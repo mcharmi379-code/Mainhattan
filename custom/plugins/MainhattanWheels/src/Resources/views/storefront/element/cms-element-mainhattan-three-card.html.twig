@@ -1,0 +1,80 @@
+{% block element_mainhattan_three_card %}
+    {% set config = element.translated.config %}
+    {% set cards = [
+        {
+            media: element.data.cardOneImage ?? null,
+            title: config.cardOneTitle.value,
+            description: config.cardOneDescription.value,
+            buttonText: config.cardOneButtonText.value,
+            buttonLink: config.cardOneButtonLink.value
+        },
+        {
+            media: element.data.cardTwoImage ?? null,
+            title: config.cardTwoTitle.value,
+            description: config.cardTwoDescription.value,
+            buttonText: config.cardTwoButtonText.value,
+            buttonLink: config.cardTwoButtonLink.value
+        },
+        {
+            media: element.data.cardThreeImage ?? null,
+            title: config.cardThreeTitle.value,
+            description: config.cardThreeDescription.value,
+            buttonText: config.cardThreeButtonText.value,
+            buttonLink: config.cardThreeButtonLink.value
+        }
+    ] %}
+
+    <section class="cms-element-mainhattan-three-card">
+        {% if config.heading.value %}
+            <header class="cms-element-mainhattan-three-card__header">
+                <h2 class="cms-element-mainhattan-three-card__heading">{{ config.heading.value }}</h2>
+            </header>
+        {% endif %}
+
+        <div class="cms-element-mainhattan-three-card__grid">
+            {% for card in cards %}
+                <article class="cms-element-mainhattan-three-card__card">
+                    <div class="cms-element-mainhattan-three-card__card-inner">
+                        {% if card.media %}
+                            <div class="cms-element-mainhattan-three-card__media">
+                                {% sw_thumbnails 'cms-element-mainhattan-three-card-thumbnails' with {
+                                    media: card.media,
+                                    sizes: {
+                                        default: '96px'
+                                    },
+                                    attributes: {
+                                        class: 'cms-element-mainhattan-three-card__image',
+                                        alt: card.media.translated.alt ?: card.title ?: '',
+                                        title: card.media.translated.title ?: card.title ?: '',
+                                        loading: 'lazy'
+                                    }
+                                } %}
+                            </div>
+                        {% endif %}
+
+                        {% if card.title %}
+                            <h3 class="cms-element-mainhattan-three-card__title">{{ card.title }}</h3>
+                        {% endif %}
+
+                        {% if card.description %}
+                            <div class="cms-element-mainhattan-three-card__description">
+                                {{ card.description|raw }}
+                            </div>
+                        {% endif %}
+
+                        {% if card.buttonText and card.buttonLink %}
+                            <div class="cms-element-mainhattan-three-card__actions">
+                                <a
+                                    href="{{ card.buttonLink }}"
+                                    class="btn cms-element-mainhattan-three-card__button"
+                                >
+                                    {{ card.buttonText }}
+                                </a>
+                            </div>
+                        {% endif %}
+                    </div>
+                </article>
+            {% endfor %}
+        </div>
+    </section>
+{% endblock %}

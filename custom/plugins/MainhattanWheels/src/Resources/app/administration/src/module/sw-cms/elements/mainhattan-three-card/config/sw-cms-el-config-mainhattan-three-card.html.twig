@@ -1,0 +1,121 @@
+<div class="sw-cms-el-config-mainhattan-three-card">
+    <sw-tabs
+        class="sw-cms-el-config-mainhattan-three-card__tabs"
+        position-identifier="sw-cms-el-config-mainhattan-three-card"
+        default-item="heading"
+    >
+        <template #default="{ active }">
+            <sw-tabs-item
+                :title="$tc('sw-cms.elements.mainhattanThreeCard.headingTab')"
+                name="heading"
+                :active-tab="active"
+            >
+                {{ $tc('sw-cms.elements.mainhattanThreeCard.headingTab') }}
+            </sw-tabs-item>
+
+            <sw-tabs-item
+                :title="$tc('sw-cms.elements.mainhattanThreeCard.cardsTab')"
+                name="cards"
+                :active-tab="active"
+            >
+                {{ $tc('sw-cms.elements.mainhattanThreeCard.cardsTab') }}
+            </sw-tabs-item>
+        </template>
+
+        <template #content="{ active }">
+            <sw-container
+                v-if="active === 'heading'"
+                class="sw-cms-el-config-mainhattan-three-card__tab-content"
+            >
+                <sw-text-field
+                    :value="element.config.heading.value"
+                    :label="$tc('sw-cms.elements.mainhattanThreeCard.headingLabel')"
+                    @update:value="onInputValue('heading', $event)"
+                />
+            </sw-container>
+
+            <sw-container
+                v-if="active === 'cards'"
+                class="sw-cms-el-config-mainhattan-three-card__tab-content"
+            >
+                <div
+                    v-for="card in cardDefinitions"
+                    :key="card.index"
+                    class="sw-cms-el-config-mainhattan-three-card__accordion-item"
+                >
+                    <button
+                        type="button"
+                        class="sw-cms-el-config-mainhattan-three-card__accordion-trigger"
+                        @click="toggleCard(card.index)"
+                    >
+                        <span>{{ $tc('sw-cms.elements.mainhattanThreeCard.cardTitle', card.index, { index: card.index }) }}</span>
+                        <span class="sw-cms-el-config-mainhattan-three-card__accordion-indicator">
+                            {{ isCardOpen(card.index) ? '-' : '+' }}
+                        </span>
+                    </button>
+
+                    <div
+                        v-if="isCardOpen(card.index)"
+                        class="sw-cms-el-config-mainhattan-three-card__accordion-content"
+                    >
+                        <sw-media-upload-v2
+                            variant="regular"
+                            :upload-tag="uploadTag(card.mediaKey)"
+                            :source="previewSource(card.mediaKey)"
+                            :allow-multi-select="false"
+                            :default-folder="cmsPageState.pageEntityName"
+                            :caption="$tc('sw-cms.elements.mainhattanThreeCard.imageLabel')"
+                            @media-upload-sidebar-open="onOpenMediaModal(card.mediaKey)"
+                            @media-upload-remove-image="onImageRemove(card.mediaKey)"
+                        />
+
+                        <sw-upload-listener
+                            :upload-tag="uploadTag(card.mediaKey)"
+                            auto-upload
+                            @media-upload-finish="onImageUpload(card.mediaKey, $event)"
+                        />
+
+                        <sw-text-field
+                            :value="element.config[card.titleKey].value"
+                            :label="$tc('sw-cms.elements.mainhattanThreeCard.titleLabel')"
+                            @update:value="onInputValue(card.titleKey, $event)"
+                        />
+
+                        <sw-text-editor
+                            :value="element.config[card.descriptionKey].value"
+                            sanitize-input
+                            enable-transparent-background
+                            :label="$tc('sw-cms.elements.mainhattanThreeCard.descriptionLabel')"
+                            @update:value="onInputDescription(card.descriptionKey, $event)"
+                            @blur="onInputDescription(card.descriptionKey, $event)"
+                        />
+
+                        <sw-text-field
+                            :value="element.config[card.buttonTextKey].value"
+                            :label="$tc('sw-cms.elements.mainhattanThreeCard.buttonTextLabel')"
+                            @update:value="onInputValue(card.buttonTextKey, $event)"
+                        />
+
+                        <mainhattan-dynamic-url-field
+                            v-model:value="element.config[card.buttonLinkKey].value"
+                            :label="$tc('sw-cms.elements.mainhattanThreeCard.buttonLinkLabel')"
+                            @update:value="onInputValue(card.buttonLinkKey, $event)"
+                        />
+                    </div>
+                </div>
+            </sw-container>
+        </template>
+    </sw-tabs>
+
+    <sw-media-modal-v2
+        v-if="mediaModalIsOpen"
+        variant="full"
+        :caption="$tc('sw-cms.elements.mainhattanThreeCard.imageLabel')"
+        :entity-context="cmsPageState.entityName"
+        :allow-multi-select="false"
+        :initial-folder-id="cmsPageState.defaultMediaFolderId"
+        @media-upload-remove-image="onImageRemove(activeMediaField)"
+        @media-modal-selection-change="onSelectionChanges"
+        @modal-close="onCloseModal"
+    />
+</div>

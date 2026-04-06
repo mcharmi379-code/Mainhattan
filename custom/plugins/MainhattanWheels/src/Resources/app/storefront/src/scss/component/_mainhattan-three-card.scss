@@ -1,0 +1,137 @@
+.cms-element-mainhattan-three-card {
+    padding: 32px 0;
+}
+
+.cms-element-mainhattan-three-card__header {
+    margin-bottom: 32px;
+    text-align: center;
+}
+
+.cms-element-mainhattan-three-card__heading {
+    margin: 0;
+    color: #fff;
+    font-family: $sw-font-secondary;
+    font-size: clamp(28px, 4vw, 48px);
+    line-height: 1.1;
+}
+
+.cms-element-mainhattan-three-card__grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 24px;
+    align-items: stretch;
+}
+
+.cms-element-mainhattan-three-card__card {
+    height: 100%;
+}
+
+.cms-element-mainhattan-three-card__card-inner {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    min-height: 100%;
+    padding: 32px 26px 24px;
+    border-radius: 28px;
+    background:
+        radial-gradient(circle at top left, rgba(255, 109, 56, 0.5), rgba(255, 109, 56, 0) 30%),
+        linear-gradient(160deg, #1b1b1b 0%, #0e0e0e 100%);
+    box-shadow: 0 18px 40px rgba(0, 0, 0, 0.28);
+}
+
+.cms-element-mainhattan-three-card__media {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    min-height: 88px;
+    margin-bottom: 20px;
+}
+
+.cms-element-mainhattan-three-card__image {
+    width: 72px;
+    height: 72px;
+    object-fit: contain;
+}
+
+.cms-element-mainhattan-three-card__title {
+    margin-bottom: 14px;
+    color: #fff;
+    font-family: $sw-font-secondary;
+    font-size: clamp(22px, 2vw, 30px);
+    line-height: 1.2;
+}
+
+.cms-element-mainhattan-three-card__description,
+.cms-element-mainhattan-three-card__description p {
+    color: rgba(255, 255, 255, 0.82);
+    font-family: $sw-font-family-base;
+    font-size: 16px;
+    line-height: 1.6;
+}
+
+.cms-element-mainhattan-three-card__description {
+    flex: 1 1 auto;
+    margin-bottom: 24px;
+}
+
+.cms-element-mainhattan-three-card__description > *:last-child {
+    margin-bottom: 0;
+}
+
+.cms-element-mainhattan-three-card__actions {
+    margin-top: auto;
+}
+
+.cms-element-mainhattan-three-card__button.btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 48px;
+    padding: 12px 22px;
+    border: 0;
+    border-radius: 999px;
+    background: linear-gradient(90deg, #f35b33 0%, #ff7f4d 100%);
+    color: #fff;
+    font-family: $sw-font-family-base;
+    font-size: 15px;
+    font-weight: 600;
+    text-align: center;
+    text-decoration: none;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.cms-element-mainhattan-three-card__button.btn:hover,
+.cms-element-mainhattan-three-card__button.btn:focus {
+    color: #fff;
+    transform: translateY(-1px);
+    box-shadow: 0 8px 18px rgba(243, 91, 51, 0.3);
+}
+
+@media (max-width: 991.98px) {
+    .cms-element-mainhattan-three-card {
+        padding: 24px 0;
+    }
+
+    .cms-element-mainhattan-three-card__grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
+
+@media (max-width: 767.98px) {
+    .cms-element-mainhattan-three-card__header {
+        margin-bottom: 24px;
+    }
+
+    .cms-element-mainhattan-three-card__grid {
+        grid-template-columns: 1fr;
+        gap: 16px;
+    }
+
+    .cms-element-mainhattan-three-card__card-inner {
+        padding: 24px 20px 20px;
+    }
+
+    .cms-element-mainhattan-three-card__button.btn {
+        width: 100%;
+    }
+}

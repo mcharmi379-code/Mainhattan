@@ -1,0 +1,38 @@
+<div class="sw-cms-el-mainhattan-three-card">
+    <div class="sw-cms-el-mainhattan-three-card__heading">
+        {{ element.config.heading.value }}
+    </div>
+
+    <div class="sw-cms-el-mainhattan-three-card__grid">
+        <article
+            v-for="(card, index) in cards"
+            :key="index"
+            class="sw-cms-el-mainhattan-three-card__card"
+        >
+            <div class="sw-cms-el-mainhattan-three-card__media">
+                <img
+                    v-if="card.media && card.media.url"
+                    :src="card.media.url"
+                    :alt="card.media.alt || card.title"
+                >
+                <div
+                    v-else
+                    class="sw-cms-el-mainhattan-three-card__media-placeholder"
+                >
+                    {{ index + 1 }}
+                </div>
+            </div>
+
+            <div class="sw-cms-el-mainhattan-three-card__content">
+                <h3>{{ card.title }}</h3>
+                <div
+                    class="sw-cms-el-mainhattan-three-card__description"
+                    v-html="$sanitize(card.description)"
+                ></div>
+                <span class="sw-cms-el-mainhattan-three-card__button">
+                    {{ card.buttonText }}
+                </span>
+            </div>
+        </article>
+    </div>
+</div>
