@@ -1,0 +1,21 @@
+{% block layout_footer_logo_inner %}
+    <div class="footer-logo-main text-center js-collapse-footer-column-trigger">
+        {% block layout_footer_logo_link %}
+            <a class="footer-logo-main-link"
+               href="{{ path('frontend.home.page') }}"
+               title="{{ "header.logoLink"|trans|striptags }}">
+                {% block layout_footer_logo_image %}
+                    <picture class="footer-logo-picture">
+                        {% block layout_footer_logo_image_default %}
+                            {% if theme_config('sw-footer-logo') %}
+                                <img src="{{ theme_config('sw-footer-logo') |sw_encode_url }}"
+                                     alt="{{ "header.logoLink"|trans|striptags }}"
+                                     class="img-fluid footer-logo-main-img"/>
+                            {% endif %}
+                        {% endblock %}
+                    </picture>
+                {% endblock %}
+            </a>
+        {% endblock %}
+    </div>
+{% endblock %}

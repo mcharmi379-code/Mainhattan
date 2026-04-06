@@ -1,0 +1,630 @@
+.header-main .header-search .header-search-form .header-search-input {
+    color: #fff;
+}
+.header-main.mainhattan-header-main.is-sticky .input-group .btn .icon,
+.header-main.is-sticky .header-search .header-search-form .header-search-input {
+    color: #000;
+}
+.header-main.mainhattan-header-main .input-group .btn .icon,
+.header-main .header-search .header-search-form .header-search-input {
+    @media(max-width:992px){
+        color: #000;
+    }
+}
+div#tcinn-a11y-toolbar {
+    max-height: 100%;
+    overflow: auto;
+    z-index: 9999 !important;
+    justify-content: flex-start;
+    align-items: flex-start;
+    align-content: flex-start;
+    top: auto;
+    bottom: 0;
+    margin-bottom: 0 !important;
+}
+body {
+    .search-suggest-container {
+        left: 0;
+        width: 100%;
+        transform: revert;
+    }
+    .search-suggest-no-result {
+            color: #000;
+    }
+    button.btn.header-search-btn {
+        border-radius: 30px;
+    }
+}
+.header-main {
+    box-shadow: 0 0 2px 1px rgba(0,0,0,0.1);
+    background: #fff;
+    .btn {
+        background: transparent;
+        border: 0 !important;
+        overflow: visible;
+        &:hover {
+            background: transparent;
+        }
+    }
+    .header-actions-mobile {
+        order: 2;
+        display: none;
+    }
+    .header-search {
+        max-width: 600px;
+        .header-search-form {
+            .input-group {
+                border: 1px solid;
+                border-radius: 30px;
+            }
+            .header-search-input {
+                background: transparent;
+                border: 0;
+                height: 45px;
+                padding: 0 20px;
+            }
+        }
+    }
+    .container {
+        max-width: 100%;
+        padding: 0;
+    }
+    .languages-menu{
+        .top-bar-nav-text {
+            color: $sw-color-brand-primary;
+        }
+        .dropdown-toggle::after,
+        .category-dropdown-toggle::after {
+            color: $sw-color-brand-primary;
+        }
+        &.dropdown {
+            padding-right: 20px;
+            .dropdown-toggle{
+                display: flex;
+                align-items: center;
+            }
+        }
+    }
+    .header-cart .header-cart-badge,
+    .header-wishlist .header-wishlist-badge {
+        top: 0;
+    }
+    .header-cart{
+        .header-cart-badge {
+            @media(min-width: 768px){
+                display: block;
+                left: 20px;
+                right: auto;
+            }
+            @media(min-width:576px){
+                display: block;
+            }
+        }
+    }
+    .main-hattan-wheels-header {
+        max-width: 1400px;
+        margin: 0 auto;
+        display: flex;
+        align-items: center;
+        position: relative;
+        flex-wrap: wrap;
+        padding: 0 20px;
+        .header-logo-col {
+            width: 25%;
+            order: 1;
+            padding: 0;
+            .header-logo-picture{
+                margin-left: 0;
+            }
+        }
+        .header-logo-main-img{
+            display: block;
+        }
+        .header-black-logo-main-img {
+            display: none;
+        }
+        .main-hattan-custom-theme{
+            justify-content: center;
+            width: auto;
+        }
+        .social-icons{
+            display: flex;
+            width: auto;
+            justify-content: center;
+            a {
+                margin-right: 5px;
+            }
+            .icon {
+                width: 30px;
+                height: 30px;
+                svg path,
+                svg use {
+                    color: #e85630;
+                }
+            }
+        }
+    }
+    .header-actions-col {
+        // border-left: 1px solid $sw-border-color;
+        padding: 15px 0px;
+        order: 3;
+    }
+    .top-bar {
+        min-height: 30px;
+        background: $sw-top-header-background;
+        @media(min-width:768px){
+            padding: 0 50px;
+        }
+        .top-bar-nav {
+            text-align: right;
+            max-width: 1310px;
+            margin: 0 auto;
+            .phone-info{
+                a {
+                    color: $sw-color-brand-secondary;
+                    font-family: 'opensans-semibold';
+                    font-size: 11px;
+                    &:hover{
+                        text-decoration: none;
+                    }
+                }
+            }
+        }
+    }
+    &.mainhattan-header-main.is-sticky{
+        position: sticky;
+        top: -33px;
+        background-color: #fff;
+        z-index: 9999;
+        .header-logo-main-img{
+            display: none;
+        }
+        .header-black-logo-main-img {
+            display: block;
+        }
+    }
+}
+
+.header-minimal {
+    padding: 20px;
+    .header-minimal-contact {
+        display: block;
+        font-family: 'opensans-semibold';
+        font-size: 16px;
+    }
+    .header-logo-main-img {
+        display: none;
+    }
+}
+
+
+
+// sticky menu styling
+@media(min-width:992px){
+    .header-main.mainhattan-header-main:not(.is-sticky) {
+        background-color: #35383c;
+        color: #fff;
+        .btn {
+            color: #fff;
+        }
+        .btn .icon>svg {
+            color: #fff;
+        }
+        .main-navigation-link{
+            span {
+                color: #fff;
+            }
+            &.active,
+            &:hover{
+                span {
+                    color: $sw-header-text-hover-color;
+                }
+            }
+        }
+        .header-cart-total {
+            color: #fff;
+        }
+        .header-actions-col{
+            border:none;
+        }
+        .header-cart .header-cart-badge,
+        .header-wishlist .header-wishlist-badge {
+            background-color: $sw-color-brand-secondary !important;
+        }
+    }
+}
+
+
+.search-toggle{
+    .collapsing{
+        height: auto;
+        overflow: hidden;
+        transition: height 0.35s ease;
+        animation: avia_pop 0.3s 1 cubic-bezier(0.175,0.885,0.320,1.275);
+    }
+    svg{
+        rotate: -90deg;
+    }
+    .header-search-form {
+        background-color: #fff;
+        color: $sw-header-text-color;
+        padding: 20px;
+        border: 0;
+        z-index: 9999999;
+        padding: 0;
+        margin-left: -120px;
+        border-radius: 2px;
+        margin: 0 auto;
+        border: none;
+        outline: none;
+        box-shadow: none;
+    }
+    div#searchCollapse {
+        position: absolute;
+        z-index: 999;
+        border-radius: 3px;
+        box-shadow: 0px 3px 13px 0px rgba(0, 0, 0, 0.2);
+        border-width: 1px;
+        background-color: #fff;
+        color: $sw-header-text-color;
+        border-color: $sw-border-color;
+        border-style: solid;
+        padding: 10px 10px;
+        max-width: 300px;
+        width: 100%;
+        right: 10px;
+        animation: avia_pop 0.3s 1 cubic-bezier(0.175,0.885,0.320,1.275);
+        @media(max-width:992px){
+            transform: translate(-50%, 0%) !important;
+            left: 50%;
+        }
+        @media(min-width:768px){
+            max-width: 350px;
+        }
+        &::after {
+            transform: rotate(135deg);
+            width: 0.5rem;
+            height: 0.5rem;
+            top: -0.3125rem;
+            left: 30%;
+            content: "";
+            display: block;
+            position: absolute;
+            background: #fff;
+            border-color: #dadae5;
+            border-width: 0 0 1px 1px;
+            border-style: solid;
+            @media(max-width:992px){
+                right: 50px;
+                left: auto;
+            }
+        }
+    }     
+    .header-search-form{
+        .input-group {
+            border-color: #fff;
+            outline: none;
+            box-shadow: none;
+            color:$sw-header-text-color;
+            .dropdown-toggle::after,
+            .category-dropdown-toggle::after {
+                color: $sw-color-brand-primary;
+            }
+            .acris-header-search-filter-button {
+                background-color: #ffff;
+                .category-dropdown-toggle-text {
+                    color: $sw-color-brand-primary;
+                }
+            }            
+            .header-search-input {
+                border: none;
+                background-color: #f8f8f8;
+                color: $sw-header-text-color;
+                font-size: 16px;
+                &:focus {
+                    box-shadow: none;
+                }
+                &::placeholder {
+                    font-family: 'arial-light';
+                }                
+            }
+            .header-search-btn {
+                border: none;
+                background-color: #9cc2df;
+                color: #fff;
+                padding: 0 8px;
+                .header-search-icon{
+                    svg{
+                        color: #fff;
+                    }
+                }             
+            }
+        }
+    }
+}
+
+// Search-bar result styling
+
+.search-suggest-container{
+    max-height: 480px;
+    min-height: auto;
+    overflow-y: auto;
+    @media(min-width:768px){
+        transform: translateX(-70%);
+    }
+    @media(max-width:767px){
+        max-height: 275px;
+    }
+    @media(max-width:375px){
+        max-height: 370px;
+    }
+    .search-suggest-product-name{
+        font-family: $sw-font-secondary;
+        color: $sw-color-brand-primary;
+    }
+    .search-suggest-total{
+        font-family: 'opensans-semibold';
+        a , 
+        .search-suggest-total-count{
+            color: $sw-color-brand-secondary;
+        }
+        svg {
+            rotate: 0deg;
+            width: 15px;
+            height: 15px;
+            color: $sw-color-brand-secondary;
+        }
+    }
+    .search-suggest-product:hover{
+        div,.search-suggest-product-reference-price {
+            color: $sw-color-brand-secondary;
+        }
+    }
+    .search-suggest-product{
+        .nb-por-search-suggest {
+            text-align: right;
+        }
+    }
+}
+
+
+@include media-breakpoint-down(lg) {
+    .header-main{
+        .nav-main,
+        .header-cart-total {
+            display: none;
+        }
+        .nav-main-toggle {
+            position: absolute;
+            left: 0;
+            top: 16px;
+        }
+        .header-logo-picture {
+            max-width: 100%;
+            min-width: 100%;
+        }
+        .top-bar {
+            .top-bar-nav{
+                text-align: center;
+            }
+        }
+        .main-hattan-wheels-header{
+            .header-logo-col {
+                // flex-grow: 1;
+                width: 20%;
+                margin: 0;
+                position: relative;
+                left: 20px;
+            }
+            .header-search-col {
+                flex: revert;
+                width: 45%;
+            }
+            .header-actions-mobile{
+                >div{
+                    flex-wrap: nowrap;
+                }
+                @media (max-width:480px){
+                    padding: 0;
+                }
+            }
+            .header-actions-col {
+                width: 35%;
+                > .row {
+                    justify-content: flex-end;
+                }
+                @media (max-width:480px){
+                    border: none;
+                    .social-icons{
+                        display: none;
+                    }
+                }
+            }
+        }
+        &.mainhattan-header-main{
+            .header-black-logo-main-img{
+                display: block;
+            }
+            .header-logo-main-img{
+                display: none;
+            }
+        }
+    }
+}
+
+@media(max-width:1400px) and (min-width:1260px){
+    .header-main{
+        .main-hattan-wheels-header{
+            padding: 0 50px;
+        }
+    }
+}
+@media (max-width:1260px){
+    .header-main{
+        border-bottom: 1px solid $sw-color-brand-secondary;
+        box-shadow: none;
+    }
+}
+@include media-breakpoint-down(md) {
+    body {
+        .header-main .main-hattan-wheels-header .social-icons .icon {
+            width: 20px;
+            height: 20px;
+        }
+        .header-main .main-hattan-wheels-header .social-icons {
+            position: absolute;
+            left: 10px;
+            top: -27px;
+        }
+        .header-main .top-bar {
+            min-height: 25px;
+        }
+        .header-main .main-hattan-wheels-header .header-actions-col > .row {
+            justify-content: end;
+        }
+        .header-main .main-hattan-wheels-header .header-actions-col {
+            width: 25%;
+        }
+        .header-main .main-hattan-wheels-header .header-search-col {
+            width: 55%;
+        }
+    }
+    .header-main{
+        .header-logo-picture{
+            img{
+                width: auto;
+                max-width: 100%;
+                display: block;
+                max-height: 80px;
+            }
+        }
+    }
+}
+@media (max-width:575px){ 
+    .header-main .header-actions-mobile {
+        display: block;
+    }
+    .menu-button {
+        position: absolute;
+        left: 0;
+        top: 24px;
+    }
+    body .header-main .main-hattan-wheels-header .header-search-col {
+        width: auto;
+        flex-grow: 1;
+        display: none;
+    }
+    .header-main .main-hattan-wheels-header .header-logo-col {
+        flex-grow: 1;
+    }
+    body .search-toggle div#searchCollapse {
+        transform: revert !important;
+        left: auto;
+        width: 100%;
+        max-width: 100%;
+        right: 0;
+        top: 81px;
+    }
+    .header-main .header-search {
+        max-width: 100%;
+    }
+    .header-main .header-search .header-search-form .input-group {
+        border: 0;
+        border-radius: 0;
+    }
+    .search-toggle .header-search-form .input-group .header-search-btn {
+        background: $sw-color-brand-secondary;
+    }
+    .search-toggle div#searchCollapse::after {
+        display:none;
+    }
+}
+@media (max-width:480px){
+    .header-main .main-hattan-wheels-header .header-logo-col {
+        left: 0;
+    }
+    .header-main .main-hattan-wheels-header button#closeToggle {
+        left: 11px;
+    }
+    .header-main{
+        .main-hattan-wheels-header{
+            .header-logo-col{
+                width: 50%;
+                order: 2;
+                margin: 0 auto;
+                .header-logo-picture{
+                    min-width: 100%;
+                    img {
+                        margin: 0 auto;
+                    }
+                }
+            }
+            .header-actions-mobile{
+                width: auto;
+                order: 1;
+                >div{
+                    flex-direction: row-reverse;
+                }
+            }
+            .header-actions-col {
+                order: 3;
+                width: auto;
+            }
+            .btn {
+                padding: 0 5px;
+            }
+            .search-toggle{
+                div#searchCollapse{
+                    max-width: 100%;
+                    &:after {
+                        display: none;
+                    }
+                }
+            }
+            .search-suggest{
+                position: relative;
+                top: 30px;
+                .search-suggest-container {
+                    top: 0;
+                    box-shadow: 0px 1px 4px 1px #ccc;
+                    background: #fff;
+                    border-radius: 3px;
+                }
+                &:after {
+                    transform: rotate(135deg);
+                    width: 0.5rem;
+                    height: 0.5rem;
+                    top: -4px;
+                    left: 30%;
+                    content: "";
+                    display: block;
+                    position: absolute;
+                    background: #fff;
+                    border-color: #dadae5;
+                    border-width: 0 0 1px 1px;
+                    border-style: solid;
+                    z-index: 9999;
+                }
+            }
+        }
+    }
+}
+
+@media (max-width:340px){
+    .menu-button {
+        top: 17px;
+    }
+}
+
+@keyframes avia_pop {
+    0% {
+        transform: scale(0.8)
+    }
+
+    100% {
+        transform: scale(1)
+    }
+}
+
+
+    

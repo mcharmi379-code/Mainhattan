@@ -1,0 +1,26 @@
+{% sw_extends '@Storefront/storefront/layout/header/top-bar.html.twig' %}
+
+{% set showToolbar = config('TcinnA11yToolbarApp.config.TcinnA11yToolbarShow') %}
+{% set position    = config('TcinnA11yToolbarApp.config.TcinnA11yToolbarPosition') %}
+
+{% block layout_header_top_bar %}
+    <div class="top-bar">
+        <nav class="top-bar-nav">
+            <div class="container d-flex justify-content-end align-items-center">
+                <div class="phone-info mr-3" style="padding-right: 15px;">
+                    <a href="tel:{{ 'header.topBar.topBarContactNumber'|trans|striptags }}">{{ 'header.topBar.topBarTitle'|trans|striptags }}{{ 'header.topBar.topBarContactNumber'|trans|striptags }}</a>
+                </div>
+                {% block layout_header_top_bar_language %}
+
+                    {# Toolbar nur dann im Header bzw der Top-Bar ausgeben #}
+    {% if showToolbar and position == 'topbar' %}
+        {% block tcinnA11y_toolbar_wrapper_header_top_bar_language %}
+            {% sw_include '@Storefront/storefront/custom/tcinn-a11y-toolbar.html.twig' ignore missing %}
+        {% endblock %}
+    {% endif %}
+                    {% sw_include '@Storefront/storefront/layout/header/actions/language-widget.html.twig' %}
+                {% endblock %}
+            </div>
+        </nav>
+    </div>
+{% endblock %}

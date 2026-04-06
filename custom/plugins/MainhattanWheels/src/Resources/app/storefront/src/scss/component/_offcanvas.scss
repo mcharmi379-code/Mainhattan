@@ -1,0 +1,79 @@
+// Offcanvas Styling
+
+.offcanvas{
+    z-index: 99999;
+    .offcanvas-header{
+        .offcanvas-close {
+            color: #fff;
+            svg{
+                color: #fff;
+            }
+            &:hover{
+                color: #fff;
+                background-color: $sw-color-brand-secondary;
+            }
+        }
+    }
+}
+.offcanvas-cookie-group {
+    .form-check {
+        display: flex;
+            flex-wrap: wrap;
+        input {
+            width: 16px;
+            margin-right: 7px;
+        }
+        p {
+            width:100%;
+        }
+    }
+}
+
+// Navigation offcanvas Styling
+
+.navigation-offcanvas{
+    .offcanvas-body{
+        overflow-x: hidden;
+    }
+    .top-bar-nav-btn.btn {
+        background: transparent;
+    }
+    .navigation-offcanvas-headline {
+        font-family: $sw-font-secondary;
+    }
+    .navigation-offcanvas-link {
+        font-family: 'opensans-semibold';
+        &.is-home-link{
+            font-family: $sw-font-secondary;
+        }
+    }
+}
+
+// Model styling
+
+.modal {
+    z-index: 9999;
+}
+.modal-content {
+    padding: 14px 20px;
+    border-radius: 6px;
+    box-shadow: 0px 1px 4px 1px #ccc;
+    background: #fff;
+    width: 100%;
+    border: 0;
+}
+
+.offcanvas-cookie-header {
+    font-family: $sw-font-secondary;
+}
+.offcanvas-cookie-group{
+    .custom-control-label {
+        font-family: $sw-font-family-headline;
+    }
+}
+
+.offcanvas-cart{
+    .offcanvas-cart-actions > div {
+        margin-bottom: 10px;
+    }
+}

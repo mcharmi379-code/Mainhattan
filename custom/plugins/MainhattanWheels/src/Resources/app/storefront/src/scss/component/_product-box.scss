@@ -1,0 +1,152 @@
+.product-box{
+    &.card{
+        padding: 14px 20px;
+        border-radius: 6px;
+        box-shadow: 0px 1px 4px 1px #ccc;
+        background: #fff;
+        width: 100%;
+        border: 0;
+        margin: 5px 0;
+    }
+    .product-badges{
+        .badge{
+            color: $sw-color-brand-primary;
+            font-family:$sw-font-secondary;
+            padding: 2px 5px;
+            .icon{
+                color: #000;
+            }
+        }
+    }
+    .product-price-wrapper {
+        min-height: 54px;
+    }
+    .product-name {
+        font-size: $sw-font-size-sm;
+        line-height: 24px;
+        font-family: 'opensans-semibold';
+        height: 50px;
+        text-align: start;
+        &:hover{
+            color: $sw-color-brand-secondary;
+        }
+    }
+    .product-description {
+        color: #555555;
+        font-weight: $sw-font-weight-base;
+        font-family: $sw-font-family-headline;
+        font-size: $sw-font-size-content;
+        line-height: 20px;
+        height: 60px;
+    }
+    .product-price-unit{
+        font-size: $sw-font-size-xs;
+        font-family: $sw-font-family-base;
+        height: 20px;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        .product-unit-label {
+            font-weight: 500;
+            font-family: $sw-font-secondary;
+        }
+    }
+    .product-price-wrapper {
+        font-family: $sw-font-family-headline;
+        letter-spacing: 1px;
+        color: $sw-color-brand-primary;
+        .product-price {
+            color: $sw-color-price;
+        }
+    }
+    .product-action{
+        .btn {
+            border-radius: 3px;
+            font-family: 'opensans-semibold';
+            &:hover {
+                border-color: $sw-color-brand-secondary;
+                color: $sw-color-brand-secondary;
+                background: #fff;
+            }
+        }
+        .btn-nb-pricerequest-listing{
+            margin-top: 0;
+        }
+    }
+    .product-cheapest-price {
+        min-height: revert;
+        margin: 0 ;
+        line-height: normal;
+    }
+    .product-price-info.nb-pricerequest-listing-text {
+        margin-top: 15px;
+        p.product-price {
+            font-size: 14px;
+        }
+    }
+    .product-action {
+        margin: 5px;
+    }
+}
+//
+
+.product-box .product-price-wrapper .product-price span.list-price {
+    display: block;
+    width: 100%;
+}
+
+.product-box .product-price-wrapper .product-price .product-unit-price span {
+    color: #222;
+    font-weight: 400;
+    padding-left: 5px;
+    font-size: 0.65rem;
+}
+.product-box .product-price-wrapper .product-price span.list-price span.list-price-price {
+    font-size: 15px;
+}
+.product-box .product-price-wrapper .product-price span.list-price span.list-price-percentage {
+    font-size: 14px;
+}
+
+
+.product-price.with-list-price {
+    .product-unit-price {
+        color: #c20017;
+    }
+}
+body {
+    .product-box {
+        .product-price-wrapper {
+            .product-price.with-list-price {
+                .product-unit-price {
+                    color: #c20017;
+                }
+            }
+        }
+    }
+}
+.product-box {
+    .card-body {
+        padding-left: 0;
+        padding-right: 0;
+    }
+    .product-info {
+        .product-action {
+            .btn-detail {
+                margin-top: 8px;
+                font-size: 16px;
+            }
+        }
+    }
+}
+.product-box {
+    .product-action {
+        button.btn.btn-buy {
+            background: #fff;
+            color: #e85630;
+            &:hover {
+                background:#e85630;
+                color: #fff;
+            }
+        }
+    }
+}

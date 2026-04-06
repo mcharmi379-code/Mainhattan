@@ -1,0 +1,84 @@
+{% sw_extends '@Storefront/storefront/element/cms-element-form/form-types/newsletter-form.html.twig' %}
+
+{% block cms_form_newsletter %}
+    <div class="cms-block cms-block-form newsletter-block">
+        <div class="cms-element-form">
+            <div class="footer-newsletter-content" data-newsletter-privacy="true">
+                <form action="{{ path(action) }}"
+                      method="post"
+                      data-form-csrf-handler="true"
+                      data-form-validation="true">
+                    <div class="form-content">
+                        <div class="{{ formRowClass }}">
+
+                                <div class="footer-column-headline footer-headline js-footer-column-headline js-collapse-footer-column-trigger show"
+                                     id="collapseFooterNewsletterTitle"
+                                     data-bs-target="#collapseFooterNewsletter"
+                                     aria-expanded="true"
+                                     aria-controls="collapseFooterNewsletter"
+                                     role="listitem">
+                                    <p class="newsletter-title-one text-center footer__title">
+                                        {{ 'footer.newsletter.newsletterTitle'|trans|sw_sanitize }}
+                                    </p>
+                                    {% block layout_footer_navigation_newsletter_icons %}
+                                        <div class="footer-column-toggle">
+                                        <span class="footer-plus-icon">
+                                            {% sw_icon 'ic-chevron-right-dark' style {
+                                                'pack': 'gaisbock',
+                                                'size': 'sm',
+                                            } %}
+                                        </span>
+                                        <span class="footer-minus-icon">
+                                            {% sw_icon 'ic-chevron-down-custom' style {
+                                                'pack': 'gaisbock'
+                                            } %}
+                                        </span>
+                                        </div>
+                                    {% endblock %}
+                                </div>
+                                <div id="collapseFooterNewsletter"
+                                     class="footer-column-content collapse js-footer-column-content footer-contact show"
+                                     aria-labelledby="collapseFooterNewsletter">
+                                    <div class="newsletter-form">
+                                        {% block cms_form_newsletter_input_email %}
+                                            {% sw_include '@Storefront/storefront/element/cms-element-form/form-components/cms-element-form-input.html.twig'
+                                                with {
+                                                fieldName: 'email',
+                                                type: 'email',
+                                                required: true,
+                                                additionalClass: 'flex-fill mb-0',
+                                                placeholder: 'newsletter.placeholderMail'
+                                            }
+                                            %}
+                                        {% endblock %}
+                                        {% block cms_form_submit %}
+                                            <button type="submit" aria-label="Submit" class="btn btn-primary">
+                                                {{ 'footer.newsletter.submitButton'|trans|sw_sanitize }}
+                                            </button>
+                                        {% endblock %}
+                                    </div>
+                                </div>
+                                </div>
+                                <div class="w-100"></div>
+                                {% block cms_form_newsletter_privacy %}
+                                {% endblock %}
+
+                            {% block cms_form_newsletter_additional_fields %}{% endblock %}
+
+
+                            {% block cms_form_newsletter_required_fields_info %}{% endblock %}
+                        </div>
+
+                        {% block cms_form_newsletter_hidden_fields %}
+                            <div class="form-hidden-fields">
+
+                                <input type="hidden" name="option" value="{{ constant('Shopware\\Storefront\\Controller\\FormController::SUBSCRIBE') }}">
+                                <input type="submit" class="submit--hidden d-none" />
+                            </div>
+                        {% endblock %}
+                </form>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+

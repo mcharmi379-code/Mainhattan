@@ -1,0 +1,303 @@
+{% sw_extends '@Storefront/storefront/layout/header/header.html.twig' %}
+
+{% set showToolbar = config('TcinnA11yToolbarApp.config.TcinnA11yToolbarShow') %}
+{% set position = config('TcinnA11yToolbarApp.config.TcinnA11yToolbarPosition') %}
+{% set initState = config('TcinnA11yToolbarApp.config.TcinnA11yToolbarInitialState') %}
+{% set iconVariant = config('TcinnA11yToolbarApp.config.TcinnA11yToolbarIconVariant') %}
+
+{% set svgUniversalAccess %}
+<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" class="bi bi-universal-access" viewBox="0 0 16 16"><path d="M9.5 1.5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0M6 5.5l-4.535-.442A.531.531 0 0 1 1.531 4H14.47a.531.531 0 0 1 .066 1.058L10 5.5V9l.452 6.42a.535.535 0 0 1-1.053.174L8.243 9.97c-.064-.252-.422-.252-.486 0l-1.156 5.624a.535.535 0 0 1-1.053-.174L6 9z"/></svg>
+{% endset %}
+
+{% set svgUniversalAccessCircle %}
+<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16"><path d="M8 4.143A1.071 1.071 0 1 0 8 2a1.071 1.071 0 0 0 0 2.143m-4.668 1.47 3.24.316v2.5l-.323 4.585A.383.383 0 0 0 7 13.14l.826-4.017c.045-.18.301-.18.346 0L9 13.139a.383.383 0 0 0 .752-.125L9.43 8.43v-2.5l3.239-.316a.38.38 0 0 0-.047-.756H3.379a.38.38 0 0 0-.047.756Z"/><path d="M8 0a8 8 0 1 0 0 16A8 8 0 0 0 8 0M1 8a7 7 0 1 1 14 0A7 7 0 0 1 1 8"/></svg>
+{% endset %}
+
+{% set svgPersonWheelchair %}
+<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16"><path d="M12 3a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3m-.663 2.146a1.5 1.5 0 0 0-.47-2.115l-2.5-1.508a1.5 1.5 0 0 0-1.676.086l-2.329 1.75a.866.866 0 0 0 1.051 1.375L7.361 3.37l.922.71-2.038 2.445A4.73 4.73 0 0 0 2.628 7.67l1.064 1.065a3.25 3.25 0 0 1 4.574 4.574l1.064 1.063a4.73 4.73 0 0 0 1.09-3.998l1.043-.292-.187 2.991a.872.872 0 1 0 1.741.098l.206-4.121A1 1 0 0 0 12.224 8h-2.79zM3.023 9.48a3.25 3.25 0 0 0 4.496 4.496l1.077 1.077a4.75 4.75 0 0 1-6.65-6.65z"/></svg>
+{% endset %}
+
+{% set svgWheelchairUpright %}
+<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="-50 0 600 600"><g fill="currentColor"><path d="M205 1.9c-9.6 2.6-17.7 6.9-24.2 12.8-4.5 4.1-11.7 16.5-13.7 23.5-4 14.4-3.8 19.8 1.1 34.3 3.9 11.4 14.2 23.3 24.3 28.2 2.2 1.1 4.9 2.4 6 3 1.1.6 4.5 1.8 7.6 2.7 16.2 4.7 36.9-1.4 49.5-14.6 10.4-10.9 14-17.9 15.4-30.3 1.6-13.7-1.2-28.2-6.7-34.8-1.3-1.6-2.3-3.3-2.3-3.7 0-3-13.9-14.9-21.5-18.4-10.2-4.7-24-5.8-35.5-2.7zM207.5 123.4c-2.8.6-6.6 2.1-8.6 3.3-2 1.3-4 2.3-4.4 2.3-1.6 0-9.1 7.6-12.3 12.3-1.8 2.7-4.2 7.7-5.3 11.1-1.9 6.1-1.9 8.6-1.7 107.7l.3 101.4 3.5 6.8c6.3 12.3 18.5 22 30.4 24.1 2.1.4 31.8.9 65.9 1.1l62.1.3 2.3 2.9c1.3 1.5 2.6 3.9 3 5.3.3 1.4 1.2 3.6 1.9 5s3.6 7.9 6.4 14.5c2.9 6.6 6.7 15.1 8.5 19 1.8 3.8 6.3 14.2 10 23s7.9 18.2 9.2 21c3.2 6.2 9.8 14.5 13.9 17.1 4.6 3.1 15.1 6.4 20.4 6.4 5.2 0 14.4-3 19.9-6.5 7.8-4.8 16-18.3 16.9-27.4.5-5.3-2-14.4-6.3-23.6-5.1-10.9-8.5-18.8-8.5-20 0-.7-.6-1.8-1.4-2.4-.8-.7-1.8-2.7-2.1-4.4-.4-1.8-1.5-4.6-2.5-6.2-1-1.7-2.1-4.4-2.5-6.2-.3-1.7-1.3-3.7-2.1-4.4-.8-.6-1.4-1.8-1.4-2.7 0-.8-2.2-6.2-5-11.9-2.7-5.7-5-10.9-5-11.6 0-.7-.6-2.1-1.3-3.2-.7-1.1-1.9-3.6-2.7-5.5-.7-1.9-2.6-6.4-4.2-10-1.7-3.6-3.9-8.5-4.9-11-6.5-14.6-12.7-22.3-21.7-26.7l-5.7-2.8-54.7-.3c-30.2-.1-54.8-.6-54.9-1-.4-5.3 0-67.2.5-68 .5-.9 11.9-1.2 41.9-1.2h41.2l5.1-3c8.4-4.7 13-10.8 14.9-19.6 1.7-7.2 1.6-7.6-.5-14.6-1.9-6.3-2.9-8-7.6-12.5-3.1-2.9-7.2-5.8-9.2-6.5-2.6-.8-16-1.3-44.4-1.5-37-.4-40.9-.6-41.7-2.1-.5-.9-.8-8.2-.7-16.1.1-12.3-.2-15.5-2-21.2-7.4-23.4-28.9-35.8-52.9-30.5z"/><path d="M119.5 170.5c-31.7 12.2-65.6 40.2-86 71-6.1 9.4-6.4 9.9-19.1 35.9-.8 1.6-1.4 3.5-1.4 4.3 0 .8-.5 2.4-1.2 3.6-.7 1.2-1.3 2.6-1.4 3.2-.1.5-1.4 5.3-2.8 10.5-2.3 8.8-3.9 17.5-6.6 35.7-1.3 8.9-1.3 23.2-.1 30.4.6 3 1.5 9.4 2.1 14.4 1.1 8.5 1.9 12.1 7.6 31 2.2 7.1 6.7 18.3 9.7 24 .6 1.1 2 3.8 3 6 1.1 2.2 3.1 5.8 4.6 8 1.4 2.2 3 4.7 3.6 5.6 1 1.7 2.1 3.3 8.4 12.8 4.4 6.5 27.4 29.9 35.6 36.1 10.4 7.9 25.7 17.3 35 21.7 15.9 7.4 18.1 8.3 19.8 8.3.9 0 4.5 1.1 7.9 2.4 18 6.8 46.1 9.7 73.7 7.6 9.1-.6 19.9-2.1 23.8-3.1 4-1 8.3-1.9 9.5-1.9 1.3 0 3.6-.7 5.2-1.5s5.3-2.2 8.3-3.1c14.1-4.1 34.9-14.9 52-27 8.9-6.4 24.4-21.1 28.6-27.2 3.3-4.9 3.7-6.1 3.7-12 0-5.6-.4-7.2-3.1-11.4-1.8-2.7-5.2-6.3-7.8-8.1-4.2-2.9-5.3-3.2-12.1-3.2s-7.9.3-12 3.2c-2.5 1.7-6.1 4.8-8 6.8-11.9 12.5-35.3 28.2-48.5 32.5-2.2.7-4.9 1.9-6 2.6-1.1.8-3.3 1.4-5 1.4-1.6 0-4.3.7-5.9 1.5-4.1 2.1-27.8 5.5-38.6 5.5-10.5 0-35.3-3.4-40.4-5.5-1.9-.8-4.4-1.5-5.5-1.5-2.2 0-5.5-1.4-19.1-7.9-10.8-5.2-15.7-8.3-27.8-17.5-26.7-20.2-45.3-50.6-53.8-88.1-1.4-6.2-1.8-12.3-1.9-27.5 0-20.7.5-24.2 5.5-41 1.6-5.2 3.2-10.6 3.5-12 .8-2.7 9-19.5 12.1-24.6 8.9-14.8 25.4-33 36.9-40.7 3.3-2.2 6.9-4.8 8-5.8 3.1-2.8 21.9-12.9 23.9-12.9.7 0 3.6-2.4 6.5-5.4 6.7-6.8 8.7-13.5 6.6-21.7-1.4-5.2-2-6.3-7-11.2-2.8-2.9-12.5-6.8-16.3-6.6-1 0-4.4 1.1-7.7 2.4z"/></g></svg>
+{% endset %}
+
+{# anhand der eingestellten Variante das tatsächliche svgShow setzen #}
+{% if iconVariant == 'universal-access' %}
+  {% set svgShow = svgUniversalAccess %}
+{% elseif iconVariant == 'universal-access-circle' %}
+  {% set svgShow = svgUniversalAccessCircle %}
+{% elseif iconVariant == 'person-wheelchair' %}
+  {% set svgShow = svgPersonWheelchair %}
+{% elseif iconVariant == 'wheelchair-upright' %}
+  {% set svgShow = svgWheelchairUpright %}
+{% else %}
+  {# Fallback, falls jemand einen ungültigen Wert in den Einstellungen hat #}
+  {% set svgShow = svgUniversalAccess %}
+{% endif %}
+
+
+{% block layout_header_navigation %}
+    <div class="main-hattan-wheels-header">
+        {% block layout_header_logo %}
+            <div class="header-logo-col">
+                {% sw_include '@Storefront/storefront/layout/header/logo.html.twig' %}
+            </div>
+        {% endblock %}
+
+        {% block base_navigation %}
+            <div class="nav-main">
+                {% block base_navigation_inner %}
+                    {% sw_include '@Storefront/storefront/layout/navigation/navigation.html.twig' %}
+                {% endblock %}
+                <div class="header-navigation-aerrow">
+                
+                </div>
+            </div>
+        {% endblock %}
+
+    {% block layout_header_search %}
+        <div class="col-12 order-2 col-sm order-sm-1 header-search-col">
+            <div class="row">
+                <div class="col-sm-auto d-none d-sm-block d-lg-none navigation-section">
+                    {% block layout_header_navigation_toggle_tablet %}
+                        <div class="nav-main-toggle">
+                            {% block layout_header_navigation_toggle_tablet_button %}
+                                <button
+                                        class="btn nav-main-toggle-btn header-actions-btn"
+                                        type="button"
+                                        {# @deprecated tag:v6.6.0 - Registering plugin on selector "data-offcanvas-menu" is deprecated. Use "data-off-canvas-menu" instead #}
+                                        {% if feature('v6.6.0.0') %}
+                                            data-off-canvas-menu="true"
+                                        {% else %}
+                                            data-offcanvas-menu="true"
+                                        {% endif %}
+                                        aria-label="{{ "general.menuLink"|trans|striptags }}"
+                                >
+                                    {% block layout_header_navigation_toggle_tablet_button_icon %}
+                                        {% sw_icon 'stack' %}
+                                    {% endblock %}
+                                </button>
+                            {% endblock %}
+                        </div>
+                    {% endblock %}
+                </div>
+                <div class="col">
+                    {% sw_include '@Storefront/storefront/layout/header/search.html.twig' %}
+                </div>
+            </div>
+        </div>
+    {% endblock %}
+
+
+    {% block layout_header_actions %}
+        <div class="header-actions-mobile">
+            <div class="row g-0">
+                {% block layout_header_navigation_toggle %}
+                    <div class="col d-lg-none order-2 flex-grow-0">
+                        <div class="menu-button ">
+                            {% block layout_header_navigation_toggle_button %}
+                                <button
+                                        class="btn nav-main-toggle-btn header-actions-btn main-hattan-mobile-menu"
+                                        type="button"
+                                        id="main-hattan-cookie-button"
+                                        {# @deprecated tag:v6.6.0 - Registering plugin on selector "data-offcanvas-menu" is deprecated. Use "data-off-canvas-menu" instead #}
+                                        {% if feature('v6.6.0.0') %}
+                                            data-off-canvas-menu="true"
+                                        {% else %}
+                                            data-offcanvas-menu="true"
+                                        {% endif %}
+                                        aria-label="{{ "general.menuLink"|trans|striptags }}"
+                                >
+                                    {% block layout_header_navigation_toggle_button_icon %}
+                                        {% sw_icon 'stack' %}
+                                    {% endblock %}
+                                </button>
+                            {% endblock %}
+                        </div>
+                    </div>
+
+                    <div class="col-auto order-1">
+                        <div class="search-toggle">
+                            <button class="btn header-actions-btn search-toggle-btn js-search-toggle-btn collapsed main-hattan-search-button-for-css"
+                                    id="closeToggle"
+                                    type="button"
+                                    data-bs-toggle="collapse"
+                                    data-bs-target="#searchCollapse"
+                                    aria-expanded="false"
+                                    aria-controls="searchCollapse"
+                                    aria-label="{{ "header.searchButton"|trans|striptags }}">
+                                {% sw_icon 'search' %}
+                            </button>
+                            {% sw_include '@Storefront/storefront/layout/header/search.html.twig' %}
+                        </div>
+                    </div>
+                {% endblock %}
+            </div>
+        </div>
+        <div class="header-actions-col">
+            <div class="row g-0">
+                {% block layout_header_search_toggle %}
+
+    {# Toolbar nur dann im Header ausgeben #}
+    {% if showToolbar and position == 'header-action' %}
+        {% block tcinnA11y_toolbar_wrapper_header_toggle %}
+            {# Show-Button immer vorhanden #}
+            {% if position == 'header-action' %}
+                {% block tcinnA11y_toolbar_show_button %}
+                <div class="col-auto">
+                    <button
+                        id="show-toolbar-button" class="btn header-actions-btn tcinn-accessibility-toolbar-button toolbar-show-button {{ position }}{% if initState != 'closed' %} hidden{% endif %}" type="button"
+                        aria-controls="tcinn-a11y-toolbar"
+                        aria-expanded="{{ initState != 'closed' ? 'false' : 'true' }}"
+                        aria-label="{{ 'tcinn-a11y-toolbar.show'|trans }}"
+                        title="{{ 'tcinn-a11y-toolbar.show'|trans }}" tabindex="0">
+                        <span class="icon tcinn-icon-a11y">
+                            {{ svgShow|raw }}
+                        </span>
+                        <span class="label visually-hidden">{{ 'tcinn-a11y-toolbar.show'|trans }}</span>
+                    </button>
+                </div>
+                {% endblock %}
+            {% endif %}
+        {% endblock %}
+    {% endif %}
+
+                    <div class="main-hattan-custom-theme d-flex">
+                        {% if config('core.cart.wishlistEnabled') %}
+                            {% block layout_header_actions_wishlist %}
+                                <div class="col-auto order-4">
+                                    <div class="header-wishlist">
+                                        <a class="btn header-wishlist-btn header-actions-btn"
+                                           href="{{ path('frontend.wishlist.page') }}"
+                                           title="{{ 'header.wishlist'|trans|striptags }}"
+                                           aria-label="{{ 'header.wishlist'|trans|striptags }}">
+                                            {% sw_include '@Storefront/storefront/layout/header/actions/wishlist-widget.html.twig' %}
+                                        </a>
+                                    </div>
+                                </div>
+                            {% endblock %}
+                        {% endif %}
+
+                        {% block layout_header_actions_account %}
+                            <div class="col-auto order-3">
+                                <div class="account-menu">
+                                    {% sw_include '@Storefront/storefront/layout/header/actions/account-widget.html.twig' %}
+                                </div>
+                            </div>
+                        {% endblock %}
+
+                        {% block layout_header_actions_cart %}
+                            <div class="col-auto order-4">
+                                <div
+                                        class="header-cart"
+                                        {#                                             @deprecated tag:v6.6.0 - Registering plugin on selector "data-offcanvas-cart" is deprecated. Use "data-off-canvas-cart" instead #}
+                                        {% if feature('v6.6.0.0') %}
+                                            data-off-canvas-cart="true"
+                                        {% else %}
+                                            data-offcanvas-cart="true"
+                                        {% endif %}
+                                >
+                                    <a class="btn header-cart-btn header-actions-btn"
+                                       href="{{ path('frontend.checkout.cart.page') }}"
+                                       data-cart-widget="true"
+                                       title="{{ 'checkout.cartTitle'|trans|striptags }}"
+                                       aria-label="{{ 'checkout.cartTitle'|trans|striptags }}">
+                                        {% sw_include '@Storefront/storefront/layout/header/actions/cart-widget.html.twig' %}
+                                    </a>
+                                </div>
+                            </div>
+                        {% endblock %}
+                    </div>
+                {% endblock %}
+
+                {% sw_include '@Storefront/storefront/component/header/mainhattan-header-social-media.html.twig' %}
+            </div>
+        </div>
+
+
+    </div>
+{% endblock %}
+<!--     <script>
+        const leftArrow = document.getElementById('leftArrow');
+        const rightArrow = document.getElementById('rightArrow');
+        const menu = document.getElementById('mainNavigation');
+
+        const menuWrapperSize = document.getElementById('main-hattan-container').offsetWidth; // Unchanging
+
+        const menuSize = document.getElementById('mainNavigation').offsetWidth;
+
+        const menuInvisibleSize = Math.max(menuSize - menuWrapperSize, 0);
+        const arrowSize = rightArrow.offsetWidth;
+
+        const menuEndOffset = Math.max(menuInvisibleSize - arrowSize, 0);
+
+        const itemsCount = document.getElementsByClassName('main-navigation-link').length;
+        const itemSize = document.getElementsByClassName('main-navigation-link')[0].offsetWidth;
+
+        const itemsSpaceBetween = (menuSize - (itemsCount * itemSize)) / (itemsCount - 1);
+        const distanceInPixels = itemSize + itemsSpaceBetween;
+
+        const durationInMilliseconds = 500;
+        let starttime = null;
+
+
+        if (menuInvisibleSize === 0) {
+            leftArrow.classList.add("hidden");
+        }
+
+        const getMenuPosition = () => {
+            return parseFloat(menu.style.left) || 0;
+        };
+
+        const getScrolledDistance = () => {
+            return -1 * getMenuPosition();
+        };
+
+        const checkPosition = () => {
+            const menuPosition = getScrolledDistance();
+
+
+            if (menuPosition <= arrowSize) {
+                leftArrow.classList.add("hidden");
+                rightArrow.classList.remove("hidden");
+            } else if (menuPosition < menuEndOffset) {
+                leftArrow.classList.remove("hidden");
+                rightArrow.classList.remove("hidden");
+            } else if (menuPosition >= menuEndOffset) {
+                leftArrow.classList.remove("hidden");
+                rightArrow.classList.add("hidden");
+            }
+        };
+
+        const animateMenu = (timestamp, startingPoint, distance) => {
+            const runtime = timestamp - starttime;
+            let progress = runtime / durationInMilliseconds;
+            progress = Math.min(progress, 1);
+            let newValue = (startingPoint + (distance * progress)).toFixed(2) + 'px';
+            menu.style.left = newValue;
+
+            if (runtime < durationInMilliseconds) {	// If we still have time remaining...
+                requestAnimationFrame(function(timestamp) {
+                    animateMenu(timestamp, startingPoint, distance);
+                })
+            }
+            checkPosition();
+        };
+
+        const animationFramesSetup = (timestamp, travelDistanceInPixels) => {
+            timestamp = timestamp || new Date().getTime();
+            starttime = timestamp;
+            const startingPoint = getMenuPosition();
+            animateMenu(timestamp, startingPoint, travelDistanceInPixels);
+        };
+
+        rightArrow.addEventListener('click', () => requestAnimationFrame(
+            timestamp => animationFramesSetup(timestamp, -1 * distanceInPixels)
+        ));
+
+        leftArrow.addEventListener('click', () => requestAnimationFrame(
+            timestamp => animationFramesSetup(timestamp, distanceInPixels)
+        ));
+
+    </script> -->
+{% endblock %}

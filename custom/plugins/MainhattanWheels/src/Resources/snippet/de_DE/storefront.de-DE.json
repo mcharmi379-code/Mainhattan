@@ -1,0 +1,35 @@
+{
+  "header": {
+    "topBar": {
+      "topBarTitle": "HOTLINE: ",
+      "topBarContactNumber": "+49 (0) 60 74 - 48 66 5 66"
+    }
+  },
+  "productListing": {
+    "taxPrice": "exkl. MwSt."
+  },
+  "footer": {
+    "addressLineOne": "Mainhattan-Wheels GmbH",
+    "addressLineTwo": "Lise-Meitner-Straße 5",
+    "addressLineThree": "D-63128 Dietzenbach",
+    "contact": {
+      "contactTitle": "Kontakt",
+      "telephone": "Tel.: +49 (0) 6074 – 48 66 5 66",
+      "fax": "Fax: +49 (0) 6074 – 48 66 5 77",
+      "email": "<a href=\"mailto:info@mainhattan-wheels.de\">info@mainhattan-wheels.de</a>"
+    },
+    "map": {
+      "mapTitle": "So finden Sie uns"
+    },
+    "newsletter": {
+      "newsletterTitle": "Newsletter",
+      "submitButton": "anmelden"
+    },
+    "opening": {
+      "openingTitles": "Service Hotline",
+      "openingDesc": "Telefonische Unterstützung und Beratung unter:",
+      "openingDays": "Mo. - Fr.",
+      "openingTimes": "9.00 – 12.00 Uhr &<br> 13.00 – 17.00 Uhr"
+    }
+  }
+}

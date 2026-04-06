@@ -1,0 +1,161 @@
+.mainhattan-cms-page{
+    margin-bottom: 30px;
+    h2 {
+        font-family: $sw-font-secondary;
+        span {
+            font-size: $sw-font-size-content;
+        }
+    }    
+    h3 {
+        font-family: 'lato-bold';
+        font-size: 22px;
+        margin-top: 30px;
+    }
+    p {
+        font-family: $sw-font-family-headline;
+        font-size: $sw-font-size-content;
+        strong {
+            font-family: $sw-font-secondary;
+            font-size: $sw-font-size-content;
+            text-transform: capitalize;
+        }
+    }
+    a{
+        color: $sw-color-brand-secondary;
+    }
+}
+.cms-section{
+    .cms-section-default:has(.mainhattan-cms-page){
+        padding: 0;
+    }
+}
+.avia_textblock {
+    a {
+        color: $sw-color-brand-secondary;
+    }
+}
+
+.mainhataan-return-wrapper{
+    .cms-element-text{
+        border: 1px solid #dadae5;
+        padding: 20px;
+        border-radius: 3px;
+        h1 {
+            font-size: $sw-font-size-heading;
+            line-height: normal;
+            font-family: $sw-font-secondary;
+        }
+        h2 {
+            font-size: $sw-font-size-sm;
+            font-family: $sw-font-secondary;
+        }
+    }
+    .cms-section-default{
+        padding: 0;
+    }
+    .form-content{
+        h1 {
+            font-size: $sw-font-size-content;
+            line-height: normal;
+            margin-bottom: 0;
+            font-family: $sw-color-brand-secondary;
+        }
+    }
+}
+
+
+
+.mainhattan-newsletter-content,
+.mainhattan-contact-content{
+    margin: 0 20px;
+    .cms-block-text {
+        border: 1px solid #dadae5;
+        border-radius: 3px;
+    }
+}
+
+.mainhattan-contact-content{
+    .cms-section-default {
+        padding: 0;
+    }
+    h1 {
+        font-size: $sw-font-size-sm;
+        font-family: $sw-font-secondary;
+        line-height: normal;
+        margin-bottom: 0;
+    }
+    h2{
+        font-family: $sw-font-secondary;
+    }
+    strong {
+        font-family: $sw-font-secondary;
+        color: $sw-color-brand-primary;
+        font-size: $sw-font-size-sm;
+    }
+    p {
+        font-family: $sw-font-family-base;
+        font-size: 16px;
+    }
+    .avia_textblock {
+        font-size: 16px;
+    }
+}
+.mainhattan-newsletter-form,
+.mainhattan-contact-form{
+    h2 {
+        font-family: $sw-font-secondary;
+    }
+    p {
+        font-size: $sw-font-size-content;
+        margin-bottom: 0;
+    }
+    .form-content{
+        .js-field-toggle-newsletter-additional{
+            > div {
+                align-items: flex-end;
+            }
+        }
+    }
+}
+.mainhattan-contact-form{
+    .cms-block-container-row{
+        > div {
+            padding: 0 5px;
+        }
+    }
+    h1{
+        font-size: $sw-font-size-heading;
+        font-family: $sw-font-secondary;
+        margin-bottom: 0;
+        line-height: normal;
+    }
+}
+.modal-content{
+    .mainhattan-cms-page{
+        margin-bottom: 10px;
+    }
+}
+
+.avia-pricing-table-container strong,
+.av-special-heading-tag  {
+    font-size: 16px;
+    display: block;
+    margin-bottom: 5px;
+    font-family: $sw-font-secondary;
+}
+
+.mainhattan-contact-form,
+.mainhataan-return-wrapper{
+    .cms-element-pixelcms-forms{
+        .confirm-message{
+            .alert {
+                padding: 8px 10px !important;
+                background: #fff;
+                border: 1px solid $sw-border-color;
+                border-radius: 3px;
+                font-family: $sw-font-family-headline;
+                font-size: $sw-font-size-content;
+            }
+        }
+    }
+}

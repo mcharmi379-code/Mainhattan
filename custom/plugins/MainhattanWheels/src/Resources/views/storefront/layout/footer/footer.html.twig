@@ -1,0 +1,208 @@
+{% sw_extends '@Storefront/storefront/layout/footer/footer.html.twig' %}
+{% block layout_footer_inner_container %}
+    <div class="container">
+
+        {% block layout_footer_navigation %}
+            <div
+                    id="footerColumns"
+                    class="row footer-columns"
+                    {# @deprecated tag:v6.6.0 - Registering plugin on selector "data-collapse-footer" is deprecated. Use "data-collapse-footer-columns" instead #}
+                    {% if feature('v6.6.0.0') %}
+                        data-collapse-footer-columns="true"
+                    {% else %}
+                        data-collapse-footer="true"
+                    {% endif %}
+                    role="list"
+            >
+                <div class="col-md-3 footer-column js-footer-column">
+                    {% sw_include '@Storefront/storefront/component/footer/mainhattan-footer-logo.html.twig' %}
+                </div>
+
+                {% block layout_footer_navigation_columns %}
+                    <div class="col-md-3 footer-column js-footer-column">
+                        {% for root in page.footer.navigation.tree %}
+                            {% block layout_footer_navigation_column %}
+
+                                {% block layout_footer_navigation_information_headline %}
+                                    <div class="footer-column-headline footer-headline js-collapse-footer-column-trigger accordion {% if loop.index == 2 %}second-menu-title{% endif %}">
+
+                                        {% if root.category.type == 'folder' %}
+                                            {{ root.category.translated.name }}
+                                        {% else %}
+                                            <p class="footer__title third-column-text">
+                                                {{ root.category.translated.name }}
+                                            </p>
+                                        {% endif %}
+                                        {% block layout_footer_navigation_handler_icons_one %}
+                                            <div class="footer-column-toggle">
+                                        <span class="footer-plus-icon">
+                                            {% sw_icon 'ic-chevron-right-dark' style {
+                                                'pack': 'mainhattan',
+                                                'size': 'sm'
+                                            } %}
+                                        </span>
+                                                <span class="footer-minus-icon">
+                                                {% sw_icon 'ic-chevron-right-dark' style {
+                                                'pack': 'mainhattan',
+                                                'size': 'sm'
+                                            } %}
+                                        </span>
+                                            </div>
+                                        {% endblock %}
+                                    </div>
+                                {% endblock %}
+
+                                {% block layout_footer_navigation_information_content %}
+                                    <div class="footer-column-content collapse js-footer-column-content panel">
+                                        <div class="footer-column-content-inner">
+                                            {% block layout_footer_navigation_information_links %}
+                                                <ul class="list-unstyled">
+                                                    {% for treeItem in root.children %}
+                                                        {% set cssClass = treeItem.category.customFields.css_classes %}
+
+                                                        {% set category = treeItem.category %}
+                                                        {% set name = category.translated.name %}
+
+                                                        {% block layout_footer_navigation_information_link_item %}
+                                                            <li class="footer-link-item ">
+                                                                {% block layout_footer_navigation_information_link %}
+                                                                    {% if category.type == 'folder' %}
+                                                                        <div>{{ name }}</div>
+                                                                    {% else %}
+                                                                        <a class="footer-link {% if cssClass !== null %} {{ cssClass }} search-toggle-btn js-search-toggle-btn  collapsed {% endif %}"
+                                                                           id="{% if cssClass !== null %}closeToggle{% endif %}"
+                                                                           {% if cssClass !== null %}data-bs-toggle="collapse"
+                                                                           data-bs-target="#searchCollapse"
+                                                                           aria-expanded="false" type="button"
+                                                                           aria-controls="searchCollapse"
+                                                                           aria-label="Search"{% endif %}
+                                                                           href="{{ category_url(category) }}"
+                                                                                {% if category_linknewtab(category) %}target="_blank"{% endif %}
+                                                                           title="{{ name }}">
+                                                                            {{ name }}
+                                                                        </a>
+                                                                    {% endif %}
+                                                                {% endblock %}
+                                                            </li>
+                                                        {% endblock %}
+                                                    {% endfor %}
+                                                </ul>
+                                            {% endblock %}
+                                        </div>
+                                    </div>
+                                {% endblock %}
+
+                            {% endblock %}
+                        {% endfor %}
+                    </div>
+                {% endblock %}
+
+                {% block footer_layout_handler %}
+                    <div class="col-md-3 avia_google_maps-5 footer-column js-footer-column">
+
+                        <div class="footer-column-headline footer-headline js-footer-column-headline js-collapse-footer-column-trigger accordion"
+                             role="listitem">
+                            <div class="avia_google_maps-5-title footer__title">
+                                {{ "footer.map.mapTitle"|trans|sw_sanitize }}
+                            </div>
+                            {% block layout_footer_navigation_handler_icons %}
+                                <div class="footer-column-toggle">
+                                        <span class="footer-plus-icon">
+                                            {% sw_icon 'ic-chevron-right-dark' style {
+                                                'pack': 'mainhattan',
+                                                'size': 'sm'
+                                            } %}
+                                        </span>
+                                    <span class="footer-minus-icon">
+                                    {% sw_icon 'ic-chevron-right-dark' style {
+                                                'pack': 'mainhattan',
+                                                'size': 'sm'
+                                            } %}
+                                        </span>
+                                </div>
+                            {% endblock %}
+                        </div>
+
+                        <div class="footer-column-content collapse js-footer-column-content footer-contact panel">
+                            <div class="google-map">
+                                <iframe
+                                        title="Google Maps Karte – Standort von Mainhattan-Wheels"
+                                        width="300"
+                                        height="300"
+                                        frameborder="0"
+                                        style="border:0"
+                                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d11277.917218796614!2d8.790863!3d50.011491!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3AYOUR_LOCATION_NAME_HERE!2sMainhattan-Wheels!5e0!3m2!1sen!2sus!4v1567429023614!5m2!1sen!2sus"
+                                        >
+                                </iframe>
+                            </div>
+                        </div>
+                    </div>
+                {% endblock %}
+
+                {% block footer_newsletter %}
+                    <div class="col-md-3 footer-column js-footer-column">
+                        <div class="footer-column-headline footer-headline js-footer-column-headline js-collapse-footer-column-trigger accordion"
+                             role="listitem">
+                            <div class="opening-time-title">
+                                <h2>{{ 'footer.opening.openingTitles'|trans|sw_sanitize }}</h2>
+                            </div>
+
+                            {% block layout_footer_navigation_handler_icons_two %}
+                                <div class="footer-column-toggle">
+                                        <span class="footer-plus-icon">
+                                            {% sw_icon 'ic-chevron-right-dark' style {
+                                                'pack': 'mainhattan',
+                                                'size': 'sm'
+                                            } %}
+                                        </span>
+                                    <span class="footer-minus-icon">
+                                    {% sw_icon 'ic-chevron-right-dark' style {
+                                                'pack': 'mainhattan',
+                                                'size': 'sm'
+                                            } %}
+                                        </span>
+                                </div>
+                            {% endblock %}
+                        </div>
+
+                        <div class="footer-column-content collapse js-footer-column-content footer-contact panel"
+                             >
+                            <div class="opening-time">
+                                <span>{{ "footer.addressLineOne"|trans|sw_sanitize }}</span><br>
+                                <span>{{ "footer.addressLineTwo"|trans|sw_sanitize }}</span><br>
+                                <span>{{ "footer.addressLineThree"|trans|sw_sanitize }}</span><br><br>
+                                <p>{{ 'footer.opening.openingDesc'|trans|sw_sanitize }}</p><br>
+                                <p>{{ 'footer.contact.telephone'|trans|sw_sanitize }}</p>
+                                <span>{{ 'footer.opening.openingDays'|trans|sw_sanitize }}</span><br>
+                                <span>{{ 'footer.opening.openingTimes'|trans|sw_sanitize }}</span>
+                            </div>
+                            <div class="newsletter">
+                                {% sw_include '@Storefront/storefront/component/footer/mainhattan-footer-newsletter.html.twig' with {
+                                    action: 'frontend.form.newsletter.register.handle.custom',
+                                    submitText: 'newsletter.formSubmit'
+                                } %}
+                            </div>
+                        </div>
+                    </div>
+                {% endblock %}
+            </div>
+        {% endblock %}
+
+    </div>
+    <script>
+        var acc = document.getElementsByClassName("accordion");
+        var i;
+
+        for (i = 0; i < acc.length; i++) {
+            acc[i].addEventListener("click", function() {
+                this.classList.toggle("active");
+                var panel = this.nextElementSibling;
+                if (panel.style.display === "block") {
+                    panel.style.display = "none";
+                } else {
+                    panel.style.display = "block";
+                }
+            });
+        }
+    </script>
+{% endblock %}

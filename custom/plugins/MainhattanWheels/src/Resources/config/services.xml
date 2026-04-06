@@ -1,0 +1,22 @@
+<container xmlns="http://symfony.com/schema/dic/services" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+    <services>
+        <!-- Decorator -->
+        <service id="MainhattanWheels\Storefront\Controller\NewsletterFormController">
+            <argument type="service" id="Shopware\Core\Content\ContactForm\SalesChannel\ContactFormRoute"/>
+            <argument type="service" id="Shopware\Core\Content\Newsletter\SalesChannel\NewsletterSubscribeRoute"/>
+            <argument type="service" id="Shopware\Core\Content\Newsletter\SalesChannel\NewsletterUnsubscribeRoute"/>
+            <call method="setContainer">
+                <argument type="service" id="service_container"/>
+            </call>
+            <call method="setTwig">
+                <argument type="service" id="twig"/>
+            </call>
+            <tag name="controller.service_arguments"/>
+        </service>
+        <!-- Resolver -->
+        <service id="MainhattanWheels\Core\Content\Media\Cms\mainhattanImageTextCmsElementResolver">
+            <tag name="shopware.cms.data_resolver"/>
+            <argument type="service" id="Shopware\Core\Content\Media\Cms\DefaultMediaResolver"/>
+        </service>
+    </services>
+</container>

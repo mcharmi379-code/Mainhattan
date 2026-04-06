@@ -1,0 +1,74 @@
+{% sw_extends '@Storefront/storefront/layout/footer/footer.html.twig' %}
+
+{% set showToolbar = config('TcinnA11yToolbarApp.config.TcinnA11yToolbarShow') %}
+{% set btnBgColor = config('TcinnA11yToolbarApp.config.TcinnA11yToolbarBtnBgColor') %}
+{% set btnTextColor = config('TcinnA11yToolbarApp.config.TcinnA11yToolbarBtnTextColor') %}
+{% set btnIconColor = config('TcinnA11yToolbarApp.config.TcinnA11yToolbarBtnIconColor') %}
+{% set btnBorderRadius = config('TcinnA11yToolbarApp.config.TcinnA11yToolbarBtnBorderRadius') %}
+{% set toolbarHeightDesktop = config('TcinnA11yToolbarApp.config.TcinnA11yToolbarHeightDesktop') %}
+{% set toolbarHeightMobile = config('TcinnA11yToolbarApp.config.TcinnA11yToolbarHeightMobile') %}
+{% set problemBg = config('TcinnA11yToolbarApp.config.TcinnA11yProblemReportBgColor') %}
+{% set problemText = config('TcinnA11yToolbarApp.config.TcinnA11yProblemReportTextColor') %}
+{% set problemIcon = config('TcinnA11yToolbarApp.config.TcinnA11yProblemReportIconColor') %}
+{% set buttonOffsetX = config('TcinnA11yToolbarApp.config.TcinnA11yToolbarInitialBtnOffsetX') %}
+{% set buttonOffsetY = config('TcinnA11yToolbarApp.config.TcinnA11yToolbarInitialBtnOffsetY') %}
+{% set initialBtnBorderRadius = config('TcinnA11yToolbarApp.config.TcinnA11yToolbarInitialBorderRadius') %}
+{% set initialBtnZIndex = config('TcinnA11yToolbarApp.config.TcinnA11yInitialBtnZIndex') %}
+{% set initialBtnBgColor = config('TcinnA11yToolbarApp.config.TcinnA11yToolbarInitialBtnBgColor') %}
+{% set initialBtnIconColor = config('TcinnA11yToolbarApp.config.TcinnA11yToolbarInitialBtnIconColor') %}
+{% set containerBgColor = config('TcinnA11yToolbarApp.config.TcinnA11yToolbarContainerBgColor') %}
+{% set titleBgColor = config('TcinnA11yToolbarApp.config.TcinnA11yToolbarTitleBgColor') %}
+{% set titleColor = config('TcinnA11yToolbarApp.config.TcinnA11yToolbarTitleColor') %}
+{% set closeBtnBgColor = config('TcinnA11yToolbarApp.config.TcinnA11yToolbarCloseBtnBgColor') %}
+{% set closeBtnIconColor = config('TcinnA11yToolbarApp.config.TcinnA11yToolbarCloseBtnIconColor') %}
+{% set toolbarZIndex = config('TcinnA11yToolbarApp.config.TcinnA11yToolbarZIndex') %}
+
+{# -------------------------------------------------- #}
+{# FOOTER                                             #}
+{# -------------------------------------------------- #}
+
+{% block layout_footer_inner_container %}
+    <footer class="footer-minimal">
+        {% block layout_footer_bottom %}
+            {{ parent() }}
+        {% endblock %}
+    </footer>
+        {# Toolbar nur dann im Footer (bzw. fixed links & rechts & topbar) ausgeben #}
+    {% if showToolbar and (position == 'right' or position == 'left' or position == 'header-action' or position == 'topbar') %} 
+        {% block tcinnA11y_toolbar_wrapper_base_footer_position %}
+            {% sw_include '@Storefront/storefront/custom/tcinn-a11y-toolbar.html.twig' with {
+            isMinimalFooter: true
+        } %}
+        {% endblock %}
+    {% endif %}
+
+	{% if showToolbar %}
+        {% block tcinnA11y_toolbar_wrapper_base_footer_style %}
+            <style>
+                :root {
+                    --tcinn-a11y-btnBg: {{ btnBgColor|e('html') }};
+                    --tcinn-a11y-btnText: {{ btnTextColor|e('html') }};
+                    --tcinn-a11y-btnIcon: {{ btnIconColor|e('html') }};
+                    --tcinn-a11y-btnBorderRadius: {{ btnBorderRadius|e('html') }};
+                    --tcinn-a11y-initial-btn-z-index: {{ initialBtnZIndex|e('html') }};
+                    --tcinn-a11y-initial-btn-bg-color: {{ initialBtnBgColor|e('html') }};
+                    --tcinn-a11y-initial-btn-icon-color: {{ initialBtnIconColor|e('html') }};
+                    --tcinn-a11y-initial-btn-border-radius: {{ initialBtnBorderRadius|e('html') }};
+                    --tcinn-a11y-problem-bg: {{ problemBg|e('html') }};
+                    --tcinn-a11y-problem-text: {{ problemText|e('html') }};
+                    --tcinn-a11y-problem-icon: {{ problemIcon|e('html') }};
+                    --tcinn-a11y-button-offsetX: {{ buttonOffsetX|e('html') }};
+                    --tcinn-a11y-button-offsetY: {{ buttonOffsetY|e('html') }};
+                    --tcinn-a11y-toolbar-z-index: {{ toolbarZIndex|e('html') }};
+                    --tcinn-a11y-toolbar-heightDesktop: {{ toolbarHeightDesktop|e('html') }};
+                    --tcinn-a11y-toolbar-heightMobile: {{ toolbarHeightMobile|e('html') }};
+                    --tcinn-a11y-toolbar-container-bg-color: {{ containerBgColor|e('html') }};
+                    --tcinn-a11y-toolbar-title-bg-color: {{ titleBgColor|e('html') }};
+                    --tcinn-a11y-toolbar-title-color: {{ titleColor|e('html') }};
+                    --tcinn-a11y-toolbar-close-btn-bg-color: {{ closeBtnBgColor|e('html') }};
+                    --tcinn-a11y-toolbar-close-btn-icon-color: {{ closeBtnIconColor|e('html') }};                    
+                }
+            </style>
+        {% endblock %}
+	{% endif %}
+{% endblock %}

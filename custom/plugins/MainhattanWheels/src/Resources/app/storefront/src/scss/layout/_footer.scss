@@ -1,0 +1,238 @@
+.footer-main {
+    background-image: url("../../../bundles/mainhattanwheels/storefront/src/assets/CNC-Maschinen-Felgenbearbeitung-Mainhattan-Wheels-bg-06-min.png");
+    background-repeat: no-repeat;
+    background-attachment: scroll;
+    background-position: bottom center;
+    padding: 15px 0 30px 0;
+    background-color: $sw-footer-background;
+    .footer-columns{
+        display: flex;
+        justify-content: space-between;
+        margin: 0 auto;
+        width: 100%;
+        .footer-column {
+            @media(min-width: 1024px){
+                width: 22.33%;
+            }
+            @media(max-width: 1023px){
+                width: 50%;
+            }
+        }
+        .second-menu-title {
+            padding: 0px;
+            .footer__title {
+                margin-bottom: 5px;
+            }
+        }
+    }
+    .footer__title {
+        font-family: $sw-font-family-base;
+        color: $sw-footer-heading-color;
+        font-size: 17.6px;
+        font-weight: normal;
+        text-transform: capitalize;
+        margin-bottom: 0px;
+    }
+    .footer-link-item{
+        a {
+            color: $sw-footer-text-color;
+            font-family:  $sw-font-family-headline;
+            font-size: 16px;
+            text-transform: capitalize;
+            line-height: 26px;
+            &:hover{
+                color: $main-hattan-footer-social-column-hover-color;
+            }
+        }
+        @media(min-width: 768px){
+            padding: 0;
+        }
+    }
+    .google-map{
+        margin-top: 10px;
+        iframe{
+            width: 100%;
+            height: 230px;
+            @media(max-width:1023px){
+                height: 350px;
+            }
+        }
+    }
+    .opening-time-title{
+        h3 {
+            color: $sw-footer-heading-color;
+            font-family: $sw-font-family-base;
+            font-size: 17.6px;
+            font-weight: 400;
+            text-transform: capitalize;
+            margin-bottom: 0;
+        }
+    }
+    .opening-time {
+        color: $sw-footer-text-color;
+        font-size: $sw-font-size-content;
+        font-family:  $sw-font-family-headline;
+        p {
+            margin-bottom: 5px;
+            a{
+                color: $sw-footer-text-color;
+                text-decoration: none;
+            }
+        }
+        span{
+            font-family:  $sw-font-family-headline;
+        }
+    }
+    .footer-logo-main{
+        @media(min-width: 768px){
+            padding: 2.5rem 0 0.5rem 0;
+        }
+    }
+    .newsletter-title-one {
+        font-family: $sw-font-family-base;
+        color: $sw-footer-heading-color;
+        letter-spacing: 1px;
+        font-size: 1.1em;
+        margin-bottom: 0;
+    }
+    .footer-contact{
+        input[type="email"]{
+            background-color: #52565c;
+            padding: 8px 6px;
+            line-height: normal;
+            border-color: #35383c;
+            box-shadow: none;
+            font-family:  $sw-font-family-base;
+            color: #fff;
+            &::placeholder {
+                color: #777777;
+                text-transform: capitalize;
+                font-family:  $sw-font-family-headline;
+            }
+            &:focus{
+                box-shadow: 0px 0px 2px 0px rgba(0,0,0,0.2);
+                border-color: #35383c;
+                background-color: #52565c;
+                color: #777777;
+            }
+        }
+        button[type='submit']{
+            background-color: #ffffff;
+            color: #35383c;
+            border-color: #dddddd !important;
+            padding: 0px 22px;
+            border: none !important;
+            font-family: 'arial-light';
+            font-weight: 400;
+            font-size: 13.3333px;
+            margin: 14px 0;
+            border-radius: 0 !important;
+            &:hover{
+                background-color: #ebebeb;
+                color: #35383c;
+                border-color: #c9c9c9;
+            }
+        }
+    }
+    .confirm-alert {
+        color: #fff;
+    }
+}
+
+.footer-bottom {
+    border-color: #282b2e;
+    background-color: #282b2e;
+    color: #e8e8e8;
+    font-size: 11px;
+    padding: 20px 0 65px;
+    @media(max-width: 768px){
+        padding: 20px;
+    }
+    a {
+        color: #fff;
+    }
+    .container{
+        padding: 0 20px;
+    }
+    .footer-copyright{
+        padding: 0 20px;
+        .footer-copyright-custom {
+            text-align: start;
+            font-family:  $sw-font-family-base;
+        }
+    }
+}
+
+@include media-breakpoint-down(md) {
+    .footer-main{
+        .container {
+            padding: 0;
+        }
+        .footer-columns{
+            .footer-column{
+                width: 100%;
+            }
+            margin: 0 auto;
+            .footer-column-headline{
+                &.active{
+                    .footer-minus-icon {
+                        display: block;
+                    }
+                    .footer-plus-icon {
+                        display: none;
+                    }
+                }
+            }
+            .footer-logo-picture {
+                width: 100%;
+                display: block;
+                text-align: left;
+                margin: 3px auto;
+            }
+            .footer-column.js-footer-column {
+                padding: 0 30px;
+            }
+            .opening-time {
+                margin-bottom: 50px;
+            }
+            .opening-time-title{
+                h3 {
+                    line-height: normal;
+                    margin-bottom: 0;
+                }
+            }
+            .footer-newsletter-content {
+                margin: 0 0 50px;
+            }
+            .footer__title {
+                margin-bottom: 0;
+            }
+            .google-map {
+                margin: 20px 0;
+            }
+            .footer-column-toggle{
+                path,svg{
+                    fill: #fff;
+                    stroke-linecap: round;
+                    height: 15px;
+                }
+                .footer-minus-icon .icon {
+                    transform: rotate(90deg);
+                }
+            }
+            .second-menu-title {
+                border-top: 1px solid $sw-border-color;
+                margin: 0 -30px;
+                padding: 8px 30px;
+                .footer__title {
+                    margin-bottom: 0;
+                }
+            }
+         }
+    }
+    .footer-bottom {
+        .footer-copyright{
+            padding: 0;
+        }
+    }
+}

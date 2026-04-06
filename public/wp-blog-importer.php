@@ -662,6 +662,8 @@ function detectExtension(string $path, string $mimeType, string $sourcePath = ''
         'image/png' => 'png',
         'image/gif' => 'gif',
         'image/webp' => 'webp',
+        'image/avif' => 'avif',
+        'image/gif' => 'gif',
         'image/svg+xml' => 'svg',
     ];
 

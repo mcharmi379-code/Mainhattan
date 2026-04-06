@@ -1,0 +1,495 @@
+{
+  "name": "MainhattanWheels",
+  "author": "Shopware AG",
+  "views": [
+     "@Storefront",
+     "@Plugins",
+     "@MainhattanWheels"
+  ],
+  "style": [
+    "app/storefront/src/scss/overrides.scss",
+    "@Storefront",
+    "app/storefront/src/scss/base.scss"
+  ],
+  "script": [
+    "@Storefront",
+    "app/storefront/dist/storefront/js/mainhattan-wheels.js"
+  ],
+  "asset": [
+    "@Storefront",
+    "app/storefront/src/assets"
+  ],
+  "iconSets": {
+    "mainhattan": "app/storefront/src/assets/icon-pack/mainhattan"
+  },
+  "config": {
+    "tabs": {
+      "header": {
+        "label": {
+          "en-GB": "Header",
+          "de-DE": "Header"
+        }
+      },
+      "footer": {
+        "label": {
+          "en-GB": "Footer",
+          "de-DE": "Footer"
+        }
+      }
+    },
+    "blocks": {
+      "header": {
+        "label": {
+          "en-GB": "Header",
+          "de-DE": "Koptekst"
+        }
+      },
+      "footer": {
+        "label": {
+          "en-GB": "Footer",
+          "de-DE": "Voettekst"
+        }
+      }
+    },
+    "fields": {
+      "sw-header-black-logo": {
+        "label": {
+          "en-GB": "Header black logo",
+          "de-DE": "Schwarzes Header-Logo"
+        },
+        "type": "media",
+        "value": "",
+        "editable": true,
+        "block": "media",
+        "order": 100
+      },
+      "sw-font-secondary": {
+        "label": {
+          "en-GB": "Secondary font",
+          "de-DE": "secundair lettertype"
+        },
+        "type": "text",
+        "value": "opensans-bold",
+        "editable": true,
+        "block": "typography",
+        "order": 500
+      },
+      "sw-font-size-xs": {
+        "label": {
+          "en-GB": "Font size for xs",
+          "de-DE": "Schriftgröße für xs"
+        },
+        "type": "text",
+        "value": "13px",
+        "editable": true,
+        "block": "typography",
+        "order": 600
+      },
+      "sw-font-size-sm": {
+        "label": {
+          "en-GB": "Font size for sm",
+          "de-DE": "Schriftgröße für sm"
+        },
+        "type": "text",
+        "value": "18px",
+        "editable": true,
+        "block": "typography",
+        "order": 700
+      },
+      "sw-font-size-content": {
+        "label": {
+          "en-GB": "Font size for content",
+          "de-DE": "Schriftgröße für Inhalte"
+        },
+        "type": "text",
+        "value": "16px",
+        "editable": true,
+        "block": "typography",
+        "order": 800
+      },
+      "sw-font-size-heading": {
+        "label": {
+          "en-GB": "Font size for heading",
+          "de-DE": "Schriftgröße für Überschrift"
+        },
+        "type": "text",
+        "value": "26px",
+        "editable": true,
+        "block": "typography",
+        "order": 900
+      },
+      "sw-font-weight-base": {
+        "label": {
+          "en-GB": "Base font weight",
+          "de-DE": "Basis Schriftstärke"
+        },
+        "type": "text",
+        "value": "400",
+        "custom": {
+          "componentName": "sw-single-select",
+          "options": [
+            {
+              "value": "400",
+              "label": {
+                "en-GB": "Regular - 400",
+                "de-DE": "Regular - 400"
+              }
+            },
+            {
+              "value": "500",
+              "label": {
+                "en-GB": "Medium - 500",
+                "de-DE": "Medium - 500"
+              }
+            },
+            {
+              "value": "600",
+              "label": {
+                "en-GB": "Semi-bold - 600",
+                "de-DE": "Semi-Bold - 600"
+              }
+            },
+            {
+              "value": "700",
+              "label": {
+                "en-GB": "Bold - 700",
+                "de-DE": "Bold - 700"
+              }
+            },
+            {
+              "value": "800",
+              "label": {
+                "en-GB": "Extra Bold - 800",
+                "de-DE": "Extra Bold - 800"
+              }
+            }
+          ]
+        },
+        "editable": true,
+        "block": "typography",
+        "order": 100
+      },
+      "sw-headings-font-weight": {
+        "label": {
+          "en-GB": "Headlines font weight",
+          "de-DE": "Überschriften Schriftstärke"
+        },
+        "type": "text",
+        "value": "500",
+        "custom": {
+          "componentName": "sw-single-select",
+          "options": [
+            {
+              "value": "400",
+              "label": {
+                "en-GB": "Regular - 400",
+                "de-DE": "Regular - 400"
+              }
+            },
+            {
+              "value": "500",
+              "label": {
+                "en-GB": "Medium - 500",
+                "de-DE": "Medium - 500"
+              }
+            },
+            {
+              "value": "600",
+              "label": {
+                "en-GB": "Semi-bold - 600",
+                "de-DE": "Semi-Bold - 600"
+              }
+            },
+            {
+              "value": "700",
+              "label": {
+                "en-GB": "Bold - 700",
+                "de-DE": "Bold - 700"
+              }
+            },
+            {
+              "value": "800",
+              "label": {
+                "en-GB": "Extra Bold - 800",
+                "de-DE": "Extra Bold - 800"
+              }
+            }
+          ]
+        },
+        "editable": true,
+        "block": "typography",
+        "order": 125
+      },
+      "sw-top-header-background": {
+        "label": {
+          "en-GB": "Top header background",
+          "de-DE": "Hintergrund der oberen Kopfzeile"
+        },
+        "type": "color",
+        "value": "#f7f7f7",
+        "custom": {
+          "componentName": "sw-single-select",
+          "options": [
+            {
+              "value": "400",
+              "label": {
+                "en-GB": "Regular - 400",
+                "de-DE": "Regular - 400"
+              }
+            },
+            {
+              "value": "500",
+              "label": {
+                "en-GB": "Medium - 500",
+                "de-DE": "Medium - 500"
+              }
+            },
+            {
+              "value": "600",
+              "label": {
+                "en-GB": "Semi-bold - 600",
+                "de-DE": "Semi-Bold - 600"
+              }
+            },
+            {
+              "value": "700",
+              "label": {
+                "en-GB": "Bold - 700",
+                "de-DE": "Bold - 700"
+              }
+            },
+            {
+              "value": "800",
+              "label": {
+                "en-GB": "Extra Bold - 800",
+                "de-DE": "Extra Bold - 800"
+              }
+            }
+          ]
+        },
+        "editable": true,
+        "tab": "header",
+        "block": "header",
+        "order": 100
+      },
+      "sw-header-background": {
+        "label": {
+          "en-GB": "Header background",
+          "de-DE": "Header-Hintergrund"
+        },
+        "type": "color",
+        "value": "#fff",
+        "editable": true,
+        "tab": "header",
+        "block": "header",
+        "order": 200
+      },
+      "sw-header-text-color": {
+        "label": {
+          "en-GB": "Header color",
+          "de-DE": "Kleur van de kop"
+        },
+        "type": "color",
+        "value": "#969696",
+        "editable": true,
+        "tab": "header",
+        "block": "header",
+        "order": 300
+      },
+      "sw-header-text-hover-color": {
+        "label": {
+          "en-GB": "Header hover color",
+          "de-DE": "Kleur van de koptekst"
+        },
+        "type": "color",
+        "value": "#e85630",
+        "editable": true,
+        "tab": "header",
+        "block": "header",
+        "order": 400
+      },
+      "sw-header-navigation-align": {
+        "label": {
+          "en-GB": "Header align",
+          "de-DE": "Header align"
+        },
+        "type": "text",
+        "value": "left",
+        "custom": {
+          "componentName": "sw-single-select",
+          "options": [
+            {
+              "value": "left",
+              "label": {
+                "en-GB": "Left",
+                "de-DE": "Left"
+              }
+            },
+            {
+              "value": "right",
+              "label": {
+                "en-GB": "Right",
+                "de-DE": "Right"
+              }
+            },
+            {
+              "value": "center",
+              "label": {
+                "en-GB": "Center",
+                "de-DE": "Center"
+              }
+            }
+          ]
+        },
+        "editable": true,
+        "tab": "header",
+        "block": "header",
+        "order": 300
+      },
+      "sw-instagram-link": {
+        "label": {
+          "en-GB": "Instagram link",
+          "de-DE": "Instagram-Link"
+        },
+        "type": "url",
+        "value": "https://www.instagram.com/",
+        "editable": true,
+        "tab": "header",
+        "block": "header",
+        "scss": false
+      },
+      "sw-facebook-link": {
+        "label": {
+          "en-GB": "Facebook link",
+          "de-DE": "Facebook-Link"
+        },
+        "type": "url",
+        "value": "https://www.facebook.com/",
+        "editable": true,
+        "tab": "header",
+        "block": "header",
+        "scss": false
+      },
+      "sw-twitter-link": {
+        "label": {
+          "en-GB": "Twitter link",
+          "de-DE": "Twitter-Link"
+        },
+        "type": "url",
+        "value": "https://www.twitter.com/",
+        "editable": true,
+        "tab": "header",
+        "block": "header",
+        "scss": false
+      },
+      "sw-tiktok-link": {
+        "label": {
+          "en-GB": "TikTok link",
+          "de-DE": "TikTok-Link"
+        },
+        "type": "url",
+        "value": "https://www.tiktok.com/",
+        "editable": true,
+        "tab": "header",
+        "block": "header",
+        "scss": false
+      },
+      "sw-youtube-link": {
+        "label": {
+          "en-GB": "YouTube link",
+          "de-DE": "YouTube-Link"
+        },
+        "type": "url",
+        "value": "https://www.youtube.com/",
+        "editable": true,
+        "tab": "header",
+        "block": "header",
+        "scss": false
+      },
+      "sw-footer-background": {
+        "label": {
+          "en-GB": "Footer background",
+          "de-DE": "Voettekst achtergrond"
+        },
+        "type": "color",
+        "value": "#35383c",
+        "editable": true,
+        "tab": "footer",
+        "block": "footer",
+        "order": 100
+      },
+      "sw-footer-heading-color": {
+        "label": {
+          "en-GB": "Footer heading color",
+          "de-DE": "Farbe der Fußzeilenüberschrift"
+        },
+        "type": "color",
+        "value": "#FFF",
+        "editable": true,
+        "tab": "footer",
+        "block": "footer",
+        "order": 200
+      },
+      "sw-footer-text-color": {
+        "label": {
+          "en-GB": "Footer text color",
+          "de-DE": "Farbe des Fußzeilentextes"
+        },
+        "type": "color",
+        "value": "#E8E8E8",
+        "editable": true,
+        "tab": "footer",
+        "block": "footer",
+        "order": 300
+      },
+      "main-hattan-footer-social-column-color": {
+        "label": {
+          "en-GB": "Text",
+          "de-DE": "Text"
+        },
+        "type": "color",
+        "value": "$sw-text-color",
+        "editable": true,
+        "tab": "footer",
+        "block": "footer",
+        "order": 125
+      },
+      "main-hattan-footer-social-column-hover-color": {
+        "label": {
+          "en-GB": "Text:hover",
+          "de-DE": "Text:hover"
+        },
+        "type": "color",
+        "value": "$sw-color-brand-primary",
+        "editable": true,
+        "tab": "footer",
+        "block": "footer",
+        "order": 150
+      },
+      "main-hattan-copyright-text": {
+        "label": {
+          "en-GB": "Copy right",
+          "de-DE": "Copy right"
+        },
+        "type": "text",
+        "value": "",
+        "editable": true,
+        "tab": "footer",
+        "block": "footer",
+        "order": 100
+      },
+      "sw-footer-logo": {
+        "label": {
+          "en-GB": "Footer logo",
+          "de-DE": "Footer logo"
+        },
+        "type": "media",
+        "value": "",
+        "editable": true,
+        "tab": "footer",
+        "block": "footer",
+        "order": 100
+      }
+    }
+  }
+}

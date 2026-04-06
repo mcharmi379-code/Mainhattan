@@ -1,0 +1,24 @@
+{
+  "name": "main/main-hattan-wheels",
+  "description": "MianHattan Wheels",
+  "type": "shopware-platform-plugin",
+  "license": "proprietary",
+  "version": "1.0.3",
+  "autoload": {
+    "psr-4": {
+      "MainhattanWheels\\": "src/"
+    }
+  },
+  "require": {
+    "shopware/core": "^6.5",
+    "shopware/storefront": "^6.5",
+    "shopware/administration": "^6.5"
+  },
+  "extra": {
+    "shopware-plugin-class": "MainhattanWheels\\MainhattanWheels",
+    "label": {
+      "de-DE": "Theme MainhattanWheels plugin",
+      "en-GB": "Theme MainhattanWheels plugin"
+    }
+  }
+}

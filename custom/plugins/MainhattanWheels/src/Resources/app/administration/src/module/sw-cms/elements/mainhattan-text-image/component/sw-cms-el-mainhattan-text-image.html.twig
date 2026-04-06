@@ -1,0 +1,29 @@
+{% block sw_cms_mainhattan_listpage_image_text %}
+<div class="mainhattan-listpage-image-text">
+    <div class="mainhattan-listpage-image-text-el--inner">
+            <div class="sw-cms-el-image" :class="displayModeClass" :style="styles">
+                {% block sw_cms_element_text %}
+                    <div class="sw-cms-el-text">
+                        <div v-if="element.config.heading.source === 'mapped'" class="sw-cms-el-text__mapping-preview content-editor" v-html="$sanitize(demoValue)"></div>
+                        <sw-text-editor
+                                v-else
+                                v-model="element.config.heading.value"
+                                :disabled="disabled"
+                                :allow-inline-data-mapping="true"
+                                :is-inline-edit="true"
+                                sanitize-input
+                                enable-transparent-background
+                                @blur="onBlur"
+                                @input="onInput"
+                        />
+                    </div>
+                {% endblock %}
+                {% block sw_cms_element_image_content %}
+                    <div class="mainhattan-listpage-image-text__bottom-image">
+                        <img :src="mediaUrl" :style="imgStyles" alt="">
+                    </div>
+                {% endblock %}
+            </div>
+    </div>
+</div>
+{% endblock %}

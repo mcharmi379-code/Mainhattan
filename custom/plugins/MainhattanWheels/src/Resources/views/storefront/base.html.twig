@@ -1,0 +1,206 @@
+{% sw_extends '@Storefront/storefront/base.html.twig' %}
+
+{% set showToolbar = config('TcinnA11yToolbarApp.config.TcinnA11yToolbarShow') %}
+{% set position  = config('TcinnA11yToolbarApp.config.TcinnA11yToolbarPosition') %}
+{% set btnBgColor = config('TcinnA11yToolbarApp.config.TcinnA11yToolbarBtnBgColor') %}
+{% set btnTextColor = config('TcinnA11yToolbarApp.config.TcinnA11yToolbarBtnTextColor') %}
+{% set btnIconColor = config('TcinnA11yToolbarApp.config.TcinnA11yToolbarBtnIconColor') %}
+{% set btnBorderRadius = config('TcinnA11yToolbarApp.config.TcinnA11yToolbarBtnBorderRadius') %}
+{% set toolbarHeightDesktop = config('TcinnA11yToolbarApp.config.TcinnA11yToolbarHeightDesktop') %}
+{% set toolbarHeightMobile = config('TcinnA11yToolbarApp.config.TcinnA11yToolbarHeightMobile') %}
+{% set problemBg = config('TcinnA11yToolbarApp.config.TcinnA11yProblemReportBgColor') %}
+{% set problemText = config('TcinnA11yToolbarApp.config.TcinnA11yProblemReportTextColor') %}
+{% set problemIcon = config('TcinnA11yToolbarApp.config.TcinnA11yProblemReportIconColor') %}
+{% set buttonOffsetX = config('TcinnA11yToolbarApp.config.TcinnA11yToolbarInitialBtnOffsetX') %}
+{% set buttonOffsetY = config('TcinnA11yToolbarApp.config.TcinnA11yToolbarInitialBtnOffsetY') %}
+{% set initialBtnBorderRadius = config('TcinnA11yToolbarApp.config.TcinnA11yToolbarInitialBorderRadius') %}
+{% set initialBtnZIndex = config('TcinnA11yToolbarApp.config.TcinnA11yInitialBtnZIndex') %}
+{% set initialBtnBgColor = config('TcinnA11yToolbarApp.config.TcinnA11yToolbarInitialBtnBgColor') %}
+{% set initialBtnIconColor = config('TcinnA11yToolbarApp.config.TcinnA11yToolbarInitialBtnIconColor') %}
+{% set containerBgColor = config('TcinnA11yToolbarApp.config.TcinnA11yToolbarContainerBgColor') %}
+{% set titleBgColor = config('TcinnA11yToolbarApp.config.TcinnA11yToolbarTitleBgColor') %}
+{% set titleColor = config('TcinnA11yToolbarApp.config.TcinnA11yToolbarTitleColor') %}
+{% set closeBtnBgColor = config('TcinnA11yToolbarApp.config.TcinnA11yToolbarCloseBtnBgColor') %}
+{% set closeBtnIconColor = config('TcinnA11yToolbarApp.config.TcinnA11yToolbarCloseBtnIconColor') %}
+{% set toolbarZIndex = config('TcinnA11yToolbarApp.config.TcinnA11yToolbarZIndex') %}
+
+{# -------------------------------------------------- #}
+{# HEADER Toolbar                                     #}
+{# -------------------------------------------------- #}
+{% block base_body_inner %}
+
+    {# Toolbar nur dann im Header ausgeben #}
+    {% if showToolbar and position == 'header' %}
+        {% block tcinnA11y_toolbar_wrapper_base_body_inner %}
+            {% sw_include '@Storefront/storefront/custom/tcinn-a11y-toolbar.html.twig' ignore missing %}
+        {% endblock %}
+    {% endif %}
+
+    {{ parent() }}
+{% endblock %}
+
+{% block base_header %}
+    <header class="header-main mainhattan-header-main">
+        {% block base_header_inner %}
+            <div class="container">
+                {% sw_include '@Storefront/storefront/layout/header/header.html.twig' %}
+            </div>
+        {% endblock %}
+    </header>
+{% endblock %}
+
+{% block base_navigation %}
+    {# to hide the main navigation #}
+{% endblock %}
+  {% block base_main_inner %}
+      <div class="container">
+          {% block base_breadcrumb %}
+              {% sw_include '@Storefront/storefront/layout/breadcrumb.html.twig' with {
+                  context: context,
+                  themeIconConfig: themeIconConfig,
+                  category: page.product.seoCategory
+              } only %}
+          {% endblock %}
+
+          {% block base_main_container %}
+              <div class="container-main">
+                  {% block base_content %}{% endblock %}
+              </div>
+          {% endblock %}
+      </div>
+  {% endblock %}
+{% block base_footer %}
+    <footer class="footer-main">
+        {% block base_footer_inner %}
+            {% sw_include '@Storefront/storefront/layout/footer/footer.html.twig' %}
+        {% endblock %}
+    </footer>
+    {% block layout_footer_bottom %}
+        <div class="footer-bottom">
+            {% block layout_footer_service_menu %}
+                <div class="container">
+                    {% block layout_footer_service_menu_content %}
+                        {% apply spaceless %}
+                            <ul class="footer-service-menu-list list-unstyled">
+                                {% for serviceMenuItem in page.header.serviceMenu %}
+                                    {% block layout_footer_service_menu_item %}
+                                        <li class="footer-service-menu-item">
+                                            <a class="footer-service-menu-link"
+                                               href="{{ category_url(serviceMenuItem) }}"
+                                               {% if category_linknewtab(serviceMenuItem) %}target="_blank"{% endif %}
+                                               title="{{ serviceMenuItem.translated.name }}">
+                                                {{ serviceMenuItem.translated.name }}
+                                            </a>
+                                        </li>
+                                    {% endblock %}
+                                {% endfor %}
+                            </ul>
+                        {% endapply %}
+                    {% endblock %}
+                </div>
+            {% endblock %}
+
+            {% block layout_footer_vat %}
+                {# to hod ethe footer vat section #}
+            {% endblock %}
+
+            {% block layout_footer_copyright %}
+                <div class="container">
+                    <div class="footer-copyright">
+                        {% if theme_config('main-hattan-copyright-text') %}
+                            <div class="footer-copyright-custom">
+                                {{ theme_config('main-hattan-copyright-text')|trans|sw_sanitize }}
+                            </div>
+                        {% else %}
+                            {% sw_icon 'shopware' style {'size':'xs'} %}
+                            {{ "footer.copyrightInfo"|trans|sw_sanitize }}
+                        {% endif %}
+                    </div>
+                </div>
+            {% endblock %}
+        </div>
+    {% endblock %}
+
+    {# Toolbar nur dann im Footer (bzw. fixed links & rechts) ausgeben #}
+    {% if showToolbar and (position == 'right' or position == 'left' or position == 'header-action') %} 
+        {% block tcinnA11y_toolbar_wrapper_base_footer_position %}
+            {% sw_include '@Storefront/storefront/custom/tcinn-a11y-toolbar.html.twig' ignore missing %}
+        {% endblock %}
+    {% endif %}
+
+	{% if showToolbar %}
+        {% block tcinnA11y_toolbar_wrapper_base_footer_style %}
+            <style>
+                :root {
+                    --tcinn-a11y-btnBg: {{ btnBgColor|e('html') }};
+                    --tcinn-a11y-btnText: {{ btnTextColor|e('html') }};
+                    --tcinn-a11y-btnIcon: {{ btnIconColor|e('html') }};
+                    --tcinn-a11y-btnBorderRadius: {{ btnBorderRadius|e('html') }};
+                    --tcinn-a11y-initial-btn-z-index: {{ initialBtnZIndex|e('html') }};
+                    --tcinn-a11y-initial-btn-bg-color: {{ initialBtnBgColor|e('html') }};
+                    --tcinn-a11y-initial-btn-icon-color: {{ initialBtnIconColor|e('html') }};
+                    --tcinn-a11y-initial-btn-border-radius: {{ initialBtnBorderRadius|e('html') }};
+                    --tcinn-a11y-problem-bg: {{ problemBg|e('html') }};
+                    --tcinn-a11y-problem-text: {{ problemText|e('html') }};
+                    --tcinn-a11y-problem-icon: {{ problemIcon|e('html') }};
+                    --tcinn-a11y-button-offsetX: {{ buttonOffsetX|e('html') }};
+                    --tcinn-a11y-button-offsetY: {{ buttonOffsetY|e('html') }};
+                    --tcinn-a11y-toolbar-z-index: {{ toolbarZIndex|e('html') }};
+                    --tcinn-a11y-toolbar-heightDesktop: {{ toolbarHeightDesktop|e('html') }};
+                    --tcinn-a11y-toolbar-heightMobile: {{ toolbarHeightMobile|e('html') }};
+                    --tcinn-a11y-toolbar-container-bg-color: {{ containerBgColor|e('html') }};
+                    --tcinn-a11y-toolbar-title-bg-color: {{ titleBgColor|e('html') }};
+                    --tcinn-a11y-toolbar-title-color: {{ titleColor|e('html') }};
+                    --tcinn-a11y-toolbar-close-btn-bg-color: {{ closeBtnBgColor|e('html') }};
+                    --tcinn-a11y-toolbar-close-btn-icon-color: {{ closeBtnIconColor|e('html') }};                    
+                }
+            </style>
+        {% endblock %}
+	{% endif %}
+
+    <script>
+        const header = document.querySelector(".mainhattan-header-main");
+        const extraDiv = document.querySelector(".main-navigation-menu");
+        // Variable to track the scroll direction
+        let lastScrollTop = 0;
+        let shouldApplyClasses = false;
+        // Function to handle the scroll event
+        function handleScroll() {
+            const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+            const flyout = document.querySelector(".is-open");
+            // Check if user has scrolled at least 200 pixels from the top
+            if (scrollTop >= 5) {
+                shouldApplyClasses = true;
+            } else {
+                shouldApplyClasses = false;
+            }
+
+            if (shouldApplyClasses) {
+                if (scrollTop > lastScrollTop) {
+                    // Scrolling down
+                    if (flyout !== null){
+                        header.classList.remove("hovered");
+                        flyout.classList.remove("is-open");
+                    }
+                    header.classList.remove('show-on-scroll');
+                    header.classList.add('is-sticky','is-surolling');
+                }
+            } else {
+                // Reset all classes when not scrolled 200 pixels
+                header.classList.remove('is-sticky', 'is-fixed', 'is-surolling', 'hide-on-scroll', 'show-on-scroll');
+            }
+
+            lastScrollTop = scrollTop;
+        }
+
+        // Attach the scroll event listener
+        window.addEventListener('scroll', handleScroll);
+    </script>
+    <script>
+        var images = document.getElementsByTagName('img');
+        for (var i = 0; i < images.length; i++) {
+            images[i].removeAttribute('srcset');
+        }
+    </script>
+{% endblock %}
+

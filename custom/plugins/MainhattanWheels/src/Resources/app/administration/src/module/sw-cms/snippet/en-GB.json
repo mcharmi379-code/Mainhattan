@@ -1,0 +1,9 @@
+{
+  "sw-cms": {
+    "blocks": {
+      "mainhattanTextimage": {
+          "label": "Mian-hattan-wheels Text and Image"
+      }
+    }
+  }
+}

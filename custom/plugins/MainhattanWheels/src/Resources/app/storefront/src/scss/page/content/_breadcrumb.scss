@@ -1,0 +1,31 @@
+.breadcrumb.cms-breadcrumb {
+    border-bottom: 1px solid #dadae5;
+    width: 100%;
+    padding: 0 50px;
+    @media(max-width:1024px){
+        padding: 0 30px;
+    }
+    nav {
+        ol.breadcrumb {
+            margin: 12px 0;
+            .breadcrumb-link{
+                span {
+                    font-family: 'OpenSans-SemiBold';
+                    font-weight: 400;
+                    color: $sw-color-brand-primary;
+                }
+                &.is-active{
+                    span {
+                        color: $sw-color-brand-secondary;
+                    }
+                }
+            }
+        }
+    }    
+}
+
+.breadcrumb {
+    .icon {
+        color: $sw-color-brand-primary;
+    }
+}

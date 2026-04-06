@@ -1,0 +1,91 @@
+
+
+.mainhattan-filter ,
+.cms-block-sidebar-filter {
+    border: 1px solid #dadae5;
+    border-radius: 6px;
+    font-family: 'opensans-semibold';
+    box-shadow: 0px 1px 4px 1px #ccc;
+    margin: 3px;
+    .category-navigation-link{
+        font-size: $sw-font-size-content;
+        &.is-active {
+            border-bottom: 1px solid #dadae5;
+            color: $sw-color-brand-secondary;
+            font-weight: $sw-headings-font-weight;
+            font-family: $sw-font-secondary;
+        }
+        &:hover{
+            color: $sw-color-brand-secondary;
+        }
+    }
+    .filter-panel-wrapper-toggle {
+        border-radius: 3px;
+        background: $sw-color-brand-secondary;
+        border-color: $sw-color-brand-secondary;
+        color: #fff;
+        font-family: $sw-font-secondary;
+        font-size: $sw-font-size-content;
+        svg{
+            color: #fff;
+        }
+        &:hover{
+            background-color: #fff;
+            color: $sw-color-brand-secondary;
+            svg{
+                color: $sw-color-brand-secondary;
+            }
+        }
+    }
+}
+
+.mainhattan-sidebar-filter{
+    margin-top: 20px;
+}
+.mainhattan-filter{
+    .category-navigation-link{
+        &.is-active{
+            border: 0;
+        }
+    }
+}
+
+
+.cms-element-sidebar-filter,
+.offcanvas-filter {
+    .filter-panel-item-toggle,
+    .filter-boolean {
+        border-radius: 3px;
+        font-family:$sw-font-secondary;
+        color: $sw-color-brand-primary;
+        background-color: #fff;
+        &:hover{
+            border-color: $sw-color-brand-secondary;
+            color: $sw-color-brand-secondary;
+        }
+        &.btn.collapsed {
+            border-radius: 3px;
+        }
+    }
+    .filter-panel-item-toggle[aria-expanded="true"],
+    .filter-panel-item-dropdown{
+        border-color: $sw-color-brand-secondary;
+    }
+    .filter-panel-active-container {
+        padding: 0 10px;
+        .filter-active,
+        .filter-reset-all {
+            margin: 10px 0 0;
+        }
+    }
+    .filter-panel-items-container.acris-filter-inline {
+        margin-bottom: 0;
+        .filter-panel-item {
+            margin: 10px 10px 0;
+        }
+        .filter-panel {
+            margin-bottom: 0;
+        }
+    }
+}
+

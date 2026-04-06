@@ -1,0 +1,36 @@
+{% block layout_footer_social_media_icon %}
+    <div class="text-center social-icons">
+        {% block layout_footer_facebook_logo_image_default %}
+            {% if theme_config('sw-facebook-link') %}
+                <a href="{{ theme_config('sw-facebook-link') }}"
+                   class="social-icon"
+                   target="_blank" rel="noopener"
+                   aria-label="Facebook">
+                    {% sw_icon 'facebook' style {'pack': 'mainhattan'} %}
+                </a>
+            {% endif %}
+        {% endblock %}
+
+        {% block layout_footer_intsagram_logo_image_default %}
+            {% if theme_config('sw-instagram-link') %}
+                <a href="{{ theme_config('sw-instagram-link') }}"
+                   class="social-icon"
+                   target="_blank" rel="noopener"
+                   aria-label="Instagram">
+                    {% sw_icon 'instagram' style {'pack': 'mainhattan'} %}
+                </a>
+            {% endif %}
+        {% endblock %}
+
+        {% block layout_footer_youtube_logo_image_default %}
+            {% if theme_config('sw-youtube-link') %}
+                <a href="{{ theme_config('sw-youtube-link') }}"
+                   class="social-icon"
+                   target="_blank" rel="noopener"
+                   aria-label="Tiktok">
+                    {% sw_icon 'youtube' style {'pack': 'mainhattan'} %}
+                </a>
+            {% endif %}
+        {% endblock %}
+    </div>
+{% endblock %}

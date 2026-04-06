@@ -1,0 +1,208 @@
+.basic-captcha-content-refresh-icon {
+    .icon {
+        color: #fff;
+    }
+}
+.content-main {
+    max-width: 1360px;
+    background: #fff;
+    width: 100%;
+    margin: 20px auto 45px;
+    box-shadow: 0 0 4px 1px #dadae5;
+    @media(max-width:1260px){
+        margin: 0;
+        box-shadow: none
+    }
+    .container-main{
+        padding: 35px 50px;
+        @media(max-width:1260px){
+            padding: 20px 30px;
+        }
+        @media(max-width:767px){
+            padding: 0 20px;
+        }
+    }
+}
+.is-act-home{
+    .cms-section-default{
+        padding: 0;
+    }
+    .cms-element-product-slider{
+        .tns-ovh {
+            margin: 0 5px;
+        }
+    }
+}
+.cms-section{
+    .cms-section-sidebar{
+        padding: 0;
+    }
+}
+.is-ctl-navigation{
+    .content-main{
+        .container-main{
+            padding-top: 25px;
+            @media(max-width:1260px){
+                padding-top: 10px;
+            }
+        }
+    }
+}
+.is-ctl-search{
+    .pagination-nav {
+        margin-bottom: 20px;
+    }
+}
+
+.home-page-section{
+    .home-page-top-contain{
+        border: 1px solid $sw-border-color;
+        margin-bottom: 5px;
+        h2 {
+            font-size: $sw-font-size-content;
+            font-family: 'opensans-bold';
+            color: $sw-color-brand-primary;
+            border-bottom: 1px solid $sw-border-color;
+            padding-bottom: 10px;
+            line-height: normal;
+        }
+        .headline {
+            border: 0;
+            font-family:$sw-font-family-base;
+            font-weight: normal;
+            font-size: 32px;
+            color: #5f7285;
+            padding: 10px 0;
+            line-height: 35px;
+        }
+        p {
+            font-size: $sw-font-size-sm;
+            font-family: $sw-font-family-base;
+            color: #5f7285;
+        }
+    }
+    .cms-image {
+        width: 100%;
+    }
+}
+
+// Searchpage styling
+
+.search-page{
+    .search-headline {
+        font-size: $sw-font-size-heading;
+        font-family: $sw-font-secondary;
+        margin: 18px 0;
+        line-height: normal;
+    }
+    .filter-panel-wrapper-toggle{
+        font-family: 'opensans-semibold';
+        .icon {
+            color: #fff;
+        }
+        &:hover{
+            background-color: #fff;
+            color: $sw-color-brand-secondary;
+            .icon {
+                color: $sw-color-brand-secondary;
+            }
+        }
+    }
+}
+
+// 
+
+.cms-element-product-description {
+    padding: 1.5625rem 2.5rem 0.625rem 2.5rem;
+    border: 1px solid #dadae5;
+    border-radius: 3px;
+    margin: 5px 0;
+    p {
+        font-size: $sw-font-size-content;
+        font-family: $sw-font-secondary;
+        color: $sw-color-brand-secondary;
+    }    
+}
+
+
+// Cookie content styling
+
+.cookie-permission-content {
+    font-family: $sw-font-family-headline;
+    font-size: 14px;
+    a {
+        font-family: 'opensans-semibold';
+        color: $sw-color-brand-secondary;
+    }
+}
+
+
+@include media-breakpoint-down(md) {
+    .is-act-home{
+        .content-main{
+            .container-main{
+                padding: 0 10px;
+            }
+        }
+        .cms-block-image-cover{
+            .cms-image {
+                width: 100%;
+                margin: 0 auto;
+            }
+        }
+        .cms-block-image-cover{
+            .cms-block-container-row > div {
+                padding: 0;
+            }
+        }
+    }
+    .cms-block-product-slider{
+        .cms-block-container-row{
+            > div {
+                padding: 0;
+            }
+        }
+    }
+    .cms-element-mainhattan-listing-heading-image{
+        a:hover {
+            text-decoration: none;
+        }
+    }
+    .home-page-section{
+        .home-page-top-contain{
+            .headline {
+                font-size: $sw-font-size-heading;
+                line-height: 28px;
+            }
+            p{
+                font-size: $sw-font-size-content;
+                font-family: $sw-font-family-headline;
+            }
+        }
+    }
+    .cms-block-mainhattan-text-image {
+        h1 {
+            padding: 0 20px;
+            display: block;
+            width: 100%;
+            color: #fff;
+            font-weight: 700;
+            background: rgba(0,0,0,0.5);
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            font-size: $sw-font-size-content;
+            font-family: $sw-font-secondary;
+        }
+        img {
+            width: 100%;
+        }
+    }
+    .cms-element-product-description {
+        padding: 20px;
+        margin: 10px 0;
+        p {
+            margin-bottom: 0;
+        }
+    } 
+}

@@ -1,0 +1,230 @@
+.product-detail-review-form-footer {
+    .product-detail-review-form-actions {
+         .btn {
+            margin-top: 3px;
+            margin-bottom: 3px;
+        }
+    }
+}
+    .product-detail{
+    margin-bottom: 60px;
+    .product-detail-headline{
+        .product-detail-name {
+            font-size: $sw-font-size-heading;
+            font-family: $sw-font-secondary;
+            @media(max-width: 767px){
+                font-size: 21px;
+                hyphens: auto;
+            }
+        }
+    }
+    .product-wishlist-btn-content {
+        text-decoration: none;
+        &:hover{
+            text-decoration: underline;
+        }
+    }
+    .product-detail-manufacturer-link{
+        color: $sw-color-brand-secondary;
+    }
+    .product-detail-buy{
+        .input-group-text{
+            display: block;
+            width: 100%;
+            margin: 10px 0;
+            border-bottom: 1px solid $sw-border-color;
+        }
+        .product-wishlist-btn-content,
+        .product-detail-tax-link{
+            color: $sw-color-brand-secondary;
+        }
+        .product-detail-price-unit {
+            font-family: 'opensans-semibold';
+        }
+        .product-detail-price{
+            font-family: $sw-font-secondary;
+        }
+        .product-detail-ordernumber-container{
+            .product-detail-ordernumber-label{
+                font-family: 'opensans-bold';
+            }
+        }
+    }
+    .gallery-slider-thumbnails-container{
+        .gallery-slider-thumbnails-item-inner {
+            border-radius: 3px;
+        }
+        .gallery-slider-thumbnails-item.tns-nav-active
+        .gallery-slider-thumbnails-item-inner {
+            border-color: $sw-color-brand-secondary;
+        }
+    }
+    .product-detail-tab-navigation-link {
+        font-family: $sw-font-family-headline;
+        &:hover{
+            color: $sw-color-brand-secondary;
+        }
+    }
+    .product-detail-tabs{
+        .card-tabs {
+            padding: 14px 20px;
+            border-radius: 6px;
+            box-shadow: 0px 1px 4px 1px #ccc;
+            background: #fff;
+            width: 100%;
+            border: 0;
+            .nav-link.active,
+            .nav-link:hover {
+                background-color: #fff;
+                border-color:$sw-color-brand-secondary;
+            }
+            .nav-link.active{
+                color: $sw-color-brand-secondary;
+                font-family: $sw-font-secondary;
+            }
+            .product-detail-description-title {
+                font-size: $sw-font-size-sm;
+                font-family: 'opensans-bold';
+            }
+        }
+        .product-detail-review.tab-pane-container {
+            font-family: $sw-font-family-headline;
+        }
+        .product-detail-review-teaser .h4 {
+            font-family: $sw-font-secondary;
+        }
+        .product-detail-review-title {
+            font-family: 'opensans-semibold';
+        }
+    }
+    .product-detail-quantity-group{
+        .btn-plus{
+            border-bottom-right-radius: 3px !important;
+            border-top-right-radius: 3px !important;
+        }
+    }
+    .btn-nb-pricerequest-detail{
+        @media(min-width:576px){
+            margin-top: 0;
+        }
+    }
+    }
+    .cms-block-product-description-reviews,
+    .product-detail-tab-navigation{
+        .nav-link.active,
+        .nav-link:hover {
+            background-color: #fff;
+        }
+    }
+    .base-slider{
+        .tns-nav .base-slider-dot:hover,
+        .tns-nav .base-slider-dot.tns-nav-active,
+        .tns-nav button:hover,
+        .tns-nav button.tns-nav-active,
+        .base-slider-dots .base-slider-dot:hover,
+        .base-slider-dots .base-slider-dot.tns-nav-active,
+        .base-slider-dots button:hover,
+        .base-slider-dots button.tns-nav-active{
+            background-color: $sw-color-brand-secondary;
+            box-shadow: none;
+        }
+    }
+    .product-wishlist-btn.product-wishlist-btn-remove {
+        border: 1px solid $sw-color-brand-secondary;
+        .icon {
+            color: #fff;
+        }
+        &:hover{
+            .icon {
+                color: $sw-color-brand-secondary;
+            }
+        }
+    }
+    .product-wishlist-delivery-information {
+        font-family: $sw-font-family-headline;
+    }
+    .product-detail-description{
+        .product-detail-description-text{
+            font-size: $sw-font-size-content;
+            font-family: $sw-font-secondary;
+            font-weight: 400;
+            color: #555;
+        }
+        .product-detail-properties{
+            font-family: $sw-font-family-headline;
+        }
+    }
+    .product-detail-description-text {
+        span {
+            font-family: 'opensans-semibold' !important;
+            font-size: 14px !important;
+        }
+    }
+    .product-detail-properties 
+    .table-striped > tbody > tr:nth-of-type(odd) > * {
+        border: 1px solid $sw-border-color;
+    }
+    .product-detail-description{
+        .product-detail-description-title {
+            font-family: 'opensans-semibold';
+        }
+    }
+    .card-tabs{
+        .cms-element-product-slider{
+            .card-body {
+                padding-left: 0;
+                padding-right: 0;
+            } 
+        }
+    }
+    .cms-block-cross-selling,
+    .listing-pagination-bottom {
+        @include media-breakpoint-down(md) {
+            margin-bottom: 25px;
+        }
+    }
+    @include media-breakpoint-down(sm) {
+        .buy-widget-container{
+            fieldset {
+                width: 100%;
+                max-width: 180px;
+            }
+        }
+        .product-detail-tab-navigation-link{
+            .product-detail-tab-preview {
+                color: $sw-color-brand-primary;
+                font-family: $sw-font-family-headline;
+            }
+            .product-detail-tab-preview-more {
+                color: $sw-color-brand-secondary;
+                text-transform:lowercase;
+                font-family: $sw-font-secondary;
+            }
+        }
+        .product-detail-form-container{
+            .buy-widget-container{
+                > div {
+                    width: 100%;
+                    justify-content: flex-start !important;
+                    .product-detail-quantity-group.quantity-selector-group{
+                        width: 50%;
+                    }
+                }
+            }
+        }
+    }
+
+//    Galler Thumbnails Styling
+@include media-breakpoint-up(md) {
+    .gallery-slider-thumbnails-col{
+        width: 140px;
+        .tns-horizontal.tns-subpixel {
+            display: flex;
+            flex-direction: column;
+            transform: revert !important;
+        }
+        .gallery-slider-thumbnails-item-inner {
+            width: 80px;
+        }
+    }
+}

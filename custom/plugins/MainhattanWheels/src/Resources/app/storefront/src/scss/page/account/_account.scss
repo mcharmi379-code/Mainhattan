@@ -1,0 +1,372 @@
+.account-menu{
+    .account-menu-dropdown {
+        z-index: 999999;
+        border-radius: 3px;
+    }
+    .dropdown-header.account-menu-header {
+        font-family: 'opensans-semibold';
+    }
+    .account-menu-links {
+        font-family: $sw-font-family-base;
+    }
+    .account-menu-register{
+        a{
+            color: $sw-color-brand-secondary;
+        }
+    }
+    .account-aside-item{
+        &.is-active{
+            color: $sw-color-brand-secondary;
+            font-family: 'opensans-semibold';
+        }
+    }
+    .account-menu-login{
+        .account-menu-login-button{
+            border-radius: 3px;
+            font-family: 'opensans-semibold';
+            background-color: $sw-color-brand-secondary;
+            color: #fff;
+            border: 1px solid $sw-color-brand-secondary !important;
+            &:hover{
+                border-color:$sw-color-brand-secondary !important;
+			    color: $sw-color-brand-secondary;
+			    background: #fff;
+            }
+        }
+    }
+    .account-menu-inner{
+        .account-aside-btn{
+            display: flex;
+            align-items: center;
+            padding: 8px 10px;
+            border-radius: 3px;
+            font-family: 'opensans-semibold';
+            background-color: #fff;
+            justify-content: space-evenly;
+            color: $sw-color-brand-secondary !important;
+            border: 1px solid $sw-color-brand-secondary !important;
+            max-width: 170px;
+            svg{
+                color: $sw-color-brand-secondary !important;
+                top: 0;
+            }
+            &:hover{
+                border-color:$sw-color-brand-secondary !important;
+                color: #fff !important;
+                background-color: $sw-color-brand-secondary !important;
+                svg{
+                    color: #fff !important;
+                }
+            }
+        }
+    }
+}
+
+.account-register{
+    padding: 50px 0;
+    .login-password-recover,
+    .data-protection-information{
+        a{
+            color: $sw-color-brand-secondary;
+            font-family: $sw-font-family-headline;
+        }
+    }
+    .form-label  {
+        color: #555;
+    }
+    .form-text.privacy-notice {
+        color: $sw-color-brand-primary;
+        strong{
+            font-family: $sw-font-family-base;
+        }
+    }
+    .login-advantages{
+        ul {
+            padding-left: 20px;
+            li {
+                list-style: none;
+                position: relative;
+                &::before {
+                    content: '✓';
+                    position: absolute;
+                    left: -20px;
+                    font-size: 16px;
+                }
+            }
+        }
+    }
+}
+
+.account{
+    &.account-content{
+        margin-bottom: 50px;
+        .account-aside{
+            .account-menu-inner {
+                padding: 14px 20px;
+                border-radius: 6px;
+                box-shadow: 0px 1px 4px 1px #ccc;
+                background: #fff;
+                width: 100%;
+                border: 0;
+                .account-aside-header{
+                    border-bottom: 1px solid $sw-border-color;
+                    padding: 10px 0;
+                    font-size: $sw-font-size-content;
+                    font-family: 'opensans-semibold';
+                }
+                .account-aside-list-group{
+                    margin: 10px 0;
+                }
+                .account-aside-item{
+                    padding: 8px 0;
+                    font-size: 14px;
+                    font-family: $sw-font-family-base;                        
+                    &.is-active{
+                        font-family: $sw-font-secondary;
+                        color: $sw-color-brand-secondary;
+                    }
+                }
+                .account-aside-footer{
+                    .account-aside-btn{
+                        width: 100%;
+                        line-height: 2rem;
+                        svg{
+                            color: #fff;
+                        }
+                        &:hover{
+                            svg{
+                                color: $sw-color-brand-secondary;
+                            }
+                        }
+                    }
+                }
+            }      
+        }
+        .account-content-main{
+            .account-welcome{
+                h1 {
+                    font-size: $sw-font-size-heading;
+                    font-family: $sw-font-secondary;
+                }
+                p{
+                    font-size: $sw-font-size-content;
+                    font-family: 'opensans-semibold';
+                    color: #555;
+                }
+            }
+            .account-profile-mail-label ,
+            .account-profile-mail {
+                font-family: $sw-font-family-base;
+            }
+            .payment-method-description{
+                p , > p {
+                    color: #555;
+                }
+            }
+            .card {
+                padding: 14px 20px;
+                border-radius: 6px;
+                box-shadow: 0px 1px 4px 1px #ccc;
+                background: #fff;
+                width: 100%;
+                border: 0;
+            }
+            .account-profile-credentials{
+                .card-title {
+                    margin-bottom: 15px;
+                }
+                .account-profile-change {
+                    font-size: 14px;
+                    border: 1px solid #dadae5;
+                    padding: 8px 8px;
+                    border-radius: 3px;
+                    font-family: 'opensans-semibold';
+                    color: #555;
+                    margin: 5px 0;
+                    width: auto;
+                    display: block;
+                    &:hover{
+                        border-color: $sw-color-brand-secondary;
+                        color: $sw-color-brand-secondary;
+                    }
+                }
+            }
+        }
+    }
+}
+
+// Button styling
+
+.login-submit,
+.register-submit,
+.account-recover-password-form-actions{
+    .btn{
+        border-radius: 3px;
+        font-family: 'opensans-semibold';
+        background-color: $sw-color-brand-secondary;
+        color: #fff;
+        border: 1px solid $sw-color-brand-secondary;
+        &:hover{
+            border-color:$sw-color-brand-secondary;
+            color: $sw-color-brand-secondary;
+            background-color: #fff;
+        }
+    }
+}
+
+.account-recover-password{
+    .account-recover-password-submit{
+        border-radius: 3px;
+        font-family: 'opensans-semibold';
+        background-color: #fff;
+        color: $sw-color-brand-secondary;
+        border: 1px solid $sw-color-brand-secondary;
+        &:hover{
+            border-color:$sw-color-brand-secondary;
+            color: #fff;
+            background-color: $sw-color-brand-secondary;
+        }
+    }
+}
+.card-title,
+.login-advantages-header,
+.form-label  {
+    font-family: 'opensans-semibold';
+}
+
+.address-editor-modal{
+    .address-editor-edit,
+    .address-editor-create,
+    .js-close-address-editor,
+    .address-editor-select {
+        margin: 8px 0;
+        display: block;
+        width: 100%;
+    }
+    .js-close-address-editor{
+        .btn {
+            width: 100%;
+        }
+    }
+}
+.privacy-notice{
+    font-size: 14px;
+    color: $sw-color-brand-primary;
+    strong {
+        font-family: $sw-color-brand-secondary;
+    } a {
+        font-family: 'opensans-semibold';
+    }
+}
+.profile-content{
+    .account-password {
+        margin: 20px 0;
+    }
+}
+.address-actions-defaults{
+    .address-action-set-default {
+        margin: 5px 0;
+        padding: 8px 12px;
+        width: 100%;
+    }
+}
+.address-card{
+    .address-actions-buttons > div {
+        margin: 5px 0;
+        width: 100%;
+    }
+    .address-action-delete {
+        margin: 0;
+    }
+}
+.account-menu-offcanvas .account-aside-item,
+.account-menu-dropdown .account-aside-item {
+    font-family: $sw-font-family-headline;
+}
+.cms-element-pixelcms-forms{
+    .privacy-notice + .form-group {
+        margin-top: 15px;
+    }
+}
+.modal-content{
+    .nb-custom-h5{
+        font-size: 20px;
+        line-height: normal;
+        font-family: $sw-font-secondary;
+        color: $sw-color-brand-primary;
+    }
+    .request-text{
+        font-size: $sw-font-size-content;
+        font-family: $sw-font-family-headline;
+    }
+    .request-product{
+        b {
+            font-family: 'opensans-semibold';
+        }
+    }
+    label {
+        font-family: "opensans-semibold";
+        color: #555;
+    }
+    .custom-checkbox{
+        a{
+            color: $sw-color-brand-secondary;
+        }
+    }
+}
+.order-table-header-heading {
+    font-family: $sw-font-secondary;
+}
+.order-table-header-label {
+    font-family: 'opensans-semibold';
+}
+.shipping-method,
+.payment-methods {
+    .shipping-method-description
+    p {
+        color: $sw-color-brand-primary;
+    }
+}
+
+@include media-breakpoint-up(md) {
+    .account{
+        &.account-content{
+            .account-content-aside {
+                width: 25%;
+            }
+            .account-content-main {
+                width: 75%;
+                margin: auto;
+                .account-profile-credentials{
+                    .account-profile-change {
+                        width: auto;
+                        display: block;
+                        margin: 5px  0;
+                    }
+                }
+            }
+        }
+    } 
+}
+
+@include media-breakpoint-down(sm) {
+    .account-email, 
+    .profile-content{
+        .form-group {
+            flex: revert;
+            width: 100%;
+        }
+    }
+    .order-table-header-heading{
+        width: 100%;
+    }
+}
+
+@media(max-width:380px){
+    .account-overview-newest-order{
+        .order-table-header-label {
+            display: block;
+            width: 60%;
+        }
+    }
+}

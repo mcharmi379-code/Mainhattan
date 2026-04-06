@@ -1,0 +1,276 @@
+/*
+Override variable defaults
+==================================================
+This file is used to override default SCSS variables from the Shopware Storefront or Bootstrap.
+
+Because of the !default flags, theme variable overrides have to be declared beforehand.
+https://getbootstrap.com/docs/4.0/getting-started/theming/#variable-defaults
+*/
+
+// font style
+
+@font-face {
+	font-family: 'lato-light';
+	font-style: normal;
+	font-weight: 300;
+	src: local(''),
+	url('../../../bundles/mainhattanwheels/storefront/src/assets/font/lato/lato-light/Lato-Light.eot') format('embedded-opentype'), /* IE6-IE8 */
+	url('../../../bundles/mainhattanwheels/storefront/src/assets/font/lato/lato-light/Lato-Light.otf') format('otf'), /* Super Modern Browsers */
+	url('../../../bundles/mainhattanwheels/storefront/src/assets/font/lato/lato-light/Lato-Light.ttf') format('truetype'), /* Modern Browsers */
+	url('../../../bundles/mainhattanwheels/storefront/src/assets/font/lato/lato-light/Lato-Light.woff') format('woff'), /* Safari, Android, iOS */
+	url('../../../bundles/mainhattanwheels/storefront/src/assets/font/lato/lato-light/Lato-Light.woff2') format('woff2'); /* Legacy iOS */
+}
+
+@font-face {
+	font-family: 'lato-regular';
+	font-style: normal;
+	font-weight: 400;
+	src: local(''),
+	url('../../../bundles/mainhattanwheels/storefront/src/assets/font/lato/lato-regular/Lato-Regular.eot') format('embedded-opentype'), /* IE6-IE8 */
+	url('../../../bundles/mainhattanwheels/storefront/src/assets/font/lato/lato-regular/Lato-Regular.otf') format('otf'), /* Super Modern Browsers */
+	url('../../../bundles/mainhattanwheels/storefront/src/assets/font/lato/lato-regular/Lato-Regular.ttf') format('truetype'), /* Modern Browsers */
+	url('../../../bundles/mainhattanwheels/storefront/src/assets/font/lato/lato-regular/Lato-Regular.woff') format('woff'), /* Safari, Android, iOS */
+	url('../../../bundles/mainhattanwheels/storefront/src/assets/font/lato/lato-regular/Lato-Regular.woff2') format('woff2'); /* Legacy iOS */
+}
+
+@font-face {
+	font-family: 'lato-bold';
+	font-style: normal;
+	font-weight: 700;
+	src: local(''),
+	url('../../../bundles/mainhattanwheels/storefront/src/assets/font/lato/lato-bold/Lato-Bold.eot') format('embedded-opentype'), /* IE6-IE8 */
+	url('../../../bundles/mainhattanwheels/storefront/src/assets/font/lato/lato-bold/Lato-Bold.otf') format('otf'), /* Super Modern Browsers */
+	url('../../../bundles/mainhattanwheels/storefront/src/assets/font/lato/lato-bold/Lato-Bold.ttf') format('truetype'), /* Modern Browsers */
+	url('../../../bundles/mainhattanwheels/storefront/src/assets/font/lato/lato-bold/Lato-Bold.woff') format('woff'), /* Safari, Android, iOS */
+	url('../../../bundles/mainhattanwheels/storefront/src/assets/font/lato/lato-bold/Lato-Bold.woff2') format('woff2'); /* Legacy iOS */
+}
+
+
+@font-face {
+	font-family: 'OpenSans-Regular';
+	font-style: normal;
+	font-weight: 400;
+	src: local(''),
+	url('../../../bundles/mainhattanwheels/storefront/src/assets/font/Open_Sans/opensans-regular/OpenSans-Regular.eot') format('embedded-opentype'), /* IE6-IE8 */
+	url('../../../bundles/mainhattanwheels/storefront/src/assets/font/Open_Sans/opensans-regular/OpenSans-Regular.otf') format('otf'), /* Super Modern Browsers */
+	url('../../../bundles/mainhattanwheels/storefront/src/assets/font/Open_Sans/opensans-regular/OpenSans-Regular.ttf') format('truetype'), /* Modern Browsers */
+	url('../../../bundles/mainhattanwheels/storefront/src/assets/font/Open_Sans/opensans-regular/OpenSans-Regular.woff') format('woff'), /* Safari, Android, iOS */
+	url('../../../bundles/mainhattanwheels/storefront/src/assets/font/Open_Sans/opensans-regular/OpenSans-Regular.woff2') format('woff2'); /* Legacy iOS */
+}
+
+@font-face {
+	font-family: 'opensans-semibold';
+	font-style: normal;
+	font-weight: 600;
+	src: local(''),
+	url('../../../bundles/mainhattanwheels/storefront/src/assets/font/Open_Sans/opensans-semibold/OpenSans-SemiBold.eot') format('embedded-opentype'), /* IE6-IE8 */
+	url('../../../bundles/mainhattanwheels/storefront/src/assets/font/Open_Sans/opensans-semibold/OpenSans-SemiBold.otf') format('otf'), /* Super Modern Browsers */
+	url('../../../bundles/mainhattanwheels/storefront/src/assets/font/Open_Sans/opensans-semibold/OpenSans-SemiBold.ttf') format('truetype'), /* Modern Browsers */
+	url('../../../bundles/mainhattanwheels/storefront/src/assets/font/Open_Sans/opensans-semibold/OpenSans-SemiBold.woff') format('woff'), /* Safari, Android, iOS */
+	url('../../../bundles/mainhattanwheels/storefront/src/assets/font/Open_Sans/opensans-semibold/OpenSans-SemiBold.woff2') format('woff2'); /* Legacy iOS */
+}
+
+@font-face {
+	font-family: 'opensans-bold';
+	font-style: normal;
+	font-weight: 700;
+	src: local(''),
+	url('../../../bundles/mainhattanwheels/storefront/src/assets/font/Open_Sans/opensans-bold/OpenSans-Bold.eot') format('embedded-opentype'), /* IE6-IE8 */
+	url('../../../bundles/mainhattanwheels/storefront/src/assets/font/Open_Sans/opensans-bold/OpenSans-Bold.otf') format('otf'), /* Super Modern Browsers */
+	url('../../../bundles/mainhattanwheels/storefront/src/assets/font/Open_Sans/opensans-bold/OpenSans-Bold.ttf') format('truetype'), /* Modern Browsers */
+	url('../../../bundles/mainhattanwheels/storefront/src/assets/font/Open_Sans/opensans-bold/OpenSans-Bold.woff') format('woff'), /* Safari, Android, iOS */
+	url('../../../bundles/mainhattanwheels/storefront/src/assets/font/Open_Sans/opensans-bold/OpenSans-Bold.woff2') format('woff2'); /* Legacy iOS */
+}
+
+@font-face {
+	font-family: 'arial-light';
+	font-style: normal;
+	font-weight: 300;
+	src: local(''),
+	url('../../../bundles/mainhattanwheels/storefront/src/assets/font/arial/arial.eot') format('embedded-opentype'), /* IE6-IE8 */
+	url('../../../bundles/mainhattanwheels/storefront/src/assets/font/arial/arial.otf') format('otf'), /* Super Modern Browsers */
+	url('../../../bundles/mainhattanwheels/storefront/src/assets/font/arial/arial.ttf') format('truetype'), /* Modern Browsers */
+	url('../../../bundles/mainhattanwheels/storefront/src/assets/font/arial/arial.woff') format('woff'), /* Safari, Android, iOS */
+	url('../../../bundles/mainhattanwheels/storefront/src/assets/font/arial/arial.woff2') format('woff2'); /* Legacy iOS */
+}
+
+
+// override scss
+body{
+    font-family:  $sw-font-family-base !important;
+    background: #e9e9f0;
+    color: $sw-color-brand-primary;
+    .scroll-up-button{
+        button {
+            opacity: 0.7;
+            visibility: visible;
+            color: #e8e8e8;
+            border: 1px solid #282b2e;
+            background-color: #282b2e;
+            border-radius: 2px;
+            height: 50px;
+            width: 50px;
+            svg {
+                color: #fff;
+            }
+            &:hover {
+                background-color: #f8f8f8;
+                color: #000000;
+                border: 1px solid #ebebeb;
+                svg {
+                    color: #000;
+                }
+            }
+        }
+    }
+	.form-check-input:checked,
+	.custom-control-input:checked{
+		background-color: $sw-color-brand-secondary;
+		border-color: $sw-color-brand-secondary;
+	}
+	.cms-section-sidebar{
+		.cms-section-sidebar-sidebar-content {
+			padding-left: 3px;
+		}
+		.cms-section-sidebar-main-content {
+			padding-right: 0px;
+		}
+		@media(max-width:992px){
+			.cms-section-sidebar-sidebar-content,
+			.cms-section-sidebar-main-content {
+				padding: 0 0px;
+				@media(max-width:767px){
+					padding: 0 5px;
+				}
+			}
+		}
+	}
+	select.sorting.form-select {
+		border: 0;
+		border-bottom: 1px solid $sw-border-color;
+		background-color: transparent;
+		font-family: 'opensans-semibold';
+		border-radius: 0;
+		&:focus {
+			box-shadow: none;
+		}
+		&:hover{
+			color: $sw-color-brand-secondary;
+			border-color: $sw-color-brand-secondary;
+		}
+	}
+	.btn-buy,
+	.btn{
+		border-radius: 3px;
+		font-family: 'opensans-semibold';
+		background-color: $sw-color-buy-button;
+		color: #fff;
+		border-color: $sw-color-brand-secondary;
+		&:hover {
+			border-color: $sw-color-buy-button;
+			color: $sw-color-buy-button;
+			background: #fff;
+		}
+	}
+	.container:has(.product-detail) {
+		padding: 0;
+	}
+	.product-wishlist{
+		.product-wishlist-added{
+			.icon-wishlist-added {
+				color: $sw-color-brand-secondary;
+			}
+		}
+	}
+	.alert {
+		margin: 10px 0;
+	}
+	.privacy-notice a {
+		color: $sw-color-brand-secondary;
+	}
+	.basic-captcha-content{
+		input {
+			width: auto;
+		}
+	}
+	.confirm-shipping-address,
+    .confirm-billing-address,
+    .confirm-payment-shipping,
+    .checkout-card,
+    .confirm-tos,
+	.confirm-product,
+	.checkout-main,
+	.mainhataan-return-wrapper,
+	.mainhattan-newsletter-form,
+	.mainhattan-contact-form {
+        .card {
+            padding: 14px 20px;
+            border-radius: 6px;
+            box-shadow: 0px 1px 4px 1px #ccc;
+            background: #fff;
+            width: 100%;
+            border: 0;
+        }
+    }
+	.badge.badge-stock {
+		color: $sw-color-brand-primary;
+		font-family: $sw-font-secondary;
+		 svg {
+			color: #222;
+		 }
+	}
+	.custom-checkbox{
+        input[type='checkbox'] {
+            appearance: none;
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            width: 20px;
+            height: 20px;
+            border: 1px solid $sw-border-color;
+            border-radius:3px;
+        }
+        input[type='checkbox']:checked {
+            background-color:$sw-color-brand-secondary;
+        }
+        input[type='checkbox']:checked::after {
+            content: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="18" height="20" viewBox="0 0 24 24"><path fill="%23fff" stroke="%23fff" stroke-width="2" d="M9,16.17L4.83,12l-1.42,1.41L9,19 21,7l-1.41-1.41L9,16.17z"/></svg>');
+            display: block;
+            visibility: visible;
+            margin: auto;
+			text-align: center;
+        }
+
+    }
+	.product-wishlist-action-circle{
+		&.btn {
+			border-radius: 50%;
+			background: #fff;
+		}
+	}
+	.btn-link-inline,
+	.btn-link {
+		background-color: transparent;
+		color: $sw-color-brand-primary;
+		border: 0;
+		&:focus,
+		&:focus-visible{
+			box-shadow: none;
+		}
+	}
+	.form-control,
+	.form-select {
+		background-color: #fff;
+		border: 1px solid #dadae5;
+		border-radius: 3px;
+		width: 100%;
+		&::placeholder {
+			font-family: 'opensans-semibold';
+		}
+		&:focus {
+			outline: none;
+			box-shadow: none;
+			border-color: $sw-color-brand-secondary;
+			background-color: #fff;
+		}
+	}
+}

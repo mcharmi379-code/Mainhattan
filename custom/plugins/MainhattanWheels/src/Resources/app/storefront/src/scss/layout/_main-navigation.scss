@@ -1,0 +1,109 @@
+.main-navigation-link{
+    .main-navigation-link-text{
+        border: none;
+        span {
+            font-size: 14px;
+            color: $sw-header-text-color;
+            font-family:'opensans-semibold';
+        }
+    }
+    &.active,
+    &:hover{
+        span {
+            color: $sw-header-text-hover-color;
+        }
+    }
+
+}
+
+.main-hattan-wheels-header{
+    .nav-main {
+        overflow: hidden;
+        position: relative;
+            order: 4;
+        .main-navigation-menu {
+            box-sizing: border-box;
+            white-space: nowrap;
+            -webkit-overflow-scrolling: touch;
+            position: relative;
+            display: flex;
+            flex-wrap: nowrap;
+            .home-link {
+                display:none;
+            }
+            .main-navigation-link {
+                @media(max-width:1366px) {
+                    padding-right: 27px;
+                }
+                @media(max-width:1199px) {
+                    padding-right: 13px;
+                }
+                @media(max-width:1024px) {
+                    padding-right: 10px;
+                }
+                > .main-navigation-link-text {
+                    > span {
+                         @media(max-width:1366px) {
+                            font-size: 13px;
+                         }
+                         @media(max-width:1199px) {
+                            font-size: 12px;
+                         }
+                    }
+                }
+            }
+        }
+        .header-navigation-aerrow {
+            position: absolute;
+            width: 100%;
+            top: 22px;
+            display: flex;
+            align-items: center;
+
+            .header-minus-icon {
+                left: 0;
+                svg {
+                    transform: rotate(-180deg);
+                }
+            }
+            .header-plus-icon {
+                right: 0;  
+            }
+            .header-plus-icon,
+            .header-minus-icon {
+                position: absolute;
+                z-index: 99999;
+                top: auto;
+                border-radius: 3px;
+                background-clip: padding-box;
+                border: 1px solid #dadae5;
+                background-color: #fff;
+                background-image: linear-gradient(to bottom, #fff 0%, #f8f8fa 100%);
+                height: 35px;
+                width: 25px;
+                text-align: center;
+
+            }
+            svg,
+            path {
+                height: 18px;
+                width: 18px;
+                top: 8px;
+                overflow: visible;
+            }
+            .hidden {
+                display: none;
+            }
+            &:hover{
+                .header-minus-icon,
+                .header-plus-icon  {
+                    border-color: $sw-color-brand-secondary;
+                    svg,
+                    path {
+                        color: $sw-color-brand-secondary;
+                    }
+                }
+            }
+        }
+    }  
+}
