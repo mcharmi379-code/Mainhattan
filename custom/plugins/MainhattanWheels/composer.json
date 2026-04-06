@@ -10,9 +10,9 @@
     }
   },
   "require": {
-    "shopware/core": "^6.5",
-    "shopware/storefront": "^6.5",
-    "shopware/administration": "^6.5"
+    "shopware/core": "^6.6.0",
+    "shopware/storefront": "^6.6.0",
+    "shopware/administration": "^6.6.0"
   },
   "extra": {
     "shopware-plugin-class": "MainhattanWheels\\MainhattanWheels",

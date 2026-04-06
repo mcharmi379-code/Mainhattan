@@ -1,2 +1,0 @@
-(this["webpackJsonpPluginmainhattan-wheels"]=this["webpackJsonpPluginmainhattan-wheels"]||[]).push([[4],{"2U3V":function(n,t,a){"use strict";a.r(t);t.default={template:'{% block sw_cms_block_mainhattan_listpage_text_image %}\n    <div class="sw-cms-preview-mainhattan-image-text">\n        <div>\n            <h1>Lorem ipsum dolor</h1>\n        </div>\n    </div>\n{% endblock %}'}}}]);
-//# sourceMappingURL=4.js.map

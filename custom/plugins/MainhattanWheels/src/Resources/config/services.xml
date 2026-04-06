@@ -18,5 +18,8 @@
             <tag name="shopware.cms.data_resolver"/>
             <argument type="service" id="Shopware\Core\Content\Media\Cms\DefaultMediaResolver"/>
         </service>
+        <service id="MainhattanWheels\Core\Content\Cms\MainhattanThreeCardCmsElementResolver">
+            <tag name="shopware.cms.data_resolver"/>
+        </service>
     </services>
 </container>

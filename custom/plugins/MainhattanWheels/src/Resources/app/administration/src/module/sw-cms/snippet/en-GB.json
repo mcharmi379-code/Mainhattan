@@ -3,6 +3,23 @@
     "blocks": {
       "mainhattanTextimage": {
           "label": "Mian-hattan-wheels Text and Image"
+      },
+      "mainhattanThreeCard": {
+        "label": "Mainhattan Wheels three cards"
+      }
+    },
+    "elements": {
+      "mainhattanThreeCard": {
+        "label": "Mainhattan Wheels three card",
+        "headingLabel": "Main heading",
+        "headingTab": "Heading",
+        "cardsTab": "Cards",
+        "cardTitle": "Card {index}",
+        "imageLabel": "Image",
+        "titleLabel": "Title",
+        "descriptionLabel": "Description",
+        "buttonTextLabel": "Button text",
+        "buttonLinkLabel": "Button link"
       }
     }
   }
