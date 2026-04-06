@@ -1,3 +1,5 @@
+const { Snippet } = Shopware;
+
 Shopware.Component.register('sw-cms-el-mainhattan-three-card', () => import('./component'));
 Shopware.Component.register('sw-cms-el-config-mainhattan-three-card', () => import('./config'));
 Shopware.Component.register('sw-cms-el-preview-mainhattan-three-card', () => import('./preview'));
@@ -11,7 +13,7 @@ Shopware.Service('cmsService').registerCmsElement({
     defaultConfig: {
         heading: {
             source: 'static',
-            value: 'Heading.',
+            value: Snippet.tc('sw-cms.elements.mainhattanThreeCard.defaults.heading'),
         },
         cardOneImage: {
             source: 'static',
@@ -22,15 +24,15 @@ Shopware.Service('cmsService').registerCmsElement({
         },
         cardOneTitle: {
             source: 'static',
-            value: 'Felgen reparieren & veredeln',
+            value: Snippet.tc('sw-cms.elements.mainhattanThreeCard.defaults.cardOneTitle'),
         },
         cardOneDescription: {
             source: 'static',
-            value: '<p>Professionelle Felgenreparatur und technische Instandsetzung.</p>',
+            value: Snippet.tc('sw-cms.elements.mainhattanThreeCard.defaults.cardOneDescription'),
         },
         cardOneButtonText: {
             source: 'static',
-            value: 'Mehr erfahren',
+            value: Snippet.tc('sw-cms.elements.mainhattanThreeCard.defaults.buttonText'),
         },
         cardOneButtonLink: {
             source: 'static',
@@ -45,15 +47,15 @@ Shopware.Service('cmsService').registerCmsElement({
         },
         cardTwoTitle: {
             source: 'static',
-            value: 'Anlagen fuer die Felgenbearbeitung',
+            value: Snippet.tc('sw-cms.elements.mainhattanThreeCard.defaults.cardTwoTitle'),
         },
         cardTwoDescription: {
             source: 'static',
-            value: '<p>Moderne Maschinen fuer glanzgedrehte Felgen und Polierbeschichtungen.</p>',
+            value: Snippet.tc('sw-cms.elements.mainhattanThreeCard.defaults.cardTwoDescription'),
         },
         cardTwoButtonText: {
             source: 'static',
-            value: 'Mehr erfahren',
+            value: Snippet.tc('sw-cms.elements.mainhattanThreeCard.defaults.buttonText'),
         },
         cardTwoButtonLink: {
             source: 'static',
@@ -68,15 +70,15 @@ Shopware.Service('cmsService').registerCmsElement({
         },
         cardThreeTitle: {
             source: 'static',
-            value: 'Felgenproduktion',
+            value: Snippet.tc('sw-cms.elements.mainhattanThreeCard.defaults.cardThreeTitle'),
         },
         cardThreeDescription: {
             source: 'static',
-            value: '<p>Leichtmetallraeder, Radentwicklungen und kundenorientierte Produktion.</p>',
+            value: Snippet.tc('sw-cms.elements.mainhattanThreeCard.defaults.cardThreeDescription'),
         },
         cardThreeButtonText: {
             source: 'static',
-            value: 'Mehr erfahren',
+            value: Snippet.tc('sw-cms.elements.mainhattanThreeCard.defaults.buttonText'),
         },
         cardThreeButtonLink: {
             source: 'static',

@@ -19,7 +19,17 @@
         "titleLabel": "Title",
         "descriptionLabel": "Description",
         "buttonTextLabel": "Button text",
-        "buttonLinkLabel": "Button link"
+        "buttonLinkLabel": "Button link",
+        "defaults": {
+          "heading": "Heading.",
+          "cardOneTitle": "Wheel repair & refinishing",
+          "cardOneDescription": "<p>Professional wheel repair and technical refurbishment.</p>",
+          "cardTwoTitle": "Wheel machining systems",
+          "cardTwoDescription": "<p>Modern machinery for diamond-cut wheels and polishing coatings.</p>",
+          "cardThreeTitle": "Wheel production",
+          "cardThreeDescription": "<p>Light-alloy wheels, wheel development and customer-focused production.</p>",
+          "buttonText": "Learn more"
+        }
       }
     }
   }

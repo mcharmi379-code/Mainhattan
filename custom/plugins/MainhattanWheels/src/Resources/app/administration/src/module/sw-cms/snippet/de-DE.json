@@ -19,7 +19,17 @@
         "titleLabel": "Titel",
         "descriptionLabel": "Beschreibung",
         "buttonTextLabel": "Button-Text",
-        "buttonLinkLabel": "Button-Link"
+        "buttonLinkLabel": "Button-Link",
+        "defaults": {
+          "heading": "Ueberschrift.",
+          "cardOneTitle": "Felgenreparatur & Veredelung",
+          "cardOneDescription": "<p>Professionelle Felgenreparatur und technische Instandsetzung.</p>",
+          "cardTwoTitle": "Anlagen fuer die Felgenbearbeitung",
+          "cardTwoDescription": "<p>Moderne Maschinen fuer glanzgedrehte Felgen und Polierbeschichtungen.</p>",
+          "cardThreeTitle": "Felgenproduktion",
+          "cardThreeDescription": "<p>Leichtmetallraeder, Radentwicklungen und kundenorientierte Produktion.</p>",
+          "buttonText": "Mehr erfahren"
+        }
       }
     }
   }
