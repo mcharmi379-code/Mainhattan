@@ -1,0 +1,163 @@
+{
+    "sw-privileges.additional_permissions.blog.label": "Blog",
+    "sw-privileges.additional_permissions.blog.edit_blog": "Blogbeiträge bearbeiten",
+    "sw-privileges.additional_permissions.blog.edit_authors": "Blog-Autoren bearbeiten",
+    "sw-privileges.additional_permissions.blog.edit_categories": "Blog-Kategorien bearbeiten",
+
+    "global": {
+        "entities": {
+          "s_plugin_netzp_blog": "Blog | Blog",
+          "s_plugin_netzp_blog_category": "Blog-Kategorie",
+          "s_plugin_netzp_blog_author": "Blog-Author"
+        }
+    },
+
+    "sw-seo-url-template-card": {
+        "routeNames": {
+            "frontend-blog-post": "Blog post"
+        }
+    },
+
+    "sw-profile": {
+        "tabSearchPreferences": {
+            "modules": {
+                "s_plugin_netzp_blog": {
+                    "title": "Titel"
+                }
+            }
+        }
+    },
+
+  "netzp-blog6": {
+    "main": {
+      "menuLabel": "Blog",
+      "title": "Blog",
+      "menuDescription": "Blog verwalten",
+      "placeholderSearchBar": "Suche nach Blog-Posts",
+      "btnAuthors": "Bearbeiten",
+      "btnCategories": "Bearbeiten"
+    },
+
+    "list": {
+      "title": "Blog-Beiträge",
+      "addButtonText": "Neu",
+      "duplicate": "Duplizieren",
+      "dynamicGroupMissing": "- dynamische Gruppe fehlt! -",
+      "columns": {
+        "title": "Titel",
+        "teaser": "Teaser",
+        "author": "Autor",
+        "category": "Haupt-Kategorie",
+        "author": "Autor",
+        "postdate": "Post-Datum",
+        "showfrom": "Anzeigen von",
+        "showuntil": "bis",
+        "sticky": "Sticky",
+        "image": "Bild",
+        "products": "Produkte"
+      },
+      "sidebar": {
+        "filter": "Filtern",
+        "refresh": "Aktualisieren",
+        "category": "Haupt-Kategorie",
+        "author": "Autor",
+        "tag": "Tag",
+        "allCategories": "- alle -",
+        "allAuthors": "- alle -",
+        "allTags": "- alle -"
+      }
+    },
+
+    "detail": {
+      "cancelButtonText": "Abbrechen",
+      "saveButtonText": "Speichern",
+      "msg": {
+        "attention": "Achtung",
+        "removeItem": "Soll dieses Item jetzt entfernt werden? Das kann nicht rückgängig gemacht werden.",
+        "cancel": "Abbrechen",
+        "ok": "OK"
+      },
+      "section": {
+        "main": "Hauptdaten",
+        "contents": "Inhalt",
+        "meta": "Metadaten",
+        "products": "Produkte",
+        "media": "Bilder/Medien",
+        "mainimage": "Hauptbild",
+        "mediagallery": "Bilder-/Mediengalerie",
+        "items": "Zusatzinhalte"
+      },
+
+      "items": {
+        "type": {
+          "label": "Typ",
+          "0": {
+            "label": "Standard / ohne",
+            "summary": "Zusammenfassung"
+          },
+          "1": {
+            "label": "Rezept",
+            "summary": "Zutaten"
+          },
+          "2": {
+            "label": "Anleitung",
+            "summary": "Materialien"
+          },
+          "3": {
+            "label": "Vergleichstest",
+            "summary": "Zusammenfassung"
+          },
+          "delete": "Löschen"
+        },
+        "title": "Titel",
+        "summary": "Zusammenfassung (z.B. Zutaten, Materialien etc.)",
+        "content": "Inhalt",
+        "image": "Bild"
+      },
+
+      "label": {
+        "title": "Titel",
+        "teaser": "Teaser",
+        "slug": "Slug",
+        "contents": "Inhalt",
+        "custom": "Zusatzfeld",
+        "postdate": "Post-Datum",
+        "showfrom": "Anzeigen von",
+        "showuntil": "Anzeigen bis",
+        "category": "Haupt-Kategorie",
+        "categories": "Weitere Kategorien",
+        "author": "Autor",
+        "image": "Bild",
+        "imagepreview": "Abweichendes Vorschau-Bild (optional)",
+        "useAsImage": "Als Bild verwenden",
+        "metatitle": "Meta-Titel",
+        "metadescription": "Meta-Beschreibung",
+        "products": "Produkt-Zuordnung",
+        "isproductstream": "Dynamische Produktgruppe",
+        "productStream": "Dynamische Produktgruppe auswählen",
+        "productStreamHelpText": "Achtung: aus Geschwindigkeits-Gründen wird die Anzahl von Produkten aus einer dynamischen Produktgruppe auf 50 beschränkt (wählen Sie nicht 'alle Produkte' aus!)",
+        "chars": "Zeichen",
+        "addItem": "Neues Item hinzufügen",
+        "galleryupload": "Bild hochladen",
+        "dragtoupload": "Medien hierhin ziehen zum Upload (auch aus der Medien-Seitenleiste möglich)",
+        "customfields": "Zusatzfelder",
+        "noindex": "Blog Post nicht indizieren",
+        "sticky": "Blog Post oben halten",
+        "canonicalUrl": "Canonical URL"
+      },
+
+      "help": {
+        "slug": "wird automatisch erzeugt, kann bei Bedarf überschrieben werden. Achtung: bei bereits bestehenden Blog-Posts ändert sich dann ggf. die URL.",
+        "custom": "optional, kann beliebig in eigenen Templates verwendet werden: post.translated.custom",
+        "noindex": "Dieser Blog Post wird nicht von Suchmaschinen indiziert (noindex) und aus dem RSS-Feed ausgeschlossen. Wichtig: nicht alle Suchmaschinen halten sich daran. Weiterhin wird der Post aus dem RSS-Feed ausgeschlossen.",
+        "sticky": "Zeigt diesen Blog-Post in Listen immer zuerst an.",
+        "canonicalUrl": "Hier kann optional eine Canonical-URL für diesen Blog-Beitrag angegeben werden. Leerlassen für die Standard-SEO-Url des Beitrags."
+      },
+
+      "error": {
+        "title": "Fehler",
+        "missingFields": "Ein oder mehrere Felder sind nicht ausgefüllt. Bitte prüfen Sie Ihre Eingaben."
+      }
+    }
+  }
+}

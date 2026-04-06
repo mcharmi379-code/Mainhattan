@@ -1,0 +1,26 @@
+@import "~scss/variables";
+
+$netzp-blog6-list-color-error: $color-crimson-500;
+$netzp-blog6-list-color-success: $color-emerald-500;
+
+.netzp-blog6-list {
+  .netzp-blog6__content {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+  }
+
+  .is--inactive {
+    color: $netzp-blog6-list-color-error;
+  }
+
+  .is--active {
+    color: $netzp-blog6-list-color-success;
+  }
+
+  .sidebar {
+    .sw-sidebar-item__scrollable-container {
+      padding: 0 25px;
+    }
+  }
+}

@@ -1,0 +1,39 @@
+{
+  "netzp-blog6-author": {
+    "main": {
+      "menuLabel": "Blog-Autoren",
+      "menuDescription": "Blog-Autoren verwalten"
+    },
+
+    "list": {
+      "addButtonText": "Neu",
+      "columns": {
+        "name": "Name",
+        "image": "Avatar"
+      }
+    },
+
+    "detail": {
+      "cancelButtonText": "Abbrechen",
+      "saveButtonText": "Speichern",
+
+      "section": {
+        "main": "Autor"
+      },
+
+      "label": {
+        "name": "Name",
+        "image": "Avatar",
+        "bio": "Biografie",
+        "link": "Link Autorenseite",
+        "linkHelptext": "Um den Link im neuen Tab zu öffnen, ein # hinten anhängen (z.B. https://profil.de/#)",
+        "useAsImage": "Als Bild verwenden"
+      },
+
+      "error": {
+        "title": "Fehler",
+        "message": "Etwas hat nicht funktioniert."
+      }
+    }
+  }
+}

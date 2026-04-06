@@ -1,0 +1,82 @@
+{% block blog_list_item %}
+    {% set postDetailUrl = seoUrl('frontend.blog.post', {'postId': post.id} ) %}
+    {% set paramPage = app.request.get('p') ? 'p=' ~app.request.get('p') : '' %}
+    {% set paramCategory = app.request.get('c') ? 'c=' ~app.request.get('c') : '' %}
+    {% set paramAuthor = app.request.get('a') ? 'a=' ~app.request.get('a') : '' %}
+    {% set urlParams = [paramPage, paramCategory, paramAuthor] | filter(p => p != '') | join('&') %}
+    {% if false and urlParams %}
+        {% set postDetailUrl = postDetailUrl ~ '?' ~ urlParams %}
+    {% endif %}
+
+    <div class="col-lg-4 col-sm-6 mb-3">
+        {% block blog_list_item_wrapper %}
+            <div class="card h-100 blog-card" style="background-color: {{ element.config.backgroundColor.value }}">
+                {% block blog_content_post_inner_image %}
+                    {% set image = null %}
+                    {% if post.imagepreview %}
+                        {% set image = post.imagepreview %}
+                    {% elseif post.image %}
+                        {% set image = post.image %}
+                    {% endif %}
+
+                    {% if image %}
+                        {% set thumbnailClass = element.config.imageMode.value == "contain" ? "contain" : "cover" %}
+                        <a href="{{ postDetailUrl }}">
+                            {% if image.mediaType.name == 'IMAGE' %}
+                                {% sw_thumbnails 'blog_card_image_thumbnail' with {
+                                    media: image,
+                                    attributes: {
+                                        'class': 'card-img-top ' ~ thumbnailClass,
+                                        'alt':   image.translated.alt ?: '',
+                                        'title': post.translated.title ?: ''
+                                    }
+                                } %}
+                            {% elseif image.mediaType.name == 'VIDEO' %}
+                                <video class="video {{ thumbnailClass }}" controls>
+                                    <source src="{{ image.url }}" type="{{ image.mimetype }}">
+                                    Your browser does not support HTML5 video.
+                                </video>
+                            {% endif %}
+                        </a>
+                    {% else %}
+                        <div class="blog-card-paceholder">&nbsp;</div>
+                    {% endif %}
+                {% endblock %}
+
+                <div class="card-body d-flex flex-column p-2">
+                    {% block blog_content_post_inner_title %}
+                        <a href="{{ postDetailUrl }}">
+                            {% sw_include "@Storefront/storefront/element/blog-title.html.twig" with {
+                                titleTag: element.config.titleTag.value|lower, post: post
+                            } only
+                            %}
+                        </a>
+                    {% endblock %}
+
+                    {% if element.data.pluginConfig.showmeta %}
+                        {% block blog_content_post_inner_meta %}
+                            {% sw_include "@Storefront/storefront/page/blog/post-meta.html.twig" with { config: element.data.pluginConfig } %}
+                        {% endblock %}
+                    {% endif %}
+
+                    {% if post.translated.teaser %}
+                        {% block blog_content_post_inner_teaser %}
+                            <div class="card-text mt-3 mb-1">
+                                {{ post.translated.teaser }}
+                            </div>
+                        {% endblock %}
+                    {% endif %}
+
+                    {% block blog_content_post_inner_more %}
+                        <div class="mt-auto">
+                            <a href="{{ postDetailUrl }}"
+                               class="btn btn-outline-primary btn-sm mt-2">
+                                {{ "netzp.blog.msg.more"|trans }}
+                            </a>
+                        </div>
+                    {% endblock %}
+                </div>
+            </div>
+        {% endblock %}
+    </div>
+{% endblock %}

@@ -1,0 +1,190 @@
+<?xml version="1.0" ?>
+<container xmlns="http://symfony.com/schema/dic/services"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+
+    <services>
+        <!-- entities -->
+        <service id="NetzpBlog6\Core\Content\Blog\BlogDefinition">
+            <tag name="shopware.entity.definition" entity="s_plugin_netzp_blog" />
+        </service>
+
+        <service id="NetzpBlog6\Core\Content\Aggregate\BlogTranslation\BlogTranslationDefinition">
+            <tag name="shopware.entity.definition" entity="s_plugin_netzp_blog_translation" />
+        </service>
+
+        <service id="NetzpBlog6\Core\Content\Category\CategoryDefinition">
+            <tag name="shopware.entity.definition" entity="s_plugin_netzp_blog_category" />
+        </service>
+
+        <service id="NetzpBlog6\Core\Content\Aggregate\CategoryTranslation\CategoryTranslationDefinition">
+            <tag name="shopware.entity.definition" entity="s_plugin_netzp_blog_category_translation" />
+        </service>
+
+        <service id="NetzpBlog6\Core\Content\Author\AuthorDefinition">
+            <tag name="shopware.entity.definition" entity="s_plugin_netzp_blog_author" />
+        </service>
+
+        <service id="NetzpBlog6\Core\Content\Aggregate\AuthorTranslation\AuthorTranslationDefinition">
+            <tag name="shopware.entity.definition" entity="s_plugin_netzp_blog_author_translation" />
+        </service>
+
+        <service id="NetzpBlog6\Core\Content\Aggregate\BlogProduct\BlogProductDefinition">
+            <tag name="shopware.entity.definition" entity="s_plugin_netzp_blog_product"/>
+        </service>
+
+        <service id="NetzpBlog6\Core\Content\Aggregate\BlogCategory\BlogCategoryDefinition">
+            <tag name="shopware.entity.definition" entity="s_plugin_netzp_blog_categories"/>
+        </service>
+
+        <service id="NetzpBlog6\Core\Content\Aggregate\BlogTag\BlogTagDefinition">
+            <tag name="shopware.entity.definition" entity="s_plugin_netzp_blog_tag" />
+        </service>
+
+        <service id="NetzpBlog6\Core\Content\Item\ItemDefinition">
+            <tag name="shopware.entity.definition" entity="s_plugin_netzp_blog_item" />
+        </service>
+
+        <service id="NetzpBlog6\Core\Content\Aggregate\ItemTranslation\ItemTranslationDefinition">
+            <tag name="shopware.entity.definition" entity="s_plugin_netzp_blog_item_translation" />
+        </service>
+
+        <service id="NetzpBlog6\Core\Content\BlogMedia\BlogMediaDefinition">
+            <tag name="shopware.entity.definition" entity="s_plugin_netzp_blog_media" />
+        </service>
+
+        <service id="NetzpBlog6\Core\Content\Product\ProductExtension">
+            <tag name="shopware.entity.extension"/>
+        </service>
+        <service id="NetzpBlog6\Core\Content\Media\MediaExtension">
+            <tag name="shopware.entity.extension"/>
+        </service>
+
+        <!-- services -->
+        <service id="NetzpBlog6\Helper\BlogHelper" class="NetzpBlog6\Helper\BlogHelper">
+            <argument type="service" id="Shopware\Core\Content\ProductStream\Service\ProductStreamBuilder" />
+            <argument type="service" id="product.repository"/>
+            <argument type="service" id="sales_channel.product.repository"/>
+            <argument type="service" id="plugin.repository"/>
+            <argument type="service" id="s_plugin_netzp_blog.repository"/>
+        </service>
+
+        <!-- controller -->
+        <service id="NetzpBlog6\Controller\BlogController" public="true">
+            <argument type="service" id="NetzpBlog6\Helper\BlogHelper" />
+            <argument id="NetzpBlog6\Storefront\Page\BlogPageLoader" type="service"/>
+            <argument type="service" id="Shopware\Core\System\SystemConfig\SystemConfigService" />
+
+            <call method="setContainer">
+                <argument type="service" id="service_container" />
+            </call>
+            <call method="setTwig">
+                <argument type="service" id="twig"/>
+            </call>
+        </service>
+
+        <service id="NetzpBlog6\Storefront\Page\BlogPageLoader" public="true">
+            <argument type="service" id="Shopware\Storefront\Page\GenericPageLoader" />
+            <argument id="Shopware\Core\Content\Cms\SalesChannel\SalesChannelCmsPageLoader" type="service"/>
+            <argument type="service" id="event_dispatcher"/>
+            <argument id="NetzpBlog6\Controller\StoreApi\BlogPost\BlogPostRoute" type="service"/>
+            <argument type="service" id="Shopware\Core\System\SystemConfig\SystemConfigService" />
+            <argument type="service" id="category.repository"/>
+        </service>
+
+        <!-- store api -->
+        <service id="NetzpBlog6\Controller\StoreApi\BlogPost\BlogPostRoute" public="true">
+            <argument type="service" id="NetzpBlog6\Helper\BlogHelper" />
+        </service>
+
+        <service id="NetzpBlog6\Controller\StoreApi\BlogPost\CachedBlogPostRoute" public="true"
+                 decorates="NetzpBlog6\Controller\StoreApi\BlogPost\BlogPostRoute" decoration-priority="-1000">
+            <argument type="service" id="NetzpBlog6\Controller\StoreApi\BlogPost\CachedBlogPostRoute.inner"/>
+            <argument type="service" id="cache.object"/>
+            <argument type="service" id="Shopware\Core\Framework\DataAbstractionLayer\Cache\EntityCacheKeyGenerator"/>
+            <argument type="service" id="Shopware\Core\Framework\Adapter\Cache\CacheTracer"/>
+            <argument type="service" id="logger" />
+        </service>
+
+        <service id="NetzpBlog6\Controller\StoreApi\CacheInvalidationSubscriber">
+            <argument type="service" id="Shopware\Core\Framework\Adapter\Cache\CacheInvalidator" />
+            <argument id="cms_slot.repository" type="service" />
+            <argument id="category.repository" type="service" />
+            <tag name="kernel.event_subscriber"/>
+        </service>
+
+        <service id="NetzpBlog6\Controller\StoreApi\BlogListing\BlogListingRoute" public="true">
+            <argument id="s_plugin_netzp_blog.repository" type="service" />
+            <argument type="service" id="NetzpBlog6\Helper\BlogHelper" />
+        </service>
+
+        <service id="NetzpBlog6\Controller\StoreApi\BlogListing\CachedBlogListingRoute" public="true"
+                 decorates="NetzpBlog6\Controller\StoreApi\BlogListing\BlogListingRoute" decoration-priority="-1000">
+            <argument type="service" id="NetzpBlog6\Controller\StoreApi\BlogListing\CachedBlogListingRoute.inner"/>
+            <argument type="service" id="cache.object"/>
+            <argument type="service" id="Shopware\Core\Framework\DataAbstractionLayer\Cache\EntityCacheKeyGenerator"/>
+            <argument type="service" id="Shopware\Core\Framework\Adapter\Cache\CacheTracer"/>
+            <argument type="service" id="logger" />
+        </service>
+
+        <!-- sitemap -->
+        <service id="netzp_blog6.url_provider" class="NetzpBlog6\Helper\SitemapProvider">
+            <argument type="service" id="Symfony\Component\Routing\RouterInterface"/>
+            <argument type="service" id="Doctrine\DBAL\Connection"/>
+            <argument type="service" id="NetzpBlog6\Helper\BlogHelper" />
+            <argument type="service" id="Shopware\Core\System\SystemConfig\SystemConfigService" />
+            <tag name="shopware.sitemap_url_provider"/>
+        </service>
+
+        <!-- cms -->
+        <service id="NetzpBlog6\Resolver\BlogElementResolver">
+            <tag name="shopware.cms.data_resolver"/>
+            <argument type="service" id="Shopware\Core\System\SystemConfig\SystemConfigService" />
+            <argument type="service" id="NetzpBlog6\Controller\StoreApi\BlogListing\BlogListingRoute" />
+        </service>
+
+        <!-- subscriber -->
+        <service id="NetzpBlog6\Subscriber\FrontendSubscriber">
+            <argument type="service" id="Shopware\Core\System\SystemConfig\SystemConfigService" />
+            <argument type="service" id="Doctrine\DBAL\Connection"/>
+            <argument type="service" id="product.repository" />
+            <argument type="service" id="s_plugin_netzp_blog.repository" />
+            <argument type="service" id="NetzpBlog6\Helper\BlogHelper" />
+            <tag name="kernel.event_subscriber"/>
+        </service>
+
+        <!-- seo url -->
+        <service id="NetzpBlog6\SeoUrlRoute\BlogPostSeoUrlRoute">
+            <argument type="service" id="NetzpBlog6\Core\Content\Blog\BlogDefinition"/>
+            <tag name="shopware.seo_url.route"/>
+        </service>
+
+        <service id="NetzpBlog6\SeoUrlRoute\BlogPostIndexer">
+            <argument type="service" id="Shopware\Core\Framework\DataAbstractionLayer\Dbal\Common\IteratorFactory"/>
+            <argument type="service" id="s_plugin_netzp_blog.repository"/>
+            <tag name="shopware.entity_indexer"/>
+            <argument type="service" id="event_dispatcher"/>
+        </service>
+
+        <service id="NetzpBlog6\SeoUrlRoute\BlogPostUpdater">
+            <argument type="service" id="Shopware\Core\Content\Seo\SeoUrlUpdater"/>
+            <tag name="kernel.event_subscriber"/>
+        </service>
+
+        <service id="NetzpBlog6\Twig\RenderBlogListingTemplateFilter">
+            <tag name="twig.extension"/>
+        </service>
+        <service id="NetzpBlog6\Twig\RenderBlogMediaFilter">
+            <argument type="service" id="media.repository" />
+            <tag name="twig.extension"/>
+        </service>
+
+        <service id="NetzpBlog6\Core\BlogAdminSearchIndexer">
+            <argument type="service" id="Doctrine\DBAL\Connection"/>
+            <argument type="service" id="Shopware\Core\Framework\DataAbstractionLayer\Dbal\Common\IteratorFactory" />
+            <argument type="service" id="s_plugin_netzp_blog.repository"/>
+            <argument>%elasticsearch.indexing_batch_size%</argument>
+            <tag name="shopware.elastic.admin-searcher-index" key="s_plugin_netzp_blog"/>
+        </service>
+    </services>
+</container>

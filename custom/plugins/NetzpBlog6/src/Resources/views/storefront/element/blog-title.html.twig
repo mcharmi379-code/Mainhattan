@@ -1,0 +1,17 @@
+{% if titleTag == "h1" %}
+    <h1 class="netzp-blog-title">{{ post.translated.title }}</h1>
+{% elseif titleTag == "h2" %}
+    <h2 class="netzp-blog-title">{{ post.translated.title }}</h2>
+{% elseif titleTag == "h3" %}
+    <h3 class="netzp-blog-title">{{ post.translated.title }}</h3>
+{% elseif titleTag == "h4" %}
+    <h4 class="netzp-blog-title mt-2 mb-0">{{ post.translated.title }}</h4>
+{% elseif titleTag == "h5" %}
+    <h5 class="netzp-blog-title mt-2 mb-0">{{ post.translated.title }}</h5>
+{% elseif titleTag == "h6" %}
+    <h6 class="netzp-blog-title mt-2 mb-0">{{ post.translated.title }}</h6>
+{% elseif titleTag == "none" %}
+    <div class="netzp-blog-title">{{ post.translated.title }}</div>
+{% else %}
+    <h4 class="netzp-blog-title mt-2 mb-0">{{ post.translated.title }}</h4>
+{% endif %}

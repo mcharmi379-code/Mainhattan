@@ -1,0 +1,21 @@
+.sw-cms-preview-netzp_blog6 {
+  display: flex;
+
+  .post {
+    display: flex;
+    flex-direction: column;
+    margin-right: .25rem;
+
+    h3 {
+      margin-top: .2rem;
+      margin-left: .1rem;
+      font-size: 90%;
+    }
+    .meta {
+      font-size: 75%;
+      color: #aaa;
+      margin-left: .1rem;
+      margin-bottom: .2rem;
+    }
+  }
+}

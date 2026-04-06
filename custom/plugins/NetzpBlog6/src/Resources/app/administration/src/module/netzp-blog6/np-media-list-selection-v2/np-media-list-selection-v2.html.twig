@@ -1,0 +1,28 @@
+<div class="np-media-list-selection-v2">
+    <sw-upload-listener
+        :uploadTag="uploadId"
+        @media-upload-add="onUploadsAdded"
+        @media-upload-finish="successfulUpload"
+        @media-upload-fail="onUploadFailed">
+    </sw-upload-listener>
+
+    <sw-media-upload-v2
+            :helpText="$tc('netzp-blog6.detail.label.dragtoupload')"
+            :uploadTag="uploadId"
+            variant="regular"
+            :defaultFolder="defaultFolderName"
+            @media-drop="imageDropped"
+            @media-upload-sidebar-open="onMediaUploadButtonOpenSidebar">
+    </sw-media-upload-v2>
+
+    <div class="np-media-list-selection-v2__grid" ref="grid" :style="gridAutoRows">
+        <sw-loader v-if="entity.isLoading"></sw-loader>
+            <np-media-list-selection-item-v2 v-for="(mediaItem, i) in mediaItems"
+                    @item-remove="removeItem(mediaItem, i)"
+                    v-draggable="{ dragGroup: dragGroup, data: mediaItem, onDrop: dragStop }"
+                    v-droppable="{ dragGroup: dragGroup, data: mediaItem }"
+                    :key="i"
+                    :item="mediaItem">
+            </np-media-list-selection-item-v2>
+    </div>
+</div>

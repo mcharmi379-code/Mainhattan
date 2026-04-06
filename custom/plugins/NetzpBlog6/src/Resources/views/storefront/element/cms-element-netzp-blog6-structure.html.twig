@@ -1,0 +1,51 @@
+{% block blog_content_filter %}
+    {% set currentRoute = app.request.attributes.get('_route') %}
+    {% set navigationId = app.request.attributes.get('_route_params').navigationId %}
+    {% set categoryId = app.request.get('c') ?? '00000000000000000000000000000000' %}
+    {% set authorId = app.request.get('a') ?? '00000000000000000000000000000000' %}
+    {% set seoUrl = '' %}
+    {% if navigationId %}
+        {% set seoUrl = seoUrl(currentRoute, { navigationId: navigationId }) %}
+    {% endif %}
+    <div class="netzp-blog6-filter">
+        {% if element.config.type.value == 'categories' %}
+            <ul class="list-inline">
+                <li class="list-inline-item">
+                    {% set active = app.request.get('c') == '00000000000000000000000000000000' %}
+                    <a href="{{ seoUrl }}?c=00000000000000000000000000000000" {% if active %}class="active"{% endif %}>
+                        {{ "netzp.blog.msg.showall"|trans }}
+                    </a>
+                </li>
+                {% for category in element.data %}
+                    {% set categoryUrl = seoUrl ~ '?c=' ~ category.id ~ '&a=' ~ authorId %}
+                    {% set active = app.request.get('c') == category.id %}
+
+                    <li class="list-inline-item">
+                        <a href="{{ categoryUrl }}" {% if active %}class="active"{% endif %}>
+                            {{ category.translated.title }}
+                        </a>
+                    </li>
+                {% endfor %}
+            </ul>
+        {% elseif element.config.type.value == 'authors' %}
+            <ul class="list-inline">
+                <li class="list-inline-item">
+                    {% set active = app.request.get('a') == '00000000000000000000000000000000' %}
+                    <a href="{{ seoUrl }}?a=00000000000000000000000000000000" {% if active %}class="active"{% endif %}>
+                        {{ "netzp.blog.msg.showall"|trans }}
+                    </a>
+                </li>
+                {% for author in element.data %}
+                    {% set authorUrl = seoUrl ~ '?a=' ~ author.id ~ '&c=' ~ categoryId %}
+                    {% set active = app.request.get('a') == author.id %}
+
+                    <li class="list-inline-item">
+                        <a href="{{ authorUrl }}" {% if active %}class="active"{% endif %}>
+                            {{ author.translated.name }}
+                        </a>
+                    </li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+    </div>
+{% endblock %}

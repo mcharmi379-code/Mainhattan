@@ -1,0 +1,164 @@
+{
+  "sw-privileges.additional_permissions.blog.label": "Blog",
+  "sw-privileges.additional_permissions.blog.edit_blog": "Edit blog posts",
+  "sw-privileges.additional_permissions.blog.edit_authors": "Edit blog authors",
+  "sw-privileges.additional_permissions.blog.edit_categories": "Edit blog categories",
+
+  "global": {
+    "entities": {
+      "s_plugin_netzp_blog": "Blog | Blog",
+      "s_plugin_netzp_blog_category": "Blog category",
+      "s_plugin_netzp_blog_author": "Blog author"
+    }
+  },
+
+  "sw-seo-url-template-card": {
+    "routeNames": {
+      "frontend-blog-post": "Blog post"
+    }
+  },
+
+  "sw-profile": {
+      "tabSearchPreferences": {
+          "modules": {
+              "s_plugin_netzp_blog": {
+                  "title": "Title"
+              }
+          }
+      }
+  },
+
+  "netzp-blog6": {
+    "main": {
+      "menuLabel": "Blog",
+      "title": "Blog",
+      "menuDescription": "Manage Blog",
+      "placeholderSearchBar": "Seaarch for blog posts",
+      "btnAuthors": "edit",
+      "btnCategories": "edit"
+    },
+
+    "list": {
+      "title": "Blog posts",
+      "addButtonText": "New",
+      "duplicate": "Duplicate",
+      "dynamicGroupMissing": "- dynamic group missing! -",
+      "columns": {
+        "title": "Title",
+        "teaser": "Teaser",
+        "author": "Author",
+        "category": "Main category",
+        "author": "Author",
+        "postdate": "Post date",
+        "showfrom": "Show from",
+        "showuntil": "until",
+        "sticky": "Sticky",
+        "image": "Image",
+        "products": "Products"
+      },
+      "sidebar": {
+        "filter": "Filter",
+        "refresh": "Refresh",
+        "category": "Main category",
+        "author": "Author",
+        "tag": "Tag",
+        "allCategories": "- all -",
+        "allAuthors": "- all -",
+        "allTags": "- all -"
+      }
+    },
+
+    "detail": {
+      "cancelButtonText": "Cancel",
+      "saveButtonText": "Save",
+      "msg": {
+        "attention": "Attention",
+        "removeItem": "Remove this item? This can not be undone.",
+        "cancel": "Cancel",
+        "ok": "OK"
+      },
+
+      "section": {
+        "main": "Main",
+        "contents": "Contents",
+        "meta": "Meta data",
+        "products": "Products",
+        "media": "Images/Media",
+        "mainimage": "Main image",
+        "mediagallery": "Image/media gallery",
+        "items": "Additional contents"
+      },
+
+      "items": {
+        "type": {
+          "label": "Type",
+          "0": {
+            "label": "Standard / none",
+            "summary": "Summary"
+          },
+          "1": {
+            "label": "Recipe",
+            "summary": "Ingredients"
+          },
+          "2": {
+            "label": "Guide",
+            "summary": "Material"
+          },
+          "3": {
+            "label": "Review / test",
+            "summary": "Summary"
+          }
+        },
+        "title": "Title",
+        "summary": "Summary (ex. ingredients, material)",
+        "content": "Contents",
+        "image": "Image",
+        "delete": "Delete"
+      },
+
+      "label": {
+        "title": "Title",
+        "teaser": "Teaser",
+        "slug": "Slug",
+        "contents": "Contents",
+        "custom": "Custom data",
+        "postdate": "Post date",
+        "showfrom": "Show from",
+        "showuntil": "Show until",
+        "category": "Main category",
+        "categories": "Other categories",
+        "author": "Author",
+        "image": "Image",
+        "imagepreview": "Alternative preview image (optional)",
+        "useAsImage": "Use as image",
+        "metatitle": "Meta title",
+        "metadescription": "Meta description",
+        "products": "Product assignment",
+        "isproductstream": "Dynamic product group",
+        "productStream": "Select a dynamic product group",
+        "productStreamHelpText": "Please note: for speed reasons the number of products from a dynamic product group is limited to 50 (do not select 'all products'!)",
+        "chars": "chars",
+        "addItem": "Add new item",
+        "galleryupload": "Upload image",
+        "dragtoupload": "Drag files here to upload (you can drag also from media sidebar)",
+        "customfields": "Custom fields",
+        "noindex": "Prevent from indexing",
+        "sticky": "Sticky",
+        "canonicalUrl": "Canonical Url"
+      },
+
+      "help": {
+        "slug": "generated automatically, can be overwritten if necessary. Attention: the URL may then change for already existing blog posts.",
+        "custom": "optional, can be used in own templates: post.translated.custom",
+        "noindex": "Prevent search engines from indexing this blog post (noindex) and also excludes it from the RSS feed. Please note: not all search engines adhere to this.",
+        "sticky": "Always shows this blog post first in lists.",
+        "canonicalUrl": "Optionally specify a canonical URL for this blog post here. Leave blank for the default SEO url of this post."
+      },
+
+      "error": {
+        "title": "Error",
+        "missingFields": "One or more fields are missing. Please check your input."
+      }
+    }
+  }
+}

@@ -1,0 +1,17 @@
+<div class="np-media-list-selection-item-v2" :class="productImageClasses">
+    <template v-if="!isPlaceholder">
+        <sw-media-preview-v2
+            class="np-media-list-selection-item-v2__image"
+            :source="sourceId"
+            @click="$emit('click')"
+            :hideTooltip="hideTooltip">
+        </sw-media-preview-v2>
+        <sw-context-button v-if="!hideActions" class="np-media-list-selection-item-v2__context-button">
+            <sw-context-menu-item variant="danger" @click="$emit('item-remove')">{{ $tc('global.sw-media-list-selection-item-v2.buttonRemove') }}</sw-context-menu-item>
+        </sw-context-button>
+    </template>
+
+    <template v-else>
+            <sw-icon class="np-media-list-selection-item-v2__placeholder-icon" :name="'regular-image'" :small="true"></sw-icon>
+    </template>
+</div>

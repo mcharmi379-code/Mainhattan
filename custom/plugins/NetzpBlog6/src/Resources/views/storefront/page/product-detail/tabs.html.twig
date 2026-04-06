@@ -1,0 +1,46 @@
+{% sw_extends '@Storefront/storefront/page/product-detail/tabs.html.twig' %}
+
+{# moved saleschannel filtering to views, see FrontEndSubcriber.php#54 #}
+{% set hasBlogPosts = false %}
+{% set posts = page.product.getExtension('blogs').getElements() %}
+{% for post in posts %}
+    {% if post.category.saleschannelid == null or
+        post.category.saleschannelid == '00000000000000000000000000000000' or
+        post.category.saleschannelid == context.salesChannel.id %}
+        {% set hasBlogPosts = true %}
+    {% endif %}
+{% endfor %}
+
+{% block page_product_detail_tabs_navigation_review %}
+    {{ parent() }}
+    {% if config('NetzpBlog6.config.showblogposts') and hasBlogPosts %}
+    <li class="nav-item">
+        <a class="nav-link product-detail-tab-navigation-link"
+           id="netzp-blog-tab"
+           data-bs-toggle="tab"
+           data-off-canvas-tabs="true"
+           href="#netzp-blog-tab-pane"
+           role="tab"
+           aria-controls="netzp-blog-tab-pane"
+           aria-selected="true">
+            {{ "netzp.blog.tab-posts-title"|trans }}
+            <span class="product-detail-tab-navigation-icon">
+                {% sw_icon 'arrow-medium-right' style {'pack':'solid'} %}
+            </span>
+        </a>
+    </li>
+    {% endif %}
+{% endblock %}
+
+{% block page_product_detail_tabs_content_review %}
+    {{ parent() }}
+    {% if config('NetzpBlog6.config.showblogposts') and hasBlogPosts %}
+    <div class="tab-pane fade show"
+         id="netzp-blog-tab-pane"
+         role="tabpanel"
+         aria-labelledby="netzp-blog-tab">
+
+        {% sw_include "@Storefront/storefront/page/product-detail/tabs-blog-grid.html.twig" with {'posts': posts} %}
+    </div>
+    {% endif %}
+{% endblock %}

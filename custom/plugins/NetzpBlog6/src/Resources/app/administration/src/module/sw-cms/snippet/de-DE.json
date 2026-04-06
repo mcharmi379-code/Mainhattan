@@ -1,0 +1,160 @@
+{
+  "sw-cms": {
+    "netzp-blog6": {
+      "sidebarLabel": "Blog Premium"
+    },
+
+    "blocks": {
+      "netzp-blog6": {
+        "label": "Blog-Listing"
+      },
+      "netzp-blog6-detail": {
+        "label": "Blog-Detailseite / Blog-Element"
+      }
+    },
+
+    "elements": {
+      "netzp-blog6-detail": {
+        "label": "Blog-Detailseite",
+        "meta": "01. Januar 2021 / Autor<br>Kategory / Tags",
+        "author": "Autor",
+        "products": "Zugeordnete Produkte",
+        "custom": "--- Zusatzfelder ---",
+        "info": {
+          "title": "Blog / Title",
+          "teaser": "Blog / Teaser",
+          "content": "Blog / Inhalt",
+          "products": "Blog / Zugeordnete Produkte",
+          "items": "Blog / Zusätze",
+          "media": "Blog / Bilder",
+          "date": "01. Januar 2021",
+          "meta": "Blog / Meta",
+          "author": "Blog / Autor",
+          "social": "Blog / Social",
+          "custom": "Blog / Zusatzfeld",
+          "category": "Kategorie 1",
+          "tags": "Tag 1 | Tag 2 | Tag 3",
+          "nometa": "- alle Metainformationen sind ausgeblendet -",
+          "noauthor": "- alle Autoreninformationen sind ausgeblendet -"
+        },
+        "config": {
+          "showDate": "Datum",
+          "showAuthor": "Autor",
+          "showCategory": "Kategorie",
+          "showTags": "Tags",
+          "showAuthorAvatar": "Avatar",
+          "showAuthorName": "Name",
+          "showAuthorBio": "Biografie",
+          "showGalleryCounter": "Galerie Zähler",
+          "showGalleryCaption": "Galerie Bildtitel",
+          "showThumbnailCaption": "Thumbnail Bildtitel",
+          "titleTag": {
+            "label": "Tag für Titel",
+            "h1": "H1",
+            "h2": "H2",
+            "h3": "H3",
+            "h4": "H4",
+            "h5": "H5",
+            "h6": "H6",
+            "none": "- none -"
+          },
+          "imageType": {
+            "label": "Bild-Auswahl",
+            "post": "Hauptbild",
+            "preview": "Vorschau-Bild"
+          },
+          "imageMode": {
+            "label": "Bild-Modus",
+            "full": "vollflächig (cover)",
+            "fullcontain": "vollflächig (contain)",
+            "small": "kleines Bild",
+            "responsive": "Responsiv"
+          },
+          "productLayout": {
+            "label": "Layout",
+            "standard": "Standard",
+            "minimal": "Minimal",
+            "image": "Bild",
+            "bigimage": "Großes Bild"
+          },
+          "productDisplayMode": {
+            "label": "Anzeige-Modus",
+            "standard": "Standard",
+            "cover": "Bild ausfüllen (cover)",
+            "contain": "Bild enthalten (contain)"
+          },
+          "productMinWidth": {
+            "label": "Minimale Breite (px)"
+          },
+          "height": {
+            "label": "Höhe (rem)"
+          },
+          "part": {
+            "label": "Anzeige-Element auswählen",
+            "title": "Titel",
+            "contents": "Inhalt",
+            "teaser": "Teaser",
+            "meta": "Meta-Informationen",
+            "author": "Autor",
+            "image": "Bild",
+            "items": "Zusatzinhalte",
+            "media": "Bilder / Medien",
+            "products": "Zugeordnete Produkte",
+            "social": "Social sharing icons",
+            "custom": "Zusatzfelder"
+          }
+        }
+      },
+
+      "netzp-blog6": {
+        "label": "Blog Listing",
+        "more": "Mehr...",
+        "cards": "Blog / Karten",
+        "list": "Blog / Liste",
+        "slider": "Blog / Slider",
+        "template": "Blog / Template",
+
+        "config": {
+          "category": "Kategorie",
+          "author": "Autor",
+          "backgroundColor": "Hintergrundfarbe",
+          "filterCategory": "Kategorie-Filter",
+          "filterTags": "Tags-Filter",
+          "filterAuthor": "Autor-Filter",
+          "blogPost": "Bestimmter Blogpost",
+          "numberofposts": {
+            "title": "Anzahl Posts",
+            "help": "0 für keine Beschränkung / alle"
+          },
+          "noPagination": "Keine Navigation",
+          "template": {
+            "label": "Template (Twig Syntax)",
+            "help": "Variablen: &#123;&#123; url &#125;&#125; / &#123;&#123; post.FELD &#125;&#125;, z.B.: &#123;&#123; post.translated.title &#125;&#125;, &#123;&#123; post.translated.teaser &#125;&#125;, &#123;&#123; post.translated.contents &#125;&#125;<br>(<a href='https://plugins.netzperfekt.de/doc/Netzp55675230632' target='_blank'>siehe Dokumentation</a>)"
+          },
+          "sortorder": {
+            "title": "Sortierung",
+            "desc": "Neueste Posts zuerst",
+            "asc": "Älteste Posts zuerst"
+          },
+          "layout": {
+            "title": "Layout (Blog-Übersicht)",
+            "cards": "Kartenansicht",
+            "list": "Listenansicht",
+            "slider": "Slider",
+            "template": "Eigenes Template"
+          },
+          "imageMode": {
+            "title": "Bild-Modus",
+            "cover": "feste Bildgröße (cover)",
+            "contain": "gesamtes Bild (contain)"
+          },
+          "tags": {
+            "label": "Tags",
+            "title": "Auf Tag(s) beschränken"
+          }
+        }
+      }
+    }
+  }
+}
+

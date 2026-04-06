@@ -1,0 +1,53 @@
+{% for blogEntry in page.extensions.netzpSearch.blog.data %}
+    <li class="search-suggest-product js-result">
+        <a href="{{ seoUrl('frontend.blog.post', {'postId': blogEntry.id}) }}"
+           title="{{ blogEntry.title }}"
+           class="search-suggest-product-link">
+
+            <div class="row align-items-center g-0">
+                <div class="col-auto search-suggest-product-image-container">
+                    {% if blogEntry.media.url %}
+                        {% sw_thumbnails 'blog-search-suggest-image-thumbnail' with {
+                            media: blogEntry.media,
+                            sizes: {
+                                'default': '200px'
+                            },
+                            attributes: {
+                                'class': 'search-suggest-product-image',
+                                'alt':   blogEntry.media.translated.alt ?: '',
+                                'title': blogEntry.media.translated.title ?: ''
+                            }
+                        } %}
+                    {% else %}
+                        {% sw_icon 'placeholder' style {
+                            'size': 'lg'
+                        } %}
+                    {% endif %}
+                </div>
+
+                <div class="col search-suggest-product-name">
+                    {{ blogEntry.title }}
+                </div>
+            </div>
+        </a>
+    </li>
+{% endfor %}
+
+<li class="js-result search-suggest-total">
+    <div class="row align-items-center {{ gridNoGuttersClass }}">
+        <div class="col">
+            <a href="{{ path('frontend.search.page') }}?search={{ page.searchTerm }}&tab=blog"
+               title="{{ "header.searchAllResults"|trans|striptags }}"
+               class="search-suggest-total-link">
+                {% sw_icon 'arrow-head-right' style { 'size': 'sm' } %}
+                {{ "header.searchAllResults"|trans|sw_sanitize }}
+            </a>
+        </div>
+
+        <div class="col-auto search-suggest-total-count">
+            {{ "header.searchResults"|trans({
+                '%count%': page.extensions.netzpSearch.blog.total,
+            })|sw_sanitize }}
+        </div>
+    </div>
+</li>

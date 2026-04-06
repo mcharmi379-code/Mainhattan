@@ -1,0 +1,50 @@
+<sw-page class="netzp-blog6-category-list">
+    <template #smart-bar-header>
+        <h2>
+            {{ $tc('sw-settings.index.title') }} <sw-icon name="regular-chevron-right-xs" small /> {{ $tc('netzp-blog6-category.main.menuLabel') }}
+        </h2>
+    </template>
+
+    <template #smart-bar-actions>
+        <sw-button variant="primary" :routerLink="{ name: 'netzp.blog6.category.create' }">
+            {{ $t('netzp-blog6-category.list.addButtonText') }}
+        </sw-button>
+    </template>
+    <template #language-switch>
+        <sw-language-switch @on-change="changeLanguage" />
+    </template>
+
+    <template #content>
+        <sw-entity-listing v-if="category"
+                           :items="category"
+                           :repository="repository"
+                           :showSelection="false"
+                           :columns="columns"
+                           detailRoute="netzp.blog6.category.detail">
+
+            <template #column-saleschannel="{ item }">
+                <sw-label v-if="item.saleschannel"
+                          variant="info" size="default" :ghost="true">
+                    {{ item.saleschannel.name }}
+                </sw-label>
+            </template>
+
+            <template #column-customergroup="{ item }">
+                <sw-label v-if="item.customergroup"
+                          variant="info" size="default" :ghost="true">
+                    {{ item.customergroup.name }}
+                </sw-label>
+            </template>
+
+            <template #column-onlyloggedin="{ item }">
+                <sw-icon v-if="item.onlyloggedin" name="regular-check-circle-s" small />
+                <span v-else>&nbsp;</span>
+            </template>
+
+            <template #column-includeinrss="{ item }">
+                <sw-icon v-if="item.includeinrss" name="regular-checkmark-xs" small class="is--active" />
+                <sw-icon v-else name="regular-times-s" small class="is--inactive" />
+            </template>
+        </sw-entity-listing>
+    </template>
+</sw-page>

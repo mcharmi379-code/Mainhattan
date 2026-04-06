@@ -1,0 +1,129 @@
+<div class="sw-cms-el-config-netzp-blog6-detail">
+    <sw-select-field :label="$tc('sw-cms.elements.netzp-blog6-detail.config.part.label')"
+                     v-model:value="element.config.part.value"
+                     style="font-weight: bold">
+        <option value="title">{{ $tc('sw-cms.elements.netzp-blog6-detail.config.part.title') }}</option>
+        <option value="contents">{{ $tc('sw-cms.elements.netzp-blog6-detail.config.part.contents') }}</option>
+        <option value="teaser">{{ $tc('sw-cms.elements.netzp-blog6-detail.config.part.teaser') }}</option>
+        <option value="meta">{{ $tc('sw-cms.elements.netzp-blog6-detail.config.part.meta') }}</option>
+        <option value="author">{{ $tc('sw-cms.elements.netzp-blog6-detail.config.part.author') }}</option>
+        <option value="image">{{ $tc('sw-cms.elements.netzp-blog6-detail.config.part.image') }}</option>
+        <option value="products">{{ $tc('sw-cms.elements.netzp-blog6-detail.config.part.products') }}</option>
+        <option value="items">{{ $tc('sw-cms.elements.netzp-blog6-detail.config.part.items') }}</option>
+        <option value="media">{{ $tc('sw-cms.elements.netzp-blog6-detail.config.part.media') }}</option>
+        <option value="social">{{ $tc('sw-cms.elements.netzp-blog6-detail.config.part.social') }}</option>
+        <option value="custom">{{ $tc('sw-cms.elements.netzp-blog6-detail.config.part.custom') }}</option>
+    </sw-select-field>
+
+    <sw-select-field v-if="element.config.part.value === 'title'"
+                     :label="$tc('sw-cms.elements.netzp-blog6-detail.config.titleTag.label')"
+                     v-model:value="element.config.titleTag.value">
+        <option value="h1">{{ $tc('sw-cms.elements.netzp-blog6-detail.config.titleTag.h1') }}</option>
+        <option value="h2">{{ $tc('sw-cms.elements.netzp-blog6-detail.config.titleTag.h2') }}</option>
+        <option value="h3">{{ $tc('sw-cms.elements.netzp-blog6-detail.config.titleTag.h3') }}</option>
+        <option value="h4">{{ $tc('sw-cms.elements.netzp-blog6-detail.config.titleTag.h4') }}</option>
+        <option value="h5">{{ $tc('sw-cms.elements.netzp-blog6-detail.config.titleTag.h5') }}</option>
+        <option value="h6">{{ $tc('sw-cms.elements.netzp-blog6-detail.config.titleTag.h6') }}</option>
+        <option value="none">{{ $tc('sw-cms.elements.netzp-blog6-detail.config.titleTag.none') }}</option>
+    </sw-select-field>
+
+    <sw-container v-if="element.config.part.value === 'image'" columns="1fr 1fr 1fr" gap="20px">
+        <sw-select-field :label="$tc('sw-cms.elements.netzp-blog6-detail.config.imageType.label')"
+                         v-model:value="element.config.imageType.value">
+            <option value="post">{{ $tc('sw-cms.elements.netzp-blog6-detail.config.imageType.post') }}</option>
+            <option value="preview">{{ $tc('sw-cms.elements.netzp-blog6-detail.config.imageType.preview') }}</option>
+        </sw-select-field>
+
+        <sw-select-field :label="$tc('sw-cms.elements.netzp-blog6-detail.config.imageMode.label')"
+                         v-model:value="element.config.imageMode.value">
+            <option value="full">{{ $tc('sw-cms.elements.netzp-blog6-detail.config.imageMode.full') }}</option>
+            <option value="fullcontain">{{ $tc('sw-cms.elements.netzp-blog6-detail.config.imageMode.fullcontain') }}</option>
+            <option value="small">{{ $tc('sw-cms.elements.netzp-blog6-detail.config.imageMode.small') }}</option>
+            <option value="responsive">{{ $tc('sw-cms.elements.netzp-blog6-detail.config.imageMode.responsive') }}</option>
+        </sw-select-field>
+
+        <sw-number-field v-if="element.config.imageMode.value != 'responsive'"
+                         :label="$tc('sw-cms.elements.netzp-blog6-detail.config.height.label')"
+                         numberType="int" :min="1" :max="100" :step="1"
+                         v-model:value="element.config.height.value">
+        </sw-number-field>
+    </sw-container>
+
+    <sw-container v-if="element.config.part.value === 'meta'" columns="1fr 1fr 1fr 1fr" gap="20px">
+        <sw-switch-field bordered :label="$tc('sw-cms.elements.netzp-blog6-detail.config.showDate')"
+                         v-model:value="element.config.showDate.value">
+        </sw-switch-field>
+
+        <sw-switch-field bordered :label="$tc('sw-cms.elements.netzp-blog6-detail.config.showAuthor')"
+                         v-model:value="element.config.showAuthor.value">
+        </sw-switch-field>
+
+        <sw-switch-field bordered :label="$tc('sw-cms.elements.netzp-blog6-detail.config.showCategory')"
+                         v-model:value="element.config.showCategory.value">
+        </sw-switch-field>
+
+        <sw-switch-field bordered :label="$tc('sw-cms.elements.netzp-blog6-detail.config.showTags')"
+                         v-model:value="element.config.showTags.value">
+        </sw-switch-field>
+    </sw-container>
+
+    <sw-container v-if="element.config.part.value === 'author'" columns="1fr 1fr 1fr" gap="20px">
+        <sw-switch-field bordered :label="$tc('sw-cms.elements.netzp-blog6-detail.config.showAuthorAvatar')"
+                         v-model:value="element.config.showAuthorAvatar.value">
+        </sw-switch-field>
+
+        <sw-switch-field bordered :label="$tc('sw-cms.elements.netzp-blog6-detail.config.showAuthorName')"
+                         v-model:value="element.config.showAuthorName.value">
+        </sw-switch-field>
+
+        <sw-switch-field bordered :label="$tc('sw-cms.elements.netzp-blog6-detail.config.showAuthorBio')"
+                         v-model:value="element.config.showAuthorBio.value">
+        </sw-switch-field>
+    </sw-container>
+
+    <sw-container v-if="element.config.part.value === 'products'" columns="1fr 1fr 1fr" gap="20px">
+        <sw-select-field :label="$tc('sw-cms.elements.netzp-blog6-detail.config.productLayout.label')"
+                         v-model:value="element.config.productLayout.value">
+            <option value="standard">{{ $tc('sw-cms.elements.netzp-blog6-detail.config.productLayout.standard') }}</option>
+            <option value="image">{{ $tc('sw-cms.elements.netzp-blog6-detail.config.productLayout.bigimage') }}</option>
+            <option value="minimal">{{ $tc('sw-cms.elements.netzp-blog6-detail.config.productLayout.minimal') }}</option>
+        </sw-select-field>
+
+        <sw-select-field :label="$tc('sw-cms.elements.netzp-blog6-detail.config.productDisplayMode.label')"
+                         v-model:value="element.config.productDisplayMode.value">
+            <option value="cover">{{ $tc('sw-cms.elements.netzp-blog6-detail.config.productDisplayMode.cover') }}</option>
+            <option value="contain">{{ $tc('sw-cms.elements.netzp-blog6-detail.config.productDisplayMode.contain') }}</option>
+        </sw-select-field>
+
+        <sw-number-field :label="$tc('sw-cms.elements.netzp-blog6-detail.config.productMinWidth.label')"
+                         numberType="int" :min="200" :max="800" :step="1"
+                         v-model:value="element.config.productMinWidth.value">
+        </sw-number-field>
+    </sw-container>
+
+    <sw-container v-if="element.config.part.value === 'items'" columns="1fr 1fr 1fr" gap="20px">
+        <sw-number-field :label="$tc('sw-cms.elements.netzp-blog6-detail.config.height.label')"
+                         numberType="int" :min="1" :max="100" :step="1"
+                         v-model:value="element.config.height.value">
+        </sw-number-field>
+    </sw-container>
+
+    <sw-container v-if="element.config.part.value === 'media'" columns="1fr 1fr 1fr 1fr" gap="20px">
+        <sw-number-field :label="$tc('sw-cms.elements.netzp-blog6-detail.config.height.label')"
+                         numberType="int" :min="1" :max="100" :step="1"
+                         v-model:value="element.config.height.value">
+        </sw-number-field>
+
+        <sw-switch-field bordered :label="$tc('sw-cms.elements.netzp-blog6-detail.config.showGalleryCounter')"
+                         v-model:value="element.config.showGalleryCounter.value">
+        </sw-switch-field>
+
+        <sw-switch-field bordered :label="$tc('sw-cms.elements.netzp-blog6-detail.config.showGalleryCaption')"
+                         v-model:value="element.config.showGalleryCaption.value">
+        </sw-switch-field>
+
+        <sw-switch-field bordered :label="$tc('sw-cms.elements.netzp-blog6-detail.config.showThumbnailCaption')"
+                         v-model:value="element.config.showThumbnailCaption.value">
+        </sw-switch-field>
+    </sw-container>
+</div>

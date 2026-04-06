@@ -1,0 +1,49 @@
+{% block blog_content_post_wrapper %}
+<div class="card">
+    {% block blog_content_post_inner_image %}
+        {% if post.image %}
+            {% set thumbnailClass = (config.layoutdetail == 'largeimage') ? "image-large-cover" : "image-large-contain" %}
+            {% if post.image.mediaType.name == 'IMAGE' %}
+                {% sw_thumbnails 'blog_large_image_thumbnail' with {
+                    media: post.image,
+                    attributes: {
+                        'class': 'card-img-top ' ~ thumbnailClass,
+                        'alt':   post.image.translated.alt ?: '',
+                        'title': post.translated.title ?: ''
+                    }
+                } %}
+
+            {% elseif post.image.mediaType.name == 'VIDEO' %}
+                <video class="card-img-top {{ thumbnailClass }}" controls>
+                    <source src="{{ post.image.url }}" type="{{ post.image.mimetype }}">
+                    Your browser does not support HTML5 video.
+                </video>
+            {% endif %}
+        {% endif %}
+    {% endblock %}
+
+    {% block blog_content_post_inner_wrapper %}
+    <div class="card-body mt-3 p-4">
+        {% block blog_content_post_inner_title %}
+            <h2 class="mb-1">{{ post.translated.title }}</h2>
+        {% endblock %}
+
+        {% if config.showmeta %}
+            {% sw_include "@Storefront/storefront/page/blog/post-meta.html.twig" %}
+        {% endif %}
+
+        {% block blog_content_post_inner_contents %}
+            <div class="card-text mt-3">
+                {{ render_blog_listing_template(post.translated.contents, post)|raw }}
+            </div>
+        {% endblock %}
+
+        {% block blog_content_post_inner_author %}
+            {% if config.showmeta and config.showauthor %}
+                {% sw_include "@Storefront/storefront/page/blog/post-author.html.twig" %}
+            {% endif %}
+        {% endblock %}
+    </div>
+    {% endblock %}
+</div>
+{% endblock %}

@@ -1,0 +1,16 @@
+{% block blog_list_template_item %}
+    {% set postDetailUrl = seoUrl('frontend.blog.post', {'postId': post.id} ) %}
+    {% set paramPage = app.request.get('p') ? 'p=' ~app.request.get('p') : '' %}
+    {% set paramCategory = app.request.get('c') ? 'c=' ~app.request.get('c') : '' %}
+    {% set paramAuthor = app.request.get('a') ? 'a=' ~app.request.get('a') : '' %}
+    {% set urlParams = [paramPage, paramCategory, paramAuthor] | filter(p => p != '') | join('&') %}
+    {% if false and urlParams %}
+        {% set postDetailUrl = postDetailUrl ~ '?' ~ urlParams %}
+    {% endif %}
+
+    <div class="col-lg-4 col-sm-6 mb-3 blog-template">
+        {% block blog_list_template_item_wrapper %}
+            {{ render_blog_listing_template(element.config.customTemplate.value, post, postDetailUrl)|raw }}
+        {% endblock %}
+    </div>
+{% endblock %}

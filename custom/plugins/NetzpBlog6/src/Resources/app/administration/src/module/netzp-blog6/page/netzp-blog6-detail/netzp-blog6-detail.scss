@@ -1,0 +1,49 @@
+.netzp-blog6-detail {
+  .charcounter {
+    display: inline-block;
+    font-size: 80%;
+    float: right;
+  }
+
+  .summary {
+    margin-top: 2rem;
+    margin-left: 1rem;
+    font-size: 130%;
+    font-weight: bold;
+  }
+
+  .item-buttons {
+    align-self: start;
+    display: flex;
+    flex-direction: column;
+
+    .number {
+      margin-top: 1.8rem;
+      padding-top: .3rem;
+      background-color: #800080;
+      color: #fff;
+      border: 1px solid #ccc;
+      font-size: 1.3em;
+      border-radius: 50%;
+      text-align: center;
+      width: 1.7em;
+      height: 1.7em;
+      line-height: 1.2em;
+    }
+
+    .btn--updown {
+      cursor: pointer;
+      margin-top: .5rem;
+      align-self: start;
+      padding: 5px;
+    }
+
+    .btn--delete {
+      cursor: pointer;
+      margin-top: 1.4rem;
+      align-self: start;
+      padding: 5px;
+      border: 1px solid red;
+    }
+  }
+}

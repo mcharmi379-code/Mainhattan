@@ -1,0 +1,15 @@
+{% set language = page.header.activeLanguage.translationCode.code[0:2] %}
+{% set c = config('NetzpShariff6.config') %}
+
+<div class="ms-4 shariff {% if(c.buttonstyle == 'iconcircle') %}icon-circle{% endif %} netzp-shariff6"
+      data-lang="{{ language }}"
+     {% if(buttonstyle != '') %}
+         data-button-style="{{ buttonstyle }}"
+     {% else %}
+         data-button-style="{{ c.buttonstyle }}"
+     {% endif %}
+     data-services="{% if c.showFacebook %}facebook{% endif %} {% if c.showPinterest %}pinterest{% endif %} {% if c.showTwitter %}twitter{% endif %} {% if c.showWhatsapp %}whatsapp{% endif %} {% if c.showTelegram %}telegram{% endif %} {% if c.showXing %}xing{% endif %} {% if c.showLinkedin %}linkedin{% endif %} {% if c.showPocket %}pocket{% endif %} {% if c.showDiaspora %}diaspora{% endif %} {% if c.showThreema %}threema{% endif %} {% if c.showMail %}mail{% endif %} {% if c.showPrint %}print{% endif %}"
+     data-mail-url="mailto:"
+     data-theme="{{ c.theme }}"
+     {% if(orientation != '') %}data-orientation="{{ orientation }}"{% endif %}
+></div>

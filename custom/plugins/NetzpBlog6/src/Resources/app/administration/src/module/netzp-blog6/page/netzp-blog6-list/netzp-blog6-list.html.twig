@@ -1,0 +1,135 @@
+<sw-page class="netzp-blog6-list">
+    <template #search-bar>
+        <sw-search-bar initialSearchType="s_plugin_netzp_blog" :initialSearch="term" @search="onSearch"></sw-search-bar>
+    </template>
+
+    <template #smart-bar-header>
+        <h2>
+            {{ $tc('netzp-blog6.list.title') }}&nbsp;
+            <sw-label v-if="blog && (categoriesFilter)"
+                      variant="success" size="default" appearance="pill" :ghost="false" :caps="false">
+                {{ getCategory(categoriesFilter).title }}
+            </sw-label>
+
+            <sw-label v-if="blog && (authorsFilter)"
+                      variant="success" size="default" appearance="pill" :ghost="false" :caps="false">
+                {{ getAuthor(authorsFilter).name }}
+            </sw-label>
+        </h2>
+    </template>
+
+    <template #smart-bar-actions>
+        <sw-button variant="primary" :routerLink="{ name: 'netzp.blog6.create' }">
+            {{ $t('netzp-blog6.list.addButtonText') }}
+        </sw-button>
+    </template>
+
+    <template #language-switch>
+        <sw-language-switch @on-change="changeLanguage" />
+    </template>
+
+    <template #content>
+        <sw-entity-listing v-if="blog"
+                           :columns="columns"
+                           :items="blog"
+                           :repository="repository"
+                           :showSelection="false"
+                           detailRoute="netzp.blog6.detail">
+
+            <template #column-category="{ item }">
+                {{ item.category ? item.category.title : '---' }}
+            </template>
+
+            <template #column-teaser="{ item }">
+                {{ truncateFilter(item.teaser, 50, true) }}
+            </template>
+
+            <template #column-image="{ item }">
+                <sw-media-preview-v2 :source="item.imageid ? item.imageid : null" />
+            </template>
+
+            <template #column-postdate="{ item }">
+                <b>{{ dateFilter(item.postdate) }}</b>
+            </template>
+
+            <template #column-showfrom="{ item }">
+                {{ dateFilter(item.showfrom) }}
+            </template>
+
+            <template #column-showuntil="{ item }">
+                {{ dateFilter(item.showuntil) }}
+            </template>
+
+            <template #column-sticky="{ item, isInlineEdit }">
+                <template v-if="isInlineEdit">
+                    <sw-checkbox-field v-model:value="item.sticky" />
+                </template>
+                <template v-else>
+                    <sw-icon v-if="item.sticky" name="regular-checkmark-xs" small class="is--active" />
+                    <sw-icon v-else name="regular-times-s" small class="is--inactive" />
+                </template>
+            </template>
+
+            <template #column-author="{ item }">
+                {{ item.author ? item.author.name : '---' }}
+            </template>
+
+            <template #column-products="{ item }">
+                <span v-if="item.isproductstream">
+                    <sw-label v-if="! item.productstream" variant="danger">
+                        <b>{{ $tc('netzp-blog6.list.dynamicGroupMissing') }}</b>
+                    </sw-label>
+                    <sw-label v-else variant="info">
+                        {{ item.productstream ? item.productstream.name : '???' }}
+                    </sw-label>
+                </span>
+                <span v-else-if="item.products.length > 0">
+                    <sw-label variant="primary" appearance="pill">
+                        <b style="float:right">{{ item.products.length }}</b>
+                    </sw-label>
+                </span>
+                <span v-else></span>
+            </template>
+
+            <template #more-actions="{ item }">
+                <sw-context-menu-item @click="onDuplicate(item)">
+                    {{ $tc('netzp-blog6.list.duplicate') }}
+                </sw-context-menu-item>
+            </template>
+
+        </sw-entity-listing>
+    </template>
+
+    <template #sidebar>
+        <sw-sidebar v-if="blog" class="sidebar">
+            <sw-sidebar-item icon="regular-undo"
+                             :title="$tc('netzp-blog6.list.sidebar.refresh')"
+                             @click="onRefresh">
+            </sw-sidebar-item>
+
+            <sw-sidebar-item icon="regular-filter"
+                             :title="$tc('netzp-blog6.list.sidebar.filter')">
+                <sw-entity-single-select
+                        :label="$tc('netzp-blog6.list.sidebar.category')"
+                        entity="s_plugin_netzp_blog_category" v-model:value="categoriesFilter"
+                        valueProperty="id" labelProperty="title" :resetOption="$tc('netzp-blog6.list.sidebar.allCategories')"
+                        @update:value="onChangeCategoriesFilter">
+                </sw-entity-single-select>
+
+                <sw-entity-single-select
+                        :label="$tc('netzp-blog6.list.sidebar.tag')"
+                        entity="tag" v-model:value="tagsFilter"
+                        valueProperty="id" labelProperty="name" :resetOption="$tc('netzp-blog6.list.sidebar.allTags')"
+                        @update:value="onChangeTagsFilter">
+                </sw-entity-single-select>
+
+                <sw-entity-single-select
+                        :label="$tc('netzp-blog6.list.sidebar.author')"
+                        entity="s_plugin_netzp_blog_author" v-model:value="authorsFilter"
+                        valueProperty="id" labelProperty="name" :resetOption="$tc('netzp-blog6.list.sidebar.allAuthors')"
+                        @update:value="onChangeAuthorsFilter">
+                </sw-entity-single-select>
+            </sw-sidebar-item>
+        </sw-sidebar>
+    </template>
+</sw-page>

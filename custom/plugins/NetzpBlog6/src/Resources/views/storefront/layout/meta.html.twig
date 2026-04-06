@@ -1,0 +1,110 @@
+{% sw_extends '@Storefront/storefront/layout/meta.html.twig' %}
+{% set postImage = post.imagePreview ?? post.image %}
+{% set postThumb = postImage.getThumbnails() ? postImage.getThumbnails()|sort((a, b) => a.getHeight() <=> b.getHeight())|last : postImage %}
+{% if postThumb == false %}{% set postThumb = postImage %}{% endif %}
+{% set authorThumb = post.author.image.getThumbnails() ? post.author.image.getThumbnails()|filter(t => (t.getHeight() <= 500))|first : null %}
+
+{% block layout_head_meta_tags_general %}
+    {{ parent() }}
+    <link rel="alternate"
+          type="application/rss+xml"
+          title="{{ "netzp.blog.feed.metatitle"|trans }}"
+          href="{{ app.request.get('sw-sales-channel-base-url') }}/blog.rss" />
+{% endblock %}
+
+{% block layout_head_canonical %}
+    {% if activeRoute == 'frontend.blog.post' %}
+        {% if post.canonicalUrl %}
+            <link rel="canonical" href="{{ post.canonicalUrl }}" />
+        {% else %}
+            <link rel="canonical" href="{{ seoUrl('frontend.blog.post', { postId: post.id }) }}" />
+        {% endif %}
+    {% else %}
+        {{ parent() }}
+    {% endif %}
+{% endblock %}
+
+{% block layout_head_meta_tags_opengraph %}
+    {% if activeRoute == 'frontend.blog.post' %}
+        <meta property="og:type"
+              content="website"/>
+        <meta property="og:site_name"
+              content="{{ basicConfig.shopName }}"/>
+        <meta property="og:title"
+              content="{{ post.translated.metatitle ? post.translated.metatitle : post.translated.title }}"/>
+        <meta property="og:description"
+              content="{{ post.translated.metadescription ? post.translated.metadescription : post.translated.teaser }}"/>
+
+        {% if(postThumb) %}
+            <meta property="og:image"
+                  content="{{ postThumb.getUrl() }}"/>
+        {% else %}
+            <meta property="og:image"
+                  content="{{ theme_config('sw-logo-desktop') }}"/>
+        {% endif %}
+
+        <meta name="twitter:card"
+              content="summary"/>
+        <meta name="twitter:site"
+              content="{{ basicConfig.shopName }}"/>
+        <meta name="twitter:title"
+              content="{{ post.translated.metatitle ? post.translated.metatitle : post.translated.title  }}"/>
+        <meta name="twitter:description"
+              content="{{ post.translated.metadescription ? post.translated.metadescription : post.translated.teaser }}"/>
+        {% if(postThumb) %}
+            <meta name="twitter:image"
+                  content="{{ postThumb.getUrl() }}"/>
+        {% else %}
+            <meta property="og:image"
+                  content="{{ theme_config('sw-logo-desktop') }}"/>
+        {% endif %}
+    {% else %}
+        {{ parent() }}
+    {% endif %}
+{% endblock %}
+
+{% block layout_head_meta_tags_schema_webpage %}
+    {{ parent() }}
+    {% if activeRoute == 'frontend.blog.post' %}
+        <script type="application/ld+json">
+            {
+                "@context": "https://schema.org",
+                "@type": "BlogPosting",
+                "headline": "{{ post.translated.title }}",
+                "url": "{{ seoUrl('frontend.blog.post', { postId: post.id }) }}",
+                "datePublished": "{{ post.createdAt|date('c') }}",
+                "dateCreated": "{{ post.createdAt|date('c') }}",
+                "dateModified": "{{ post.updatedAt|date('c') }}",
+                "description": "{{ post.translated.teaser }}",
+                {% if post.tags|length >0 %}"keywords": [
+                    {% for tag in post.tags %}"{{ tag.name }}"{% if not loop.last %}, {% endif %}{% endfor %}
+
+                ],{% endif %}
+
+                {% if postThumb %}"image": "{{ postThumb.getUrl() }}",{% endif %}
+
+                {% if post.author %}
+
+                "author": {
+                    "@type": "Person",
+                    "name": "{{ post.author.translated.name }}"
+                    {% if authorThumb %}, "image": "{{ authorThumb.getUrl() }}"{% endif %}
+
+                    {% if post.author.link %}, "url": "{{ post.author.link }}"{% endif %}
+
+                },
+                {% endif %}
+
+                "publisher": {
+                    "@type": "Organization",
+                    "name": "{{ config('core.basicInformation.shopName') }}",
+                    "url": "{{ seoUrl('frontend.home.page') }}",
+                    "logo": {
+                        "@type": "ImageObject",
+                        "url": "{{ theme_config('sw-logo-desktop')|sw_encode_url }}"
+                    }
+                }
+            }
+        </script>
+    {% endif %}
+{% endblock %}

@@ -1,0 +1,20 @@
+@import "~scss/variables";
+
+$netzp-blog6-author-list-color-error: $color-crimson-500;
+$netzp-blog6-author-list-color-success: $color-emerald-500;
+
+.netzp-blog6-author-list {
+  .netzp-blog6-author__content {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+  }
+
+  .is--inactive {
+    color: $netzp-blog6-author-list-color-error;
+  }
+
+  .is--active {
+    color: $netzp-blog6-author-list-color-success;
+  }
+}

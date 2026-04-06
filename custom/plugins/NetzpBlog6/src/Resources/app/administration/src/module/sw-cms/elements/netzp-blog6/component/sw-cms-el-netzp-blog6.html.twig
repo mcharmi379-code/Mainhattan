@@ -1,0 +1,69 @@
+<div class="sw-cms-el-netzp-blog6">
+    <template v-if="element.config.layout.value == 'cards'">
+        <sw-label variant="info" size="small" class="pull-right">
+            {{ $tc('sw-cms.elements.netzp-blog6.cards') }}
+        </sw-label>
+        <div class="card">
+            <div v-for="n in numberOfPosts" :key="n">
+                <div class="card-post" :style="getCardStyle">
+                    <img :src="assetFilter('/administration/static/img/cms/preview_mountain_small.jpg')" alt="">
+
+                    <div class="card-body">
+                        <h3>Blog post</h3>
+                        <div class="text-muted">28.03.2020 | Category</div>
+                        <div class="btn">{{ $tc('sw-cms.elements.netzp-blog6.more') }}</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </template>
+
+    <template v-else-if="element.config.layout.value == 'slider'">
+        <sw-label variant="info" size="small" class="pull-right">
+            {{ $tc('sw-cms.elements.netzp-blog6.slider') }}
+        </sw-label>
+        <div class="slider-wrapper">
+            <sw-icon name="regular-chevron-left" size="25" class="nav-left" />
+            <sw-icon name="regular-chevron-right" size="25" class="nav-right" />
+            <div class="slider">
+                <div v-for="n in 3" :key="n">
+                    <div class="card-post" :style="getCardStyle">
+                        <img :src="assetFilter('/administration/static/img/cms/preview_mountain_small.jpg')" alt="">
+
+                        <div class="card-body">
+                            <h3>Blog post</h3>
+                            <div class="text-muted">28.03.2020 | Category</div>
+                            <div class="btn">{{ $tc('sw-cms.elements.netzp-blog6.more') }}</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </template>
+
+    <template v-else-if="element.config.layout.value == 'tpl'">
+        <sw-label variant="info" size="small" class="pull-right">
+            {{ $tc('sw-cms.elements.netzp-blog6.template') }}
+        </sw-label>
+        <div v-html="element.config.customTemplate.value" />
+    </template>
+
+    <template v-else>
+        <sw-label variant="info" size="small" class="pull-right">
+            {{ $tc('sw-cms.elements.netzp-blog6.list') }}
+        </sw-label>
+        <div v-for="n in numberOfPosts" :key="n">
+            <div class="list" :style="getCardStyle">
+                <div class="left">
+                    <h3>Blog post</h3>
+                    <div class="text-muted">28.03.2020 | Category</div>
+                    <div class="btn">{{ $tc('sw-cms.elements.netzp-blog6.more') }}</div>
+                </div>
+
+                <div class="right">
+                    <img :src="assetFilter('/administration/static/img/cms/preview_mountain_small.jpg')" alt="">
+                </div>
+            </div>
+        </div>
+    </template>
+</div>

@@ -1,0 +1,166 @@
+<div class="sw-cms-el-netzp-blog6-detail">
+    <template v-if="element.config.part.value == 'title'">
+        <sw-label variant="info" size="small" class="pull-right">
+            {{ $tc('sw-cms.elements.netzp-blog6-detail.info.title') }}
+        </sw-label>
+        <h1 v-if="element.config.titleTag.value == 'h1'" class="title">Lorem ipsum dolor sit amet</h1>
+        <h2 v-if="element.config.titleTag.value == 'h2'" class="title">Lorem ipsum dolor sit amet</h2>
+        <h3 v-if="element.config.titleTag.value == 'h3'" class="title">Lorem ipsum dolor sit amet</h3>
+        <h4 v-if="element.config.titleTag.value == 'h4'" class="title">Lorem ipsum dolor sit amet</h4>
+        <h5 v-if="element.config.titleTag.value == 'h5'" class="title">Lorem ipsum dolor sit amet</h5>
+        <h6 v-if="element.config.titleTag.value == 'h6'" class="title">Lorem ipsum dolor sit amet</h6>
+
+        <h4 v-if="element.config.titleTag.value == 'none'" class="title">Lorem ipsum dolor sit amet</h4>
+    </template>
+
+    <template v-else-if="element.config.part.value == 'contents'">
+        <sw-label variant="info" size="small" class="pull-right">
+            {{ $tc('sw-cms.elements.netzp-blog6-detail.info.content') }}
+        </sw-label>
+        <div>
+            Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.
+            <br><br>
+            Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.
+            <br><br>
+            Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.
+        </div>
+    </template>
+
+    <template v-else-if="element.config.part.value == 'teaser'">
+        <div>
+            Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat.
+            <sw-label variant="info" size="small" class="pull-right">
+                {{ $tc('sw-cms.elements.netzp-blog6-detail.info.teaser') }}
+            </sw-label>
+        </div>
+    </template>
+
+    <template v-else-if="element.config.part.value == 'meta'">
+        <sw-label variant="info" size="small" class="pull-right">
+            {{ $tc('sw-cms.elements.netzp-blog6-detail.info.meta') }}
+        </sw-label>
+        <div class="meta">
+            <span v-if="element.config.showDate.value">
+                <sw-icon name="regular-calendar" small /> {{ $tc('sw-cms.elements.netzp-blog6-detail.info.date') }}
+            </span>
+            <span v-if="element.config.showAuthor.value">
+                <sw-icon name="regular-user" small /> {{ $tc('sw-cms.elements.netzp-blog6-detail.info.author') }}
+            </span>
+            <br>
+            <span v-if="element.config.showCategory.value">
+                <sw-icon name="regular-folder" small /> {{ $tc('sw-cms.elements.netzp-blog6-detail.info.category') }}
+            </span>
+            <span v-if="element.config.showTags.value">
+                <sw-icon name="regular-tag" small /> {{ $tc('sw-cms.elements.netzp-blog6-detail.info.tags') }}
+            </span>
+            <span v-if="! element.config.showDate.value && ! element.config.showAuthor.value && ! element.config.showCategory.value && ! element.config.showTags.value">
+                <h3>{{ $tc('sw-cms.elements.netzp-blog6-detail.info.nometa') }}</h3>
+            </span>
+        </div>
+    </template>
+
+    <template v-else-if="element.config.part.value == 'author'">
+        <sw-label variant="info" size="small" class="pull-right">
+            {{ $tc('sw-cms.elements.netzp-blog6-detail.info.author') }}
+        </sw-label>
+
+        <div class="author">
+            <span v-if="element.config.showAuthorName.value">
+                <b>{{ $tc('sw-cms.elements.netzp-blog6-detail.author') }}</b>
+            </span>
+            <span v-if="element.config.showAuthorAvatar.value">
+                <img :src="assetFilter('/administration/static/img/cms/preview_mountain_small.jpg')" alt="" class="avatar">
+            </span>
+            <span v-if="element.config.showAuthorBio.value">
+                <div class="bio">Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat.</div>
+            </span>
+            <span v-if="! element.config.showAuthorName.value && ! element.config.showAuthorAvatar.value && ! element.config.showAuthorBio.value">
+                <h3>{{ $tc('sw-cms.elements.netzp-blog6-detail.info.noauthor') }}</h3>
+            </span>
+        </div>
+    </template>
+
+    <template v-else-if="element.config.part.value == 'image'">
+        <img :src="assetFilter('/administration/static/img/cms/preview_mountain_small.jpg')" alt="">
+    </template>
+
+    <template v-else-if="element.config.part.value == 'products'">
+        <sw-label variant="info" size="small" class="pull-right">
+            {{ $tc('sw-cms.elements.netzp-blog6-detail.info.products') }}
+        </sw-label>
+        <div class="products">
+            <img :src="assetFilter('/administration/static/img/cms/preview_mountain_small.jpg')" alt="">
+            <h3>Lorem ipsum dolor</h3>
+            <div>Placeat ut aut vel ipsum in eligendi. Est perspiciatis eaque qui recusandae quis id.</div>
+            <div style="margin-top: 1rem">260.00 - 879.00*</div>
+        </div>
+    </template>
+
+    <template v-else-if="element.config.part.value == 'items'">
+        <sw-label variant="info" size="small" class="pull-right">
+            {{ $tc('sw-cms.elements.netzp-blog6-detail.info.items') }}
+        </sw-label>
+        <div class="items">
+            <div class="item">
+                <div>
+                    <h3>1. Lorem ipsum dolor</h3>
+                    <div>Placeat ut aut vel ipsum in eligendi. Est perspiciatis eaque qui recusandae quis id.</div>
+                </div>
+            </div>
+
+            <div class="item">
+                <div>
+                    <h3>2. Lorem ipsum dolor</h3>
+                    <div>Placeat ut aut vel ipsum in eligendi. Est perspiciatis eaque qui recusandae quis id.</div>
+                </div>
+                <img :src="assetFilter('/administration/static/img/cms/preview_mountain_small.jpg')" alt="">
+            </div>
+
+            <div class="item">
+                <div>
+                    <h3>3. Lorem ipsum dolor</h3>
+                    <div>Placeat ut aut vel ipsum in eligendi. Est perspiciatis eaque qui recusandae quis id.</div>
+                </div>
+                <img :src="assetFilter('/administration/static/img/cms/preview_mountain_small.jpg')" alt="">
+            </div>
+        </div>
+    </template>
+
+    <template v-else-if="element.config.part.value == 'media'">
+        <sw-label variant="info" size="small" class="pull-right">
+            {{ $tc('sw-cms.elements.netzp-blog6-detail.info.media') }}
+        </sw-label>
+        <div class="media">
+            <img :src="assetFilter('/administration/static/img/cms/preview_mountain_small.jpg')" alt="">
+            <img :src="assetFilter('/administration/static/img/cms/preview_mountain_small.jpg')" alt="">
+            <img :src="assetFilter('/administration/static/img/cms/preview_mountain_small.jpg')" alt="">
+            <img :src="assetFilter('/administration/static/img/cms/preview_mountain_small.jpg')" alt="">
+            <img :src="assetFilter('/administration/static/img/cms/preview_mountain_small.jpg')" alt="">
+            <img :src="assetFilter('/administration/static/img/cms/preview_mountain_small.jpg')" alt="">
+        </div>
+    </template>
+
+    <template v-else-if="element.config.part.value == 'social'">
+        <sw-label variant="info" size="small" class="pull-right">
+            {{ $tc('sw-cms.elements.netzp-blog6-detail.info.social') }}
+        </sw-label>
+        <sw-icon name="regular-square" large color="#f39c12" />&nbsp;&nbsp;
+        <sw-icon name="regular-square" large color="#3498db" />&nbsp;&nbsp;
+        <sw-icon name="regular-square" large color="#9b59b6" />&nbsp;&nbsp;
+        <sw-icon name="regular-square" large color="#fc427b" />&nbsp;&nbsp;
+        <sw-icon name="regular-square" large color="#c0392b" />
+    </template>
+
+    <template v-else-if="element.config.part.value == 'custom'">
+        <sw-label variant="info" size="small" class="pull-right">
+            {{ $tc('sw-cms.elements.netzp-blog6-detail.info.custom') }}
+        </sw-label>
+        <div class="customfields">
+            {{ $tc('sw-cms.elements.netzp-blog6-detail.custom') }}
+        </div>
+    </template>
+
+    <template v-else>
+        <b>Blog post part: {{ element.config.part.value }}</b>
+    </template>
+</div>

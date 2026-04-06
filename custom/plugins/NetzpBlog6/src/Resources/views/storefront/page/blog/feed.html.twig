@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+    <channel>
+        <title>{{ config('core.basicInformation.shopName') }}</title>
+        <description>{{ "netzp.blog.feed.description"|trans }}</description>
+        <link>{{ seoUrl('frontend.home.page') }}</link>
+        <atom:link href="{{ seoUrl('frontend.blog.feed') }}" rel="self" type="application/rss+xml" />
+        {% for post in posts %}
+            {% set postThumb = post.image.getThumbnails() ? post.image.getThumbnails()|filter(t => (t.getHeight() <= 800))|first : null %}
+
+            <item>
+                <title>{{ post.translated.title ?: '' }}</title>
+                <link>{{ seoUrl('frontend.blog.post', {'postId': post.id}) }}</link>
+                <guid>{{ seoUrl('frontend.blog.post', {'postId': post.id}) }}</guid>
+                <description>
+                    {% if postThumb %}
+
+                        <![CDATA[
+                        <img src="{{ postThumb.getUrl() }}">
+                        ]]>
+                    {% endif %}
+                    {{ post.translated.teaser ?: '' }}
+                </description>
+                <pubDate>{{ post.postdate|date(constant('DateTime::RSS')) }}</pubDate>
+                {% if post.category %}
+
+                    <category>{{ post.category.translated.title }}</category>
+                {% endif %}
+            </item>
+        {% endfor %}
+    </channel>
+</rss>

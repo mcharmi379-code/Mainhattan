@@ -1,0 +1,39 @@
+{
+  "netzp-blog6-author": {
+    "main": {
+      "menuLabel": "Blog authors",
+      "menuDescription": "Manage blog authors"
+    },
+
+    "list": {
+      "addButtonText": "New",
+      "columns": {
+        "name": "Name",
+        "image": "Avatar"
+      }
+    },
+
+    "detail": {
+      "cancelButtonText": "Cancel",
+      "saveButtonText": "Save",
+
+      "section": {
+        "main": "Author"
+      },
+
+      "label": {
+        "name": "Name",
+        "image": "Avatar",
+        "bio": "Biography",
+        "link": "Link author page",
+        "linkHelptext": "To open the link in a new tab, append a # at the end (e.g. https://profile.com/#)",
+        "useAsImage": "Use as image"
+      },
+
+      "error": {
+        "title": "Error",
+        "message": "Something went wrong."
+      }
+    }
+  }
+}

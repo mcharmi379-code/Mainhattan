@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="https://raw.githubusercontent.com/shopware/platform/master/src/Core/System/SystemConfig/Schema/config.xsd">
+    <card>
+        <title>Blog detail view</title>
+        <title lang="de-DE">Blog</title>
+
+        <input-field type="bool">
+            <name>showcategory</name>
+            <label>Show category (listing view)</label>
+            <label lang="de-DE">Kategorie-Informationen anzeigen (Übersichtsseite)</label>
+            <defaultValue>true</defaultValue>
+        </input-field>
+
+        <input-field type="bool">
+            <name>showmeta</name>
+            <label>Show post meta</label>
+            <label lang="de-DE">Metainformation anzeigen</label>
+            <defaultValue>true</defaultValue>
+        </input-field>
+
+        <input-field type="bool">
+            <name>showtags</name>
+            <label>Show tags</label>
+            <label lang="de-DE">Tags anzeigen</label>
+            <defaultValue>true</defaultValue>
+        </input-field>
+
+        <input-field type="bool">
+            <name>showauthor</name>
+            <label>Show author</label>
+            <label lang="de-DE">Autor anzeigen</label>
+            <defaultValue>false</defaultValue>
+        </input-field>
+
+        <input-field type="single-select">
+            <name>layoutdetail</name>
+            <label>Layout (detail view)</label>
+            <label lang="de-DE">Layout (Detailansicht)</label>
+            <defaultValue>largeimage</defaultValue>
+            <options>
+                <option>
+                    <id>largeimage</id>
+                    <name>Large image (cover)</name>
+                    <name lang="de-DE">Großes Bild (cover)</name>
+                </option>
+                <option>
+                    <id>largeimagecontain</id>
+                    <name>Large image (contain)</name>
+                    <name lang="de-DE">Großes Bild (contain)</name>
+                </option>
+                <option>
+                    <id>smallimage</id>
+                    <name>Small image</name>
+                    <name lang="de-DE">Kleines Bild</name>
+                </option>
+            </options>
+        </input-field>
+
+        <input-field type="bool">
+            <name>showblogposts</name>
+            <label>Show related blog posts (product detail)</label>
+            <label lang="de-DE">Zugehörige Blog-Posts anzeigen (Produktdetails)</label>
+            <defaultValue>true</defaultValue>
+        </input-field>
+
+        <input-field type="bool">
+            <name>searchBlog</name>
+            <label>Include blog posts in search</label>
+            <label lang="de-DE">Blog-Beiträge durchsuchen</label>
+            <helpText>For this function our plugin "advanced search" is required.</helpText>
+            <helpText lang="de-DE">Für diese Funktion ist unser Plugin "Erweiterte Suche" notwendig.</helpText>
+            <defaultValue>true</defaultValue>
+        </input-field>
+
+        <component name="sw-entity-single-select">
+            <name>cmspage</name>
+            <entity>cms_page</entity>
+            <label>CMS page for blog detail view</label>
+            <label lang="de-DE">CMS-Seite für Blog-Detailansicht</label>
+            <helpText>Leave empty for default page detail page.</helpText>
+            <helpText lang="de-DE">Leer lassen/löschen für Standard-Detailseite.</helpText>
+        </component>
+
+        <component name="sw-entity-single-select">
+            <name>navigationcategory</name>
+            <entity>category</entity>
+            <label>Navigation category for blog listing</label>
+            <label lang="de-DE">Navigations-Kategorie für Blog-Listing</label>
+            <helpText>Optional, this category is used to display the breadcrumb on blog detail pages.</helpText>
+            <helpText lang="de-DE">Optional, diese Kategorie wird für die Anzeige der Breadcrumb auf Blog-Detailseiten verwendet.</helpText>
+        </component>
+
+        <input-field type="bool">
+            <name>excludesitemap</name>
+            <label>Exclude from sitemap</label>
+            <label lang="de-DE">Aus Sitemap ausschließen</label>
+            <defaultValue>false</defaultValue>
+            <helpText>Optionally, blog posts can be EXCLUDED from the sitemap for sales channels individually.</helpText>
+            <helpText lang="de-DE">Optional kann die Aufnahme von Blog-Posts für jeden Verkaufskanal individuell AUSGESCHLOSSEN werden.</helpText>
+        </input-field>
+
+    </card>
+</config>

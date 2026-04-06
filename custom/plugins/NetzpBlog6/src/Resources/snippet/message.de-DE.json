@@ -1,0 +1,29 @@
+{
+    "netzp": {
+        "blog": {
+            "feed": {
+                "metatitle": "Blog Feed",
+                "description": ""
+            },
+            "msg": {
+                "more": "Mehr...",
+                "previous": "Zurück",
+                "next": "Weiter",
+                "noposts": "Es sind noch keine Blogeinträge vorhanden.",
+                "showall": "- alle -"
+            },
+            "filter": {
+                "categories": "Kategorien",
+                "tags": "Tags",
+                "authors": "Autoren",
+                "reset": "Zurücksetzen"
+            },
+            "breadcrumb": "Blog",
+            "productstitle": "Zugehörige Produkte",
+            "tab-posts-title": "Blog Posts",
+            "searchLabel": "Blog",
+            "showPost": "Post anzeigen",
+            "author": "Autor:"
+        }
+    }
+}

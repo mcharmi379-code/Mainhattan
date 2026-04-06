@@ -1,0 +1,99 @@
+.sw-cms-el-netzp-blog6 {
+  display: inline-block;
+  width: 100%;
+  margin-bottom: 1rem;
+
+  .pull-right {
+    position: absolute;
+    right: 0;
+  }
+
+  h3 {
+    margin-top: .25rem;
+    margin-bottom: .25rem;
+  }
+
+  .btn {
+    display: inline-block;
+    margin-top: .5rem;
+    border: 1px solid #ccc;
+    padding: 3px 5px 3px 5px;
+  }
+
+  .text-muted {
+    color: #aaa;
+  }
+
+  .card {
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+
+    .card-post {
+      width: 19rem;
+      margin-right: 1rem;
+      margin-bottom: 1rem;
+
+      .card-body {
+        padding: .25rem;
+      }
+
+      img {
+        width: 100%;
+      }
+    }
+  }
+
+  .slider-wrapper {
+    overflow: hidden;
+    margin-left: 30px;
+    margin-right: 15px;
+
+    .slider {
+      display: flex;
+      flex-wrap: nowrap;
+
+      .card-post {
+        margin-right: 1rem;
+
+        .card-body {
+          padding: .25rem;
+        }
+
+        img {
+          width: 100%;
+        }
+      }
+    }
+  }
+
+  .list {
+    display: flex;
+    flex-wrap: nowrap;
+    width: 100%;
+    margin-bottom: .5rem;
+
+    .left {
+      padding: .25rem;
+    }
+
+    .right {
+      margin-left: auto;
+      img {
+        max-height: 6rem;
+      }
+    }
+  }
+
+  .nav-left {
+    position: absolute;
+    left: 0;
+    top: 5rem;
+  }
+
+  .nav-right {
+    position: absolute;
+    right: 0;
+    top: 5rem;
+  }
+}

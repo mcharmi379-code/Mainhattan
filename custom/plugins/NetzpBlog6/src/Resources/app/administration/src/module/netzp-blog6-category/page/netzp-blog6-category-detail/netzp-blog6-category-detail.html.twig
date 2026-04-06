@@ -1,0 +1,97 @@
+<sw-page class="netzp-blog6-category-detail">
+    <template #smart-bar-actions>
+        <sw-button :routerLink="{ name: 'netzp.blog6.category.list' }">
+            {{ $t('netzp-blog6-category.detail.cancelButtonText') }}
+        </sw-button>
+
+        <sw-button-process
+                :isLoading="isLoading"
+                :processSuccess="processSuccess"
+                variant="primary"
+                @process-finish="saveFinish"
+                @click="onClickSave">
+            {{ $t('netzp-blog6-category.detail.saveButtonText') }}
+        </sw-button-process>
+    </template>
+    <template #language-switch>
+        <sw-language-switch :disabled="category && category.isNew()"
+                            @on-change="onChangeLanguage" />
+    </template>
+
+    <template #content>
+        <sw-card-view>
+            <sw-card v-if="category"
+                     :isLoading="isLoading"
+                     :title="$t('netzp-blog6-category.detail.section.main')"
+                     positionIdentifier="netzp-blog-category-name">
+                <sw-text-field :label="$t('netzp-blog6-category.detail.label.title')"
+                               v-model:value="category.title"
+                               required validation="required" :error="categoryTitleError" />
+
+                <sw-language-info :entityDescription="category.title"></sw-language-info>
+
+                <sw-text-editor :label="$t('netzp-blog6-category.detail.label.teaser')" v-model:value="category.teaser"></sw-text-editor>
+
+                <sw-entity-single-select :label="$t('netzp-blog6-category.detail.label.cmspage')"
+                                         :resetOption="$t('netzp-blog6-category.detail.label.resetCmspage')"
+                                         class="sw-cms-page-select-box"
+                                         entity="cms_page" :criteria="cmsPageCriteria()"
+                                         v-model:value="category.cmspageid">
+                </sw-entity-single-select>
+
+                <sw-entity-single-select :label="$t('netzp-blog6-category.detail.label.navigationcategory')"
+                                         :helpText="$t('netzp-blog6-category.detail.label.navigationcategoryHelpText')"
+                                         :resetOption="$t('netzp-blog6-category.detail.label.resetNavigationcategory')"
+                                         class="sw-cms-page-select-box"
+                                         entity="category" :criteria="navigationCategoryCriteria()"
+                                         v-model:value="category.navigationcategoryid">
+                </sw-entity-single-select>
+
+                <sw-single-select :label="$t('netzp-blog6-category.detail.label.saleschannel')"
+                                  :options="salesChannels" valueProperty="id"
+                                  v-model:value="category.saleschannelid">
+                    <template #selection-label-property="{ item }">
+                        {{ item.name || item.translated.name }}
+                    </template>
+                    <template #result-label-property="{ item }">
+                        {{ item.name || item.translated.name }}
+                    </template>
+                </sw-single-select>
+
+                <sw-single-select :label="$t('netzp-blog6-category.detail.label.customergroup')"
+                                         :options="customerGroups" valueProperty="id"
+                                  v-model:value="category.customergroupid">
+                    <template #selection-label-property="{ item }">
+                        {{ item.name || item.translated.name }}
+                    </template>
+                    <template #result-label-property="{ item }">
+                        {{ item.name || item.translated.name }}
+                    </template>
+                </sw-single-select>
+
+                <sw-container columns="1fr 1fr">
+                    <sw-switch-field :label="$t('netzp-blog6-category.detail.label.onlyloggedin')"
+                                     v-model:value="category.onlyloggedin"
+                                     noMarginTop>
+                    </sw-switch-field>
+
+                    <sw-switch-field :label="$t('netzp-blog6-category.detail.label.includeinrss')"
+                                     v-model:value="category.includeinrss"
+                                     noMarginTop>
+                    </sw-switch-field>
+                </sw-container>
+            </sw-card>
+
+            <sw-card :title="$tc('netzp-blog6-category.detail.label.customfields')"
+                     v-if="category && !category.isNew() && customFieldSets && customFieldSets.length > 0"
+                     :isLoading="isLoading" style="width: 100%;"
+                     positionIdentifier="netzp-blog-category-customfields">
+
+                <sw-custom-field-set-renderer v-if="category"
+                        :entity="category"
+                        :sets="customFieldSets">
+                </sw-custom-field-set-renderer>
+            </sw-card>
+        </sw-card-view>
+    </template>
+</sw-page>

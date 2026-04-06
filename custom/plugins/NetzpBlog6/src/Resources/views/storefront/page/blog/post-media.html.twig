@@ -1,0 +1,135 @@
+{% if post.blogmedia|length > 0 %}
+    <div class="blog-media" id="blog-media-gallery_{{ element.id }}">
+        {% for media in post.blogmedia %}
+            {% block netzp_blog_media_item %}
+                <div>
+                    {% if media.media %}
+                        {% set height = element.config.height.value ?? 12 %}
+                        {% set subHtml = element.config.showGalleryCaption.value ? media.media.translated.title : '' %}
+
+                        {% set thumbnailClass = 'type-image img-fluid' %}
+                        {% set thumbnailStyle = 'height: ' ~ height ~ 'rem; width: ' ~ height ~ 'rem;' %}
+
+                        {% if media.media.mediatype.name == 'VIDEO' %}
+                            {% block netzp_blog_media_item_video %}
+                                <div class="item">
+                                    {% block netzp_blog_media_item_video_element %}
+                                        <div data-html="#video_{{ loop.index }}"
+                                             data-sub-html="{{ subHtml }}"
+                                             class="lightbox type-video" style="{{ thumbnailStyle }}"
+                                             alt="{{ media.media.translated.alt }}" title="{{ media.media.translated.title }}">
+                                            {% sw_icon 'video-camera' style { 'size': 'lg' } %}
+                                            <div class="file-extension">{{ media.media.fileExtension|upper }}</div>
+                                        </div>
+                                    {% endblock %}
+                                    {% block netzp_blog_media_item_video_caption %}
+                                        {% if element.config.showThumbnailCaption.value and media.media.translated.title %}
+                                            <div class="caption" style="max-width: {{ height }}rem">{{ media.media.translated.title }}</div>
+                                        {% endif %}
+                                    {% endblock %}
+                                </div>
+                            {% endblock %}
+
+                        {% elseif media.media.mediatype.name == 'DOCUMENT' %}
+                            {% block netzp_blog_media_item_document %}
+                                <div class="item">
+                                    {% block netzp_blog_media_item_document_element %}
+                                        <a href="{{ media.media.url }}" download
+                                           alt="{{ media.media.translated.alt }}"
+                                           title="{{ media.media.translated.title }}">
+                                            <div class="type-document" style="{{ thumbnailStyle }}"
+                                                 alt="{{ media.media.translated.alt }}" title="{{ media.media.translated.title }}">
+                                                {% sw_icon 'file' style { 'size': 'lg' } %}
+                                                <div class="file-extension">{{ media.media.fileExtension|upper }}</div>
+                                                <div class="download-icon">
+                                                    {% sw_icon 'cloud-download' style { 'size': 'sm' } %}
+                                                </div>
+                                            </div>
+                                        </a>
+                                    {% endblock %}
+                                    {% block netzp_blog_media_item_document_caption %}
+                                        {% if element.config.showThumbnailCaption.value and media.media.translated.title %}
+                                            <div class="caption" style="max-width: {{ height }}rem">{{ media.media.translated.title }}</div>
+                                        {% endif %}
+                                    {% endblock %}
+                                </div>
+                            {% endblock %}
+
+                        {% elseif media.media.mediatype.name == 'AUDIO' %}
+                            {% block netzp_blog_media_item_audio %}
+                                <div class="item">
+                                    {% block netzp_blog_media_item_audio_element %}
+                                        <a href="{{ media.media.url }}" download
+                                           alt="{{ media.media.translated.alt }}"
+                                           title="{{ media.media.translated.title }}">
+                                            <div class="type-audio" style="{{ thumbnailStyle }}"
+                                                 alt="{{ media.media.translated.alt }}" title="{{ media.media.translated.title }}">
+                                                {% sw_icon 'micophone' style { 'size': 'lg' } %}
+                                                <div class="file-extension">{{ media.media.fileExtension|upper }}</div>
+                                            </div>
+                                        </a>
+                                    {% endblock %}
+                                    {% block netzp_blog_media_item_audio_caption %}
+                                        {% if element.config.showThumbnailCaption.value and media.media.translated.title %}
+                                            <div class="caption" style="max-width: {{ height }}rem">{{ media.media.translated.title }}</div>
+                                        {% endif %}
+                                    {% endblock %}
+                                </div>
+                            {% endblock %}
+
+                        {% elseif media.media.mediatype.name == 'IMAGE' %}
+                            {% block netzp_blog_media_item_image %}
+                                <div class="item">
+                                    {% block netzp_blog_media_item_image_element %}
+                                        <a href="{{ media.media.url }}" data-sub-html="{{ subHtml }}" class="lightbox">
+                                            {% sw_thumbnails 'blog_detail_media_image_thumbnail' with {
+                                                media: media.media,
+                                                sizes: {
+                                                    'default': height ~ 'rem'
+                                                },
+                                                attributes: {
+                                                    'class': thumbnailClass,
+                                                    'style': thumbnailStyle,
+                                                    'alt':   media.media.translated.alt,
+                                                    'title': media.media.translated.title
+                                                }
+                                            } %}
+                                        </a>
+                                    {% endblock %}
+                                    {% block netzp_blog_media_item_image_caption %}
+                                        {% if element.config.showThumbnailCaption.value and media.media.translated.title %}
+                                            <div class="caption" style="max-width: {{ height }}rem">
+                                                {{ media.media.translated.title }}
+                                            </div>
+                                        {% endif %}
+                                    {% endblock %}
+                                </div>
+                            {% endblock %}
+                        {% endif %}
+                    {% endif %}
+                </div>
+            {% endblock %}
+        {% endfor %}
+    </div>
+
+    {% for media in post.blogmedia %}
+        {% if media.media %}
+            {% if media.media.mediatype.name == 'VIDEO' %}
+                <div style="display: none" id="video_{{ loop.index }}">
+                    <video class="lg-video-object lg-html5" controls preload="none">
+                        <source src="{{ media.media.url }}" type="{{ media.media.mimetype }}">
+                        Your browser does not support HTML5 video.
+                    </video>
+                </div>
+            {% endif %}
+        {% endif %}
+    {% endfor %}
+
+    <template data-netzp-blog-gallery data-netzp6-blog-gallery-options='{
+        "selectorId": "blog-media-gallery_{{ element.id }}",
+        "selector": ".lightbox",
+        "download": false,
+        "captionFromTitleOrAlt": false,
+        "counter": {{ element.config.showGalleryCounter.value ? 'true' : 'false' }}
+    }'></template>
+{% endif %}

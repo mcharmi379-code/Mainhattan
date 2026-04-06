@@ -1,0 +1,98 @@
+.sw-cms-el-netzp-blog6-detail {
+  display: block;
+  width: 100%;
+
+  h1, h2, h3 {
+    min-height: 2.5rem;
+  }
+
+  .pull-right {
+    float: right;
+  }
+
+  .title {
+    margin: 0;
+  }
+
+  .meta {
+    display: block;
+    font-size: 80%;
+    color: #798490;
+    line-height: 1.3rem;
+  }
+
+  .author {
+    display: block;
+  }
+
+  img {
+    display: inline-block;
+  }
+
+  .avatar {
+    display: inline-block;
+    float: left;
+    height: 4rem;
+    width: 4rem;
+    margin-right: .5rem;
+    border-radius: 50%;
+  }
+
+  .bio {
+    font-size: 0.9rem;
+  }
+
+  .products {
+    border: 2px solid #ccc;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    img {
+      max-width: 10rem;
+    }
+  }
+
+  .items {
+    width: 100%;
+    height: 100%;
+
+    .item {
+      display: flex;
+      flex-direction: row;
+      margin-bottom: 1rem;
+
+      h3 {
+        margin: 0;
+      }
+
+      img {
+        margin-left: 1rem;
+        width: 3rem;
+        height: 3rem;
+      }
+    }
+  }
+
+  .media {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-wrap: wrap;
+
+    img {
+      margin-right: .5rem;
+      width: 5rem;
+      height: 5rem;
+    }
+  }
+
+  .customfields {
+    font-size: 130%;
+    font-weight: bold;
+    padding: 1rem;
+  }
+}

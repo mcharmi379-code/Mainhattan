@@ -1,0 +1,29 @@
+{% if post.products|length > 0 %}
+    {% if element.config.productDisplayMode.value == 'standard' %}
+        {% set displayMode = 'cover' %}
+    {% else %}
+        {% set displayMode = element.config.productDisplayMode.value ?? 'cover'  %}
+    {% endif %}
+    {% set sliderConfig = {
+        'title':         { 'value': "netzp.blog.productstitle"|trans },
+        'border':        { 'value': false },
+        'rotate':        { 'value': false },
+        'boxLayout':     { 'value': element.config.productLayout.value ?? 'minimal' },
+        'elMinWidth':    { 'value': (element.config.productMinWidth.value ?? '300') ~ 'px' },
+        'navigation':    { 'value': true},
+        'displayMode':   { 'value': displayMode },
+        'verticalAlign': { 'value': 'top' },
+    } %}
+
+    <div class="mt-4">
+        {% sw_include "@Storefront/storefront/element/cms-element-product-slider.html.twig" with {
+            sliderConfig: sliderConfig,
+            element: {
+                type: 'product-slider',
+                'data': {
+                    'products': { elements: post.getProducts() }
+                }
+            }
+        } only %}
+    </div>
+{% endif %}

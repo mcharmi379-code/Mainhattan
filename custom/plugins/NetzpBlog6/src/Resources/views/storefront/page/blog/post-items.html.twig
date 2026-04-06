@@ -1,0 +1,75 @@
+{% if post.items|length > 0 %}
+    <div class="blog-items">
+        {% for item in post.items %}
+            <div class="d-flex flex-md-row flex-column blog-item">
+                {% if item.number == 0 %}
+                    {% if item.translated.content %}
+                        <div class="toc accordion" id="accordion-toc">
+                            <div class="accordion-item">
+                                <div>
+                                    <button class="btn btn-info float-end"
+                                            type="button" data-bs-toggle="collapse" data-bs-target="#collapse-toc"
+                                            aria-expanded="true" aria-controls="collapse-toc">
+                                        {{ item.translated.title }}
+                                    </button>
+                                </div>
+                                <div id="collapse-toc" class="collapse show" data-parent="#accordion-toc">
+                                    {{ item.translated.content|raw }}
+                                </div>
+                            </div>
+                        </div>
+                    {% endif %}
+                {% else %}
+                    <div class="me-4">
+                        <h4 class="title">
+                            {{ item.translated.title }}
+                        </h4>
+                        <div class="content">
+                            {{ item.translated.content|raw }}
+                        </div>
+                    </div>
+
+                    <div class="modal image-modal" id="modal_{{ loop.index }}" tabindex="-1" aria-hidden="true">
+                        <div class="modal-dialog modal-dialog-scrollable">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title">{{ item.translated.title }}</h5>
+                                    <a type="button" data-bs-dismiss="modal" aria-label="Close">
+                                        {% sw_icon 'x' %}
+                                    </a>
+                                </div>
+                                <div class="modal-body">
+                                    {% if item.image %}
+                                        <img src="{{ item.image.url }}"
+                                             class="img-fluid"
+                                             alt="{{ item.image.translated.alt ?: '' }}"
+                                             title="{{ item.translated.title ?: '' }}">
+                                    {% endif %}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="ms-md-auto"
+                         data-bs-toggle="modal" data-bs-target="#modal_{{ loop.index }}">
+                        {% if item.image and item.image.mediatype.name != 'VIDEO' %}
+                            {% set height = element.config.height.value ?? '15' %}
+                            {% set style = "max-height: " ~ height ~ "rem; max-width: " ~ height ~ "rem;" %}
+                            {% sw_thumbnails 'blog_detail_item_image_thumbnail' with {
+                                media: item.image,
+                                sizes: {
+                                    'default': height ~ 'rem'
+                                },
+                                attributes: {
+                                    'class': 'blog-item-image img-fluid',
+                                    'style': style,
+                                    'alt':   item.image.translated.alt ?: '',
+                                    'title': item.translated.title ?: ''
+                                }
+                            } %}
+                        {% endif %}
+                    </div>
+                {% endif %}
+            </div>
+        {% endfor %}
+    </div>
+{% endif %}

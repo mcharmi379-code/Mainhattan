@@ -1,0 +1,44 @@
+{% set isoCode = app.request.locale|lower|split('-') %}
+<div class="card-text">
+    {% block blog_content_post_inner_meta_date %}
+        {% if element.config.showDate.value %}
+        <small class="text-muted post-date">
+            {% sw_icon 'calendar' style { 'size': 'sm' } %} {{ post.postdate is empty ? "" : post.postdate|format_datetime('long', 'none', timezone='UTC', locale=isoCode[0]) }}
+        </small>
+        {% endif %}
+    {% endblock %}
+    {% block blog_content_post_inner_meta_author %}
+        {% if (element.config.showAuthor.value) and (post.author.translated.name) %}
+            <small class="text-muted post-author">
+                &nbsp;{% sw_icon 'avatar' style { 'size': 'sm' } %}
+                {% if post.author.link %}<a href="{{ post.author.link }}" {% if post.author.link[-1:] == '#' %}target="_blank"{% endif %}>{% endif %}
+                    {{ post.author.translated.name }}
+                {% if post.author.link %}</a>{% endif %}
+            </small><br>
+        {% endif %}
+    {% endblock %}
+    {% block blog_content_post_inner_meta_category %}
+        {% if element.config.showCategory.value and post.category.translated.title %}
+            <small class="text-muted post-category">
+                {% sw_icon 'map-closed' style { 'size': 'sm' } %} {{ post.category.translated.title }}
+                {% if(post.categories|length > 0) %}
+                    {% for addCategory in post.categories %}
+                        {% if addCategory.translated.title != post.category.translated.title %}
+                            | {{ addCategory.translated.title }}
+                        {% endif %}
+                    {% endfor %}
+                {% endif %}
+            </small>
+        {% endif %}
+    {% endblock %}
+    {% block blog_content_post_inner_meta_tags %}
+        {% if (element.config.showTags.value) and (post.tags|length > 0) %}
+            <small class="text-muted post-tags">
+                &nbsp;{% sw_icon 'tags' style { 'size': 'sm' } %}
+                {% for tag in post.tags %}
+                    {{ tag.name }}{% if not loop.last %}, {% endif %}
+                {% endfor %}
+            </small>
+        {% endif %}
+    {% endblock %}
+</div>

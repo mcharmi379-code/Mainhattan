@@ -1,0 +1,76 @@
+<sw-page class="netzp-blog6-author-detail">
+    <template #smart-bar-actions>
+        <sw-button :routerLink="{ name: 'netzp.blog6.author.list' }">
+            {{ $t('netzp-blog6-author.detail.cancelButtonText') }}
+        </sw-button>
+
+        <sw-button-process
+                :isLoading="isLoading"
+                :processSuccess="processSuccess"
+                variant="primary"
+                @process-finish="saveFinish"
+                @click="onClickSave">
+            {{ $t('netzp-blog6-author.detail.saveButtonText') }}
+        </sw-button-process>
+    </template>
+    <template #language-switch>
+        <sw-language-switch :disabled="author && author.isNew()"
+                            @on-change="onChangeLanguage" />
+    </template>
+
+    <template #content>
+        <sw-card-view>
+            <sw-card v-if="author"
+                     :isLoading="isLoading"
+                     :title="$t('netzp-blog6-author.detail.section.main')"
+                     positionIdentifier="netzp-blog-author-name">
+                <sw-container columns="1fr 1fr" gap="30px">
+                    <sw-container rows="2">
+                        <sw-text-field :label="$t('netzp-blog6-author.detail.label.name')"
+                                       v-model:value="author.name"
+                                       required validation="required" :error="authorNameError" />
+
+                        <sw-text-field :label="$t('netzp-blog6-author.detail.label.link')"
+                                       :helpText="$t('netzp-blog6-author.detail.label.linkHelptext')"
+                                       v-model:value="author.link" />
+                    </sw-container>
+
+                    <sw-media-upload-v2 :label="$tc('netzp-blog6-author.detail.label.image')" variant="regular"
+                                        :source="mediaItem" :uploadTag="imageUploadTag" :allowMultiSelect="false"
+                                        defaultFolder="s_plugin_netzp_blog"
+                                        @media-drop="onMediaDropped"
+                                        @media-upload-sidebar-open="openMediaSidebar"
+                                        @media-upload-remove-image="onRemoveMediaItem">
+                    </sw-media-upload-v2>
+                </sw-container>
+                <sw-language-info :entityDescription="author.name"></sw-language-info>
+
+                <sw-text-editor :label="$t('netzp-blog6-author.detail.label.bio')" v-model:value="author.bio"></sw-text-editor>
+
+                <sw-upload-listener :uploadTag="imageUploadTag" @media-upload-finish="onSetMediaItem" autoUpload />
+            </sw-card>
+
+            <sw-card :title="$tc('netzp-blog6-category.detail.label.customfields')"
+                     v-if="author && !author.isNew() && customFieldSets && customFieldSets.length > 0"
+                     :isLoading="isLoading" style="width: 100%;"
+                     positionIdentifier="netzp-blog-author-customfields">
+                <sw-custom-field-set-renderer v-if="author"
+                        :entity="author"
+                        :sets="customFieldSets">
+                </sw-custom-field-set-renderer>
+            </sw-card>
+        </sw-card-view>
+    </template>
+
+    <template #sidebar>
+        <sw-sidebar>
+            <sw-sidebar-media-item ref="mediaSidebarItem">
+                <template #context-menu-items="media">
+                    <sw-context-menu-item @click="setMediaItemFromSidebar(media.mediaItem)">
+                        {{ $tc('netzp-blog6-author.detail.label.useAsImage') }}
+                    </sw-context-menu-item>
+                </template>
+            </sw-sidebar-media-item>
+        </sw-sidebar>
+    </template>
+</sw-page>

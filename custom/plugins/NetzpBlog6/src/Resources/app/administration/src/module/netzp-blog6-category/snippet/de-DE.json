@@ -1,0 +1,49 @@
+{
+  "netzp-blog6-category": {
+    "main": {
+      "menuLabel": "Blog-Kategorien",
+      "menuDescription": "Blog-Kategorien verwalten"
+    },
+
+    "list": {
+      "addButtonText": "Neu",
+      "columns": {
+        "title": "Titel",
+        "onlyloggedin": "Nur für angemeldete",
+        "includeinrss": "In RSS-Feed",
+        "saleschannel": "Verkaufskanal",
+        "customergroup": "Kundengruppe"
+      }
+    },
+
+    "detail": {
+      "cancelButtonText": "Abbrechen",
+      "saveButtonText": "Speichern",
+
+      "section": {
+        "main": "Kategorie"
+      },
+
+      "label": {
+        "title": "Titel",
+        "teaser": "Teaser",
+        "customfields": "Zusatzfelder",
+        "cmspage": "CMS-Seite für Blog-Detailansicht",
+        "resetCmspage": "- keine (Standard Layout) -",
+        "navigationcategory": "Navigations-Kategorie für Blog-Listing",
+        "navigationcategoryHelpText": "Optional, diese Kategorie wird für die Anzeige der Breadcrumb auf Blog-Detailseiten verwendet. Überschreibt eine eventuell vorhandene Navigationskategorie in den Plugin-Einstellungen.",
+        "resetNavigationcategory": "- keine (Standard Navigations-Kategorie) -",
+        "saleschannel": "Verkaufskanal",
+        "customergroup": "Kundengruppe",
+        "reset": "- keine Einschränkung -",
+        "onlyloggedin": "nur sichtbar für angemeldeten Nutzer",
+        "includeinrss": "In RSS-Feed aufnehmen"
+      },
+
+      "error": {
+        "title": "Fehler",
+        "message": "Etwas hat nicht funktioniert."
+      }
+    }
+  }
+}
