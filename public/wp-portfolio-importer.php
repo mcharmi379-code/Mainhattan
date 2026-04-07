@@ -1,12 +1,5 @@
 <?php
-/**
- * WordPress Portfolio -> Shopware Portfolio importer
- *
- * NOTE: This file is a template based on `wp-blog-importer.php`.
- * You must adjust repository service names and DB table names to match
- * your Shopware portfolio plugin (repository/service names often start
- * with `s_plugin_<your_plugin>`). Review `TODO` markers below.
- */
+
 
 use Shopware\Core\Content\Media\File\FileSaver;
 use Shopware\Core\Content\Media\File\MediaFile;
@@ -19,7 +12,7 @@ use Shopware\Core\Framework\Uuid\Uuid;
 use Shopware\Core\Kernel;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
-// Source WordPress APIs — adjust the `portfolio` endpoint if your WP uses a different CPT
+// Source WordPress APIs
 define('WP_PORTFOLIO_API', 'https://mainhattan-wheels.de/wp-json/wp/v2/portfolio');
 define('WP_MEDIA_API', 'https://mainhattan-wheels.de/wp-json/wp/v2/media');
 define('WP_BASE_URL', 'https://mainhattan-wheels.de');
@@ -31,7 +24,7 @@ define('DB_PASS', 'admin123');
 define('PER_PAGE', 10);
 define('PORTFOLIO_EMPTY_UUID', '00000000000000000000000000000000');
 
-// language/version/saleschannel constants reused from `wp-importer.php`
+// language/version/saleschannel constants
 if (!defined('LANG_DE')) define('LANG_DE', hex2bin('019D6207880B72E2B9F9E67F38378DEE'));
 if (!defined('LANG_EN')) define('LANG_EN', hex2bin('2FBB5FE2E29A4D70AA5854CE7CE3E20B'));
 if (!defined('VERSION_ID')) define('VERSION_ID', hex2bin('0FA91CE3E96A4BC2BE4BD9CE752C3425'));
@@ -78,7 +71,7 @@ function runImport(PDO $pdo, int $pageNumber): string
 
     $response = curlGetJson(WP_PORTFOLIO_API . '?per_page=' . PER_PAGE . '&page=' . $pageNumber . '&status=publish&_embed=1');
     if ($response === null || $response === [] || !is_array($response)) {
-        return alert('success', '✅ All portfolios imported!');
+        return alert('success', 'All portfolios imported!');
     }
 
     $imported = 0;
@@ -113,8 +106,7 @@ function runImport(PDO $pdo, int $pageNumber): string
 
 function importWordpressPortfolio(array $post): void
 {
-    // Create a Shopware landing page (CMS) from the portfolio post, reusing
-    // the same approach as `wp-importer.php` so portfolio items behave like pages.
+    // Create a Shopware landing page (CMS) from the portfolio post.
     global $pdo;
 
     $title = decodeText($post['title']['rendered'] ?? '');
@@ -130,7 +122,7 @@ function importWordpressPortfolio(array $post): void
         return;
     }
 
-    // Create landing page (CMS) using the same SQL flow as wp-importer
+    // Create landing page (CMS)
     $lpId   = randomBin();
     $pageId = randomBin();
     $secId  = randomBin();
@@ -208,8 +200,7 @@ function importWordpressPortfolio(array $post): void
 
     // seo_url for both languages
     foreach (array_unique([$langSystem, $langGerman]) as $lang) {
-        // Use a distinct seo_path_info namespace so we can identify imported
-        // landing pages later (wp-portfolio/{slug}).
+        // Use a distinct seo_path_info namespace for imported landing pages (wp-portfolio/{slug}).
         $seoPath = 'wp-portfolio/' . $slug;
         $pdo->prepare("INSERT IGNORE INTO seo_url (id, language_id, sales_channel_id, foreign_key, route_name, path_info, seo_path_info, is_canonical, is_modified, is_deleted, created_at) VALUES (?,?,?,?,'frontend.landing.page',?,?,1,0,0,?)")
             ->execute([randomBin(), $lang, $salesChannelId, $lpId, '/landingPage/' . bin2hex($lpId), $seoPath, $now]);
@@ -235,9 +226,7 @@ function getFeaturedImageUrl(array $post): ?string
 
 function randomBin(): string { return random_bytes(16); }
 
-/**
- * Parse WP HTML into blocks (copied from wp-importer.php)
- */
+// Parse WP HTML into blocks
 function parseWpContent(string $html): array
 {
     $html = preg_replace('#<script[^>]*>.*?</script>#is', '', $html);
@@ -384,9 +373,6 @@ function localizeInlineImages(string &$html, string $slug): array
 
 function ensurePortfolioCategory(): ?string
 {
-    // No-op: importer creates landing pages directly without relying on a
-    // third-party portfolio/category plugin. Return null to indicate no
-    // plugin category was created.
     return null;
 }
 
