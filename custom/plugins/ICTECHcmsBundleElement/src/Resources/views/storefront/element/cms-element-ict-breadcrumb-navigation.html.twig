@@ -1,0 +1,97 @@
+{% block element_ict_breadcrumb_navigation %}
+    {% set alignment = element.config.alignment.value ?? 'left' %}
+    {% set textColor = element.config.textColor.value ?? '' %}
+
+    {% set alignClass = 'ict-breadcrumb--left' %}
+    {% if alignment == 'center' %}
+        {% set alignClass = 'ict-breadcrumb--center' %}
+    {% elseif alignment == 'right' %}
+        {% set alignClass = 'ict-breadcrumb--right' %}
+    {% endif %}
+
+    {% set breadcrumbCategories = [] %}
+    {% set currentCategory = null %}
+
+    {# Category pages #}
+    {% if page is defined and page.category is defined %}
+        {% set currentCategory = page.category %}
+    {% endif %}
+
+    {# Product detail pages (use SEO category when present) #}
+    {% if currentCategory is null and page is defined and page.product is defined and page.product.seoCategory is defined and page.product.seoCategory %}
+        {% set currentCategory = page.product.seoCategory %}
+    {% endif %}
+
+    {# Fallback: active navigation category from header #}
+    {% if currentCategory is null and page is defined and page.header is defined and page.header.navigation is defined and page.header.navigation.active is defined and page.header.navigation.active %}
+        {% set currentCategory = page.header.navigation.active %}
+    {% endif %}
+
+    {# Fallback: explicit category variable #}
+    {% if currentCategory is null and category is defined and category %}
+        {% set currentCategory = category %}
+    {% endif %}
+
+    {% if currentCategory %}
+        {% set breadcrumbCategories = sw_breadcrumb_full(currentCategory, context.context) %}
+    {% endif %}
+
+    {% if breadcrumbCategories|length > 0 %}
+        <nav
+            class="cms-element-ict-breadcrumb-navigation ict-breadcrumb {{ alignClass }}"
+            aria-label="{{ 'general.breadcrumb'|trans }}"
+            {% if textColor %}style="--ict-bc-color: {{ textColor|escape('html_attr') }}"{% endif %}
+        >
+            <ol class="ict-breadcrumb__list" itemscope itemtype="https://schema.org/BreadcrumbList">
+                {# Home #}
+                <li
+                    class="ict-breadcrumb__item"
+                    itemprop="itemListElement"
+                    itemscope
+                    itemtype="https://schema.org/ListItem"
+                >
+                    <a
+                        href="{{ path('frontend.home.page') }}"
+                        class="ict-breadcrumb__link ict-breadcrumb__home"
+                        itemprop="item"
+                        title="{{ 'general.homeLink'|trans }}"
+                    >
+                        {% sw_icon 'house' style { size: 'fluid', ariaHidden: true } %}
+                        <span class="visually-hidden" itemprop="name">{{ 'general.homeLink'|trans }}</span>
+                    </a>
+                    <meta itemprop="position" content="1"/>
+                    <span class="ict-breadcrumb__sep" aria-hidden="true">›</span>
+                </li>
+
+                {% for breadcrumbCategory in breadcrumbCategories %}
+                    {% set isLast = loop.last %}
+                    {% set catUrl = seoUrl('frontend.navigation.page', { navigationId: breadcrumbCategory.id }) %}
+                    {% set catName = breadcrumbCategory.translated.name %}
+                    {% set isFolder = breadcrumbCategory.type is defined and breadcrumbCategory.type == 'folder' %}
+
+                    <li
+                        class="ict-breadcrumb__item{% if isLast %} is-current{% endif %}"
+                        itemprop="itemListElement"
+                        itemscope
+                        itemtype="https://schema.org/ListItem"
+                    >
+                        {% if catUrl and not isFolder %}
+                            <a href="{{ catUrl }}" class="ict-breadcrumb__link{% if isLast %} is-active{% endif %}" itemprop="item" title="{{ catName|striptags }}"{% if isLast %} aria-current="page"{% endif %}>
+                                <span itemprop="name">{{ catName }}</span>
+                            </a>
+                        {% else %}
+                            <span class="ict-breadcrumb__label" itemprop="name"{% if isLast %} aria-current="page"{% endif %}>
+                                {{ catName }}
+                            </span>
+                        {% endif %}
+
+                        <meta itemprop="position" content="{{ loop.index + 1 }}"/>
+                        {% if not isLast %}
+                            <span class="ict-breadcrumb__sep" aria-hidden="true">›</span>
+                        {% endif %}
+                    </li>
+                {% endfor %}
+            </ol>
+        </nav>
+    {% endif %}
+{% endblock %}

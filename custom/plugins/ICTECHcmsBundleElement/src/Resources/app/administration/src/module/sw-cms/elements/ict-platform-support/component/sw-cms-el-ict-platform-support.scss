@@ -1,0 +1,29 @@
+.sw-cms-el-ict-platform-support {
+    .platform-support-preview {
+        min-height: 180px;
+
+        h3 {
+            margin: 0 0 2rem;
+            letter-spacing: -0.01em;
+        }
+
+        .platform-grid {
+            width: 100%;
+        }
+
+        .platform-item {
+            transition: transform 0.2s ease;
+            cursor: default;
+
+            .platform-icon-wrapper {
+                transition: box-shadow 0.2s ease, transform 0.2s ease;
+                flex-shrink: 0;
+                box-shadow: 0 2px 8px rgba(0, 90, 229, 0.18);
+            }
+
+            span {
+                word-break: break-word;
+            }
+        }
+    }
+}

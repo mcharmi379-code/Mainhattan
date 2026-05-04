@@ -1,0 +1,84 @@
+.sw-cms-el-preview-ict-overview-cards-6 {
+    background: #f8f9fb;
+    border-radius: 6px;
+    overflow: hidden;
+    font-family: inherit;
+
+    .ict-oc6-preview__bar {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 5px 10px;
+        background: #1a1a2e;
+    }
+
+    .ict-oc6-preview__bar-label {
+        font-size: 7px;
+        font-weight: 700;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        color: rgba(255, 255, 255, 0.7);
+    }
+
+    .ict-oc6-preview__bar-cols {
+        font-size: 7px;
+        font-weight: 600;
+        color: rgba(255, 255, 255, 0.4);
+        background: rgba(255, 255, 255, 0.1);
+        padding: 1px 5px;
+        border-radius: 10px;
+    }
+
+    .ict-oc6-preview__grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 6px;
+        padding: 8px;
+    }
+
+    .ict-oc6-preview__card {
+        background: #fff;
+        border-radius: 5px;
+        overflow: hidden;
+        border: 1px solid #e8eaf0;
+        box-shadow: 0 1px 4px rgba(0, 0, 0, 0.06);
+    }
+
+    .ict-oc6-preview__media {
+        height: 36px;
+        background: linear-gradient(135deg, #dde8ff 0%, #c7d9ff 100%);
+    }
+
+    .ict-oc6-preview__body {
+        padding: 6px 6px 7px;
+        display: flex;
+        flex-direction: column;
+        gap: 3px;
+    }
+
+    .ict-oc6-preview__headline {
+        height: 5px;
+        border-radius: 3px;
+        background: #1a1a2e;
+        width: 75%;
+    }
+
+    .ict-oc6-preview__text {
+        height: 3px;
+        border-radius: 2px;
+        background: #c8cdd8;
+        width: 90%;
+
+        &--short {
+            width: 60%;
+        }
+    }
+
+    .ict-oc6-preview__btn {
+        margin-top: 4px;
+        height: 8px;
+        width: 40%;
+        border-radius: 3px;
+        background: linear-gradient(90deg, #005ae5 0%, #0080ff 100%);
+    }
+}

@@ -1,0 +1,38 @@
+{% block element_ict_image_gallery_lightbox %}
+    <div class="ict-image-gallery__lightbox" data-ict-gallery-modal aria-hidden="true">
+        <div class="ict-image-gallery__lightbox-backdrop" data-ict-gallery-backdrop></div>
+
+        <div class="ict-image-gallery__lightbox-dialog"
+             role="dialog"
+             aria-modal="true"
+             aria-label="{{ galleryTitle|default('Image gallery') }}">
+            <button type="button"
+                    class="ict-image-gallery__lightbox-close"
+                    data-ict-gallery-close
+                    aria-label="{{ 'general.close'|trans|striptags }}">
+                {% sw_icon 'x' %}
+            </button>
+
+            <button type="button"
+                    class="ict-image-gallery__lightbox-nav is-prev"
+                    data-ict-gallery-prev
+                    aria-label="{{ 'general.previous'|trans|striptags }}">
+                {% sw_icon 'arrow-head-left' %}
+            </button>
+
+            <figure class="ict-image-gallery__lightbox-stage">
+                <img data-ict-gallery-modal-image src="" alt="" class="ict-image-gallery__lightbox-image">
+                <figcaption class="ict-image-gallery__lightbox-caption" data-ict-gallery-modal-caption></figcaption>
+            </figure>
+
+            <button type="button"
+                    class="ict-image-gallery__lightbox-nav is-next"
+                    data-ict-gallery-next
+                    aria-label="{{ 'general.next'|trans|striptags }}">
+                {% sw_icon 'arrow-head-right' %}
+            </button>
+
+            <div class="ict-image-gallery__lightbox-counter" data-ict-gallery-counter></div>
+        </div>
+    </div>
+{% endblock %}

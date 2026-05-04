@@ -1,0 +1,40 @@
+{% block block_ict_three_column %}
+    {% block block_ict_three_column_left %}
+        {% set element = block.slots.getSlot('left') %}
+        {% if element %}
+            <div class="ict-three-column-layout__col" data-cms-element-id="{{ element.id }}">
+                {% block block_ict_three_column_left_inner %}
+                    <div class="ict-three-column-layout__card-slot">
+                        {% sw_include '@Storefront/storefront/element/cms-element-' ~ element.type ~ '.html.twig' ignore missing with { element: element } %}
+                    </div>
+                {% endblock %}
+            </div>
+        {% endif %}
+    {% endblock %}
+
+    {% block block_ict_three_column_center %}
+        {% set element = block.slots.getSlot('center') %}
+        {% if element %}
+            <div class="ict-three-column-layout__col" data-cms-element-id="{{ element.id }}">
+                {% block block_ict_three_column_center_inner %}
+                    <div class="ict-three-column-layout__card-slot">
+                        {% sw_include '@Storefront/storefront/element/cms-element-' ~ element.type ~ '.html.twig' ignore missing with { element: element } %}
+                    </div>
+                {% endblock %}
+            </div>
+        {% endif %}
+    {% endblock %}
+
+    {% block block_ict_three_column_right %}
+        {% set element = block.slots.getSlot('right') %}
+        {% if element %}
+            <div class="ict-three-column-layout__col" data-cms-element-id="{{ element.id }}">
+                {% block block_ict_three_column_right_inner %}
+                    <div class="ict-three-column-layout__card-slot">
+                        {% sw_include '@Storefront/storefront/element/cms-element-' ~ element.type ~ '.html.twig' ignore missing with { element: element } %}
+                    </div>
+                {% endblock %}
+            </div>
+        {% endif %}
+    {% endblock %}
+{% endblock %}

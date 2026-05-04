@@ -1,0 +1,68 @@
+{% block sw_cms_el_config_ict_subcategory_navigation %}
+<div class="ict-subcat-config">
+
+    <div
+        class="ict-subcat-config__row"
+        :class="{ 'ict-subcat-config__row--single': isManual }"
+    >
+        <sw-select-field
+            v-model:value="element.config.entryPoint.value"
+            :label="$tc('ict-cms-bundle-element.cms.elements.ictSubcategoryNavigation.config.entryPoint')"
+            @update:value="onEntryPointChange"
+        >
+            <option
+                v-for="opt in entryPointOptions"
+                :key="opt.value"
+                :value="opt.value"
+            >
+                {{ opt.label }}
+            </option>
+        </sw-select-field>
+
+        <sw-number-field
+            v-if="!isManual"
+            :value="element.config.categoryLevels.value"
+            :label="$tc('ict-cms-bundle-element.cms.elements.ictSubcategoryNavigation.config.categoryLevels')"
+            :help-text="$tc('ict-cms-bundle-element.cms.elements.ictSubcategoryNavigation.config.categoryLevelsHelpText')"
+            :min="1"
+            :max="3"
+            :step="1"
+            @update:value="onCategoryLevelsChange"
+        />
+    </div>
+
+    <sw-switch-field
+        v-if="!isManual"
+        v-model:value="element.config.showProductCount.value"
+        :label="$tc('ict-cms-bundle-element.cms.elements.ictSubcategoryNavigation.config.showProductCount')"
+        :help-text="$tc('ict-cms-bundle-element.cms.elements.ictSubcategoryNavigation.config.showProductCountHelpText')"
+        @update:value="onUpdate"
+    />
+
+    <sw-entity-single-select
+        v-if="isCustom"
+        entity="category"
+        show-clearable-button
+        :value="element.config.entryCategory.value"
+        :label="$tc('ict-cms-bundle-element.cms.elements.ictSubcategoryNavigation.config.entryCategory')"
+        :placeholder="$tc('ict-cms-bundle-element.cms.elements.ictSubcategoryNavigation.config.entryCategory')"
+        @update:value="onEntryCategorySelect"
+    />
+
+    <sw-entity-multi-id-select
+        v-if="isManual"
+        :repository="categoryRepository"
+        :value="element.config.manualCategories.value"
+        entity="category"
+        :label="$tc('ict-cms-bundle-element.cms.elements.ictSubcategoryNavigation.config.manualCategories')"
+        :placeholder="$tc('global.sw-select.placeholder')"
+        @update:value="onManualCategoriesChange"
+    />
+
+    <sw-alert v-if="!isManual" variant="info" class="ict-subcat-config__info">
+        <strong>{{ $tc('ict-cms-bundle-element.cms.elements.ictSubcategoryNavigation.config.autoTitle') }}</strong>
+        <p>{{ $tc('ict-cms-bundle-element.cms.elements.ictSubcategoryNavigation.config.autoDesc') }}</p>
+    </sw-alert>
+
+</div>
+{% endblock %}

@@ -1,0 +1,138 @@
+{% block sw_cms_element_ict_hero_section_config %}
+    <sw-tabs class="sw-cms-el-config-ict-hero-section" default-item="background">
+        <template #default="{ active }">
+            <sw-tabs-item name="background" :active-tab="active">Background</sw-tabs-item>
+            <sw-tabs-item name="leftSection" :active-tab="active">Left Section</sw-tabs-item>
+            <sw-tabs-item name="rightSection" :active-tab="active">Right Section</sw-tabs-item>
+        </template>
+
+        <template #content="{ active }">
+            <sw-container v-if="active === 'background'" class="sw-cms-el-config-ict-hero-section__background">
+                <mt-select
+                    v-model="element.config.backgroundType.value"
+                    label="Background Type"
+                    :options="[{ value: 'color', label: 'Color' }, { value: 'gbColor', label: 'Gradient' }]"
+                    @update:model-value="onInput"
+                />
+
+                <sw-colorpicker
+                    v-if="element.config.backgroundType.value === 'color'"
+                    v-model:value="element.config.backgroundColor.value"
+                    label="Background Color"
+                    color-output="hex"
+                    @update:value="onInput"
+                />
+
+                <div v-if="element.config.backgroundType.value === 'gbColor'" class="config-row-2">
+                    <sw-colorpicker
+                        v-model:value="element.config.backgroundGradientColor1.value"
+                        label="Gradient Color 1"
+                        color-output="hex"
+                        @update:value="onInput"
+                    />
+                    <sw-colorpicker
+                         v-model:value="element.config.backgroundGradientColor2.value"
+                        label="Gradient Color 2"
+                        color-output="hex"
+                        @update:value="onInput"
+                    />
+                </div>
+
+                <mt-text-field
+                    v-model="element.config.minHeight.value"
+                    label="Minimum Height"
+                    @update:model-value="onInput"
+                />
+            </sw-container>
+
+            <sw-container v-if="active === 'leftSection'" class="sw-cms-el-config-ict-hero-section__left-section">
+                <mt-text-field v-model="element.config.labelText.value" label="Label Text" @update:model-value="onInput" />
+
+                <div class="config-row-3">
+                    <sw-colorpicker v-model:value="element.config.labelBackgroundColor.value" label="Label Background" color-output="hex" @update:value="onInput" />
+                    <sw-colorpicker v-model:value="element.config.labelTextColor.value" label="Label Text Color" color-output="hex" @update:value="onInput" />
+                    <sw-colorpicker v-model:value="element.config.labelBorderColor.value" label="Label Border" color-output="hex" @update:value="onInput" />
+                </div>
+
+                <mt-text-field v-model="element.config.headlineText.value" label="Headline" @update:model-value="onInput" />
+                <sw-colorpicker v-model:value="element.config.headlineColor.value" label="Headline Color" color-output="hex" @update:value="onInput" />
+
+                <sw-text-editor v-model:value="element.config.descriptionText.value" sanitize-input @update:value="onInput" />
+                <sw-colorpicker v-model:value="element.config.descriptionColor.value" label="Description Color" color-output="hex" @update:value="onInput" />
+
+                <div class="config-section-title">Primary Button</div>
+                <mt-text-field v-model="element.config.primaryButtonText.value" label="Button Text" @update:model-value="onInput" />
+                <mt-select
+                    v-model="element.config.primaryButtonLinkType.value"
+                    label="Link Type"
+                    :options="[{ value: 'internal', label: 'Internal' }, { value: 'external', label: 'External' }]"
+                    @update:model-value="onInput"
+                />
+                <sw-dynamic-url-field
+                    v-if="element.config.primaryButtonLinkType.value === 'internal'"
+                    v-model:value="element.config.primaryButtonLink.value"
+                />
+                <mt-text-field
+                    v-if="element.config.primaryButtonLinkType.value === 'external'"
+                    v-model="element.config.primaryButtonLink.value"
+                    label="Link"
+                    @update:model-value="onInput"
+                />
+                <mt-select
+                    v-model="element.config.primaryButtonTarget.value"
+                    label="Target"
+                    :options="[{ value: '_self', label: 'Same tab' }, { value: '_blank', label: 'New tab' }]"
+                    @update:model-value="onInput"
+                />
+                <div class="config-row-2">
+                    <sw-colorpicker v-model:value="element.config.primaryButtonBackgroundColor.value" label="Background Color" color-output="hex" @update:value="onInput" />
+                    <sw-colorpicker v-model:value="element.config.primaryButtonTextColor.value" label="Text Color" color-output="hex" @update:value="onInput" />
+                </div>
+
+                <sw-switch-field v-model:value="element.config.showSecondaryButton.value" label="Show Secondary Button" @update:value="onInput" />
+                <div v-if="element.config.showSecondaryButton.value">
+                    <div class="config-section-title">Secondary Button</div>
+                    <mt-text-field v-model="element.config.secondaryButtonText.value" label="Button Text" @update:model-value="onInput" />
+                    <mt-select
+                        v-model="element.config.secondaryButtonLinkType.value"
+                        label="Link Type"
+                        :options="[{ value: 'internal', label: 'Internal' }, { value: 'external', label: 'External' }]"
+                        @update:model-value="onInput"
+                    />
+                    <sw-dynamic-url-field
+                        v-if="element.config.secondaryButtonLinkType.value === 'internal'"
+                        v-model:value="element.config.secondaryButtonLink.value"
+                    />
+                    <mt-text-field
+                        v-if="element.config.secondaryButtonLinkType.value === 'external'"
+                        v-model="element.config.secondaryButtonLink.value"
+                        label="Link"
+                        @update:model-value="onInput"
+                    />
+                    <mt-select
+                        v-model="element.config.secondaryButtonTarget.value"
+                        label="Target"
+                        :options="[{ value: '_self', label: 'Same tab' }, { value: '_blank', label: 'New tab' }]"
+                        @update:model-value="onInput"
+                    />
+                    <div class="config-row-2">
+                        <sw-colorpicker v-model:value="element.config.secondaryButtonBackgroundColor.value" label="Background Color" color-output="hex" @update:value="onInput" />
+                        <sw-colorpicker v-model:value="element.config.secondaryButtonTextColor.value" label="Text Color" color-output="hex" @update:value="onInput" />
+                    </div>
+                </div>
+            </sw-container>
+
+            <sw-container v-if="active === 'rightSection'" class="sw-cms-el-config-ict-hero-section__right-section">
+                <div class="config-section-title">Feature Items</div>
+                <div v-for="(item, index) in element.config.featureItems.value" :key="index" class="sw-cms-el-config-ict-hero-section__feature-item">
+                    <sw-container columns="1fr auto" gap="16px">
+                        <mt-text-field v-model="item.title" label="Title" @update:model-value="onInput" />
+                        <sw-button size="small" variant="danger" @click="removeFeatureItem(index)">Remove</sw-button>
+                    </sw-container>
+                    <mt-text-field v-model="item.description" label="Description" @update:model-value="onInput" />
+                </div>
+                <sw-button size="small" variant="primary" @click="addFeatureItem">Add Feature</sw-button>
+            </sw-container>
+        </template>
+    </sw-tabs>
+{% endblock %}

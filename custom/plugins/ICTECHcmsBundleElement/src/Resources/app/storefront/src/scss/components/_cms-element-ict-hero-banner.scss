@@ -1,0 +1,114 @@
+.cms-block-ict-hero-banner .ict-hero-banner-col {
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+}
+
+.cms-element-ict-hero-banner {
+    width: 100%;
+    display: block;
+}
+
+.ict-hero-banner {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    height: 380px;
+    overflow: hidden;
+
+    &__left {
+        flex: 0 0 45%;
+        width: 45%;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-end;
+        padding: 2.5rem 3rem;
+        gap: 1rem;
+        box-sizing: border-box;
+        overflow: hidden;
+    }
+
+    &__logo-wrap {
+        display: inline-block;
+    }
+
+    &__logo {
+        max-height: 60px;
+        max-width: 180px;
+        object-fit: contain;
+        display: block;
+    }
+
+    &__logo-placeholder {
+        width: 80px;
+        height: 40px;
+        border: 1px dashed rgba(255, 255, 255, 0.4);
+        display: block;
+    }
+
+    &__headline {
+        margin: 0;
+        font-size: 1rem;
+        line-height: 1.6;
+        color: rgba(255, 255, 255, 0.8);
+        word-break: break-word;
+    }
+
+    &__right {
+        flex: 0 0 55%;
+        width: 55%;
+        overflow: hidden;
+        background: #c8c8c8;
+        position: relative;
+    }
+
+    &__image {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        display: block;
+    }
+
+    &__image-placeholder {
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(135deg, #c8c8c8, #e0e0e0);
+        display: block;
+    }
+
+    @media (max-width: 991.98px) {
+        height: 300px;
+
+        &__left {
+            flex: 0 0 50%;
+            width: 50%;
+            padding: 2rem 1.5rem;
+        }
+
+        &__right {
+            flex: 0 0 50%;
+            width: 50%;
+        }
+    }
+
+    @media (max-width: 767.98px) {
+        flex-direction: column;
+        height: auto;
+
+        &__left {
+            flex: none;
+            width: 100%;
+            min-height: 180px;
+            padding: 1.75rem 1.25rem;
+        }
+
+        &__right {
+            flex: none;
+            width: 100%;
+            height: 260px;
+            position: relative;
+        }
+    }
+}

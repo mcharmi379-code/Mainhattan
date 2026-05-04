@@ -1,0 +1,139 @@
+<sw-tabs
+    class="sw-cms-el-config-ict-accordion"
+    position-identifier="sw-cms-element-config-ict-accordion"
+    default-item="entries"
+>
+    <template #default="{ active }">
+        <sw-tabs-item
+            :title="$tc('ict-cms-bundle-element.cms.elements.ictAccordion.config.tabs.entries')"
+            name="entries"
+            :active-tab="active"
+        >
+            {{ $tc('ict-cms-bundle-element.cms.elements.ictAccordion.config.tabs.entries') }}
+        </sw-tabs-item>
+
+        <sw-tabs-item
+            :title="$tc('ict-cms-bundle-element.cms.elements.ictAccordion.config.tabs.settings')"
+            name="settings"
+            :active-tab="active"
+        >
+            {{ $tc('ict-cms-bundle-element.cms.elements.ictAccordion.config.tabs.settings') }}
+        </sw-tabs-item>
+    </template>
+
+    <template #content="{ active }">
+        <sw-container
+            v-if="active === 'entries'"
+            class="sw-cms-el-config-ict-accordion__entries"
+        >
+            <article
+                v-for="(entry, index) in entries"
+                :key="index"
+                class="sw-cms-el-config-ict-accordion__entry"
+            >
+                <header class="sw-cms-el-config-ict-accordion__entry-header">
+                    <span class="sw-cms-el-config-ict-accordion__entry-title">
+                        {{ getEntryLabel(entry, index) }}
+                    </span>
+
+                    <div class="sw-cms-el-config-ict-accordion__entry-actions">
+                        <sw-button
+                            size="small"
+                            icon="regular-copy"
+                            @click="duplicateEntry(index)"
+                        ></sw-button>
+
+                        <sw-button
+                            size="small"
+                            icon="regular-chevron-up-xs"
+                            :disabled="index === 0"
+                            @click="moveEntry(index, -1)"
+                        ></sw-button>
+
+                        <sw-button
+                            size="small"
+                            icon="regular-chevron-down-xs"
+                            :disabled="index === entries.length - 1"
+                            @click="moveEntry(index, 1)"
+                        ></sw-button>
+
+                        <sw-button
+                            size="small"
+                            variant="danger"
+                            icon="regular-trash"
+                            @click="removeEntry(index)"
+                        ></sw-button>
+                    </div>
+                </header>
+
+                <div class="sw-cms-el-config-ict-accordion__entry-body">
+                    <div class="sw-cms-el-config-ict-accordion__entry-grid">
+                        <sw-text-field
+                            :value="entry.title"
+                            :label="$tc('ict-cms-bundle-element.cms.elements.ictAccordion.config.entry.title')"
+                            :placeholder="$tc('ict-cms-bundle-element.cms.elements.ictAccordion.config.entry.titlePlaceholder')"
+                            @update:value="onEntryTitleChange(index, $event)"
+                        />
+
+                        <sw-switch-field
+                            :value="entry.expanded"
+                            bordered
+                            :label="$tc('ict-cms-bundle-element.cms.elements.ictAccordion.config.entry.expanded')"
+                            @update:value="onEntryExpandedChange(index, $event)"
+                        />
+                    </div>
+
+                    <sw-text-editor
+                        :value="entry.content"
+                        sanitize-info-warn
+                        enable-transparent-background
+                        :label="$tc('ict-cms-bundle-element.cms.elements.ictAccordion.config.entry.content')"
+                        @update:value="onEntryContentChange(index, $event)"
+                    />
+                </div>
+            </article>
+
+            <sw-button
+                variant="primary"
+                size="small"
+                icon="regular-plus-xs"
+                @click="addEntry"
+            >
+                {{ $tc('ict-cms-bundle-element.cms.elements.ictAccordion.config.entry.add') }}
+            </sw-button>
+        </sw-container>
+
+        <sw-container
+            v-if="active === 'settings'"
+            class="sw-cms-el-config-ict-accordion__settings"
+        >
+            <sw-text-field
+                v-model:value="element.config.title.value"
+                :label="$tc('ict-cms-bundle-element.cms.elements.ictAccordion.config.title')"
+                :placeholder="$tc('ict-cms-bundle-element.cms.elements.ictAccordion.config.titlePlaceholder')"
+                @update:value="onInput"
+            />
+
+            <sw-textarea-field
+                v-model:value="element.config.description.value"
+                :label="$tc('ict-cms-bundle-element.cms.elements.ictAccordion.config.description')"
+                :placeholder="$tc('ict-cms-bundle-element.cms.elements.ictAccordion.config.descriptionPlaceholder')"
+                rows="4"
+                @update:value="onInput"
+            />
+
+            <sw-select-field
+                v-model:value="element.config.displayMode.value"
+                :label="$tc('ict-cms-bundle-element.cms.elements.ictAccordion.config.displayMode')"
+                @update:value="onInput"
+            >
+                <option value="single">
+                    {{ $tc('ict-cms-bundle-element.cms.elements.ictAccordion.config.displayModeSingle') }}
+                </option>
+                <option value="multiple">
+                    {{ $tc('ict-cms-bundle-element.cms.elements.ictAccordion.config.displayModeMultiple') }}
+                </option>
+            </sw-select-field>
+        </sw-container>
+    </template>
+</sw-tabs>

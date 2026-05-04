@@ -1,0 +1,74 @@
+.sw-cms-el-config-ict-accordion {
+    &__entries,
+    &__settings {
+        display: grid;
+        gap: 24px;
+        padding-top: 24px;
+    }
+
+    &__entry {
+        border: 1px solid #d7dde5;
+        border-radius: 10px;
+        background: #ffffff;
+        overflow: hidden;
+    }
+
+    &__entry-header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 16px;
+        padding: 14px 18px;
+        background: #f8fafc;
+        border-bottom: 1px solid #e2e8f0;
+    }
+
+    &__entry-title {
+        color: #1f2d3d;
+        font-size: 14px;
+        font-weight: 600;
+        line-height: 1.4;
+        word-break: break-word;
+    }
+
+    &__entry-actions {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+        flex: 0 0 auto;
+    }
+
+    &__entry-body {
+        display: grid;
+        gap: 20px;
+        padding: 18px;
+    }
+
+    &__entry-grid {
+        display: grid;
+        gap: 16px;
+        grid-template-columns: minmax(0, 1fr) 220px;
+    }
+
+    .sw-text-editor {
+        border-radius: 8px;
+        overflow: hidden;
+    }
+}
+
+@media screen and (max-width: 767px) {
+    .sw-cms-el-config-ict-accordion {
+        &__entry-grid {
+            grid-template-columns: minmax(0, 1fr);
+        }
+
+        &__entry-header {
+            align-items: flex-start;
+            flex-direction: column;
+        }
+
+        &__entry-actions {
+            width: 100%;
+        }
+    }
+}

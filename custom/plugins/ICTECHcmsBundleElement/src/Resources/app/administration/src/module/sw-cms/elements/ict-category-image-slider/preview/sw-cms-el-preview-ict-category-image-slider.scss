@@ -1,0 +1,16 @@
+.sw-cms-el-preview-ict-category-image-slider {
+    padding: 10px;
+
+    &__grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 10px;
+    }
+
+    &__item {
+        height: 60px;
+        border-radius: 4px;
+        background: #d1d9e0;
+    }
+}
+

@@ -1,0 +1,126 @@
+<div class="sw-cms-el-config-ict-product-comparison">
+    <sw-tabs class="ict-product-comparison-config__tabs" default-item="products">
+        <sw-tabs-item
+            name="products"
+            :active="activeTab === 'products'"
+            @click="activeTab = 'products'"
+        >
+            {{ $tc('ict-cms-bundle-element.cms.elements.ictProductComparison.config.tabs.products') }}
+        </sw-tabs-item>
+
+        <sw-tabs-item
+            name="comparisonValues"
+            :active="activeTab === 'comparisonValues'"
+            @click="activeTab = 'comparisonValues'"
+        >
+            {{ $tc('ict-cms-bundle-element.cms.elements.ictProductComparison.config.tabs.comparisonValues') }}
+        </sw-tabs-item>
+    </sw-tabs>
+
+    <div v-if="activeTab === 'products'" class="ict-product-comparison-config__panel">
+        <sw-container columns="1fr" gap="20px">
+            <sw-single-select
+                v-model:value="element.config.productAssignmentType.value"
+                :label="$tc('ict-cms-bundle-element.cms.elements.ictProductComparison.config.assignment.label')"
+                :options="assignmentTypeOptions"
+                @update:value="onAssignmentTypeChange"
+            />
+
+            <sw-entity-multi-id-select
+                v-if="element.config.productAssignmentType.value === 'manual'"
+                v-model:value="element.config.productIds.value"
+                :repository="productRepository"
+                :criteria="productSelectCriteria"
+                :label="$tc('ict-cms-bundle-element.cms.elements.ictProductComparison.config.products.label')"
+                :placeholder="$tc('ict-cms-bundle-element.cms.elements.ictProductComparison.config.products.placeholder')"
+                @update:value="onSelectionChange"
+            >
+                <template #selection-label-property="{ item }">
+                    {{ item.translated?.name || item.name || item.productNumber }}
+                </template>
+
+                <template #result-label-property="{ item }">
+                    {{ item.translated?.name || item.name || item.productNumber }}
+                </template>
+            </sw-entity-multi-id-select>
+
+            <sw-container
+                v-else
+                columns="1fr"
+                gap="16px"
+            >
+                <sw-alert variant="info" appearance="default">
+                    {{ $tc('ict-cms-bundle-element.cms.elements.ictProductComparison.config.streamHint') }}
+                </sw-alert>
+
+                <sw-entity-single-select
+                    v-model:value="element.config.productStreamId.value"
+                    :repository="productStreamRepository"
+                    :criteria="productStreamSelectCriteria"
+                    :label="$tc('ict-cms-bundle-element.cms.elements.ictProductComparison.config.stream.label')"
+                    :placeholder="$tc('ict-cms-bundle-element.cms.elements.ictProductComparison.config.stream.placeholder')"
+                    @update:value="onInput"
+                >
+                    <template #selection-label-property="{ item }">
+                        {{ item.name }}
+                    </template>
+
+                    <template #result-label-property="{ item }">
+                        {{ item.name }}
+                    </template>
+                </sw-entity-single-select>
+
+                <sw-container columns="1fr 1fr" gap="16px">
+                    <sw-single-select
+                        v-model:value="element.config.productStreamSorting.value"
+                        :label="$tc('ict-cms-bundle-element.cms.elements.ictProductComparison.config.streamSorting.label')"
+                        :options="productStreamSortingOptions"
+                        @update:value="onInput"
+                    />
+
+                    <sw-number-field
+                        v-model:value="element.config.productStreamLimit.value"
+                        number-type="int"
+                        :min="1"
+                        :label="$tc('ict-cms-bundle-element.cms.elements.ictProductComparison.config.streamLimit.label')"
+                        @update:value="onInput"
+                    />
+                </sw-container>
+
+                <sw-external-link
+                    v-if="element.config.productStreamId.value"
+                    :href="`#/sw/product/stream/detail/${element.config.productStreamId.value}`"
+                >
+                    {{ $tc('ict-cms-bundle-element.cms.elements.ictProductComparison.config.stream.preview') }}
+                </sw-external-link>
+            </sw-container>
+
+        </sw-container>
+    </div>
+
+    <div v-else class="ict-product-comparison-config__panel">
+        <sw-container columns="1fr" gap="20px">
+            <sw-multi-select
+                v-model:value="element.config.defaultProductValues.value"
+                :label="$tc('ict-cms-bundle-element.cms.elements.ictProductComparison.config.defaultValues.label')"
+                :placeholder="$tc('ict-cms-bundle-element.cms.elements.ictProductComparison.config.defaultValues.placeholder')"
+                :options="defaultProductValueOptions"
+                @update:value="onInput"
+            />
+
+            <sw-multi-select
+                v-model:value="element.config.propertyGroups.value"
+                :label="$tc('ict-cms-bundle-element.cms.elements.ictProductComparison.config.propertyGroups.label')"
+                :placeholder="$tc('ict-cms-bundle-element.cms.elements.ictProductComparison.config.propertyGroups.placeholder')"
+                :options="propertyGroupOptions"
+                @update:value="onInput"
+            />
+
+            <sw-switch-field
+                v-model:value="element.config.highlightFirstProduct.value"
+                :label="$tc('ict-cms-bundle-element.cms.elements.ictProductComparison.config.highlightFirstProduct.label')"
+                @update:value="onInput"
+            />
+        </sw-container>
+    </div>
+</div>

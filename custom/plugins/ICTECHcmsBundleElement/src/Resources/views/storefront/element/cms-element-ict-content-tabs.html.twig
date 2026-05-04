@@ -1,0 +1,41 @@
+{% block element_ict_content_tabs %}
+    {% set tabs = element.data.tabs ?? [] %}
+
+    {% if tabs|length > 0 %}
+        <div class="cms-element-ict-content-tabs">
+
+            <ul class="nav nav-tabs ict-ct__nav" role="tablist">
+                {% for tab in tabs %}
+                    <li class="nav-item" role="presentation">
+                        <button
+                            type="button"
+                            class="nav-link{% if loop.first %} active{% endif %}"
+                            id="ict-ct-tab-{{ element.id }}-{{ loop.index0 }}"
+                            data-bs-toggle="tab"
+                            data-bs-target="#ict-ct-panel-{{ element.id }}-{{ loop.index0 }}"
+                            role="tab"
+                            aria-controls="ict-ct-panel-{{ element.id }}-{{ loop.index0 }}"
+                            aria-selected="{{ loop.first ? 'true' : 'false' }}"
+                        >
+                            {{ tab.label|default('Tab ' ~ loop.index)|e }}
+                        </button>
+                    </li>
+                {% endfor %}
+            </ul>
+
+            <div class="tab-content ict-ct__panels">
+                {% for tab in tabs %}
+                    <div
+                        class="tab-pane fade{% if loop.first %} show active{% endif %} ict-ct__panel"
+                        id="ict-ct-panel-{{ element.id }}-{{ loop.index0 }}"
+                        role="tabpanel"
+                        aria-labelledby="ict-ct-tab-{{ element.id }}-{{ loop.index0 }}"
+                    >
+                        {{ tab.content|raw }}
+                    </div>
+                {% endfor %}
+            </div>
+
+        </div>
+    {% endif %}
+{% endblock %}

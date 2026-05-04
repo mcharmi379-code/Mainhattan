@@ -1,0 +1,29 @@
+{% block sw_cms_el_ict_vertical_tab %}
+<div class="sw-cms-el-ict-vertical-tab">
+    <div class="sw-cms-el-ict-vertical-tab__layout">
+        <div class="sw-cms-el-ict-vertical-tab__content">
+            <template v-if="activeTab">
+                <div class="sw-cms-el-ict-vertical-tab__header">
+                    {{ activeTab.header || $tc('ict-cms-bundle-element.cms.elements.ictVerticalTab.placeholder.header') }}
+                </div>
+                <div class="sw-cms-el-ict-vertical-tab__body">
+                    {{ activeTab.content || $tc('ict-cms-bundle-element.cms.elements.ictVerticalTab.placeholder.content') }}
+                </div>
+                <div v-if="activeTab.buttonText" class="sw-cms-el-ict-vertical-tab__btn">
+                    {{ activeTab.buttonText }}
+                </div>
+            </template>
+        </div>
+        <div class="sw-cms-el-ict-vertical-tab__nav">
+            <div
+                v-for="(tab, index) in tabs"
+                :key="index"
+                class="sw-cms-el-ict-vertical-tab__nav-item"
+                :class="{ 'sw-cms-el-ict-vertical-tab__nav-item--active': index === 0 }"
+            >
+                {{ tab.title || `Tab ${index + 1}` }}
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

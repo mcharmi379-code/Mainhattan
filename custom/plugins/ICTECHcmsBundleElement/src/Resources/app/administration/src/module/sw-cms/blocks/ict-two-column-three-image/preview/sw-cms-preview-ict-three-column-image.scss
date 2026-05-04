@@ -1,0 +1,106 @@
+.sw-cms-preview-ict-three-column-three-images {
+  width: 100%;
+  padding: 10px;
+
+  .preview-row {
+    display: flex;
+    gap: 12px;
+    width: 100%;
+  }
+
+  /* LEFT BIG IMAGE */
+  .preview-col-left {
+    flex: 2;
+  }
+
+  /* RIGHT TWO IMAGES */
+  .preview-col-right {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  /* IMAGE CARD BASE STYLE */
+  .preview-image-item {
+    position: relative;
+    border-radius: 10px;
+    overflow: hidden;
+    background: #000;
+    color: #ffffff;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    &.large {
+      height: 260px;
+    }
+
+    &.small {
+      height: 120px;
+    }
+  }
+
+  /* BADGES */
+  .content {
+    position: absolute;
+    top: 12px;
+    left: 12px;
+
+    .badges {
+      display: flex;
+      gap: 6px;
+
+      .badge {
+        font-size: 10px;
+        background: rgba(30, 58, 138, 0.9);
+        padding: 3px 8px;
+        border-radius: 4px;
+        font-weight: 600;
+
+        &.secondary {
+          background: rgba(55, 65, 81, 0.9);
+        }
+      }
+    }
+
+    .description {
+      margin-top: 8px;
+
+      p {
+        margin: 0;
+        font-size: 14px;
+        font-weight: 600;
+        color: #ffffff;
+        line-height: 1.3;
+        max-width: 170px; // keeps text on 2 lines like screenshot
+      }
+    }
+  }
+
+  /* BUTTON */
+  .btn-small {
+    position: absolute;
+    bottom: 12px;
+    left: 12px;
+    background: #1e3a8a;
+    color: #ffffff;
+    padding: 6px 12px;
+    font-size: 11px;
+    border-radius: 4px;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    transition: all 0.2s ease;
+
+    &:hover {
+      background: #3b82f6;
+      color: #fff;
+    }
+  }
+}

@@ -1,0 +1,43 @@
+{% block sw_cms_element_ict_hero_section %}
+    <div class="sw-cms-el-ict-hero-section">
+        <div class="sw-cms-el-ict-hero-section__left">
+            <span
+                v-if="element.config.labelText.value"
+                class="sw-cms-el-ict-hero-section__label"
+            >
+                {{ element.config.labelText.value }}
+            </span>
+
+            <h2 class="sw-cms-el-ict-hero-section__headline">
+                {{ element.config.headlineText.value }}
+            </h2>
+
+            <p class="sw-cms-el-ict-hero-section__description">
+                {{ element.config.descriptionText.value }}
+            </p>
+
+            <div class="sw-cms-el-ict-hero-section__actions">
+                <button class="sw-cms-el-ict-hero-section__button sw-cms-el-ict-hero-section__button--primary">
+                    {{ element.config.primaryButtonText.value }}
+                </button>
+                <button
+                    v-if="element.config.showSecondaryButton.value"
+                    class="sw-cms-el-ict-hero-section__button sw-cms-el-ict-hero-section__button--secondary"
+                >
+                    {{ element.config.secondaryButtonText.value }}
+                </button>
+            </div>
+        </div>
+
+        <div class="sw-cms-el-ict-hero-section__right">
+            <div
+                v-for="(item, index) in element.config.featureItems.value"
+                :key="index"
+                class="sw-cms-el-ict-hero-section__feature"
+            >
+                <h3 class="sw-cms-el-ict-hero-section__feature-title">{{ item.title }}</h3>
+                <p class="sw-cms-el-ict-hero-section__feature-text">{{ item.description }}</p>
+            </div>
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,12 @@
+{% block block_ict_manufacturer_list %}
+    {% set element = block.slots.getSlot('content') %}
+
+    {% if element %}
+        <div
+            class="ict-manufacturer-list-block__slot"
+            data-cms-element-id="{{ element.id }}"
+        >
+            {% sw_include '@Storefront/storefront/element/cms-element-' ~ element.type ~ '.html.twig' ignore missing with { element: element } %}
+        </div>
+    {% endif %}
+{% endblock %}

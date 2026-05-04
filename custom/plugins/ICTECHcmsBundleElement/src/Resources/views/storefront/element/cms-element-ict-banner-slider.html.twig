@@ -1,0 +1,50 @@
+{% block element_ict_banner_slider %}
+    {% set sliderItems = element.config.sliderItems.value ?? [] %}
+    {% set displayMode = element.config.displayMode.value ?? 'contain' %}
+    {% set autoTransition = element.config.autoTransition.value ?? false %}
+    {% set navigationDots = element.config.navigationDots.value ?? 'none' %}
+    {% set navigationArrows = element.config.navigationArrows.value ?? 'outside' %}
+    {% set hasMultipleSlides = sliderItems|length > 1 %}
+    {% set baseSliderOptions = {
+        slider: {
+            controls: navigationArrows != 'none' and hasMultipleSlides,
+            nav: navigationDots != 'none' and hasMultipleSlides,
+            navPosition: 'bottom',
+            items: 1,
+            mode: 'carousel',
+            mouseDrag: hasMultipleSlides,
+            touchDrag: hasMultipleSlides,
+            autoplay: autoTransition and hasMultipleSlides,
+            autoplayButtonOutput: false,
+            autoplayHoverPause: true,
+            autoplayTimeout: 5000,
+            speed: 400,
+            edgePadding: 0,
+            gutter: 0,
+            loop: hasMultipleSlides,
+            rewind: false,
+            ariaLive: autoTransition and hasMultipleSlides ? false : true,
+            autoHeight: false,
+        }
+    } %}
+
+    {% if sliderItems|length > 0 %}
+        <div class="cms-element-ict-banner-slider">
+            <div
+                class="base-slider image-slider{% if navigationArrows == 'outside' %} has-nav-outside{% endif %}{% if navigationDots == 'outside' %} has-dots-outside{% endif %}"
+                data-base-slider="true"
+                data-base-slider-options="{{ baseSliderOptions|json_encode|e('html_attr') }}"
+                role="region"
+                aria-label="Banner slider"
+                tabindex="0"
+            >
+                <div class="image-slider-container" data-base-slider-container="true">
+                    {% for item in sliderItems %}
+                        {% sw_include '@ICTECHcmsBundleElement/storefront/element/ict-banner-slider/slide.html.twig' %}
+                    {% endfor %}
+                </div>
+                {% sw_include '@ICTECHcmsBundleElement/storefront/element/ict-banner-slider/controls.html.twig' %}
+            </div>
+        </div>
+    {% endif %}
+{% endblock %}

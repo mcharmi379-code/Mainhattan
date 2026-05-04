@@ -1,0 +1,76 @@
+{% block element_ict_accordion %}
+    {% set config = element.translated.config ?? element.config %}
+    {% set title = config.title.value|default('') %}
+    {% set description = config.description.value|default('') %}
+    {% set displayMode = config.displayMode.value|default('single') %}
+    {% set entries = config.entries.value|default([]) %}
+    {% set accordionId = 'ict-accordion-' ~ element.id %}
+
+    {% if entries is empty and (title or description) %}
+        {% set entries = [{
+            title: title ?: 'Accordion',
+            content: description,
+            expanded: true
+        }] %}
+        {% set title = '' %}
+        {% set description = '' %}
+    {% endif %}
+
+    {% if title or description or entries is not empty %}
+        <div class="cms-element-ict-accordion">
+            {% if title or description %}
+                <header class="cms-element-ict-accordion__intro">
+                    {% if title %}
+                        <h2 class="cms-element-ict-accordion__title">{{ title }}</h2>
+                    {% endif %}
+
+                    {% if description %}
+                        <div class="cms-element-ict-accordion__description">{{ description|raw }}</div>
+                    {% endif %}
+                </header>
+            {% endif %}
+
+            <div
+                class="accordion cms-element-ict-accordion__items"
+                id="{{ accordionId }}"
+            >
+                {% for entry in entries %}
+                    {% if entry.title is defined or entry.content is defined %}
+                        {% set headingId = accordionId ~ '-heading-' ~ loop.index %}
+                        {% set collapseId = accordionId ~ '-collapse-' ~ loop.index %}
+                        {% set isExpanded = entry.expanded|default(false) %}
+
+                        <div class="accordion-item cms-element-ict-accordion__item">
+                            <h3
+                                class="accordion-header cms-element-ict-accordion__header"
+                                id="{{ headingId }}"
+                            >
+                                <button
+                                    class="accordion-button cms-element-ict-accordion__button{% if not isExpanded %} collapsed{% endif %}"
+                                    type="button"
+                                    data-bs-toggle="collapse"
+                                    data-bs-target="#{{ collapseId }}"
+                                    aria-expanded="{{ isExpanded ? 'true' : 'false' }}"
+                                    aria-controls="{{ collapseId }}"
+                                >
+                                    {{ entry.title|default('') }}
+                                </button>
+                            </h3>
+
+                            <div
+                                id="{{ collapseId }}"
+                                class="accordion-collapse collapse{% if isExpanded %} show{% endif %}"
+                                aria-labelledby="{{ headingId }}"
+                                {% if displayMode == 'single' %}data-bs-parent="#{{ accordionId }}"{% endif %}
+                            >
+                                <div class="accordion-body cms-element-ict-accordion__body">
+                                    {{ entry.content|default('')|raw }}
+                                </div>
+                            </div>
+                        </div>
+                    {% endif %}
+                {% endfor %}
+            </div>
+        </div>
+    {% endif %}
+{% endblock %}

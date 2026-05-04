@@ -1,0 +1,95 @@
+.sw-cms-el-ict-content-tabs {
+    width: 100%;
+    min-height: 120px;
+
+    &__placeholder {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+        min-height: 120px;
+        border: 1px dashed #b6c2d0;
+        border-radius: 6px;
+        background: #f8fafc;
+        color: #7b8794;
+        font-size: 13px;
+        cursor: pointer;
+    }
+
+    &__nav {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 4px;
+        margin-bottom: 0;
+    }
+
+    &__nav-item {
+        padding: 5px 14px;
+        font-size: 13px;
+        font-weight: 600;
+        border: none;
+        border-radius: 4px 4px 0 0;
+        background: #e2e8f0;
+        color: #64748b;
+        cursor: pointer;
+        transition: background 0.15s, color 0.15s;
+        outline: none;
+
+        &:hover {
+            background: #cbd5e1;
+            color: #334155;
+        }
+
+        &--active {
+            background: #1e293b;
+            color: #fff;
+        }
+    }
+
+    &__panel {
+        border: 1px solid #e2e8f0;
+        border-radius: 0 4px 4px 4px;
+        padding: 16px;
+        background: #fff;
+        min-height: 80px;
+    }
+
+    &__content {
+        font-size: 14px;
+        line-height: 1.6;
+        color: #334155;
+        overflow-wrap: anywhere;
+        word-break: break-word;
+
+        h1, h2, h3, h4, h5, h6 {
+            margin: 0 0 10px;
+            font-weight: 700;
+            color: #1e293b;
+        }
+
+        p { margin: 0 0 8px; &:last-child { margin-bottom: 0; } }
+
+        a { color: #3b82f6; text-decoration: underline; }
+
+        ul, ol { padding-left: 20px; margin: 0 0 8px; }
+    }
+
+    // Buttons style variant
+    &--buttons {
+        .sw-cms-el-ict-content-tabs__nav-item {
+            border-radius: 4px;
+            border: 1px solid #e2e8f0;
+
+            &--active {
+                background: #1e293b;
+                color: #fff;
+                border-color: #1e293b;
+            }
+        }
+
+        .sw-cms-el-ict-content-tabs__panel {
+            border-radius: 4px;
+            margin-top: 8px;
+        }
+    }
+}

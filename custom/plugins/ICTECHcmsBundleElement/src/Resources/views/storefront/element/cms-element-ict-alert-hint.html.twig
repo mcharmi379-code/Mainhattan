@@ -1,0 +1,33 @@
+{% block element_ict_alert_hint %}
+    {% set alertType    = element.data.alertType ?? element.config.alertType.value ?? 'info' %}
+    {% set layoutType   = element.data.layoutType ?? element.config.layoutType.value ?? 'custom-callout' %}
+    {% set activateIcon = element.data.activateIcon ?? element.config.activateIcon.value ?? true %}
+    {% set title        = element.data.title ?? element.config.title.value ?? '' %}
+    {% set content      = element.data.content ?? element.config.content.value ?? '' %}
+
+    {% if title or content %}
+        {% set layoutClass = layoutType == 'shopware-standard' ? 'ict-alert-hint--sw-standard' : 'ict-alert-hint--callout' %}
+
+        <div class="cms-element-ict-alert-hint">
+            <div class="ict-alert-hint ict-alert-hint--{{ alertType }} {{ layoutClass }}" role="alert">
+                {% if activateIcon %}
+                    <span class="ict-alert-hint__icon" aria-hidden="true">
+                        {% if alertType == 'success' %}
+                            {% sw_icon 'checkmark-circle' style { size: 'fluid' } %}
+                        {% elseif alertType == 'danger' %}
+                            {% sw_icon 'x-circle' style { size: 'fluid' } %}
+                        {% elseif alertType == 'warning' %}
+                            {% sw_icon 'warning' style { size: 'fluid' } %}
+                        {% else %}
+                            {% sw_icon 'info' style { size: 'fluid' } %}
+                        {% endif %}
+                    </span>
+                {% endif %}
+                <div class="ict-alert-hint__body">
+                    {% if title %}<strong class="ict-alert-hint__title">{{ title }}</strong>{% endif %}
+                    {% if content %}<div class="ict-alert-hint__content">{{ content|raw }}</div>{% endif %}
+                </div>
+            </div>
+        </div>
+    {% endif %}
+{% endblock %}

@@ -1,0 +1,48 @@
+.sw-cms-el-preview-ict-file-download {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    padding: 10px;
+    background: #f8fafc;
+    height: 100%;
+
+    &__icon-wrap {
+        width: 32px;
+        height: 32px;
+        background: #e8f0fe;
+        border-radius: 6px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: #189eff;
+    }
+
+    &__bar {
+        width: 80%;
+        height: 10px;
+        background: #e2eaf3;
+        border-radius: 3px;
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
+        padding-right: 4px;
+    }
+
+    &__btn {
+        display: inline-block;
+        width: 22px;
+        height: 7px;
+        background: #189eff;
+        border-radius: 2px;
+    }
+
+    &__label {
+        font-size: 10px;
+        font-weight: 600;
+        color: #52667a;
+        margin: 0;
+        text-align: center;
+    }
+}

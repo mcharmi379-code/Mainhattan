@@ -1,0 +1,18 @@
+{% block sw_cms_preview_ict_feature_grid %}
+<div class="sw-cms-preview-ict-feature-grid">
+    <div class="pfg-preview__header">
+        <span class="pfg-preview__label">Feature Grid</span>
+        <span class="pfg-preview__badge">3 items</span>
+    </div>
+    <div class="pfg-preview__list">
+        <div class="pfg-preview__row" v-for="i in 3" :key="i">
+            <div class="pfg-preview__icon"></div>
+            <div class="pfg-preview__body">
+                <div class="pfg-preview__title"></div>
+                <div class="pfg-preview__desc"></div>
+            </div>
+            <div class="pfg-preview__cta"></div>
+        </div>
+    </div>
+</div>
+{% endblock %}

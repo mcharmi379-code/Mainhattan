@@ -1,0 +1,45 @@
+{% block element_ict_two_column_three_image_right_top %}
+    {% if data.rightTopMedia %}
+        {% set imageObjectFit = config.rightTopImageObjectFit.value %}
+
+        <div class="banner-small image-card mb-3">
+            <img src="{{ data.rightTopMedia.url }}"
+                 alt="{{ data.rightTopMedia.fileName }}"
+                 class="img-fluid w-100 rounded"
+                 style="{% if imageObjectFit != 'contain' %}height: {{ rightTopImageHeightCss }};{% endif %}object-fit: {{ config.rightTopImageObjectFit.value }};">
+
+            <div class="content">
+                {% if config.rightTopImageDescription.value %}
+                    <p class="title">{{ config.rightTopImageDescription.value | striptags }}</p>
+                {% endif %}
+            </div>
+
+            <div class="learn-more-btn">
+                {% if config.rightTopButtonTitle.value %}
+                    {% set buttonIconSizeRaw = config.rightTopButtonIconSize.value ?? '25' %}
+                    {% set buttonIconSizeCss = buttonIconSizeRaw matches '/^[0-9]+(\\.[0-9]+)?$/' ? buttonIconSizeRaw ~ 'px' : buttonIconSizeRaw %}
+                    {% set buttonIconHoverActive = config.rightTopButtonIconHoverActive.value ? 'true' : 'false' %}
+                    {% set buttonIconHoverColor = config.rightTopButtonIconHoverColor.value ?? '#000000' %}
+
+                    <a href="{{ config.rightTopButtonLink.value }}"
+                       target="{{ config.rightTopButtonTarget.value }}"
+                       class="ict-content-button btn-learn btn btn-lg px-5 py-3 fw-bold text-decoration-none"
+                       data-icon-hover-active="{{ buttonIconHoverActive }}"
+                       style="background: {{ config.rightTopButtonBackgroundColor.value }};color: {{ config.rightTopButtonTextColor.value }};border: 1px solid {{ config.rightTopButtonBorderColor.value }};border-radius: 0;--button-icon-size: {{ buttonIconSizeCss }};--button-icon-base-color: #ffffff;--button-icon-hover-color: {{ buttonIconHoverColor }};box-shadow: none;"
+                       onmouseover="this.style.background='{{ config.rightTopButtonHoverBackgroundColor.value }}';this.style.color='{{ config.rightTopButtonHoverTextColor.value }}';this.style.borderColor='{{ config.rightTopButtonHoverBorderColor.value }}';"
+                       onmouseout="this.style.background='{{ config.rightTopButtonBackgroundColor.value }}';this.style.color='{{ config.rightTopButtonTextColor.value }}';this.style.borderColor='{{ config.rightTopButtonBorderColor.value }}';">
+                        {{ config.rightTopButtonTitle.value }}
+
+                        {% if data.rightTopButtonIcon %}
+                            {% if '.svg' in data.rightTopButtonIcon.url %}
+                                <span class="button-icon button-icon-mask" style="background-color: var(--button-icon-color);-webkit-mask-image: url('{{ data.rightTopButtonIcon.url }}');mask-image: url('{{ data.rightTopButtonIcon.url }}');"></span>
+                            {% else %}
+                                <span class="button-icon button-icon-image" style="background-image: url('{{ data.rightTopButtonIcon.url }}');"></span>
+                            {% endif %}
+                        {% endif %}
+                    </a>
+                {% endif %}
+            </div>
+        </div>
+    {% endif %}
+{% endblock %}

@@ -1,0 +1,76 @@
+{% block element_ict_hero_section %}
+    {% set c = element.config %}
+    {% set background = '' %}
+    {% if c.backgroundType.value == 'color' %}
+        {% set background = 'background-color:' ~ (c.backgroundColor.value ?: '#f8f9fa') ~ ';' %}
+    {% else %}
+        {% set background = 'background:linear-gradient(135deg,' ~ (c.backgroundGradientColor1.value ?: '#0b5c8a') ~ ' 0%,' ~ (c.backgroundGradientColor2.value ?: '#1559d6') ~ ' 100%);' %}
+    {% endif %}
+    {% set minHeight = c.minHeight.value ?: '560px' %}
+
+    {% set featureItems = c.featureItems.value is iterable ? c.featureItems.value : [] %}
+
+    <section class="cms-element-ict-hero-section" style="{{ background }}min-height:{{ minHeight }};">
+        <div class="cms-element-ict-hero-section__container">
+            <div class="cms-element-ict-hero-section__left">
+                {% if c.labelText.value %}
+                    <span
+                        class="cms-element-ict-hero-section__label"
+                        style="background-color:{{ c.labelBackgroundColor.value ?: '#ffffff' }};color:{{ c.labelTextColor.value ?: '#212529' }};border-color:{{ c.labelBorderColor.value ?: '#dee2e6' }};"
+                    >
+                        {{ c.labelText.value }}
+                    </span>
+                {% endif %}
+
+                <h2 class="cms-element-ict-hero-section__headline" style="color:{{ c.headlineColor.value ?: '#ffffff' }};">
+                    {{ c.headlineText.value }}
+                </h2>
+
+                <div class="cms-element-ict-hero-section__description" style="color:{{ c.descriptionColor.value ?: '#e9ecef' }};">
+                    {{ c.descriptionText.value|raw }}
+                </div>
+
+                <div class="cms-element-ict-hero-section__actions">
+                    {% if c.primaryButtonText.value %}
+                        {% set primaryUrl = c.primaryButtonLink.value ?: '#' %}
+                        {% if c.primaryButtonLinkType.value == 'external' and primaryUrl != '#' and not (primaryUrl starts with 'http://') and not (primaryUrl starts with 'https://') %}
+                            {% set primaryUrl = 'https://' ~ primaryUrl %}
+                        {% endif %}
+                        <a
+                            href="{{ primaryUrl }}"
+                            target="{{ c.primaryButtonTarget.value ?: '_self' }}"
+                            class="cms-element-ict-hero-section__button cms-element-ict-hero-section__button--primary"
+                            style="background-color:{{ c.primaryButtonBackgroundColor.value ?: '#0064ff' }};color:{{ c.primaryButtonTextColor.value ?: '#ffffff' }};"
+                        >
+                            {{ c.primaryButtonText.value }}
+                        </a>
+                    {% endif %}
+
+                    {% if c.showSecondaryButton.value and c.secondaryButtonText.value %}
+                        {% set secondaryUrl = c.secondaryButtonLink.value ?: '#' %}
+                        {% if c.secondaryButtonLinkType.value == 'external' and secondaryUrl != '#' and not (secondaryUrl starts with 'http://') and not (secondaryUrl starts with 'https://') %}
+                            {% set secondaryUrl = 'https://' ~ secondaryUrl %}
+                        {% endif %}
+                        <a
+                            href="{{ secondaryUrl }}"
+                            target="{{ c.secondaryButtonTarget.value ?: '_self' }}"
+                            class="cms-element-ict-hero-section__button cms-element-ict-hero-section__button--secondary"
+                            style="background-color:{{ c.secondaryButtonBackgroundColor.value ?: '#6c757d' }};color:{{ c.secondaryButtonTextColor.value ?: '#ffffff' }};"
+                        >
+                            {{ c.secondaryButtonText.value }}
+                        </a>
+                    {% endif %}
+                </div>
+            </div>
+
+            <div class="cms-element-ict-hero-section__right">
+                {% for item in featureItems %}
+                    <article class="cms-element-ict-hero-section__feature">
+                        <h3 class="cms-element-ict-hero-section__feature-title">{{ item.title }}</h3>
+                        <p class="cms-element-ict-hero-section__feature-text">{{ item.description }}</p>
+                    </article>
+                {% endfor %}
+            </div>
+        </div>
+    </section>
+{% endblock %}

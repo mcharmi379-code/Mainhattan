@@ -1,0 +1,96 @@
+{% block element_ict_platform_support_grid_item %}
+    {% set platformElement = platform %}
+
+    {% if platformElement.platformLinkUrl %}
+        <a href="{{ platformElement.platformLinkUrl }}" target="{{ platformElement.platformLinkTarget }}" class="platform-item-link">
+    {% endif %}
+
+    <div class="platform-item" style="
+                {% if platformElement.textAlignment == 'right' %}
+                    flex-direction: row;
+                    align-items: center;
+                {% elseif platformElement.textAlignment == 'left' %}
+                    flex-direction: row-reverse;
+                    align-items: center;
+                {% elseif platformElement.textAlignment == 'center-top' %}
+                    flex-direction: column-reverse;
+                    align-items: center;
+                {% else %}
+                    flex-direction: column;
+                    align-items: center;
+                {% endif %}
+                gap: 10px;
+                cursor: {{ platformElement.platformLinkUrl ? platformElement.platformLinkUrl : 'default' }};
+            ">
+        <div class="platform-icon" style="
+                    width: {{ platformElement.iconSizePx ?? '48' }}px;
+                    height: {{ platformElement.iconSizePx ?? '48' }}px;
+                    {% if platformElement.iconBackgroundType == 'gradient' %}
+                        background: linear-gradient({{ platformElement.iconGradientDirection }}, {{ platformElement.iconGradientColor1 }}, {{ platformElement.iconGradientColor2 }});
+                    {% elseif platformElement.iconBackgroundType == 'solid' %}
+                        background-color: {{ platformElement.iconBackgroundColor }};
+                    {% else %}
+                        background: transparent;
+                    {% endif %}
+                    {% if platformElement.iconBackgroundShape == 'circle' %}
+                        border-radius: 50%;
+                    {% elseif platformElement.iconBackgroundShape == 'rounded' %}
+                        border-radius: 12px;
+                    {% elseif platformElement.iconBackgroundShape == 'square' %}
+                        border-radius: 4px;
+                    {% else %}
+                        border-radius: 8px;
+                    {% endif %}
+                    {% if platformElement.platformIconShadow %}
+                        {% set shadowColor = platformElement.platformShadowColor ?? '#808080' %}
+                        box-shadow: 0 4px 12px {{ shadowColor }}26;
+                    {% endif %}
+                    transition: all 0.3s ease;
+                ">
+            {% if platformElement.iconMedia %}
+                <img class="platform-icon-img" src="{{ platformElement.iconMedia.url }}" alt="{{ platformElement.platformLabel }}" style="
+                    width: {{ (platformElement.iconSizePx ?? '48')|number_format * 0.7 }}px;
+                    height: {{ (platformElement.iconSizePx ?? '48')|number_format * 0.7 }}px;
+                    object-fit: contain;
+                ">
+            {% elseif data.platformIcons and data.platformIcons[loop.index0] %}
+                <img class="platform-icon-img" src="{{ data.platformIcons[loop.index0].url }}" alt="{{ platformElement.platformLabel }}" style="
+                    width: {{ (platformElement.iconSizePx ?? '48')|number_format * 0.7 }}px;
+                    height: {{ (platformElement.iconSizePx ?? '48')|number_format * 0.7 }}px;
+                    object-fit: contain;
+                ">
+            {% else %}
+                <div class="platform-icon-placeholder" style="
+                            border: 2px solid {{ platformElement.iconColor ?? '#ffffff' }};
+                            width: 16px;
+                            height: 12px;
+                            border-radius: 2px;
+                        "></div>
+            {% endif %}
+        </div>
+
+        {% if platformElement.platformLabel %}
+            <span class="platform-label" style="
+                        font-size: {{ platformElement.platformLabelSizePx ?? '16' }}px;
+                        font-weight: {{ platformElement.platformLabelWeight ?? '400' }};
+                        color: {{ platformElement.platformLabelColor }};
+                        {% if platformElement.textAlignment == 'right' or platformElement.textAlignment == 'left' %}
+                            text-align: left;
+                        {% else %}
+                            text-align: center;
+                        {% endif %}
+                        transition: all 0.3s ease;
+                    "
+                    {% if platformElement.textHoverUnderline or platformElement.textHoverColorChange %}
+                        onmouseover="{% if platformElement.textHoverUnderline %}this.style.textDecoration='underline';{% endif %}{% if platformElement.textHoverColorChange %}this.style.color='{{ platformElement.textHoverColor }}';{% endif %}"
+                        onmouseout="{% if platformElement.textHoverUnderline %}this.style.textDecoration='none';{% endif %}{% if platformElement.textHoverColorChange %}this.style.color='{{ platformElement.platformLabelColor }}';{% endif %}"
+                    {% endif %}>
+                {{ platformElement.platformLabel }}
+            </span>
+        {% endif %}
+    </div>
+
+    {% if platformElement.platformLinkUrl %}
+        </a>
+    {% endif %}
+{% endblock %}

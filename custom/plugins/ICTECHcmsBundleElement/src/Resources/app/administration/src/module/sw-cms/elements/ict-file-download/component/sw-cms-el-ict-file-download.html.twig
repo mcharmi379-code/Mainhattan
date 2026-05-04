@@ -1,0 +1,17 @@
+{% block sw_cms_el_ict_file_download %}
+<div class="sw-cms-el-ict-file-download">
+    <div class="sw-cms-el-ict-file-download__body">
+        <div class="sw-cms-el-ict-file-download__text">
+            <span class="sw-cms-el-ict-file-download__title">
+                {{ title || $tc('ict-cms-bundle-element.cms.elements.ictFileDownload.config.titlePlaceholder') }}
+            </span>
+            <span class="sw-cms-el-ict-file-download__subtitle">
+                {{ subtitle || $tc('ict-cms-bundle-element.cms.elements.ictFileDownload.config.subtitlePlaceholder') }}
+            </span>
+        </div>
+        <button class="sw-cms-el-ict-file-download__btn" type="button" disabled>
+            {{ buttonText }}
+        </button>
+    </div>
+</div>
+{% endblock %}

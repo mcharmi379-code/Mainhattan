@@ -1,0 +1,14 @@
+{% block block_ict_eight_column %}
+    {% set slotNames = ['column1', 'column2', 'column3', 'column4', 'column5', 'column6', 'column7', 'column8'] %}
+
+    {% for slotName in slotNames %}
+        {% set element = block.slots.getSlot(slotName) %}
+        {% if element %}
+            <div class="ict-eight-column-layout__col" data-cms-element-id="{{ element.id }}">
+                <div class="ict-eight-column-layout__card-slot">
+                    {% sw_include '@Storefront/storefront/element/cms-element-' ~ element.type ~ '.html.twig' ignore missing with { element: element } %}
+                </div>
+            </div>
+        {% endif %}
+    {% endfor %}
+{% endblock %}

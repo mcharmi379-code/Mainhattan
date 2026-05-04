@@ -1,0 +1,37 @@
+{% block element_ict_image_gallery_grid %}
+    <div class="ict-image-gallery__grid">
+        {% for image in galleryItems %}
+            {% set media = image.media ?? null %}
+
+            {% if media %}
+                {% set caption = image.title|default(media.translated.alt|default(media.translated.title|default(''))) %}
+                {% set triggerLabel = caption|default(galleryTitle|default('Gallery image')) %}
+                {% set attributes = {
+                    'class': 'ict-image-gallery__image',
+                    'alt': media.translated.alt|default(caption),
+                    'title': media.translated.title|default(caption),
+                    'loading': 'lazy',
+                    'decoding': 'async'
+                } %}
+
+                <button
+                    type="button"
+                    class="ict-image-gallery__item"
+                    data-ict-gallery-item
+                    data-ict-gallery-src="{{ media.url }}"
+                    data-ict-gallery-alt="{{ media.translated.alt|default(caption)|e('html_attr') }}"
+                    data-ict-gallery-caption="{{ caption|e('html_attr') }}"
+                    aria-label="{{ triggerLabel|sw_sanitize }}"
+                >
+                    <span class="ict-image-gallery__media">
+                        {% sw_thumbnails 'ict-image-gallery-thumbnails' with { media: media, attributes: attributes } %}
+                    </span>
+
+                    {% if caption %}
+                        <span class="ict-image-gallery__caption">{{ caption }}</span>
+                    {% endif %}
+                </button>
+            {% endif %}
+        {% endfor %}
+    </div>
+{% endblock %}

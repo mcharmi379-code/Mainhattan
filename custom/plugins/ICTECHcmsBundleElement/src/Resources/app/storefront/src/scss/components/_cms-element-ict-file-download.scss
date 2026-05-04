@@ -1,0 +1,143 @@
+.cms-element-ict-file-download {
+    .ict-file-download {
+        border: 2px solid #d1dbe8;
+        border-radius: 8px;
+        background: #f8fafc;
+        padding: 1.125rem 1.5rem;
+        box-sizing: border-box;
+        width: 100%;
+
+        &__inner {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        &__thumb {
+            flex: 0 0 56px;
+            width: 56px;
+            height: 56px;
+            border-radius: 8px;
+            overflow: hidden;
+            background: #fff;
+            border: 1px solid #e2eaf3;
+
+            img {
+                width: 100%;
+                height: 100%;
+                display: block;
+                object-fit: cover;
+            }
+        }
+
+        &__text {
+            display: flex;
+            flex-direction: column;
+            gap: 3px;
+            min-width: 0;
+            flex: 1 1 auto;
+        }
+
+        &__title {
+            display: block;
+            font-size: 1.0625rem;
+            font-weight: 700;
+            color: #1a2b3c;
+            line-height: 1.3;
+        }
+
+        &__subtitle {
+            display: block;
+            font-size: .875rem;
+            color: #52667a;
+            line-height: 1.4;
+        }
+
+        &__btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            min-width: 120px;
+            padding: .625rem 1.25rem;
+            font-size: .875rem;
+            font-weight: 600;
+            color: #fff;
+            background: #189eff;
+            border: 2px solid #189eff;
+            border-radius: 5px;
+            text-decoration: none;
+            cursor: pointer;
+            transition: background .2s ease, border-color .2s ease, transform .1s ease;
+            touch-action: manipulation;
+            -webkit-tap-highlight-color: transparent;
+            white-space: nowrap;
+
+            &:hover,
+            &:focus-visible {
+                background: #0d7fd4;
+                border-color: #0d7fd4;
+                color: #fff;
+                text-decoration: none;
+                outline: 2px solid #0d7fd4;
+                outline-offset: 2px;
+            }
+
+            &:active {
+                transform: scale(.97);
+            }
+
+            &--disabled {
+                background: #b3bfcc;
+                border-color: #b3bfcc;
+                cursor: not-allowed;
+                pointer-events: none;
+            }
+        }
+
+        &__specs {
+            margin-top: .75rem;
+            padding-top: .75rem;
+            border-top: 1px solid #e2eaf3;
+            display: flex;
+            flex-wrap: wrap;
+            gap: .5rem;
+        }
+
+        &__specs-item {
+            font-size: .8125rem;
+            color: #52667a;
+
+            &--empty {
+                color: #b3bfcc;
+                font-style: italic;
+            }
+        }
+    }
+
+    @media (max-width: 575.98px) {
+        .ict-file-download {
+            padding: 1rem;
+
+            &__inner {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            &__thumb {
+                width: 64px;
+                height: 64px;
+                flex-basis: 64px;
+            }
+
+            &__btn {
+                width: 100%;
+                min-width: unset;
+                padding: .75rem 1rem;
+                font-size: .9375rem;
+            }
+        }
+    }
+}

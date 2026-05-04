@@ -1,0 +1,23 @@
+{% block element_ict_platform_support_open %}
+    <div class="cms-element-ict-platform-support" style="
+            {% if config.backgroundType.value == 'color' %}
+                background-color: {{ config.platformBlockBackground.value }};
+            {% elseif config.backgroundType.value == 'image' and data.backgroundImage %}
+                background-image: url('{{ data.backgroundImage.url }}');
+                background-size: cover;
+                background-position: center;
+                background-repeat: no-repeat;
+                min-height: {{ config.backgroundImageMinHeight.value|default('400px') }};
+            {% elseif config.backgroundType.value == 'gradient' %}
+                background: linear-gradient({{ config.gradientDirection.value }}, {{ config.gradientColor1.value }}, {{ config.gradientColor2.value }});
+            {% endif %}
+            padding: 48px;
+            border-radius: {{ config.platformBlockBorderRadius.value ?? 0 }}px;
+            position: relative;
+            overflow: hidden;
+        "
+        {% if config.backgroundType.value == 'gradient' and config.hoverGradientColor1.value and config.hoverGradientColor2.value %}
+            onmouseover="this.style.background='linear-gradient({{ config.gradientDirection.value }}, {{ config.hoverGradientColor1.value }}, {{ config.hoverGradientColor2.value }})'"
+            onmouseout="this.style.background='linear-gradient({{ config.gradientDirection.value }}, {{ config.gradientColor1.value }}, {{ config.gradientColor2.value }})'"
+        {% endif %}>
+{% endblock %}

@@ -1,0 +1,20 @@
+.sw-cms-block-ict-eleven-column {
+    display: flex;
+    gap: 5px;
+    align-items: stretch;
+
+    &__slot {
+        flex: 1 1 0;
+        min-width: 0;
+    }
+
+    .sw-cms-slot,
+    .sw-cms-el-ict-eleven-column {
+        height: 100%;
+        width: 100%;
+    }
+
+    .sw-cms-slot {
+        min-width: 0;
+    }
+}

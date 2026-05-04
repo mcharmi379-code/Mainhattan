@@ -1,0 +1,12 @@
+{% block sw_cms_el_ict_breadcrumb_navigation %}
+<div class="sw-cms-el-ict-breadcrumb-navigation" :style="colorStyle">
+    <nav class="ict-bc-preview" :style="alignmentStyle" aria-label="Breadcrumb preview">
+        <template v-for="(crumb, index) in previewCrumbs" :key="index">
+            <span class="ict-bc-preview__item" :class="{ 'is-active': index === previewCrumbs.length - 1 }">
+                {{ crumb }}
+            </span>
+            <span v-if="index < previewCrumbs.length - 1" class="ict-bc-preview__sep" aria-hidden="true">›</span>
+        </template>
+    </nav>
+</div>
+{% endblock %}

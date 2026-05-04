@@ -1,0 +1,11 @@
+{% block block_ict_file_download %}
+<div class="cms-block-ict-file-download">
+    <div class="cms-block-container">
+        {% block block_ict_file_download_content %}
+            {% set element = block.slots.getSlot('content') %}
+            {% sw_include '@Storefront/storefront/element/cms-element-' ~ element.type ~ '.html.twig' ignore missing %}
+        {% endblock %}
+    </div>
+</div>
+{% endblock %}
+

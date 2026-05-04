@@ -1,0 +1,20 @@
+{% block element_ict_platform_support_styles %}
+    <style>
+        @media (max-width: 767px) {
+            .cms-block-ict-platform-support .platform-grid {
+                grid-template-columns: repeat(2, 1fr) !important;
+            }
+        }
+
+        @media (min-width: 768px) and (max-width: 1024px) {
+            .cms-block-ict-platform-support .platform-grid {
+                grid-template-columns: repeat(4, 1fr) !important;
+            }
+        }
+
+        .platform-item-link:hover {
+            text-decoration: none;
+            cursor: default;
+        }
+    </style>
+{% endblock %}

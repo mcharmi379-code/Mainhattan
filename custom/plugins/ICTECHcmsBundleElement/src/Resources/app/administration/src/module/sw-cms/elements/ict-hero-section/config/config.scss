@@ -1,0 +1,109 @@
+.sw-cms-el-config-ict-hero-section {
+    .config-row {
+        display: flex;
+        gap: 16px;
+        margin-bottom: 16px;
+        
+        > * {
+            flex: 1;
+        }
+    }
+    
+    .config-row-2 {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 16px;
+        margin-bottom: 16px;
+    }
+    
+    .config-row-3 {
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr;
+        gap: 12px;
+        margin-bottom: 16px;
+    }
+    
+    .config-section-title {
+        font-weight: 600;
+        font-size: 14px;
+        color: #52667a;
+        margin: 24px 0 12px 0;
+        padding-bottom: 8px;
+        border-bottom: 1px solid #d1d9e0;
+    }
+
+    // Right Section Accordion Styles
+    &__right-section {
+        .cards-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+
+        .feature-item-config {
+            border: 1px solid #d1d5db;
+            border-radius: 8px;
+            margin-bottom: 1rem;
+            overflow: hidden;
+        }
+
+        .ict-accordion-header {
+            background: #f3f4f6;
+            padding: 12px 16px;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .ict-card-accordion {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
+
+            h4 {
+                margin: 0;
+                font-weight: 600;
+            }
+        }
+
+        .ict-card-accordion-arrow {
+            display: inline-flex;
+            transition: transform 0.3s ease;
+
+            &.open {
+                transform: rotate(90deg);
+            }
+        }
+
+        .ict-accordion-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.35s ease;
+            background: #ffffff;
+            padding: 0 16px;
+
+            &.open {
+                padding: 16px;
+                max-height: 5000px;
+            }
+        }
+
+        .remove-feature-section {
+            margin-top: 1rem;
+        }
+    }
+}
+
+.sw-cms-slot-config__settings-modal {
+    .sw-modal__body {
+        overflow: visible;
+    }
+
+    .sw-colorpicker__dropdown,
+    .sw-colorpicker__colorpicker {
+        z-index: 1200;
+    }
+}

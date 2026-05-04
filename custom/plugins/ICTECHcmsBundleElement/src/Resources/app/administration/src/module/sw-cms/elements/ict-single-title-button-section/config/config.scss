@@ -1,0 +1,10 @@
+.sw-cms-slot-config__settings-modal {
+    .sw-modal__body {
+        overflow: visible;
+    }
+
+    .sw-colorpicker__dropdown,
+    .sw-colorpicker__colorpicker {
+        z-index: 1200;
+    }
+}

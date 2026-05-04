@@ -1,0 +1,81 @@
+{% block sw_cms_el_config_ict_content_tabs %}
+<div class="sw-cms-el-config-ict-content-tabs">
+
+    <div class="ict-ct-config__panel">
+
+        <div
+            v-for="(tab, index) in tabs"
+            :key="index"
+            class="ict-ct-config__item"
+        >
+            <div class="ict-ct-config__item-header">
+                <span class="ict-ct-config__item-label">{{ tab.label || ('Tab ' + (index + 1)) }}</span>
+
+                <div class="ict-ct-config__item-actions">
+                    <sw-button
+                        size="x-small"
+                        :disabled="tabs.length <= 1"
+                        @click="duplicateTab(index)"
+                    >
+                        <sw-icon name="regular-copy" size="12" />
+                    </sw-button>
+
+                    <sw-button
+                        size="x-small"
+                        :disabled="index === 0"
+                        @click="moveTabUp(index)"
+                    >
+                        <sw-icon name="regular-chevron-up-xxs" size="12" />
+                    </sw-button>
+
+                    <sw-button
+                        size="x-small"
+                        :disabled="index >= tabs.length - 1"
+                        @click="moveTabDown(index)"
+                    >
+                        <sw-icon name="regular-chevron-down-xxs" size="12" />
+                    </sw-button>
+
+                    <sw-button
+                        size="x-small"
+                        variant="danger"
+                        :disabled="tabs.length <= 1"
+                        @click="removeTab(index)"
+                    >
+                        <sw-icon name="regular-trash" size="12" />
+                    </sw-button>
+                </div>
+            </div>
+
+            <div class="ict-ct-config__item-body">
+                <sw-text-field
+                    v-model:value="tab.label"
+                    :label="$tc('ict-cms-bundle-element.cms.elements.ictContentTabs.tabLabel')"
+                    @update:value="onTabLabelChange"
+                />
+
+                <div class="ict-ct-config__editor-label">
+                    {{ $tc('ict-cms-bundle-element.cms.elements.ictContentTabs.tabContent') }}
+                </div>
+                <sw-text-editor
+                    :value="tab.content"
+                    sanitize-input
+                    @update:value="onTabContentChange(index, $event)"
+                />
+            </div>
+        </div>
+
+        <sw-button
+            class="ict-ct-config__add-btn"
+            variant="ghost"
+            size="small"
+            @click="addTab"
+        >
+            <sw-icon name="regular-plus-circle" size="14" />
+            {{ $tc('ict-cms-bundle-element.cms.elements.ictContentTabs.addTab') }}
+        </sw-button>
+
+    </div>
+
+</div>
+{% endblock %}

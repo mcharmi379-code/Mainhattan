@@ -1,0 +1,77 @@
+{% block sw_cms_element_ict_category_image_slider_config %}
+<div class="sw-cms-el-config-ict-category-image-slider">
+    <sw-alert
+        v-if="hasValidationErrors"
+        class="sw-cms-el-config-ict-category-image-slider__alert"
+        variant="error"
+    >
+        {{ $tc('ict-cms-bundle-element.cms.elements.ictCategoryImageSlider.config.errorHint') }}
+    </sw-alert>
+
+    <div class="sw-cms-el-config-ict-category-image-slider__cards">
+        <div
+            v-for="(card, index) in cards"
+            :key="index"
+            class="sw-cms-el-config-ict-category-image-slider__card"
+        >
+            <sw-container columns="1fr 1fr" gap="20px">
+                <sw-text-field
+                    v-model:value="card.title"
+                    :label="$tc('ict-cms-bundle-element.cms.elements.ictCategoryImageSlider.config.cardTitle')"
+                    :placeholder="$tc('ict-cms-bundle-element.cms.elements.ictCategoryImageSlider.config.cardTitlePlaceholder')"
+                />
+
+                <sw-entity-single-select
+                    v-model:value="card.categoryId"
+                    entity="category"
+                    :label="$tc('ict-cms-bundle-element.cms.elements.ictCategoryImageSlider.config.category')"
+                    :placeholder="$tc('ict-cms-bundle-element.cms.elements.ictCategoryImageSlider.config.categoryPlaceholder')"
+                    :criteria="categoryCriteria"
+                    show-clearable-button
+                    @update:value="onCategoryChange($event, index)"
+                />
+            </sw-container>
+
+            <sw-alert
+                v-if="invalidCards[index] === true"
+                class="sw-cms-el-config-ict-category-image-slider__card-error"
+                variant="error"
+            >
+                {{ $tc('ict-cms-bundle-element.cms.elements.ictCategoryImageSlider.config.cardErrorNoMedia') }}
+            </sw-alert>
+
+            <div
+                v-if="categoryMediaUrl(index)"
+                class="sw-cms-el-config-ict-category-image-slider__preview"
+            >
+                <img
+                    class="sw-cms-el-config-ict-category-image-slider__preview-image"
+                    :src="categoryMediaUrl(index)"
+                    alt=""
+                >
+                <div class="sw-cms-el-config-ict-category-image-slider__preview-title">
+                    {{ categoryName(index) }}
+                </div>
+            </div>
+
+            <sw-button
+                class="sw-cms-el-config-ict-category-image-slider__remove"
+                variant="danger"
+                size="small"
+                @click="removeCard(index)"
+            >
+                {{ $tc('ict-cms-bundle-element.cms.elements.ictCategoryImageSlider.config.removeCard') }}
+            </sw-button>
+        </div>
+    </div>
+
+    <sw-button
+        class="sw-cms-el-config-ict-category-image-slider__add"
+        variant="primary"
+        @click="addCard"
+    >
+        {{ $tc('ict-cms-bundle-element.cms.elements.ictCategoryImageSlider.config.addCard') }}
+    </sw-button>
+</div>
+{% endblock %}
+

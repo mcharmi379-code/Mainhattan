@@ -1,0 +1,10 @@
+{% block block_ict_alert_hint %}
+<div class="cms-block-ict-alert-hint">
+    <div class="cms-block-container">
+        {% block block_ict_alert_hint_content %}
+            {% set element = block.slots.getSlot('content') %}
+            {% sw_include '@Storefront/storefront/element/cms-element-' ~ element.type ~ '.html.twig' ignore missing %}
+        {% endblock %}
+    </div>
+</div>
+{% endblock %}

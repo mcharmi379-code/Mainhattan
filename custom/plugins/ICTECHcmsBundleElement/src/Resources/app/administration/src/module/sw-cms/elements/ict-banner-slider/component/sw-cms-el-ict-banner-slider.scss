@@ -1,0 +1,191 @@
+@import "~scss/variables";
+
+.sw-cms-el-ict-banner-slider {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    min-height: 300px;
+
+    &.has--outside-arrows {
+        width: calc(100% - 48px);
+        margin: 0 auto;
+    }
+
+    &__slide {
+        position: relative;
+        width: 100%;
+        height: 100%;
+        min-height: 300px;
+        overflow: hidden;
+    }
+
+    &__image-box {
+        width: 100%;
+        height: 100%;
+        min-height: 300px;
+
+        &.is--cover {
+            .sw-cms-el-ict-banner-slider__image {
+                position: absolute;
+                inset: 0;
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+            }
+        }
+
+        &.is--contain {
+            .sw-cms-el-ict-banner-slider__image {
+                width: 100%;
+                height: 100%;
+                object-fit: contain;
+            }
+        }
+    }
+
+    &__image {
+        display: block;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+
+    &__overlay {
+        position: absolute;
+        inset: 0;
+        background: rgba(0, 0, 0, 0.4);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        padding: 24px 40px;
+        text-align: center;
+        z-index: 1;
+    }
+
+    &__main-title {
+        font-size: 28px;
+        font-weight: 700;
+        margin: 0 0 8px;
+        line-height: 1.2;
+        text-transform: uppercase;
+        color: #ffffff;
+        word-break: break-word;
+    }
+
+    &__sub-title {
+        font-size: 18px;
+        font-weight: 400;
+        margin: 0 0 10px;
+        text-transform: uppercase;
+        color: #ffffff;
+        word-break: break-word;
+    }
+
+    &__description {
+        font-size: 14px;
+        margin: 0 0 16px;
+        max-width: 560px;
+        line-height: 1.5;
+        color: #ffffff;
+        word-break: break-word;
+    }
+
+    &__actions {
+        display: flex;
+        gap: 12px;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
+    &__btn {
+        display: inline-flex;
+        align-items: center;
+        padding: 8px 20px;
+        border-radius: 4px;
+        font-size: 14px;
+        font-weight: 600;
+        background-color: #f15a24;
+        color: #ffffff;
+        cursor: default;
+        white-space: nowrap;
+    }
+
+    &__dots {
+        position: absolute;
+        bottom: 12px;
+        left: 50%;
+        transform: translateX(-50%);
+        display: flex;
+        gap: 6px;
+        z-index: 2;
+
+        &.is--dot-outside {
+            bottom: -20px;
+        }
+    }
+
+    &__dot {
+        width: 10px;
+        height: 10px;
+        border-radius: 50%;
+        background: $color-gray-400;
+        cursor: pointer;
+        transition: background 0.15s ease;
+
+        &.is--active,
+        &:hover {
+            background: $color-gray-900;
+        }
+    }
+
+    &__arrows {
+        &.is--nav-inside {
+            .sw-cms-el-ict-banner-slider__arrow {
+                position: absolute;
+                top: 50%;
+                transform: translateY(-50%);
+                z-index: 2;
+                cursor: pointer;
+                color: $color-gray-400;
+                background: rgba(255, 255, 255, 0.8);
+                border-radius: 2px;
+
+                &:hover {
+                    color: $color-gray-900;
+                }
+
+                &--prev {
+                    left: 5px;
+                }
+
+                &--next {
+                    right: 5px;
+                }
+            }
+        }
+
+        &.is--nav-outside {
+            .sw-cms-el-ict-banner-slider__arrow {
+                position: absolute;
+                top: 50%;
+                transform: translateY(-50%);
+                z-index: 2;
+                cursor: pointer;
+                color: $color-gray-400;
+
+                &:hover {
+                    color: $color-gray-900;
+                }
+
+                &--prev {
+                    left: -28px;
+                }
+
+                &--next {
+                    right: -28px;
+                }
+            }
+        }
+    }
+}

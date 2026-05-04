@@ -1,0 +1,11 @@
+{% block block_ict_feature_grid %}
+    {% set element = block.slots.getSlot('featureGrid') %}
+
+    {% if element %}
+        <div class="cms-block-ict-feature-grid">
+            <div data-cms-element-id="{{ element.id }}">
+                {% sw_include '@Storefront/storefront/element/cms-element-' ~ element.type ~ '.html.twig' ignore missing with { element: element } %}
+            </div>
+        </div>
+    {% endif %}
+{% endblock %}

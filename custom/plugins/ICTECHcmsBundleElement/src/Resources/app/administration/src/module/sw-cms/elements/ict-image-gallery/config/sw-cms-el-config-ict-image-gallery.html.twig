@@ -1,0 +1,117 @@
+<div class="sw-cms-el-config-ict-image-gallery">
+    <div class="sw-cms-el-config-ict-image-gallery__fields">
+        <sw-text-field
+            v-model:value="element.config.galleryTitle.value"
+            class="sw-cms-el-config-ict-image-gallery__title"
+            :label="$tc('ict-cms-bundle-element.cms.elements.ictImageGallery.config.galleryTitle')"
+            :placeholder="$tc('ict-cms-bundle-element.cms.elements.ictImageGallery.config.galleryTitlePlaceholder')"
+            @update:value="emitElementUpdate"
+        />
+
+        <sw-select-field
+            v-model:value="element.config.columns.value"
+            class="sw-cms-el-config-ict-image-gallery__columns"
+            :label="$tc('ict-cms-bundle-element.cms.elements.ictImageGallery.config.columns')"
+            @update:value="onColumnsChange"
+        >
+            <option
+                v-for="option in columnsOptions"
+                :key="option"
+                :value="option"
+            >
+                {{ option }}
+            </option>
+        </sw-select-field>
+    </div>
+
+    <div class="sw-cms-el-config-ict-image-gallery__toolbar">
+        <sw-media-upload-v2
+            variant="regular"
+            :upload-tag="uploadTag"
+            :default-folder="defaultFolderName"
+            :allow-multi-select="true"
+            :caption="$tc('sw-cms.elements.general.config.caption.mediaUpload')"
+            @media-upload-sidebar-open="onOpenMediaModal"
+        />
+    </div>
+
+    <sw-upload-listener
+        :upload-tag="uploadTag"
+        auto-upload
+        @media-upload-finish="onImageUpload"
+    />
+
+    <sw-alert
+        v-if="galleryItems.length === 0"
+        class="sw-cms-el-config-ict-image-gallery__empty"
+        variant="info"
+    >
+        {{ $tc('ict-cms-bundle-element.cms.elements.ictImageGallery.config.emptyState') }}
+    </sw-alert>
+
+    <div
+        v-else
+        class="sw-cms-el-config-ict-image-gallery__grid"
+    >
+        <template v-for="(item, index) in galleryItems">
+            <article
+                v-if="item"
+                :key="index"
+                class="sw-cms-el-config-ict-image-gallery__item"
+            >
+                <div class="sw-cms-el-config-ict-image-gallery__media">
+                    <img
+                        v-if="getItemPreviewUrl(item, index)"
+                        class="sw-cms-el-config-ict-image-gallery__media-image"
+                        :src="getItemPreviewUrl(item, index)"
+                        :alt="getItemPreviewAlt(item)"
+                    >
+
+                    <div
+                        v-else
+                        class="sw-cms-el-config-ict-image-gallery__media-placeholder"
+                    >
+                        <sw-icon
+                            name="regular-image"
+                            size="24"
+                        />
+                    </div>
+
+                    <sw-button
+                        class="sw-cms-el-config-ict-image-gallery__remove"
+                        variant="danger"
+                        size="small"
+                        @click.prevent="onItemRemove(index)"
+                    >
+                        {{ $tc('global.default.remove') }}
+                    </sw-button>
+                </div>
+
+                <div class="sw-cms-el-config-ict-image-gallery__body">
+                    <div class="sw-cms-el-config-ict-image-gallery__meta">
+                        {{ getItemLabel(item, index) }}
+                    </div>
+
+                    <sw-text-field
+                        v-model:value="item.title"
+                        class="sw-cms-el-config-ict-image-gallery__item-title"
+                        :label="$tc('ict-cms-bundle-element.cms.elements.ictImageGallery.config.imageTitle')"
+                        :placeholder="$tc('ict-cms-bundle-element.cms.elements.ictImageGallery.config.imageTitlePlaceholder')"
+                        @update:value="onTitleChange"
+                    />
+                </div>
+            </article>
+        </template>
+    </div>
+
+    <sw-media-modal-v2
+        v-if="mediaModalIsOpen"
+        variant="full"
+        :allow-multi-select="true"
+        :caption="$tc('sw-cms.elements.general.config.caption.mediaUpload')"
+        :entity-context="cmsPageState.entityName"
+        :initial-folder-id="cmsPageState.defaultMediaFolderId"
+        @media-modal-selection-change="onMediaSelectionChange"
+        @modal-close="onCloseMediaModal"
+    />
+</div>

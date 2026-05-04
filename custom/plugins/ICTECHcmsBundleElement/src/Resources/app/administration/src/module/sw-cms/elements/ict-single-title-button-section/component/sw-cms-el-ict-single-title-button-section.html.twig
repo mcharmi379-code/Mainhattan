@@ -1,0 +1,17 @@
+{% block sw_cms_element_ict_single_title_button_section %}
+    <div class="sw-cms-el-ict-single-title-button-section">
+        <div class="ict-single-title-content-wrapper">
+            <h2 class="ict-single-title-main">{{ element.config.title.value }}</h2>
+            <div class="ict-single-title-description" v-html="element.config.description.value"></div>
+
+            <div class="ict-single-title-buttons">
+                <button class="ict-button left-button">
+                    {{ element.config.leftSectionButtonText.value }}
+                </button>
+                <button class="ict-button right-button">
+                    {{ element.config.rightSectionButtonText.value }}
+                </button>
+            </div>
+        </div>
+    </div>
+{% endblock %}

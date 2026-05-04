@@ -1,0 +1,44 @@
+.ict-subcat-preview-thumb {
+    padding: 12px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+
+    &__grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 4px;
+        width: 100%;
+    }
+
+    &__card {
+        border: 1px solid #e5e7eb;
+        border-radius: 4px;
+        overflow: hidden;
+        background: #fff;
+    }
+
+    &__img {
+        height: 32px;
+        background: #f3f4f6;
+    }
+
+    &__tag {
+        padding: 3px 4px;
+        font-size: 7px;
+        font-weight: 700;
+        letter-spacing: 0.04em;
+        color: #fff;
+        background: #1a56db;
+        text-align: center;
+    }
+
+    &__label {
+        margin: 0;
+        font-size: 11px;
+        font-weight: 600;
+        color: #374151;
+        text-align: center;
+    }
+}

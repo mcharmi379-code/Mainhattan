@@ -1,0 +1,65 @@
+{% block element_ict_file_download %}
+    {% set title              = element.data.title ?? element.config.title.value ?? '' %}
+    {% set subtitle           = element.data.subtitle ?? element.config.subtitle.value ?? '' %}
+    {% set buttonText         = element.data.buttonText ?? element.config.buttonText.value ?? '' %}
+    {% set showSpecifications = element.data.showSpecifications ?? element.config.showSpecifications.value ?? false %}
+    {% set mediaId            = element.data.mediaId ?? element.config.mediaId.value ?? '' %}
+    {% set media              = element.data.media ?? null %}
+    {% set previewMedia       = element.data.previewMedia ?? null %}
+
+    {% if buttonText is empty %}
+        {% set buttonText = 'ict-cms-bundle-element.storefront.fileDownload.defaultButtonText'|trans %}
+    {% endif %}
+
+    <div class="cms-element-ict-file-download ict-file-download">
+        <div class="ict-file-download__inner">
+            {% if previewMedia and previewMedia.url %}
+                <div class="ict-file-download__thumb" aria-hidden="true">
+                    <img
+                        src="{{ previewMedia.url }}"
+                        alt=""
+                        loading="lazy"
+                        decoding="async"
+                    >
+                </div>
+            {% endif %}
+            <div class="ict-file-download__text">
+                {% if title %}
+                    <strong class="ict-file-download__title">{{ title }}</strong>
+                {% endif %}
+                {% if subtitle %}
+                    <span class="ict-file-download__subtitle">{{ subtitle }}</span>
+                {% endif %}
+            </div>
+
+            {% if media and media.url %}
+                <a
+                    href="{{ media.url }}"
+                    class="ict-file-download__btn"
+                    download
+                    aria-label="{{ buttonText }}"
+                >
+                    {{ buttonText }}
+                </a>
+            {% else %}
+                <span class="ict-file-download__btn ict-file-download__btn--disabled" aria-disabled="true">
+                    {{ buttonText }}
+                </span>
+            {% endif %}
+        </div>
+
+        {% if showSpecifications %}
+            <div class="ict-file-download__specs">
+                {% if mediaId %}
+                    <span class="ict-file-download__specs-item">
+                        {{ 'ict-cms-bundle-element.storefront.fileDownload.fileAvailable'|trans }}
+                    </span>
+                {% else %}
+                    <span class="ict-file-download__specs-item ict-file-download__specs-item--empty">
+                        {{ 'ict-cms-bundle-element.storefront.fileDownload.noFile'|trans }}
+                    </span>
+                {% endif %}
+            </div>
+        {% endif %}
+    </div>
+{% endblock %}

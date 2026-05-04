@@ -1,0 +1,39 @@
+{% block element_ict_feature_grid_body %}
+    <div class="ifg-card__body">
+        <div class="ifg-card__icon-wrap" style="color: {{ card.iconColor ?? '#6366f1' }};">
+            {% if iconMedia %}
+                {% if '.svg' in iconMedia.url %}
+                    <span class="ifg-card__icon-mask" style="background-color: {{ card.iconColor ?? '#6366f1' }};-webkit-mask-image: url('{{ iconMedia.url }}');mask-image: url('{{ iconMedia.url }}');"></span>
+                {% else %}
+                    <img src="{{ iconMedia.url }}" alt="Icon" class="ifg-card__icon-img">
+                {% endif %}
+            {% else %}
+                <svg width="40" height="40" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
+                </svg>
+            {% endif %}
+        </div>
+
+        <h3 class="ifg-card__headline" style="color: {{ card.headlineColor ?? '#1e293b' }};">{{ card.headline }}</h3>
+
+        {% if (card.subheadline ?? '')|trim %}
+            <p class="ifg-card__subheadline" style="color: {{ card.subheadlineColor ?? '#64748b' }};">{{ card.subheadline }}</p>
+        {% endif %}
+
+        <div class="ifg-card__body-text" style="color: {{ card.bodyTextColor ?? '#64748b' }};">{{ card.bodyText|raw }}</div>
+
+        {% if activeButton %}
+            <div class="ifg-card__footer">
+                <a href="{{ activeButton.buttonUrl ?? '#' }}"
+                   target="{{ activeButton.buttonTarget ?? '_self' }}"
+                   class="ifg-card__btn"
+                   style="color: {{ activeButton.buttonTextColor ?? '#ffffff' }};">
+                    {{ activeButton.buttonText ?? 'Learn More' }}
+                    <svg class="ifg-card__btn-arrow" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                        <path d="M5 12h14M12 5l7 7-7 7"/>
+                    </svg>
+                </a>
+            </div>
+        {% endif %}
+    </div>
+{% endblock %}

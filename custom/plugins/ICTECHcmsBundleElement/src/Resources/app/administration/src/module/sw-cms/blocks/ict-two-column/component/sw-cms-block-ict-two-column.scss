@@ -1,0 +1,21 @@
+.sw-cms-block-ict-two-column {
+    display: flex;
+    gap: 20px;
+    align-items: stretch;
+    grid-gap: 30px !important;
+
+    &__slot {
+        flex: 1 1 0;
+        min-width: 0;
+    }
+
+    .sw-cms-slot,
+    .sw-cms-el-ict-two-column {
+        height: 100%;
+        width: 100%;
+    }
+
+    .sw-cms-slot {
+        min-width: 0;
+    }
+}

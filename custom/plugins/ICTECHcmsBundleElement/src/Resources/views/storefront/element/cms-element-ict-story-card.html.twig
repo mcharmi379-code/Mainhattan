@@ -1,0 +1,58 @@
+{% block element_ict_story_card %}
+    {% set title        = element.data.title ?? element.config.title.value ?? '' %}
+    {% set subline      = element.data.subline ?? element.config.subline.value ?? '' %}
+    {% set subtitle     = element.data.subtitle ?? element.config.subtitle.value ?? '' %}
+    {% set media        = element.data.media ?? null %}
+    {% set linkUrl      = (element.data.linkUrl ?? element.config.linkUrl.value ?? '')|trim %}
+    {% set openInNewTab = element.data.openInNewTab ?? element.config.openInNewTab.value ?? false %}
+
+    {% set target = openInNewTab ? '_blank' : '_self' %}
+    {% set rel = openInNewTab ? 'noopener noreferrer' : '' %}
+
+    <div class="cms-element-ict-story-card ict-story-card">
+        {% if linkUrl %}
+            <a
+                class="ict-story-card__inner"
+                href="{{ linkUrl }}"
+                target="{{ target }}"
+                rel="{{ rel }}"
+                {% if title %}aria-label="{{ title|striptags|trim }}"{% endif %}
+            >
+        {% else %}
+            <div class="ict-story-card__inner">
+        {% endif %}
+
+            <div class="ict-story-card__media" aria-hidden="{{ media is empty ? 'true' : 'false' }}">
+                {% if media and media.url %}
+                    <img
+                        src="{{ media.url }}"
+                        alt="{{ title ? (title|striptags|trim) : '' }}"
+                        loading="lazy"
+                        decoding="async"
+                    >
+                {% else %}
+                    <div class="ict-story-card__media-placeholder"></div>
+                {% endif %}
+            </div>
+
+            <div class="ict-story-card__content">
+                {% if title %}
+                    <h3 class="ict-story-card__title">{{ title }}</h3>
+                {% endif %}
+
+                {% if subline %}
+                    <div class="ict-story-card__subline">{{ subline|raw }}</div>
+                {% endif %}
+
+                {% if subtitle %}
+                    <p class="ict-story-card__subtitle">{{ subtitle }}</p>
+                {% endif %}
+            </div>
+
+        {% if linkUrl %}
+            </a>
+        {% else %}
+            </div>
+        {% endif %}
+    </div>
+{% endblock %}

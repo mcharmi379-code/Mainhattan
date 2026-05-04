@@ -1,0 +1,127 @@
+{% block element_ict_product_comparison %}
+    {% set slotData = element.data %}
+    {% set products = slotData.products ?? [] %}
+    {% set defaultValues = slotData.defaultProductValues ?? [] %}
+    {% set propertyGroups = slotData.propertyGroups ?? [] %}
+    {% set highlightFirst = slotData.highlightFirstProduct ?? false %}
+
+    {% if products is empty %}
+        <div class="cms-element-ict-product-comparison__empty">
+            <span class="cms-element-ict-product-comparison__empty-icon">ℹ</span>
+            <span>{{ 'ict-cms-bundle-element.storefront.productComparison.noProducts'|trans }}</span>
+        </div>
+    {% else %}
+        {% set cols = products|length %}
+
+        <div class="cms-element-ict-product-comparison" data-ict-product-comparison="true">
+            <div class="pc-grid" style="--pc-cols: {{ cols }};">
+                <div class="pc-grid__cell pc-grid__cell--corner" aria-hidden="true"></div>
+
+                {% for product in products %}
+                    {% set coverUrl = product.cover.media.url ?? null %}
+                    {% set productName = product.translated.name ?? product.name ?? product.productNumber %}
+                    {% set headerClasses = ['pc-grid__cell', 'pc-grid__cell--header'] %}
+                    {% if highlightFirst and loop.first %}
+                        {% set headerClasses = headerClasses|merge(['pc-grid__cell--highlight']) %}
+                    {% endif %}
+
+                    <div class="{{ headerClasses|join(' ') }}">
+                        <div class="pc-product">
+                            {% if coverUrl %}
+                                <img class="pc-product__img" src="{{ coverUrl }}" alt="{{ productName|e }}" loading="lazy">
+                            {% else %}
+                                <div class="pc-product__img pc-product__img--placeholder" aria-hidden="true"></div>
+                            {% endif %}
+
+                            <div class="pc-product__meta">
+                                <a class="pc-product__name" href="{{ seoUrl('frontend.detail.page', { productId: product.id }) }}">
+                                    {{ productName }}
+                                </a>
+
+                                {% set unitPrice = product.calculatedPrice.unitPrice ?? null %}
+                                {% if unitPrice is not null %}
+                                    <div class="pc-product__price">{{ unitPrice|currency }}</div>
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+
+                {# Default product values rows #}
+                {% for key in defaultValues %}
+                    {% set labelKey = 'ict-cms-bundle-element.storefront.productComparison.labels.' ~ key %}
+                    <div class="pc-grid__cell pc-grid__cell--label">{{ labelKey|trans }}</div>
+
+                    {% for product in products %}
+                        <div class="pc-grid__cell pc-grid__cell--value">
+                            {% if key == 'name' %}
+                                {{ product.translated.name ?? product.name ?? '—' }}
+                            {% elseif key == 'price' %}
+                                {% set unitPrice = product.calculatedPrice.unitPrice ?? null %}
+                                {{ unitPrice is not null ? (unitPrice|currency) : '—' }}
+                            {% elseif key == 'description' %}
+                                {% set desc = product.translated.description ?? product.description ?? '' %}
+                                {{ desc ? (desc|striptags|trim) : '—' }}
+                            {% elseif key == 'rating' %}
+                                {% set rating = product.ratingAverage ?? null %}
+                                {% if rating is not null %}
+                                    <span class="pc-rating" aria-label="{{ 'ict-cms-bundle-element.storefront.productComparison.ratingAria'|trans({'%rating%': rating|number_format(1, '.', '')})|striptags }}">
+                                        <span class="pc-rating__bar" style="--pc-rating: {{ rating }};"></span>
+                                    </span>
+                                {% else %}
+                                    —
+                                {% endif %}
+                            {% elseif key == 'manufacturer' %}
+                                {{ product.manufacturer.translated.name ?? product.manufacturer.name ?? '—' }}
+                            {% else %}
+                                —
+                            {% endif %}
+                        </div>
+                    {% endfor %}
+                {% endfor %}
+
+                {# Property groups rows #}
+                {% set groupNameMap = {
+                    'target_group': ['Target Group', 'Zielgruppe'],
+                    'color': ['Color', 'Farbe'],
+                    'ingredients': ['Ingredients', 'Ingreediets', 'Inhaltsstoffe'],
+                    'size': ['Size', 'Größe', 'Groesse'],
+                    'material': ['Material']
+                } %}
+
+                {% for key in propertyGroups %}
+                    {% set labelKey = 'ict-cms-bundle-element.storefront.productComparison.labels.propertyGroups.' ~ key %}
+                    <div class="pc-grid__cell pc-grid__cell--label">{{ labelKey|trans }}</div>
+
+                    {% for product in products %}
+                        {% set values = [] %}
+                        {% if product.properties is defined and product.properties is not null %}
+                            {% for option in product.properties %}
+                                {% set groupName = option.group.translated.name ?? option.group.name ?? '' %}
+                                {% set matchGroup = false %}
+                                {% if groupName and groupNameMap[key] is defined %}
+                                    {% for expectedGroupName in groupNameMap[key] %}
+                                        {% if expectedGroupName and (groupName|lower) == (expectedGroupName|lower) %}
+                                            {% set matchGroup = true %}
+                                        {% endif %}
+                                    {% endfor %}
+                                {% endif %}
+
+                                {% if matchGroup %}
+                                    {% set optionName = option.translated.name ?? option.name ?? '' %}
+                                    {% if optionName %}
+                                        {% set values = values|merge([optionName]) %}
+                                    {% endif %}
+                                {% endif %}
+                            {% endfor %}
+                        {% endif %}
+
+                        <div class="pc-grid__cell pc-grid__cell--value">
+                            {{ values is not empty ? values|join(', ') : '—' }}
+                        </div>
+                    {% endfor %}
+                {% endfor %}
+            </div>
+        </div>
+    {% endif %}
+{% endblock %}

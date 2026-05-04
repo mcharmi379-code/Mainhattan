@@ -1,0 +1,65 @@
+{% block sw_cms_el_config_ict_alert_hint %}
+<div class="ict-ah-config">
+
+    <div class="ict-ah-config__section-title">
+        {{ $tc('ict-cms-bundle-element.cms.elements.ictAlertHint.config.generalSettings') }}
+    </div>
+
+    <div class="ict-ah-config__row">
+        <sw-select-field
+            v-model:value="element.config.alertType.value"
+            :label="$tc('ict-cms-bundle-element.cms.elements.ictAlertHint.config.alertType')"
+            @update:value="onUpdate"
+        >
+            <option
+                v-for="opt in alertTypeOptions"
+                :key="opt.value"
+                :value="opt.value"
+            >
+                {{ opt.label }}
+            </option>
+        </sw-select-field>
+
+        <sw-select-field
+            v-model:value="element.config.layoutType.value"
+            :label="$tc('ict-cms-bundle-element.cms.elements.ictAlertHint.config.layoutType')"
+            @update:value="onUpdate"
+        >
+            <option
+                v-for="opt in layoutTypeOptions"
+                :key="opt.value"
+                :value="opt.value"
+            >
+                {{ opt.label }}
+            </option>
+        </sw-select-field>
+    </div>
+
+    <sw-switch-field
+        v-model:value="element.config.activateIcon.value"
+        :label="$tc('ict-cms-bundle-element.cms.elements.ictAlertHint.config.activateIcon')"
+        @update:value="onUpdate"
+    />
+
+    <div class="ict-ah-config__section-title ict-ah-config__section-title--spaced">
+        {{ $tc('ict-cms-bundle-element.cms.elements.ictAlertHint.config.alertContent') }}
+    </div>
+
+    <sw-text-field
+        v-model:value="element.config.title.value"
+        :label="$tc('ict-cms-bundle-element.cms.elements.ictAlertHint.config.title')"
+        :placeholder="$tc('ict-cms-bundle-element.cms.elements.ictAlertHint.config.titlePlaceholder')"
+        @update:value="onUpdate"
+    />
+
+    <div class="ict-ah-config__editor-label">
+        {{ $tc('ict-cms-bundle-element.cms.elements.ictAlertHint.config.content') }}
+    </div>
+    <sw-text-editor
+        :value="element.config.content.value"
+        :placeholder="$tc('ict-cms-bundle-element.cms.elements.ictAlertHint.config.contentPlaceholder')"
+        @update:value="onContentUpdate"
+    />
+
+</div>
+{% endblock %}

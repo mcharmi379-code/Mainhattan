@@ -1,0 +1,281 @@
+{% block sw_cms_element_ict_overview_cards_6 %}
+    <div
+        class="sw-cms-el-ict-overview-cards-6"
+        :style="{
+            backgroundColor: element.config.backgroundType.value === 'color' ? element.config.backgroundColor.value : '',
+            background: element.config.backgroundType.value === 'gradient'
+                ? `linear-gradient(to ${element.config.backgroundGradientDirection.value}, ${element.config.backgroundGradientColor1.value}, ${element.config.backgroundGradientColor2.value})`
+                : ''
+        }"
+    >
+        <div
+            v-if="element.config.backgroundType.value === 'image' && element.data && element.data.backgroundMedia"
+            class="element-background-image"
+            :style="{ backgroundImage: `url(${element.data.backgroundMedia.url})` }"
+        ></div>
+
+        <iframe
+            v-if="element.config.backgroundType.value === 'video' && element.config.backgroundVideoUploadType.value === 'url' && element.config.backgroundVideoUploadUrl.value"
+            class="element-background-video-iframe"
+            :src="getYoutubeEmbedUrl(element.config.backgroundVideoUploadUrl.value)"
+            frameborder="0"
+            allowfullscreen
+        ></iframe>
+
+        <video
+            v-if="element.config.backgroundType.value === 'video' && element.config.backgroundVideoUploadType.value === 'file' && element.data && element.data.backgroundVideoMedia"
+            class="element-background-video"
+            autoplay
+            muted
+            loop
+        >
+            <source :src="element.data.backgroundVideoMedia.url" type="video/mp4">
+        </video>
+
+        <div
+            class="ict-overview-cards-grid"
+            :style="{
+                gridTemplateColumns: `repeat(${element.config.numberOfColumns.value}, minmax(0, 1fr))`,
+                gap: `${element.config.cardSpacing.value}px`,
+                alignItems: element.config.verticalAlignment.value
+            }"
+        >
+            <div
+                v-for="(card, index) in element.config.cards.value"
+                :key="index"
+                class="ict-overview-card"
+                :style="{
+                    backgroundColor: card.cardMainBackgroundType === 'color' ? card.cardMainBackgroundColor : '#FFFFFF',
+                    background: card.cardMainBackgroundType === 'gradient'
+                        ? `linear-gradient(to ${card.cardMainBackgroundGradientDirection}, ${card.cardMainBackgroundGradientColor1}, ${card.cardMainBackgroundGradientColor2})`
+                        : ''
+                }"
+            >
+                <div
+                    v-if="card.cardMainBackgroundType === 'image' && element.data && element.data.cardMainImages && element.data.cardMainImages[index]"
+                    class="card-main-background"
+                    :style="{ backgroundImage: `url(${element.data.cardMainImages[index].url})` }"
+                ></div>
+
+                <iframe
+                    v-if="card.cardMainBackgroundType === 'video' && card.cardMainBackgroundVideoUploadType === 'url' && card.cardMainBackgroundVideoUploadUrl"
+                    class="card-main-background-iframe"
+                    :src="getYoutubeEmbedUrl(card.cardMainBackgroundVideoUploadUrl)"
+                    frameborder="0"
+                    allowfullscreen
+                ></iframe>
+
+                <video
+                    v-if="card.cardMainBackgroundType === 'video' && card.cardMainBackgroundVideoUploadType === 'file' && element.data && element.data.cardMainVideos && element.data.cardMainVideos[index]"
+                    class="card-main-background-video"
+                    autoplay
+                    muted
+                    loop
+                >
+                    <source :src="element.data.cardMainVideos[index].url" type="video/mp4">
+                </video>
+
+                <div class="card-shell">
+                    <div
+                        class="card-media"
+                        :class="`card-media--${getMediaDisplayMode(card)}`"
+                        :style="{ height: getMediaHeight(card) }"
+                    >
+                        <template v-if="card.cardBackgroundType === 'image' && element.data && element.data.cardImages && element.data.cardImages[index]">
+                            <div
+                                v-if="getMediaDisplayMode(card) === 'tile'"
+                                class="card-media-tile"
+                                :style="{ backgroundImage: `url(${element.data.cardImages[index].url})` }"
+                            ></div>
+                            <img
+                                v-else
+                                class="card-media-image"
+                                :src="element.data.cardImages[index].url"
+                                :alt="card.headline || 'Media'"
+                                :style="{ objectFit: getMediaImageFit(card) }"
+                            >
+                        </template>
+
+                        <iframe
+                            v-else-if="card.cardBackgroundType === 'video' && card.cardBackgroundVideoUploadType === 'url' && card.cardBackgroundVideoUploadUrl"
+                            class="card-media-iframe"
+                            :src="getYoutubeEmbedUrl(card.cardBackgroundVideoUploadUrl)"
+                            frameborder="0"
+                            allowfullscreen
+                        ></iframe>
+
+                        <video
+                            v-else-if="card.cardBackgroundType === 'video' && card.cardBackgroundVideoUploadType === 'file' && element.data && element.data.cardVideos && element.data.cardVideos[index]"
+                            class="card-media-video"
+                            autoplay
+                            muted
+                            loop
+                            :style="{ objectFit: getMediaImageFit(card) }"
+                        >
+                            <source :src="element.data.cardVideos[index].url" type="video/mp4">
+                        </video>
+
+                        <div v-else class="card-media-placeholder">
+                            Media
+                        </div>
+                    </div>
+
+                    <div class="card-content">
+                        <div class="card-icon" :style="{ textAlign: getTextAlignment(card.iconAlignment) }">
+                            <div
+                                class="icon-box"
+                                :data-hover-effect="card.iconHoverEffect || 'none'"
+                                :style="{
+                                    width: `${card.iconSize}px`,
+                                    height: `${card.iconSize}px`,
+                                    backgroundColor: card.iconBackgroundColor,
+                                    borderRadius: card.iconShape === 'round' ? '50%' : `${card.iconBorderRadius}px`,
+                                    border: card.iconOutlinePosition === 'inside'
+                                        ? `${card.iconOutlineThickness}px solid ${card.iconOutlineColor}`
+                                        : 'none',
+                                    outline: card.iconOutlinePosition === 'outside'
+                                        ? `${card.iconOutlineThickness}px solid ${card.iconOutlineColor}`
+                                        : 'none',
+                                    color: card.iconColor
+                                }"
+                            >
+                                <span
+                                    v-if="element.data && element.data.iconImages && element.data.iconImages[index] && isSvgUrl(element.data.iconImages[index].url)"
+                                    class="icon-image-mask"
+                                    :style="{
+                                        backgroundColor: card.iconColor || '#005AE5',
+                                        WebkitMaskImage: `url(${element.data.iconImages[index].url})`,
+                                        maskImage: `url(${element.data.iconImages[index].url})`
+                                    }"
+                                ></span>
+                                <img
+                                    v-else-if="element.data && element.data.iconImages && element.data.iconImages[index]"
+                                    :src="element.data.iconImages[index].url"
+                                    :alt="card.headline || 'Icon'"
+                                    class="icon-image"
+                                >
+                                <svg v-else width="50%" height="50%" viewBox="0 0 24 24" :fill="card.iconColor">
+                                    <path d="M12,1L3,5V11C3,16.55 6.84,21.74 12,23C17.16,21.74 21,16.55 21,11V5L12,1Z"/>
+                                </svg>
+                            </div>
+                        </div>
+
+                        <h3
+                            class="card-headline"
+                            :style="{
+                                fontSize: getCssSizeValue(card.headlineSize, '24px'),
+                                lineHeight: getLineHeightValue(card.headlineLineHeight, getHeadlineLineHeight(card.headlineSize)),
+                                textAlign: getTextAlignment(card.headlineAlignment),
+                                color: card.headlineColor
+                            }"
+                        >
+                            {{ card.headline }}
+                        </h3>
+
+                        <h4
+                            class="card-subheadline"
+                            :style="{
+                                fontSize: getCssSizeValue(card.subheadlineSize, '20px'),
+                                lineHeight: getLineHeightValue(card.subheadlineLineHeight, getSubheadlineLineHeight(card.subheadlineSize)),
+                                textAlign: getTextAlignment(card.subheadlineAlignment),
+                                color: card.subheadlineColor
+                            }"
+                        >
+                            {{ card.subheadline }}
+                        </h4>
+
+                        <div
+                            v-if="card.showBodyText"
+                            class="card-body-text"
+                            :style="{
+                                fontSize: getCssSizeValue(card.bodyTextSize, '16px'),
+                                lineHeight: getLineHeightValue(card.bodyTextLineHeight, '24px'),
+                                textAlign: getTextAlignment(card.bodyTextAlignment),
+                                color: card.bodyTextColor
+                            }"
+                            v-html="card.bodyText"
+                        ></div>
+
+                        <div v-if="getCardDetailRows(card).length" class="card-detail-rows">
+                            <div
+                                v-for="(row, rowIndex) in getCardDetailRows(card)"
+                                :key="`${index}-${rowIndex}`"
+                                class="card-detail-row"
+                                :style="{
+                                    borderBottom: `${card.detailRowsOutlineThickness || 1}px solid ${card.detailRowsOutlineColor || '#E4E4E3'}`
+                                }"
+                            >
+                                <div
+                                    class="card-detail-row__title"
+                                    :style="{
+                                        textAlign: getTextAlignment(card.detailRowsTitleAlignment),
+                                        fontSize: getCssSizeValue(card.detailRowsTitleSize, '16px'),
+                                        lineHeight: getLineHeightValue(card.detailRowsTitleLineHeight, '24px'),
+                                        color: row.titleColor || '#262624',
+                                        fontWeight: card.detailRowsTitleFontWeight || '700'
+                                    }"
+                                >
+                                    {{ row.title }}
+                                </div>
+                                <div
+                                    class="card-detail-row__value"
+                                    :style="{
+                                        textAlign: getTextAlignment(card.detailRowsValueAlignment, 'right'),
+                                        fontSize: getCssSizeValue(card.detailRowsValueSize, '16px'),
+                                        lineHeight: getLineHeightValue(card.detailRowsValueLineHeight, '24px'),
+                                        color: row.valueColor || '#262624',
+                                        fontWeight: card.detailRowsValueFontWeight || '400'
+                                    }"
+                                >
+                                    {{ row.value }}
+                                </div>
+                            </div>
+                        </div>
+
+                        <div
+                            v-if="(card.infoText || '').trim()"
+                            class="card-info-text"
+                            :style="{
+                                borderBottom: `${card.detailRowsOutlineThickness || 1}px solid ${card.detailRowsOutlineColor || '#E4E4E3'}`,
+                                textAlign: getTextAlignment(card.infoTextAlignment),
+                                fontSize: getCssSizeValue(card.infoTextSize, '16px'),
+                                lineHeight: getLineHeightValue(card.infoTextLineHeight, '24px'),
+                                color: card.infoTextColor || '#262624',
+                                fontWeight: card.infoTextFontWeight || '700'
+                            }"
+                        >
+                            {{ card.infoText }}
+                        </div>
+
+                        <div
+                            v-if="getCardButtons(card).length"
+                            class="card-buttons"
+                            :style="{ justifyContent: 'flex-start' }"
+                        >
+                            <div
+                                v-for="(button, buttonIndex) in getCardButtons(card).slice(0, 1)"
+                                :key="`${index}-${buttonIndex}`"
+                                class="card-button-wrapper"
+                            >
+                                <span
+                                    class="card-button"
+                                    :style="{
+                                        '--button-text': button.buttonTextColor || '#FFFFFF',
+                                        '--button-hover-text': button.buttonHoverTextColor || '#000000',
+                                        '--button-border-width': getCssSizeValue(button.buttonBorderWidth, '0px'),
+                                        '--button-border-style': button.buttonBorderStyle || 'solid',
+                                        '--button-border-color': button.buttonBorderColor || 'transparent',
+                                        '--button-hover-border-color': button.buttonHoverBorderColor || 'transparent',
+                                        '--button-radius': getCssSizeValue(button.buttonBorderRadius, '6px')
+                                    }"
+                                >
+                                    <span>{{ button.buttonText || 'LEARN MORE' }}</span>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

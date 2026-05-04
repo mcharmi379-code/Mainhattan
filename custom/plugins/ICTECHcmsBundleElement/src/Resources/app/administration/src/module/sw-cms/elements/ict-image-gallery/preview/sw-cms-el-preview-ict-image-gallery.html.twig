@@ -1,0 +1,19 @@
+<div class="sw-cms-el-preview-ict-image-gallery">
+    <div class="sw-cms-el-preview-ict-image-gallery__title">
+        {{ $tc('ict-cms-bundle-element.cms.elements.ictImageGallery.label') }}
+    </div>
+
+    <div class="sw-cms-el-preview-ict-image-gallery__grid">
+        <span
+            v-for="(previewImage, index) in previewImages"
+            :key="index"
+            class="sw-cms-el-preview-ict-image-gallery__item"
+        >
+            <img
+                class="sw-cms-el-preview-ict-image-gallery__image"
+                :src="assetFilter(previewImage)"
+                alt=""
+            >
+        </span>
+    </div>
+</div>

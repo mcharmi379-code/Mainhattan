@@ -1,0 +1,79 @@
+<div class="sw-cms-el-config-ict-manufacturer-slider">
+    <sw-container
+        columns="1fr"
+        gap="24px"
+    >
+        <sw-entity-multi-id-select
+            v-model:value="element.config.manufacturerIds.value"
+            :repository="manufacturerRepository"
+            :criteria="manufacturerSelectCriteria"
+            :label="$tc('ict-cms-bundle-element.cms.elements.ictManufacturerSlider.config.manufacturers')"
+            :placeholder="$tc('ict-cms-bundle-element.cms.elements.ictManufacturerSlider.config.manufacturersPlaceholder')"
+            @update:value="onSelectionChange"
+        >
+            <template #selection-label-property="{ item }">
+                {{ item.translated?.name || item.name }}
+            </template>
+
+            <template #result-label-property="{ item }">
+                {{ item.translated?.name || item.name }}
+            </template>
+        </sw-entity-multi-id-select>
+
+        <sw-switch-field
+            v-model:value="element.config.showManufacturerName.value"
+            :label="$tc('ict-cms-bundle-element.cms.elements.ictManufacturerSlider.config.showManufacturerName')"
+            @update:value="onInput"
+        />
+
+        <sw-container
+            columns="1fr 1fr"
+            gap="24px"
+        >
+            <sw-number-field
+                v-model:value="element.config.maxWidth.value"
+                number-type="int"
+                :min="1"
+                :label="$tc('ict-cms-bundle-element.cms.elements.ictManufacturerSlider.config.maxWidth')"
+                @update:value="onInput"
+            />
+
+            <sw-number-field
+                v-model:value="element.config.maxHeight.value"
+                number-type="int"
+                :min="1"
+                :label="$tc('ict-cms-bundle-element.cms.elements.ictManufacturerSlider.config.maxHeight')"
+                @update:value="onInput"
+            />
+        </sw-container>
+
+        <sw-container
+            columns="1fr 1fr 1fr"
+            gap="24px"
+        >
+            <sw-number-field
+                v-model:value="element.config.desktopItems.value"
+                number-type="int"
+                :min="1"
+                :label="$tc('ict-cms-bundle-element.cms.elements.ictManufacturerSlider.config.desktopItems')"
+                @update:value="onInput"
+            />
+
+            <sw-number-field
+                v-model:value="element.config.tabletItems.value"
+                number-type="int"
+                :min="1"
+                :label="$tc('ict-cms-bundle-element.cms.elements.ictManufacturerSlider.config.tabletItems')"
+                @update:value="onInput"
+            />
+
+            <sw-number-field
+                v-model:value="element.config.mobileItems.value"
+                number-type="int"
+                :min="1"
+                :label="$tc('ict-cms-bundle-element.cms.elements.ictManufacturerSlider.config.mobileItems')"
+                @update:value="onInput"
+            />
+        </sw-container>
+    </sw-container>
+</div>

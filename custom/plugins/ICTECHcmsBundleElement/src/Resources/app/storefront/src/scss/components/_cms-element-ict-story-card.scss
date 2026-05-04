@@ -1,0 +1,100 @@
+.cms-element-ict-story-card {
+    .ict-story-card {
+        width: 100%;
+
+        &__inner {
+            display: flex;
+            gap: 1.25rem;
+            align-items: center;
+            padding: 1rem 1.25rem;
+            border: 1px solid #d1dbe8;
+            border-radius: 8px;
+            background: #fff;
+            text-decoration: none;
+            color: inherit;
+            touch-action: manipulation;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        a.ict-story-card__inner:hover,
+        a.ict-story-card__inner:focus-visible {
+            text-decoration: none;
+            border-color: #0d7fd4;
+            box-shadow: 0 0 0 2px rgba(13, 127, 212, 0.18);
+            outline: none;
+        }
+
+        &__media {
+            flex: 0 0 220px;
+            width: 220px;
+            height: 120px;
+            border-radius: 8px;
+            overflow: hidden;
+            background: #f1f5f9;
+            border: 1px solid #e2eaf3;
+        }
+
+        &__media-placeholder {
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #e2e8f0, #f8fafc);
+        }
+
+        &__media img {
+            width: 100%;
+            height: 100%;
+            display: block;
+            object-fit: cover;
+        }
+
+        &__content {
+            min-width: 0;
+            flex: 1 1 auto;
+            display: flex;
+            flex-direction: column;
+            gap: .25rem;
+        }
+
+        &__title {
+            margin: 0;
+            font-size: 1.125rem;
+            font-weight: 700;
+            color: #1a2b3c;
+            line-height: 1.25;
+        }
+
+        &__subline {
+            font-size: .95rem;
+            line-height: 1.35;
+            color: #1a2b3c;
+
+            p {
+                margin: 0;
+            }
+        }
+
+        &__subtitle {
+            margin: 0;
+            font-size: .875rem;
+            line-height: 1.4;
+            color: #52667a;
+        }
+    }
+
+    @media (max-width: 767.98px) {
+        .ict-story-card {
+            &__inner {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: .875rem;
+                padding: 1rem;
+            }
+
+            &__media {
+                width: 100%;
+                flex-basis: auto;
+                height: 180px;
+            }
+        }
+    }
+}

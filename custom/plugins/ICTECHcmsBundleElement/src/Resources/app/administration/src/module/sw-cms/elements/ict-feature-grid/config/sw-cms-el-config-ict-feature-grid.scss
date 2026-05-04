@@ -1,0 +1,197 @@
+.sw-cms-el-config-ict-feature-grid {
+    --ifg-cfg-accent: #6366f1;
+    --ifg-cfg-border: #e2e8f0;
+    --ifg-cfg-surface: #f8fafc;
+    --ifg-cfg-text: #1e293b;
+    --ifg-cfg-muted: #64748b;
+
+    .ifg-config-section {
+        margin-bottom: 16px;
+        padding: 14px 16px;
+        background: #fff;
+        border: 1px solid var(--ifg-cfg-border);
+        border-radius: 10px;
+
+        &--cards {
+            padding: 0;
+            background: transparent;
+            border: none;
+        }
+    }
+
+    .ifg-config-section__title {
+        font-size: 11px;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.07em;
+        color: var(--ifg-cfg-text);
+        margin: 0 0 12px;
+        padding-bottom: 8px;
+        border-bottom: 2px solid var(--ifg-cfg-accent);
+        display: inline-block;
+    }
+
+    .ifg-config-section__header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 10px;
+
+        .ifg-config-section__title { margin-bottom: 0; padding-bottom: 0; border-bottom: none; }
+    }
+
+    // ── Accordion ─────────────────────────────────────────────────────
+    .ifg-accordion {
+        margin-bottom: 6px;
+        border: 1px solid var(--ifg-cfg-border);
+        border-radius: 10px;
+        overflow: hidden;
+        background: #fff;
+    }
+
+    .ifg-accordion__header {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        padding: 10px 14px;
+        background: var(--ifg-cfg-surface);
+        cursor: pointer;
+        transition: background 0.15s;
+
+        &:hover { background: #eef2ff; }
+    }
+
+    .ifg-accordion__badge {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        min-width: 20px;
+        height: 20px;
+        padding: 0 5px;
+        border-radius: 5px;
+        background: var(--ifg-cfg-accent);
+        color: #fff;
+        font-size: 10px;
+        font-weight: 700;
+        flex-shrink: 0;
+    }
+
+    .ifg-accordion__title {
+        flex: 1;
+        font-size: 12px;
+        font-weight: 600;
+        color: var(--ifg-cfg-text);
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+
+    .ifg-accordion__arrow {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 20px;
+        height: 20px;
+        border-radius: 5px;
+        background: var(--ifg-cfg-border);
+        color: var(--ifg-cfg-muted);
+        transition: transform 0.2s, background 0.15s, color 0.15s;
+        flex-shrink: 0;
+
+        &--open {
+            transform: rotate(90deg);
+            background: var(--ifg-cfg-accent);
+            color: #fff;
+        }
+    }
+
+    .ifg-accordion__body {
+        display: none;
+        padding: 16px;
+        border-top: 1px solid var(--ifg-cfg-border);
+
+        &--open { display: block; }
+    }
+
+    // ── Field groups ──────────────────────────────────────────────────
+    .ifg-field-group {
+        margin-bottom: 16px;
+        padding-bottom: 16px;
+        border-bottom: 1px solid var(--ifg-cfg-border);
+
+        &:last-child { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
+    }
+
+    .ifg-field-group__title {
+        font-size: 10px;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.06em;
+        color: var(--ifg-cfg-muted);
+        margin: 0 0 10px;
+    }
+
+    .ifg-field-group__header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 10px;
+
+        .ifg-field-group__title { margin-bottom: 0; }
+    }
+
+    .ifg-inline {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+        gap: 10px;
+        margin-top: 10px;
+    }
+
+    // ── Button items ──────────────────────────────────────────────────
+    .ifg-btn-item {
+        border: 1px solid var(--ifg-cfg-border);
+        border-radius: 8px;
+        overflow: hidden;
+        margin-top: 8px;
+    }
+
+    .ifg-btn-item__header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 8px 12px;
+        background: var(--ifg-cfg-surface);
+        cursor: pointer;
+        font-size: 12px;
+        font-weight: 600;
+        color: var(--ifg-cfg-text);
+        gap: 8px;
+        transition: background 0.15s;
+
+        &:hover { background: #eef2ff; }
+    }
+
+    .ifg-btn-item__actions {
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        flex-shrink: 0;
+    }
+
+    .ifg-btn-item__body {
+        display: none;
+        padding: 14px;
+        border-top: 1px solid var(--ifg-cfg-border);
+
+        &--open { display: block; }
+    }
+
+    // ── Remove card ───────────────────────────────────────────────────
+    .ifg-remove-card {
+        margin-top: 14px;
+        padding-top: 12px;
+        border-top: 1px dashed var(--ifg-cfg-border);
+        display: flex;
+        justify-content: flex-end;
+    }
+}

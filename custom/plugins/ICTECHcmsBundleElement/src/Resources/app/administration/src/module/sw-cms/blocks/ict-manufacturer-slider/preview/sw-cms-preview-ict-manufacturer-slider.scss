@@ -1,0 +1,12 @@
+.sw-cms-preview-ict-manufacturer-slider {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 8px;
+    padding: 12px;
+
+    &__item {
+        height: 54px;
+        border-radius: 6px;
+        background: linear-gradient(135deg, #dbeafe 0%, #dcfce7 100%);
+    }
+}

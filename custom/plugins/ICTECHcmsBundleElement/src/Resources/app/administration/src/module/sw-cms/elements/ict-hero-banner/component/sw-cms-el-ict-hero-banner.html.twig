@@ -1,0 +1,27 @@
+{% block sw_cms_el_ict_hero_banner %}
+<div class="sw-cms-el-ict-hero-banner">
+    <div class="sw-cms-el-ict-hero-banner__left" :style="leftStyle">
+        <div class="sw-cms-el-ict-hero-banner__logo">
+            <template v-if="logoMedia && logoMedia.url">
+                <img :src="logoMedia.url" alt="" />
+            </template>
+            <template v-else>
+                <span class="sw-cms-el-ict-hero-banner__logo-placeholder">LOGO</span>
+            </template>
+        </div>
+        <div class="sw-cms-el-ict-hero-banner__headline">
+            {{ headline || $tc('ict-cms-bundle-element.cms.elements.ictHeroBanner.placeholder.headline') }}
+        </div>
+    </div>
+    <div class="sw-cms-el-ict-hero-banner__right">
+        <template v-if="heroMedia && heroMedia.url">
+            <img :src="heroMedia.url" alt="" />
+        </template>
+        <template v-else>
+            <span class="sw-cms-el-ict-hero-banner__image-placeholder">
+                {{ $tc('ict-cms-bundle-element.cms.elements.ictHeroBanner.placeholder.bannerImage') }}
+            </span>
+        </template>
+    </div>
+</div>
+{% endblock %}

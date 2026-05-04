@@ -1,0 +1,62 @@
+.sw-cms-el-ict-story-card {
+    width: 100%;
+
+    &__inner {
+        display: flex;
+        align-items: stretch;
+        border: 2px dashed rgba(8, 80, 236, 0.4);
+        border-radius: 6px;
+        background: #fff;
+        min-height: 94px;
+        overflow: hidden;
+    }
+
+    &__media {
+        flex: 0 0 160px;
+        width: 160px;
+        background: #e5e5e5;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        position: relative;
+
+        img {
+            width: 100%;
+            height: 100%;
+            display: block;
+            object-fit: cover;
+        }
+    }
+
+    &__media-label {
+        font-size: 12px;
+        font-weight: 600;
+        color: #52667a;
+    }
+
+    &__content {
+        flex: 1 1 auto;
+        padding: 14px 16px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        gap: 4px;
+        min-width: 0;
+    }
+
+    &__title {
+        font-size: 16px;
+        font-weight: 700;
+        line-height: 1.3;
+        color: #1a2b3c;
+        word-break: break-word;
+    }
+
+    &__subtitle {
+        font-size: 13px;
+        line-height: 1.35;
+        color: #52667a;
+        word-break: break-word;
+    }
+}
+

@@ -1,0 +1,52 @@
+{% block element_ict_nine_column %}
+    {% set media = element.data.media ?? null %}
+    {% set eyebrow = element.config.eyebrow.value ?? '' %}
+    {% set title = element.config.title.value ?? '' %}
+    {% set text = element.config.text.value ?? '' %}
+    {% set linkText = element.config.linkText.value ?? '' %}
+    {% set url = element.config.url.value ?? '' %}
+    {% set newTab = element.config.newTab.value ?? false %}
+
+    <div class="cms-element-ict-nine-column ict-nine-column-card">
+        <div class="ict-nine-column-card__media">
+            {% if media %}
+                <img
+                    src="{{ media.url }}"
+                    alt="{{ media.translated.alt|default(title) }}"
+                >
+            {% else %}
+                <div class="ict-nine-column-card__media-placeholder">
+                    {{ title }}
+                </div>
+            {% endif %}
+        </div>
+
+        <div class="ict-nine-column-card__content">
+            {% if eyebrow %}
+                <p class="ict-nine-column-card__eyebrow">{{ eyebrow }}</p>
+            {% endif %}
+
+            {% if title %}
+                <h3 class="ict-nine-column-card__title">{{ title }}</h3>
+            {% endif %}
+
+            {% if text %}
+                <p class="ict-nine-column-card__text">{{ text }}</p>
+            {% endif %}
+
+            {% if linkText %}
+                {% if url %}
+                    <a
+                        class="ict-nine-column-card__link"
+                        href="{{ url }}"
+                        {% if newTab %}target="_blank" rel="noopener noreferrer"{% endif %}
+                    >
+                        {{ linkText }}
+                    </a>
+                {% else %}
+                    <span class="ict-nine-column-card__link">{{ linkText }}</span>
+                {% endif %}
+            {% endif %}
+        </div>
+    </div>
+{% endblock %}

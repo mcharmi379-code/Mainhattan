@@ -1,0 +1,201 @@
+<div class="sw-cms-el-config-ict-banner-slider">
+    <sw-tabs
+        position-identifier="sw-cms-element-config-ict-banner-slider"
+        default-item="content"
+    >
+        <template #default="{ active }">
+            <sw-tabs-item
+                :active-tab="active"
+                name="content"
+            >
+                {{ $t('sw-cms.elements.general.config.tab.content') }}
+            </sw-tabs-item>
+            <sw-tabs-item
+                :active-tab="active"
+                name="settings"
+            >
+                {{ $t('sw-cms.elements.general.config.tab.settings') }}
+            </sw-tabs-item>
+        </template>
+
+        <template #content="{ active }">
+            <div v-show="active === 'content'">
+                <sw-media-upload-v2
+                    variant="regular"
+                    :upload-tag="uploadTag"
+                    :allow-multi-select="true"
+                    label="Media Upload"
+                    :caption="$tc('sw-cms.elements.general.config.caption.mediaUpload')"
+                    @media-upload-sidebar-open="onOpenMediaModal"
+                />
+
+                <sw-upload-listener
+                    :upload-tag="uploadTag"
+                    auto-upload
+                    @media-upload-finish="onImageUpload"
+                />
+
+                <div class="sw-cms-el-config-ict-banner-slider__item-list">
+                    <div
+                        v-for="(item, index) in sliderItems"
+                        :key="index"
+                        class="sw-cms-el-config-ict-banner-slider__item"
+                    >
+                        <div class="sw-cms-el-config-ict-banner-slider__item-header">
+                            <img :src="item.mediaUrl" class="sw-cms-el-config-ict-banner-slider__item-preview">
+                            <sw-button
+                                size="x-small"
+                                square
+                                variant="danger"
+                                @click="onRemoveItem(index)"
+                            >
+                                <sw-icon name="regular-times" size="12" />
+                            </sw-button>
+                        </div>
+
+                        <div class="sw-cms-el-config-ict-banner-slider__item-content">
+                            <div class="sw-cms-el-config-ict-banner-slider__item-row">
+                                <sw-text-field
+                                    v-model:value="item.mainTitle"
+                                    :label="$t('ict-cms-bundle-element.cms.elements.ictBannerSlider.config.mainTitle')"
+                                    placeholder="Enter main title..."
+                                    @update:value="emitElementUpdate"
+                                />
+                                <sw-colorpicker
+                                    v-model:value="item.mainTitleColor"
+                                    :label="$t('ict-cms-bundle-element.cms.elements.ictBannerSlider.config.mainTitleColor')"
+                                    :default-value="'#ffffff'"
+                                    @update:value="emitElementUpdate"
+                                />
+                            </div>
+
+                            <div class="sw-cms-el-config-ict-banner-slider__item-row">
+                                <sw-text-field
+                                    v-model:value="item.subTitle"
+                                    :label="$t('ict-cms-bundle-element.cms.elements.ictBannerSlider.config.subTitle')"
+                                    placeholder="Enter sub title..."
+                                    @update:value="emitElementUpdate"
+                                />
+                                <sw-colorpicker
+                                    v-model:value="item.subTitleColor"
+                                    :label="$t('ict-cms-bundle-element.cms.elements.ictBannerSlider.config.subTitleColor')"
+                                    :default-value="'#ffffff'"
+                                    @update:value="emitElementUpdate"
+                                />
+                            </div>
+
+                            <div class="sw-cms-el-config-ict-banner-slider__item-row">
+                                <sw-textarea-field
+                                    v-model:value="item.description"
+                                    :label="$t('ict-cms-bundle-element.cms.elements.ictBannerSlider.config.description')"
+                                    placeholder="Enter description..."
+                                    @update:value="emitElementUpdate"
+                                />
+                                <sw-colorpicker
+                                    v-model:value="item.descriptionColor"
+                                    :label="$t('ict-cms-bundle-element.cms.elements.ictBannerSlider.config.descriptionColor')"
+                                    :default-value="'#ffffff'"
+                                    @update:value="emitElementUpdate"
+                                />
+                            </div>
+
+                            <div class="sw-cms-el-config-ict-banner-slider__item-row">
+                                <sw-text-field
+                                    v-model:value="item.callButtonText"
+                                    :label="$t('ict-cms-bundle-element.cms.elements.ictBannerSlider.config.callButtonText')"
+                                    placeholder="Call us"
+                                    @update:value="emitElementUpdate"
+                                />
+                                <sw-text-field
+                                    v-model:value="item.callButtonNumber"
+                                    :label="$t('ict-cms-bundle-element.cms.elements.ictBannerSlider.config.phoneNumber')"
+                                    placeholder="06074 - 21 50 70"
+                                    @update:value="emitElementUpdate"
+                                />
+                            </div>
+
+                            <div class="sw-cms-el-config-ict-banner-slider__item-row">
+                                <sw-text-field
+                                    v-model:value="item.emailButtonText"
+                                    :label="$t('ict-cms-bundle-element.cms.elements.ictBannerSlider.config.emailButtonText')"
+                                    placeholder="Email us"
+                                    @update:value="emitElementUpdate"
+                                />
+                                <sw-text-field
+                                    v-model:value="item.emailButtonAddress"
+                                    :label="$t('ict-cms-bundle-element.cms.elements.ictBannerSlider.config.emailAddress')"
+                                    placeholder="info@example.com"
+                                    @update:value="emitElementUpdate"
+                                />
+                            </div>
+
+                            <div class="sw-cms-el-config-ict-banner-slider__item-row">
+                                <sw-colorpicker
+                                    v-model:value="item.buttonColor"
+                                    :label="$t('ict-cms-bundle-element.cms.elements.ictBannerSlider.config.buttonColor')"
+                                    :default-value="'#f15a24'"
+                                    @update:value="emitElementUpdate"
+                                />
+                                <sw-colorpicker
+                                    v-model:value="item.buttonTextColor"
+                                    :label="$t('ict-cms-bundle-element.cms.elements.ictBannerSlider.config.buttonTextColor')"
+                                    :default-value="'#ffffff'"
+                                    @update:value="emitElementUpdate"
+                                />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <sw-media-modal-v2
+                    v-if="mediaModalIsOpen"
+                    variant="full"
+                    :allow-multi-select="true"
+                    :caption="$tc('sw-cms.elements.general.config.caption.mediaUpload')"
+                    :entity-context="cmsPageState.entityName"
+                    :initial-folder-id="cmsPageState.defaultMediaFolderId"
+                    @media-modal-selection-change="onMediaSelectionChange"
+                    @modal-close="onCloseMediaModal"
+                />
+            </div>
+
+            <div v-show="active === 'settings'">
+                <sw-select-field
+                    v-model:value="element.config.displayMode.value"
+                    :label="$t('sw-cms.elements.general.config.label.displayMode')"
+                    @update:value="emitElementUpdate"
+                >
+                    <option value="cover">{{ $t('sw-cms.elements.general.config.label.displayModeCover') }}</option>
+                    <option value="contain">{{ $t('sw-cms.elements.general.config.label.displayModeContain') }}</option>
+                </sw-select-field>
+
+                <sw-select-field
+                    v-model:value="element.config.navigationArrows.value"
+                    :label="$t('ict-cms-bundle-element.cms.elements.ictBannerSlider.config.navigationArrows')"
+                    @update:value="emitElementUpdate"
+                >
+                    <option value="none">{{ $t('ict-cms-bundle-element.cms.elements.ictBannerSlider.config.navigationArrowsNone') }}</option>
+                    <option value="inside">{{ $t('ict-cms-bundle-element.cms.elements.ictBannerSlider.config.navigationArrowsInside') }}</option>
+                    <option value="outside">{{ $t('ict-cms-bundle-element.cms.elements.ictBannerSlider.config.navigationArrowsOutside') }}</option>
+                </sw-select-field>
+
+                <sw-select-field
+                    v-model:value="element.config.navigationDots.value"
+                    :label="$t('ict-cms-bundle-element.cms.elements.ictBannerSlider.config.navigationDots')"
+                    @update:value="emitElementUpdate"
+                >
+                    <option value="none">{{ $t('ict-cms-bundle-element.cms.elements.ictBannerSlider.config.navigationDotsNone') }}</option>
+                    <option value="inside">{{ $t('ict-cms-bundle-element.cms.elements.ictBannerSlider.config.navigationDotsInside') }}</option>
+                    <option value="outside">{{ $t('ict-cms-bundle-element.cms.elements.ictBannerSlider.config.navigationDotsOutside') }}</option>
+                </sw-select-field>
+
+                <sw-switch-field
+                    v-model:value="element.config.autoTransition.value"
+                    :label="$t('ict-cms-bundle-element.cms.elements.ictBannerSlider.config.autoTransition')"
+                    :help-text="$t('ict-cms-bundle-element.cms.elements.ictBannerSlider.config.autoTransitionHelp')"
+                    @update:value="emitElementUpdate"
+                />
+            </div>
+        </template>
+    </sw-tabs>
+</div>

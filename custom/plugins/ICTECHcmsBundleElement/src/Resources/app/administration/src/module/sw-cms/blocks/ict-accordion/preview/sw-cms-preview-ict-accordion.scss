@@ -1,0 +1,50 @@
+.sw-cms-preview-ict-accordion {
+    display: grid;
+    gap: 10px;
+    padding: 12px;
+    border: 1px solid #d7dde5;
+    border-radius: 10px;
+    background: #ffffff;
+
+    &__item {
+        display: grid;
+        gap: 6px;
+        padding: 10px;
+        border: 1px solid #e2e8f0;
+        border-radius: 8px;
+        background: linear-gradient(180deg, #f8fafc 0%, #f1f5f9 100%);
+    }
+
+    &__headline,
+    &__content {
+        display: block;
+        height: 6px;
+        border-radius: 999px;
+        background: #cfd9e4;
+    }
+
+    &__headline {
+        width: 72%;
+        height: 8px;
+    }
+
+    &__content {
+        width: 56%;
+    }
+
+    &__content--wide {
+        width: 100%;
+    }
+
+    &__content--medium {
+        width: 78%;
+    }
+
+    &__label {
+        color: #52667a;
+        font-size: 11px;
+        font-weight: 600;
+        line-height: 1.4;
+        text-align: center;
+    }
+}

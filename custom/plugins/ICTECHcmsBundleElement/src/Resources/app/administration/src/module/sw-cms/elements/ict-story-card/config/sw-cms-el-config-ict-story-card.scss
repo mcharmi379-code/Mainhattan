@@ -1,0 +1,35 @@
+.ict-story-card-config {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+
+    &__section {
+        display: flex;
+        flex-direction: column;
+        gap: 14px;
+    }
+
+    &__label {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        font-size: 13px;
+        font-weight: 600;
+        color: #52667a;
+    }
+
+    &__link-actions {
+        display: flex;
+        justify-content: flex-start;
+    }
+
+    &__editor-label {
+        font-size: 13px;
+        font-weight: 600;
+        color: #52667a;
+    }
+
+    .sw-text-editor {
+        min-height: 180px;
+    }
+}

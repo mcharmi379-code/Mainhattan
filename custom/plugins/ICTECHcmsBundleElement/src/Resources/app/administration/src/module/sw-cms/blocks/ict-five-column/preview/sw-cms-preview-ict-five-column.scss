@@ -1,0 +1,33 @@
+.sw-cms-preview-ict-five-column {
+    display: grid;
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+    gap: 8px;
+    height: 100%;
+    align-items: stretch;
+
+    &__slot {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        min-height: 76px;
+        padding: 10px 6px;
+        border: 1px dashed #b6c2d0;
+        border-radius: 8px;
+        background: #fbfcfd;
+        color: #7b8794;
+        text-align: center;
+    }
+
+    &__icon {
+        margin-bottom: 4px;
+        color: #94a3b8;
+    }
+
+    &__label {
+        display: block;
+        font-size: 10px;
+        font-weight: 600;
+        line-height: 1.2;
+    }
+}

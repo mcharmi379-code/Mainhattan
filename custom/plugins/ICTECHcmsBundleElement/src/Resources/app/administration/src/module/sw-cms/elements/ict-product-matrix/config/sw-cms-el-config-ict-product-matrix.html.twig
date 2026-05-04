@@ -1,0 +1,37 @@
+{% block sw_cms_el_config_ict_product_matrix %}
+<div class="sw-cms-el-config-ict-product-matrix">
+
+    <sw-entity-single-select
+        entity="product"
+        :value="element.config.product.value"
+        :label="$tc('ict-cms-bundle-element.cms.elements.ictProductMatrix.chooseProduct')"
+        :criteria="productCriteria"
+        :placeholder="$tc('ict-cms-bundle-element.cms.elements.ictProductMatrix.chooseProductPlaceholder')"
+        show-clearable-button
+        @update:value="onProductChange"
+    />
+
+    <div class="ipm-config__info">
+        <sw-icon name="regular-info-circle" size="16" color="#1e3a5f" />
+        <div class="ipm-config__info-text">
+            <strong>{{ $tc('ict-cms-bundle-element.cms.elements.ictProductMatrix.autoRetrievalTitle') }}</strong>
+            <span>{{ $tc('ict-cms-bundle-element.cms.elements.ictProductMatrix.autoRetrievalHint') }}</span>
+        </div>
+    </div>
+
+    <sw-select-field
+        v-model:value="element.config.displayMode.value"
+        :label="$tc('ict-cms-bundle-element.cms.elements.ictProductMatrix.displayModeLabel')"
+        @update:value="onDisplayModeChange"
+    >
+        <option
+            v-for="opt in displayModeOptions"
+            :key="opt.value"
+            :value="opt.value"
+        >
+            {{ opt.label }}
+        </option>
+    </sw-select-field>
+
+</div>
+{% endblock %}

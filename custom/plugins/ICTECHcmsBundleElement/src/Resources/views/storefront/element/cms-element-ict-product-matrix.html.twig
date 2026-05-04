@@ -1,0 +1,164 @@
+{% block element_ict_product_matrix %}
+    {% set slotData    = element.data %}
+    {% set variants    = slotData.variants %}
+    {% set displayMode = slotData.displayMode ?? 'standard' %}
+
+    {% if slotData.productId is null or slotData.productId is empty %}
+        <div class="cms-element-ict-product-matrix__empty">
+            <span class="cms-element-ict-product-matrix__empty-icon">ℹ</span>
+            <span>{{ 'ict-cms-bundle-element.storefront.productMatrix.noProduct'|trans }}</span>
+        </div>
+    {% elseif variants is null or variants.count == 0 %}
+        <div class="cms-element-ict-product-matrix__empty">
+            <span class="cms-element-ict-product-matrix__empty-icon">ℹ</span>
+            <span>{{ 'ict-cms-bundle-element.storefront.productMatrix.noVariants'|trans }}</span>
+        </div>
+    {% else %}
+        <div class="cms-element-ict-product-matrix cms-element-ict-product-matrix--{{ displayMode }}" data-ict-product-matrix="true">
+            <table class="ipm-table">
+                <thead class="ipm-table__head">
+                    <tr>
+                        <th class="ipm-table__th ipm-table__th--article">
+                            {{ 'ict-cms-bundle-element.storefront.productMatrix.colArticle'|trans }}
+                        </th>
+                        <th class="ipm-table__th">
+                            {{ 'ict-cms-bundle-element.storefront.productMatrix.colDelivery'|trans }}
+                        </th>
+                        <th class="ipm-table__th">
+                            {{ 'ict-cms-bundle-element.storefront.productMatrix.colPrice'|trans }}
+                        </th>
+                        <th class="ipm-table__th">
+                            {{ 'ict-cms-bundle-element.storefront.productMatrix.colBuy'|trans }}
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for variant in variants %}
+                        {% set coverUrl = variant.cover.media.url ?? null %}
+                        {% set productName = variant.translated.name ?? variant.productNumber %}
+
+                        {# Build option label e.g. "Colour: Blue, Size: M" #}
+                        {% set optionParts = [] %}
+                        {% if variant.options is defined and variant.options is not null %}
+                            {% for option in variant.options %}
+                                {% set groupName = option.group.translated.name ?? option.group.name ?? '' %}
+                                {% set optionName = option.translated.name ?? option.name ?? '' %}
+                                {% if groupName and optionName %}
+                                    {% set optionParts = optionParts|merge([groupName ~ ': ' ~ optionName]) %}
+                                {% endif %}
+                            {% endfor %}
+                        {% endif %}
+                        {% set optionLabel = optionParts|join(', ') %}
+
+                        {# Delivery info #}
+                        {% set isFreeShipping = variant.shippingFree ?? false %}
+                        {% set deliveryTime = variant.deliveryTime.translated.name ?? null %}
+
+                        {# Price #}
+                        {% set price = variant.calculatedPrice ?? null %}
+                        {% set unitPrice = price ? price.unitPrice : null %}
+
+                        <tr class="ipm-table__row">
+                            <td class="ipm-table__td ipm-table__td--article">
+                                <div class="ipm-article">
+                                    {% if coverUrl %}
+                                        <img
+                                            class="ipm-article__img"
+                                            src="{{ coverUrl }}"
+                                            alt="{{ productName|e }}"
+                                            loading="lazy"
+                                        >
+                                    {% else %}
+                                        <div class="ipm-article__img-placeholder"></div>
+                                    {% endif %}
+                                    <div class="ipm-article__info">
+                                        <a
+                                            class="ipm-article__name"
+                                            href="{{ seoUrl('frontend.detail.page', { productId: variant.id }) }}"
+                                        >
+                                            {{ productName }}
+                                        </a>
+                                        {% if optionLabel %}
+                                            <span class="ipm-article__options">{{ optionLabel }}</span>
+                                        {% endif %}
+                                    </div>
+                                </div>
+                            </td>
+
+                            <td class="ipm-table__td ipm-table__td--delivery">
+                                {% if isFreeShipping %}
+                                    <span class="ipm-delivery ipm-delivery--free">
+                                        <span class="ipm-delivery__dot"></span>
+                                        {{ 'ict-cms-bundle-element.storefront.productMatrix.freeShipping'|trans }}
+                                    </span>
+                                {% elseif deliveryTime %}
+                                    <span class="ipm-delivery">{{ deliveryTime }}</span>
+                                {% else %}
+                                    <span class="ipm-delivery ipm-delivery--free">
+                                        <span class="ipm-delivery__dot"></span>
+                                        {{ 'ict-cms-bundle-element.storefront.productMatrix.freeShipping'|trans }}
+                                    </span>
+                                {% endif %}
+                            </td>
+
+                            <td class="ipm-table__td ipm-table__td--price">
+                                {% if unitPrice is not null %}
+                                    <span class="ipm-price">
+                                        {{ unitPrice|currency }}
+                                    </span>
+                                {% else %}
+                                    <span class="ipm-price ipm-price--na">—</span>
+                                {% endif %}
+                            </td>
+
+                            <td class="ipm-table__td ipm-table__td--buy">
+                                <form
+                                    action="{{ path('frontend.checkout.line-item.add') }}"
+                                    method="post"
+                                    class="ipm-buy-form"
+                                    data-add-to-cart="true"
+                                >
+                                    <input type="hidden" name="redirectTo" value="frontend.cart.offcanvas">
+                                    <input type="hidden" name="lineItems[{{ variant.id }}][id]" value="{{ variant.id }}">
+                                    <input type="hidden" name="lineItems[{{ variant.id }}][type]" value="product">
+                                    <input type="hidden" name="lineItems[{{ variant.id }}][referencedId]" value="{{ variant.id }}">
+                                    <input type="hidden" name="lineItems[{{ variant.id }}][stackable]" value="1">
+                                    <input type="hidden" name="lineItems[{{ variant.id }}][removable]" value="1">
+
+                                    <div class="d-flex gap-2 align-items-stretch">
+                                        <div class="input-group quantity-selector-group flex-nowrap" style="width: auto;" data-quantity-selector="true">
+                                            <button type="button" class="btn btn-outline-secondary btn-minus js-btn-minus"
+                                                aria-label="{{ 'ict-cms-bundle-element.storefront.productMatrix.decrease'|trans|striptags }}"
+                                            >{% sw_icon 'minus' style {size: 'xs'} %}</button>
+                                            <input
+                                                type="number"
+                                                name="lineItems[{{ variant.id }}][quantity]"
+                                                class="form-control js-quantity-selector quantity-selector-group-input text-center"
+                                                value="1"
+                                                min="1"
+                                                step="1"
+                                                style="width: 3rem;"
+                                                aria-label="{{ 'ict-cms-bundle-element.storefront.productMatrix.quantity'|trans|striptags }}"
+                                            >
+                                            <button type="button" class="btn btn-outline-secondary btn-plus js-btn-plus"
+                                                aria-label="{{ 'ict-cms-bundle-element.storefront.productMatrix.increase'|trans|striptags }}"
+                                            >{% sw_icon 'plus' style {size: 'xs'} %}</button>
+                                        </div>
+
+                                        <button
+                                            type="submit"
+                                            class="btn btn-primary btn-buy"
+                                            title="{{ 'ict-cms-bundle-element.storefront.productMatrix.addToCart'|trans|striptags }}"
+                                        >
+                                            {{ 'ict-cms-bundle-element.storefront.productMatrix.addToCart'|trans }}
+                                        </button>
+                                    </div>
+                                </form>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    {% endif %}
+{% endblock %}

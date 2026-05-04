@@ -1,0 +1,39 @@
+{% block sw_cms_element_ict_three_image %}
+    <div class="ict-three-image">
+
+        <div class="ict-left">
+            <div class="image-card">
+                <img :src="leftMediaUrl" alt="">
+
+                <div class="content">
+                    <p class="title" v-if="element.config.leftImageDescription?.value" v-html="element.config.leftImageDescription.value"></p>
+
+                    <a href="#" class="btn-learn" v-if="element.config.leftButtonTitle?.value">{{ element.config.leftButtonTitle.value }} →</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="ict-right">
+
+            <div class="image-card small">
+                <img :src="rightTopMediaUrl" alt="">
+
+                <div class="content">
+                    <p class="title" v-if="element.config.rightTopImageDescription?.value" v-html="element.config.rightTopImageDescription.value"></p>
+                    <a href="#" class="btn-learn" v-if="element.config.rightTopButtonTitle?.value">{{ element.config.rightTopButtonTitle.value }} →</a>
+                </div>
+            </div>
+
+            <div class="image-card small">
+                <img :src="rightBottomMediaUrl" alt="">
+
+                <div class="content">
+                    <p class="title" v-if="element.config.rightBottomImageDescription?.value" v-html="element.config.rightBottomImageDescription.value"></p>
+                    <a href="#" class="btn-learn" v-if="element.config.rightBottomButtonTitle?.value">{{ element.config.rightBottomButtonTitle.value }} →</a>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+{% endblock %}

@@ -1,0 +1,221 @@
+.cms-element-ict-image-comparison {
+    width: 100%;
+}
+
+.ict-img-compare {
+    width: 100%;
+    user-select: none;
+    -webkit-user-select: none;
+
+    &__container {
+        position: relative;
+        width: 100%;
+        overflow: hidden;
+        border-radius: 8px;
+        background: #e2e8f0;
+        aspect-ratio: 16 / 7;
+        min-height: 260px;
+        touch-action: none;
+    }
+
+    // Both panels are absolute, fill the container, overflow:hidden clips the image
+    &__before,
+    &__after {
+        position: absolute;
+        top: 0;
+        overflow: hidden;
+    }
+
+    // The image inside each panel is sized to the FULL container
+    // JS sets the panel width/height; the image is always container-sized
+    &__before img,
+    &__after img {
+        position: absolute;
+        top: 0;
+        left: 0;
+        object-fit: cover;
+        display: block;
+        -webkit-user-drag: none;
+        pointer-events: none;
+    }
+
+    &__placeholder {
+        position: absolute;
+        top: 0;
+        left: 0;
+        background: linear-gradient(135deg, #e2e8f0, #f1f5f9);
+    }
+
+    // ── HORIZONTAL ────────────────────────────────────────────────────
+    &--horizontal .ict-img-compare__container {
+        cursor: col-resize;
+    }
+
+    &--horizontal .ict-img-compare__before {
+        left: 0;
+        height: 100%;
+        width: 50%; // JS updates
+    }
+
+    &--horizontal .ict-img-compare__after {
+        right: 0;
+        height: 100%;
+        width: 50%; // JS updates — right-anchored
+    }
+
+    // Images fill the full container width (JS sets via inline style)
+    &--horizontal .ict-img-compare__before img,
+    &--horizontal .ict-img-compare__before .ict-img-compare__placeholder {
+        width: var(--ict-compare-w, 100%);
+        height: 100%;
+    }
+
+    &--horizontal .ict-img-compare__after img,
+    &--horizontal .ict-img-compare__after .ict-img-compare__placeholder {
+        width: var(--ict-compare-w, 100%);
+        height: 100%;
+        left: auto;
+        right: 0;
+    }
+
+    &--horizontal .ict-img-compare__handle {
+        position: absolute;
+        top: 0;
+        left: 50%; // JS updates
+        height: 100%;
+        transform: translateX(-50%);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        z-index: 10;
+        cursor: col-resize;
+        pointer-events: none;
+        width: 4px;
+    }
+
+    &--horizontal .ict-img-compare__handle-line--before,
+    &--horizontal .ict-img-compare__handle-line--after {
+        flex: 1 1 auto;
+        width: 3px;
+        background: rgba(255, 255, 255, 0.92);
+        box-shadow: 0 0 6px rgba(0, 0, 0, 0.5);
+    }
+
+    // ── VERTICAL ──────────────────────────────────────────────────────
+    &--vertical .ict-img-compare__container {
+        cursor: row-resize;
+        aspect-ratio: 4 / 3;
+    }
+
+    &--vertical .ict-img-compare__before {
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 50%; // JS updates
+    }
+
+    &--vertical .ict-img-compare__after {
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        height: 50%; // JS updates — bottom-anchored
+        top: auto;
+    }
+
+    &--vertical .ict-img-compare__before img,
+    &--vertical .ict-img-compare__before .ict-img-compare__placeholder {
+        width: 100%;
+        height: var(--ict-compare-h, 100%);
+        top: 0;
+    }
+
+    &--vertical .ict-img-compare__after img,
+    &--vertical .ict-img-compare__after .ict-img-compare__placeholder {
+        width: 100%;
+        height: var(--ict-compare-h, 100%);
+        top: auto;
+        bottom: 0;
+    }
+
+    &--vertical .ict-img-compare__handle {
+        position: absolute;
+        left: 0;
+        top: 50%; // JS updates
+        width: 100%;
+        transform: translateY(-50%);
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        z-index: 10;
+        cursor: row-resize;
+        pointer-events: none;
+        height: 4px;
+    }
+
+    &--vertical .ict-img-compare__handle-line--before,
+    &--vertical .ict-img-compare__handle-line--after {
+        flex: 1 1 auto;
+        height: 3px;
+        background: rgba(255, 255, 255, 0.92);
+        box-shadow: 0 0 6px rgba(0, 0, 0, 0.5);
+    }
+
+    // ── Handle circle ─────────────────────────────────────────────────
+    &__handle-circle {
+        flex: 0 0 auto;
+        width: 53px;
+        height: 53px;
+        border-radius: 50%;
+        background: rgba(255, 255, 255, 0.96);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        box-shadow: 0 2px 16px rgba(0, 0, 0, 0.4);
+        transition: transform .15s ease;
+        pointer-events: all;
+        cursor: grab;
+
+        &:active {
+            cursor: grabbing;
+            transform: scale(0.95);
+        }
+
+        svg {
+            width: 22px;
+            height: 22px;
+            color: #1a2b3c;
+            pointer-events: none;
+        }
+    }
+
+    &__handle:hover &__handle-circle {
+        transform: scale(1.1);
+    }
+
+    &__handle:focus-visible {
+        outline: none;
+
+        .ict-img-compare__handle-circle {
+            outline: 3px solid #189eff;
+            outline-offset: 3px;
+        }
+    }
+
+    // ── Responsive ────────────────────────────────────────────────────
+    @media (max-width: 767.98px) {
+        &__container {
+            aspect-ratio: 4 / 3;
+            min-height: 200px;
+        }
+
+        &__handle-circle {
+            width: 40px;
+            height: 40px;
+
+            svg {
+                width: 18px;
+                height: 18px;
+            }
+        }
+    }
+}

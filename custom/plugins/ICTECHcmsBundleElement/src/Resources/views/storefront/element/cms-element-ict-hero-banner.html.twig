@@ -1,0 +1,42 @@
+{% block element_ict_hero_banner %}
+    {% set headline        = element.data.headline ?? element.config.headline.value ?? '' %}
+    {% set backgroundColor = element.data.backgroundColor ?? element.config.backgroundColor.value ?? '#111111' %}
+    {% set logoMedia       = element.data.logoMedia ?? null %}
+    {% set heroMedia       = element.data.heroMedia ?? null %}
+
+    <div class="cms-element-ict-hero-banner ict-hero-banner">
+        <div class="ict-hero-banner__left" style="background-color: {{ backgroundColor|escape('html_attr') }};">
+            <div class="ict-hero-banner__logo-wrap">
+                {% if logoMedia and logoMedia.url %}
+                    <img
+                        class="ict-hero-banner__logo"
+                        src="{{ logoMedia.url }}"
+                        alt="{{ logoMedia.alt ?? '' }}"
+                        loading="lazy"
+                        decoding="async"
+                    >
+                {% else %}
+                    <div class="ict-hero-banner__logo-placeholder" aria-hidden="true"></div>
+                {% endif %}
+            </div>
+
+            {% if headline %}
+                <p class="ict-hero-banner__headline">{{ headline }}</p>
+            {% endif %}
+        </div>
+
+        <div class="ict-hero-banner__right">
+            {% if heroMedia and heroMedia.url %}
+                <img
+                    class="ict-hero-banner__image"
+                    src="{{ heroMedia.url }}"
+                    alt="{{ heroMedia.alt ?? '' }}"
+                    loading="lazy"
+                    decoding="async"
+                >
+            {% else %}
+                <div class="ict-hero-banner__image-placeholder" aria-hidden="true"></div>
+            {% endif %}
+        </div>
+    </div>
+{% endblock %}

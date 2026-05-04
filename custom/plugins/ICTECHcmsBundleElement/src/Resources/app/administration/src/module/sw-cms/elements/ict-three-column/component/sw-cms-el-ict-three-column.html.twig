@@ -1,0 +1,71 @@
+<div
+    class="sw-cms-el-ict-three-column"
+    :class="{ 'sw-cms-el-ict-three-column--placeholder': isPlaceholder }"
+>
+    <div
+        v-if="isPlaceholder"
+        class="sw-cms-el-ict-three-column__placeholder"
+        role="button"
+        :tabindex="disabled ? -1 : 0"
+        @click="onPlaceholderActivate"
+        @keydown.enter.prevent="onPlaceholderActivate"
+        @keydown.space.prevent="onPlaceholderActivate"
+    >
+        <sw-icon
+            class="sw-cms-el-ict-three-column__placeholder-icon"
+            name="regular-plus-circle"
+            size="18"
+        />
+
+        <span class="sw-cms-el-ict-three-column__placeholder-label">
+            {{ $tc('sw-cms.detail.title.elementChangeModal') }}
+        </span>
+    </div>
+
+    <template v-else>
+        <div class="sw-cms-el-ict-three-column__media">
+            <img
+                v-if="media"
+                :src="media.url"
+                :alt="media.translated.alt || title"
+            >
+
+            <div
+                v-else
+                class="sw-cms-el-ict-three-column__media-placeholder"
+            >
+                {{ title }}
+            </div>
+        </div>
+
+        <div class="sw-cms-el-ict-three-column__content">
+            <p
+                v-if="eyebrow"
+                class="sw-cms-el-ict-three-column__eyebrow"
+            >
+                {{ eyebrow }}
+            </p>
+
+            <h3
+                v-if="title"
+                class="sw-cms-el-ict-three-column__title"
+            >
+                {{ title }}
+            </h3>
+
+            <p
+                v-if="text"
+                class="sw-cms-el-ict-three-column__text"
+            >
+                {{ text }}
+            </p>
+
+            <span
+                v-if="linkText"
+                class="sw-cms-el-ict-three-column__link"
+            >
+                {{ linkText }}
+            </span>
+        </div>
+    </template>
+</div>

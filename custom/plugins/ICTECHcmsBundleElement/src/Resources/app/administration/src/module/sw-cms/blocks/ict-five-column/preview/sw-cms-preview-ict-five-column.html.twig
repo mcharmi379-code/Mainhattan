@@ -1,0 +1,17 @@
+<div class="sw-cms-preview-ict-five-column">
+    <span
+        v-for="slot in 5"
+        :key="slot"
+        class="sw-cms-preview-ict-five-column__slot"
+    >
+        <sw-icon
+            class="sw-cms-preview-ict-five-column__icon"
+            name="regular-plus-circle"
+            size="12"
+        />
+
+        <span class="sw-cms-preview-ict-five-column__label">
+            {{ $tc('sw-cms.detail.title.elementChangeModal') }}
+        </span>
+    </span>
+</div>

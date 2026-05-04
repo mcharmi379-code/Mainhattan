@@ -1,0 +1,8 @@
+{% block element_ict_feature_grid_card %}
+    <div class="ifg-card" style="--ifg-accent: {{ accentColor }}; background-color: {{ bgColor }};">
+        <div class="ifg-card__accent-bar"></div>
+
+        {% sw_include '@ICTECHcmsBundleElement/storefront/element/ict-feature-grid/media.html.twig' %}
+        {% sw_include '@ICTECHcmsBundleElement/storefront/element/ict-feature-grid/body.html.twig' %}
+    </div>
+{% endblock %}

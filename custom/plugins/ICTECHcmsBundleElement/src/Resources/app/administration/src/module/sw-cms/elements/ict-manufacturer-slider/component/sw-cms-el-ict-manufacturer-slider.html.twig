@@ -1,0 +1,67 @@
+<div class="sw-cms-el-ict-manufacturer-slider">
+    <div
+        v-if="visibleManufacturers.length > 0"
+        class="sw-cms-el-ict-manufacturer-slider__frame"
+    >
+        <button
+            class="sw-cms-el-ict-manufacturer-slider__nav is-prev"
+            type="button"
+            aria-hidden="true"
+            tabindex="-1"
+        >
+            <sw-icon
+                name="regular-chevron-left-xs"
+                size="16"
+            />
+        </button>
+
+        <div
+            class="sw-cms-el-ict-manufacturer-slider__grid"
+            :style="{ gridTemplateColumns: `repeat(${desktopItems}, minmax(0, 1fr))` }"
+        >
+            <div
+                v-for="manufacturer in visibleManufacturers"
+                :key="manufacturer.id"
+                class="sw-cms-el-ict-manufacturer-slider__item"
+            >
+                <div class="sw-cms-el-ict-manufacturer-slider__media">
+                    <img
+                        v-if="getManufacturerMediaUrl(manufacturer)"
+                        :src="getManufacturerMediaUrl(manufacturer)"
+                        :alt="getManufacturerName(manufacturer)"
+                        class="sw-cms-el-ict-manufacturer-slider__image"
+                    >
+                    <div
+                        v-else
+                        class="sw-cms-el-ict-manufacturer-slider__placeholder"
+                        v-text="getManufacturerName(manufacturer).slice(0, 1) || 'M'"
+                    ></div>
+                </div>
+
+                <div
+                    v-if="showManufacturerName"
+                    class="sw-cms-el-ict-manufacturer-slider__name"
+                    v-text="getManufacturerName(manufacturer)"
+                ></div>
+            </div>
+        </div>
+
+        <button
+            class="sw-cms-el-ict-manufacturer-slider__nav is-next"
+            type="button"
+            aria-hidden="true"
+            tabindex="-1"
+        >
+            <sw-icon
+                name="regular-chevron-right-xs"
+                size="16"
+            />
+        </button>
+    </div>
+
+    <div
+        v-else
+        class="sw-cms-el-ict-manufacturer-slider__empty"
+        v-text="$tc('ict-cms-bundle-element.cms.elements.ictManufacturerSlider.config.emptyState')"
+    ></div>
+</div>

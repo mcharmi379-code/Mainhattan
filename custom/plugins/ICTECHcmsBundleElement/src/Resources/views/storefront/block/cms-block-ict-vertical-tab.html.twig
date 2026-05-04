@@ -1,0 +1,10 @@
+{% block block_ict_vertical_tab %}
+<div class="cms-block-ict-vertical-tab">
+    <div class="cms-block-container">
+        {% block block_ict_vertical_tab_content %}
+            {% set element = block.slots.getSlot('content') %}
+            {% sw_include '@Storefront/storefront/element/cms-element-' ~ element.type ~ '.html.twig' ignore missing %}
+        {% endblock %}
+    </div>
+</div>
+{% endblock %}

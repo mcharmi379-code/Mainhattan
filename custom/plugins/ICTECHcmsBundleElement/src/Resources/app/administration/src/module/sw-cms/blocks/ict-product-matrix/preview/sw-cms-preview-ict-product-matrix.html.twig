@@ -1,0 +1,20 @@
+{% block sw_cms_preview_ict_product_matrix %}
+<div class="sw-cms-preview-ict-product-matrix">
+    <div class="ipm-preview__header">
+        <span class="ipm-preview__col ipm-preview__col--wide">Article</span>
+        <span class="ipm-preview__col">Delivery</span>
+        <span class="ipm-preview__col">Price</span>
+        <span class="ipm-preview__col">Buy</span>
+    </div>
+    <div class="ipm-preview__row" v-for="i in 3" :key="i">
+        <div class="ipm-preview__thumb"></div>
+        <div class="ipm-preview__lines">
+            <span class="ipm-preview__line ipm-preview__line--short"></span>
+            <span class="ipm-preview__line"></span>
+        </div>
+        <span class="ipm-preview__line ipm-preview__line--mid"></span>
+        <span class="ipm-preview__line ipm-preview__line--mid"></span>
+        <span class="ipm-preview__btn"></span>
+    </div>
+</div>
+{% endblock %}

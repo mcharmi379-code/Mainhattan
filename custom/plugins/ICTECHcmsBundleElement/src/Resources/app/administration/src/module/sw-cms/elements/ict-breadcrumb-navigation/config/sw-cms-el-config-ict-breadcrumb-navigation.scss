@@ -1,0 +1,24 @@
+.ict-bc-config {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+
+    &__info-banner {
+        p {
+            margin: 4px 0 0;
+            font-size: 13px;
+        }
+    }
+
+    &__hint {
+        margin-top: 8px !important;
+        color: var(--color-text-secondary-default);
+    }
+
+    &__row {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 16px;
+        align-items: end;
+    }
+}

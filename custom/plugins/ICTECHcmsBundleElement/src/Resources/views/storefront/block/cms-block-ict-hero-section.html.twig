@@ -1,0 +1,7 @@
+{% block cms_block_ict_hero_section %}
+    <div class="cms-block-ict-hero-section">
+        {% for element in block.slots %}
+            {% sw_include "@Storefront/storefront/element/cms-element-" ~ element.type ~ ".html.twig" ignore missing %}
+        {% endfor %}
+    </div>
+{% endblock %}

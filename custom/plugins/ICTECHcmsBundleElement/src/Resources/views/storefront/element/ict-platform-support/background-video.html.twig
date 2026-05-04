@@ -1,0 +1,28 @@
+{% block element_ict_platform_support_background_video %}
+    {% if config.backgroundType.value == 'video' %}
+        {% if config.backgroundVideoUploadType.value == 'url' and config.backgroundVideoUploadUrl.value %}
+            {% set videoUrl = config.backgroundVideoUploadUrl.value %}
+            {% if 'youtube.com' in videoUrl or 'youtu.be' in videoUrl %}
+                {% set videoId = videoUrl|replace({'https://www.youtube.com/watch?v=': '', 'https://youtu.be/': '', '&': '?'})|split('?')[0] %}
+                <iframe class="background-video-iframe"
+                        src="https://www.youtube.com/embed/{{ videoId }}?autoplay=1&mute=1&loop=1&playlist={{ videoId }}&controls=0&showinfo=0&rel=0&iv_load_policy=3&modestbranding=1"
+                        allow="autoplay; encrypted-media" allowfullscreen></iframe>
+            {% elseif 'vimeo.com' in videoUrl %}
+                {% set videoId = videoUrl|split('/')|last %}
+                <iframe class="background-video-iframe"
+                        src="https://player.vimeo.com/video/{{ videoId }}?autoplay=1&muted=1&loop=1&background=1&controls=0"
+                        allow="autoplay; fullscreen" allowfullscreen></iframe>
+            {% else %}
+                <video class="background-video" autoplay muted loop playsinline>
+                    <source src="{{ videoUrl }}" type="video/mp4">
+                    <source src="{{ videoUrl }}" type="video/webm">
+                    <source src="{{ videoUrl }}" type="video/ogg">
+                </video>
+            {% endif %}
+        {% elseif config.backgroundVideoUploadType.value == 'file' and data.backgroundVideo %}
+            <video class="background-video" autoplay muted loop playsinline>
+                <source src="{{ data.backgroundVideo.url }}" type="video/mp4">
+            </video>
+        {% endif %}
+    {% endif %}
+{% endblock %}

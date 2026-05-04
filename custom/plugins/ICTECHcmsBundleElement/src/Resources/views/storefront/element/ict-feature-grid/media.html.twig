@@ -1,0 +1,37 @@
+{% block element_ict_feature_grid_media %}
+    <div class="ifg-card__media" style="height: {{ mediaHeightCss }};">
+        {% if cardImageMedia %}
+            <img class="ifg-card__media-img"
+                 src="{{ cardImageMedia.url }}"
+                 alt="{{ card.headline ?? 'Media' }}"
+                 style="object-fit: {{ objectFit }};">
+        {% elseif card.cardBackgroundVideoUploadType == 'url' and card.cardBackgroundVideoUploadUrl %}
+            {% set ytUrl = card.cardBackgroundVideoUploadUrl %}
+            {% set ytId = '' %}
+            {% if 'v=' in ytUrl %}
+                {% set ytId = ytUrl|split('v=')[1]|split('&')[0]|split('?')[0]|split('#')[0] %}
+            {% elseif 'youtu.be/' in ytUrl %}
+                {% set ytId = ytUrl|split('youtu.be/')[1]|split('?')[0]|split('&')[0]|split('#')[0] %}
+            {% elseif '/live/' in ytUrl %}
+                {% set ytId = ytUrl|split('/live/')[1]|split('?')[0]|split('&')[0]|split('#')[0] %}
+            {% elseif '/shorts/' in ytUrl %}
+                {% set ytId = ytUrl|split('/shorts/')[1]|split('?')[0]|split('&')[0]|split('#')[0] %}
+            {% elseif '/embed/' in ytUrl %}
+                {% set ytId = ytUrl|split('/embed/')[1]|split('?')[0]|split('&')[0]|split('#')[0] %}
+            {% endif %}
+
+            {% if ytId %}
+                <iframe class="ifg-card__media-iframe"
+                        src="https://www.youtube.com/embed/{{ ytId }}?autoplay=1&mute=1&loop=1&playlist={{ ytId }}&controls=0&rel=0"
+                        frameborder="0"
+                        allowfullscreen></iframe>
+            {% endif %}
+        {% elseif card.cardBackgroundVideoUploadType == 'file' and cardVideoMedia %}
+            <video autoplay muted loop class="ifg-card__media-video" style="object-fit: {{ objectFit }};">
+                <source src="{{ cardVideoMedia.url }}" type="video/mp4">
+            </video>
+        {% else %}
+            <div class="ifg-card__media-placeholder"></div>
+        {% endif %}
+    </div>
+{% endblock %}

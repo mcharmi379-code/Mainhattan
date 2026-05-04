@@ -1,0 +1,23 @@
+{% block element_ict_product %}
+    {% block element_ict_two_column_three_image %}
+        {% set config = element.config %}
+        {% set data = element.data %}
+        {% set leftImageHeightRaw = config.leftImageHeight.value ?? '' %}
+        {% set leftImageHeightCss = leftImageHeightRaw matches '/^[0-9]+(\\.[0-9]+)?$/' ? leftImageHeightRaw ~ 'px' : leftImageHeightRaw %}
+        {% set rightTopImageHeightRaw = config.rightTopImageHeight.value ?? '' %}
+        {% set rightTopImageHeightCss = rightTopImageHeightRaw matches '/^[0-9]+(\\.[0-9]+)?$/' ? rightTopImageHeightRaw ~ 'px' : rightTopImageHeightRaw %}
+        {% set rightBottomImageHeightRaw = config.rightBottomImageHeight.value ?? '' %}
+        {% set rightBottomImageHeightCss = rightBottomImageHeightRaw matches '/^[0-9]+(\\.[0-9]+)?$/' ? rightBottomImageHeightRaw ~ 'px' : rightBottomImageHeightRaw %}
+
+        <div class="container">
+            <div class="row g-3">
+                {% sw_include '@ICTECHcmsBundleElement/storefront/element/ict-two-column-three-image/left.html.twig' %}
+
+                <div class="col-md-4 left-img-section">
+                    {% sw_include '@ICTECHcmsBundleElement/storefront/element/ict-two-column-three-image/right-top.html.twig' %}
+                    {% sw_include '@ICTECHcmsBundleElement/storefront/element/ict-two-column-three-image/right-bottom.html.twig' %}
+                </div>
+            </div>
+        </div>
+    {% endblock %}
+{% endblock %}

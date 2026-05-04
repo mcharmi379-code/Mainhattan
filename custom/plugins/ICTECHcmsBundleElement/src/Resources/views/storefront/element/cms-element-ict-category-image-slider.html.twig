@@ -1,0 +1,100 @@
+{% block element_ict_category_image_slider %}
+    {% set items = element.data.items ?? [] %}
+    {% set itemCount = items|length %}
+    {% set needsSlider = itemCount > 1 %}
+    {% set baseSliderOptions = {
+        slider: {
+            controls: needsSlider,
+            nav: needsSlider,
+            navPosition: 'bottom',
+            items: 3,
+            slideBy: 1,
+            mode: 'carousel',
+            mouseDrag: needsSlider,
+            touchDrag: needsSlider,
+            autoplay: false,
+            autoplayButtonOutput: false,
+            autoplayHoverPause: true,
+            speed: 400,
+            edgePadding: 0,
+            gutter: 16,
+            loop: needsSlider,
+            rewind: false,
+            ariaLive: true,
+            autoHeight: false,
+            responsive: {
+                0: { items: 1, gutter: 0 },
+                576: { items: 2, gutter: 12 },
+                992: { items: 3, gutter: 16 }
+            }
+        }
+    } %}
+    {% if itemCount > 0 %}
+        <div class="cms-element-ict-category-image-slider">
+            <div
+                class="base-slider ict-category-image-slider{% if needsSlider %} has-nav-outside has-dots-outside{% endif %}"
+                data-base-slider="true"
+                data-base-slider-options="{{ baseSliderOptions|json_encode|e('html_attr') }}"
+                role="region"
+                aria-label="Category image slider"
+                tabindex="0"
+            >
+                <div class="ict-category-image-slider__container" data-base-slider-container="true">
+                    {% for item in items %}
+                        {% set category = item.category %}
+                        {% if category and category.media %}
+                            <div class="ict-category-image-slider__slide">
+                                <a
+                                    class="ict-category-image-slider__card"
+                                    href="{{ category_url(category) }}"
+                                    title="{{ category.translated.name|striptags }}"
+                                >
+                                    <div class="ict-category-image-slider__media">
+                                        {% sw_thumbnails 'cms-image-slider-thumbnails' with {
+                                            media: category.media,
+                                            sizes: { default: '420px' },
+                                            attributes: {
+                                                class: 'ict-category-image-slider__image',
+                                                alt: (category.media.translated.alt ?: category.translated.name),
+                                                title: (category.media.translated.title ?: category.translated.name),
+                                                loading: 'lazy'
+                                            }
+                                        } %}
+                                    </div>
+                                    <div class="ict-category-image-slider__content">
+                                        {% if item.title %}
+                                            <div class="ict-category-image-slider__title">
+                                                {{ item.title }}
+                                            </div>
+                                        {% endif %}
+                                        <div class="ict-category-image-slider__name">
+                                            {{ category.translated.name }}
+                                        </div>
+                                    </div>
+                                </a>
+                            </div>
+                        {% endif %}
+                    {% endfor %}
+	                </div>
+	                {% if needsSlider %}
+	                    <div class="image-slider-controls-container">
+                        <div class="base-slider-controls" data-base-slider-controls="true">
+                            <button
+                                class="base-slider-controls-prev image-slider-controls-prev is-nav-prev-outside ict-category-image-slider__control-prev"
+                                aria-label="{{ 'general.previous'|trans|striptags }}"
+                            >
+                                {% sw_icon 'arrow-head-left' %}
+                            </button>
+                            <button
+                                class="base-slider-controls-next image-slider-controls-next is-nav-next-outside ict-category-image-slider__control-next"
+                                aria-label="{{ 'general.next'|trans|striptags }}"
+                            >
+                                {% sw_icon 'arrow-head-right' %}
+                            </button>
+                        </div>
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+    {% endif %}
+{% endblock %}

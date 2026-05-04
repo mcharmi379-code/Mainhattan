@@ -1,0 +1,21 @@
+{% block sw_cms_element_ict_feature_grid_preview %}
+<div class="sw-cms-el-preview-ict-feature-grid">
+    <div class="ifg-el-preview__topbar">
+        <span class="ifg-el-preview__label">Feature Grid</span>
+        <span class="ifg-el-preview__cols">3 col</span>
+    </div>
+    <div class="ifg-el-preview__grid">
+        <div class="ifg-el-preview__card" v-for="i in 3" :key="i">
+            <div class="ifg-el-preview__bar"></div>
+            <div class="ifg-el-preview__thumb"></div>
+            <div class="ifg-el-preview__content">
+                <div class="ifg-el-preview__icon"></div>
+                <div class="ifg-el-preview__headline"></div>
+                <div class="ifg-el-preview__text"></div>
+                <div class="ifg-el-preview__text ifg-el-preview__text--short"></div>
+                <div class="ifg-el-preview__btn"></div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

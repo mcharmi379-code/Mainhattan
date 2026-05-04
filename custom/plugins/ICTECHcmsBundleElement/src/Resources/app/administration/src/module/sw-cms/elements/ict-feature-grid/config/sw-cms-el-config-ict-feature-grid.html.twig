@@ -1,0 +1,243 @@
+{% block sw_cms_el_config_ict_feature_grid %}
+<div class="sw-cms-el-config-ict-feature-grid">
+
+    <div class="ifg-config-section">
+        <h3 class="ifg-config-section__title">Layout</h3>
+        <mt-select
+            v-model="element.config.numberOfColumns.value"
+            label="Columns"
+            :options="columnOptions"
+            @update:model-value="onElementUpdate">
+        </mt-select>
+        <mt-number-field
+            v-model="element.config.cardSpacing.value"
+            label="Card spacing (px)"
+            type="int"
+            :min="0"
+            :step="4"
+            @update:model-value="onElementUpdate">
+        </mt-number-field>
+    </div>
+
+    <div class="ifg-config-section ifg-config-section--cards">
+        <div class="ifg-config-section__header">
+            <h3 class="ifg-config-section__title">Cards</h3>
+            <sw-button variant="primary" size="small" @click="addCard">+ Add Card</sw-button>
+        </div>
+
+        <div
+            v-for="(card, cardIndex) in element.config.cards.value"
+            :key="cardIndex"
+            class="ifg-accordion"
+        >
+            <div class="ifg-accordion__header" @click="toggleAccordion(cardIndex)">
+                <span class="ifg-accordion__badge">{{ cardIndex + 1 }}</span>
+                <span class="ifg-accordion__title">{{ card.headline || 'Card ' + (cardIndex + 1) }}</span>
+                <span class="ifg-accordion__arrow" :class="{ 'ifg-accordion__arrow--open': openIndex === cardIndex }">
+                    <mt-icon size="0.75rem" name="regular-chevron-right-xxs"></mt-icon>
+                </span>
+            </div>
+
+            <div class="ifg-accordion__body" :class="{ 'ifg-accordion__body--open': openIndex === cardIndex }">
+
+                <!-- Icon -->
+                <div class="ifg-field-group">
+                    <h5 class="ifg-field-group__title">Icon</h5>
+                    <sw-upload-listener
+                        :upload-tag="getIconUploadTag(cardIndex)"
+                        @media-upload-finish="onIconUpload(cardIndex, $event)"
+                        auto-upload>
+                    </sw-upload-listener>
+                    <sw-media-upload-v2
+                        variant="regular"
+                        :upload-tag="getIconUploadTag(cardIndex)"
+                        :source="getIconMediaItem(cardIndex)"
+                        :allow-multi-select="false"
+                        label="Icon image (SVG or PNG)"
+                        :default-folder="'cms_page'"
+                        @selection-change="onIconSelectionChange(cardIndex, $event)"
+                        @media-upload-remove-image="onIconRemove(cardIndex)"
+                        @media-upload-sidebar-open="onOpenIconModal(cardIndex)">
+                    </sw-media-upload-v2>
+                    <sw-media-modal-v2
+                        v-if="iconImageModals[cardIndex]"
+                        :initial-folder-id="null"
+                        :entity-context="'cms_page'"
+                        @media-modal-selection-change="onIconSelectionChange(cardIndex, $event)"
+                        @modal-close="onCloseIconModal(cardIndex)">
+                    </sw-media-modal-v2>
+                    <mt-colorpicker
+                        v-model="card.iconColor"
+                        label="Icon color">
+                    </mt-colorpicker>
+                </div>
+
+                <!-- Content -->
+                <div class="ifg-field-group">
+                    <h5 class="ifg-field-group__title">Content</h5>
+                    <mt-text-field
+                        v-model="card.headline"
+                        label="Headline"
+                        @update:model-value="onElementUpdate">
+                    </mt-text-field>
+                    <mt-colorpicker v-model="card.headlineColor" label="Headline color"></mt-colorpicker>
+                    <mt-text-field
+                        v-model="card.subheadline"
+                        label="Subheadline (optional)"
+                        @update:model-value="onElementUpdate">
+                    </mt-text-field>
+                    <mt-colorpicker v-model="card.subheadlineColor" label="Subheadline color"></mt-colorpicker>
+                    <sw-text-editor
+                        :value="card.bodyText"
+                        sanitize-input
+                        @update:value="(v) => { card.bodyText = v; onElementUpdate(); }">
+                    </sw-text-editor>
+                    <mt-colorpicker v-model="card.bodyTextColor" label="Body text color"></mt-colorpicker>
+                </div>
+
+                <!-- Card design -->
+                <div class="ifg-field-group">
+                    <h5 class="ifg-field-group__title">Card Design</h5>
+                    <mt-colorpicker v-model="card.cardBackgroundColor" label="Card background"></mt-colorpicker>
+                    <mt-colorpicker v-model="card.cardAccentColor" label="Accent color"></mt-colorpicker>
+                </div>
+
+                <!-- Media -->
+                <div class="ifg-field-group">
+                    <h5 class="ifg-field-group__title">Media</h5>
+                    <div class="ifg-inline">
+                        <mt-select
+                            v-model="card.mediaDisplayMode"
+                            label="Display mode"
+                            :options="mediaDisplayModeOptions"
+                            @update:model-value="onElementUpdate">
+                        </mt-select>
+                        <mt-number-field
+                            v-model="card.mediaHeight"
+                            label="Height (px)"
+                            type="int"
+                            :min="0"
+                            :step="10"
+                            @update:model-value="onElementUpdate">
+                        </mt-number-field>
+                    </div>
+
+                    <mt-select
+                        v-model="card.mediaType"
+                        label="Media type"
+                        :options="[{value:'image',label:'Card image'},{value:'video',label:'Video'}]"
+                        @update:model-value="onElementUpdate">
+                    </mt-select>
+
+                    <template v-if="!card.mediaType || card.mediaType === 'image'">
+                        <sw-upload-listener
+                            :upload-tag="getCardImageUploadTag(cardIndex)"
+                            @media-upload-finish="onCardImageUpload(cardIndex, $event)"
+                            auto-upload>
+                        </sw-upload-listener>
+                        <sw-media-upload-v2
+                            variant="regular"
+                            :upload-tag="getCardImageUploadTag(cardIndex)"
+                            :source="getCardImageMediaItem(cardIndex)"
+                            :allow-multi-select="false"
+                            label="Card image"
+                            :default-folder="'cms_page'"
+                            :file-accept="fileAccept"
+                            @selection-change="onCardImageSelectionChange(cardIndex, $event)"
+                            @media-upload-remove-image="onCardImageRemove(cardIndex)"
+                            @media-upload-sidebar-open="onOpenCardImageModal(cardIndex)">
+                        </sw-media-upload-v2>
+                        <sw-media-modal-v2
+                            v-if="cardImageModals[cardIndex]"
+                            :initial-folder-id="null"
+                            :entity-context="'cms_page'"
+                            @media-modal-selection-change="onCardImageSelectionChange(cardIndex, $event)"
+                            @modal-close="onCloseCardImageModal(cardIndex)">
+                        </sw-media-modal-v2>
+                    </template>
+
+                    <template v-if="card.mediaType === 'video'">
+                        <mt-select
+                            v-model="card.cardBackgroundVideoUploadType"
+                            label="Video source"
+                            :options="[{value:'file',label:'Upload file'},{value:'url',label:'YouTube URL'}]"
+                            @update:model-value="onElementUpdate">
+                        </mt-select>
+                        <mt-text-field
+                            v-if="card.cardBackgroundVideoUploadType === 'url'"
+                            v-model="card.cardBackgroundVideoUploadUrl"
+                            label="YouTube URL"
+                            @update:model-value="onElementUpdate">
+                        </mt-text-field>
+                        <div v-if="!card.cardBackgroundVideoUploadType || card.cardBackgroundVideoUploadType === 'file'">
+                            <sw-upload-listener
+                                :upload-tag="getCardVideoUploadTag(cardIndex)"
+                                @media-upload-finish="onCardVideoUpload(cardIndex, $event)"
+                                auto-upload>
+                            </sw-upload-listener>
+                            <sw-media-upload-v2
+                                variant="regular"
+                                :upload-tag="getCardVideoUploadTag(cardIndex)"
+                                :source="getCardVideoMediaItem(cardIndex)"
+                                :allow-multi-select="false"
+                                label="Card video"
+                                :default-folder="'cms_page'"
+                                :file-accept="videoFileAccept"
+                                @selection-change="onCardVideoSelectionChange(cardIndex, $event)"
+                                @media-upload-remove-image="onCardVideoRemove(cardIndex)"
+                                @media-upload-sidebar-open="onOpenCardVideoModal(cardIndex)">
+                            </sw-media-upload-v2>
+                            <sw-media-modal-v2
+                                v-if="cardVideoModals[cardIndex]"
+                                :initial-folder-id="null"
+                                :entity-context="'cms_page'"
+                                @media-modal-selection-change="onCardVideoSelectionChange(cardIndex, $event)"
+                                @modal-close="onCloseCardVideoModal(cardIndex)">
+                            </sw-media-modal-v2>
+                        </div>
+                    </template>
+                </div>
+
+                <!-- Buttons -->
+                <div class="ifg-field-group">
+                    <div class="ifg-field-group__header">
+                        <h5 class="ifg-field-group__title">Buttons</h5>
+                        <sw-button variant="primary" size="small" @click="addButton(cardIndex)">+ Add</sw-button>
+                    </div>
+
+                    <div
+                        v-for="(button, buttonIndex) in getCardButtons(card)"
+                        :key="`${cardIndex}-${buttonIndex}`"
+                        class="ifg-btn-item"
+                    >
+                        <div class="ifg-btn-item__header" @click="toggleButtonAccordion(cardIndex, buttonIndex)">
+                            <span>Button {{ buttonIndex + 1 }} — {{ button.buttonText || 'Learn More' }}</span>
+                            <div class="ifg-btn-item__actions">
+                                <sw-button size="small" variant="danger" @click.stop="removeButton(cardIndex, buttonIndex)">Remove</sw-button>
+                                <span class="ifg-accordion__arrow" :class="{ 'ifg-accordion__arrow--open': isButtonOpen(cardIndex, buttonIndex) }">
+                                    <mt-icon size="0.75rem" name="regular-chevron-right-xxs"></mt-icon>
+                                </span>
+                            </div>
+                        </div>
+
+                        <div class="ifg-btn-item__body" :class="{ 'ifg-btn-item__body--open': isButtonOpen(cardIndex, buttonIndex) }">
+                            <mt-text-field v-model="button.buttonText" label="Button text" @update:model-value="onElementUpdate"></mt-text-field>
+                            <mt-select v-model="button.buttonLinkType" label="Link type" :options="linkTypeOptions" @update:model-value="onElementUpdate"></mt-select>
+                            <sw-dynamic-url-field v-if="button.buttonLinkType === 'internal'" v-model:value="button.buttonUrl"></sw-dynamic-url-field>
+                            <mt-text-field v-if="button.buttonLinkType === 'external'" v-model="button.buttonUrl" label="URL" @update:model-value="onElementUpdate"></mt-text-field>
+                            <mt-select v-model="button.buttonTarget" label="Target" :options="targetOptions" @update:model-value="onElementUpdate"></mt-select>
+                            <mt-colorpicker v-model="button.buttonTextColor" label="Text color"></mt-colorpicker>
+                        </div>
+                    </div>
+                </div>
+
+                <div v-if="element.config.cards.value.length > 1" class="ifg-remove-card">
+                    <sw-button size="small" variant="danger" @click="removeCard(cardIndex)">Remove Card</sw-button>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+</div>
+{% endblock %}

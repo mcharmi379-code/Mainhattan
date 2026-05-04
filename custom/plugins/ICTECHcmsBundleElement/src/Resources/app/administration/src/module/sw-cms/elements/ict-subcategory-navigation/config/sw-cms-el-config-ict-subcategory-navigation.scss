@@ -1,0 +1,25 @@
+.ict-subcat-config {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+
+    &__row {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 16px;
+        align-items: end;
+
+        &--single {
+            grid-template-columns: 1fr;
+        }
+
+        @media (max-width: 700px) {
+            grid-template-columns: 1fr;
+        }
+    }
+
+    &__info p {
+        margin: 4px 0 0;
+        font-size: 13px;
+    }
+}

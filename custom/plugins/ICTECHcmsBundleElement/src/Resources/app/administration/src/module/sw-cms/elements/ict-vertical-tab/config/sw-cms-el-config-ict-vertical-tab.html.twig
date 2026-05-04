@@ -1,0 +1,98 @@
+{% block sw_cms_el_config_ict_vertical_tab %}
+<div class="ict-vertical-tab-config">
+    <div
+        v-for="(tab, index) in tabs"
+        :key="index"
+        class="ict-vertical-tab-config__tab"
+    >
+        <div class="ict-vertical-tab-config__tab-header" @click="toggleExpand(index)">
+            <span class="ict-vertical-tab-config__tab-title">{{ tab.title || `Tab ${index + 1}` }}</span>
+            <div class="ict-vertical-tab-config__tab-actions">
+                <sw-icon
+                    :name="expandedIndex === index ? 'regular-chevron-up-xs' : 'regular-chevron-down-xs'"
+                    small
+                />
+                <sw-icon
+                    name="regular-times-xs"
+                    small
+                    class="ict-vertical-tab-config__remove-icon"
+                    @click.stop="removeTab(index)"
+                />
+            </div>
+        </div>
+
+        <div v-if="expandedIndex === index" class="ict-vertical-tab-config__tab-body">
+            <sw-text-field
+                v-model:value="tab.title"
+                :label="$tc('ict-cms-bundle-element.cms.elements.ictVerticalTab.config.tabTitle')"
+                @update:value="onUpdate"
+            />
+
+            <sw-text-field
+                v-model:value="tab.header"
+                :label="$tc('ict-cms-bundle-element.cms.elements.ictVerticalTab.config.headerText')"
+                @update:value="onUpdate"
+            />
+
+            <div class="ict-vertical-tab-config__editor-label">
+                {{ $tc('ict-cms-bundle-element.cms.elements.ictVerticalTab.config.contentText') }}
+            </div>
+            <sw-text-editor
+                v-model:value="tab.content"
+                sanitize-input
+                @update:value="onUpdate"
+            />
+
+            <sw-text-field
+                v-model:value="tab.buttonText"
+                :label="$tc('ict-cms-bundle-element.cms.elements.ictVerticalTab.config.buttonText')"
+                @update:value="onUpdate"
+            />
+
+            <sw-single-select
+                v-model:value="tab.linkType"
+                :label="$tc('ict-cms-bundle-element.cms.elements.ictVerticalTab.config.linkType')"
+                :options="linkTypeOptions"
+                @update:value="onUpdate"
+            />
+
+            <sw-dynamic-url-field
+                v-if="tab.linkType === 'internal'"
+                v-model:value="tab.linkUrl"
+            />
+
+            <template v-else>
+                <sw-text-field
+                    v-model:value="tab.linkUrl"
+                    :label="$tc('ict-cms-bundle-element.cms.elements.ictVerticalTab.config.linkTo')"
+                    :placeholder="$tc('ict-cms-bundle-element.cms.elements.ictVerticalTab.config.linkPlaceholder')"
+                    @update:value="onUpdate"
+                />
+                <div class="ict-vertical-tab-config__link-actions">
+                    <sw-button
+                        size="small"
+                        variant="danger"
+                        :disabled="!tab.linkUrl"
+                        @click="onRemoveLink(tab)"
+                    >
+                        {{ $tc('ict-cms-bundle-element.cms.elements.ictVerticalTab.config.removeLink') }}
+                    </sw-button>
+                </div>
+            </template>
+
+            <sw-switch-field
+                v-model:value="tab.openInNewTab"
+                :label="$tc('ict-cms-bundle-element.cms.elements.ictVerticalTab.config.openInNewTab')"
+                @update:value="onUpdate"
+            />
+        </div>
+    </div>
+
+    <div class="ict-vertical-tab-config__add">
+        <sw-button size="small" @click="addTab">
+            <sw-icon name="regular-plus-xs" small />
+            {{ $tc('ict-cms-bundle-element.cms.elements.ictVerticalTab.config.addTab') }}
+        </sw-button>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,42 @@
+.sw-cms-el-config-ict-three-column-image-box {
+  .sw-cms-el-config-ict-three-column-left-image-section__main,
+  .sw-cms-el-config-ict-two-column-right-top-image-section__main,
+  .sw-cms-el-config-ict-two-column-right-bottom-image-section__main {
+    .sw-cms-el-config-ict-three-column-image-box_config_mode,
+    .sw-cms-el-config-ict-three-column-image-box_button_config {
+      display: flex;
+      flex-wrap: wrap;
+      margin-top: 20px;
+      gap: 15px 20px;
+    }
+
+    .sw-cms-el-config-ict-three-column-image-box-url-field {
+      display: grid;
+      grid-template-columns: 1fr 1fr auto;
+      gap: 20px;
+      align-items: center;
+
+      .sw-dynamic-url-field_link-category {
+        width: 100%;
+      }
+
+      .sw-dynamic-url-field__entity-single-select {
+        width: 100%;
+      }
+
+      .sw-dynamic-url-field__link-menu-buttons-button-remove {
+        justify-self: end;
+      }
+    }
+
+    .sw-cms-el-config-ict-three-column-image-box_button_styling {
+      margin-top: 10px;
+      .button-color-config, .button-border-config {
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr 1fr;
+        gap: 15px;
+        align-items: center;
+      }
+    }
+  }
+}

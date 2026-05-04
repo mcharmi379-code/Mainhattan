@@ -1,0 +1,52 @@
+{% block element_ict_single_title_button_section %}
+    {% set c = element.config %}
+    {% set background = '' %}
+    {% if c.backgroundType.value == 'color' %}
+        {% set background = 'background-color:' ~ (c.backgroundColor.value ?: '#0b5c8a') ~ ';' %}
+    {% else %}
+        {% set background = 'background:linear-gradient(135deg,' ~ (c.backgroundGradientColor1.value ?: '#0b5c8a') ~ ' 0%,' ~ (c.backgroundGradientColor2.value ?: '#1559d6') ~ ' 100%);' %}
+    {% endif %}
+
+    {% set leftUrl = c.leftSectionButtonLink.value ?: '#' %}
+    {% if c.leftSectionButtonLinkType.value == 'external' and leftUrl != '#' and not (leftUrl starts with 'http://') and not (leftUrl starts with 'https://') %}
+        {% set leftUrl = 'https://' ~ leftUrl %}
+    {% endif %}
+
+    {% set rightUrl = c.rightSectionButtonLink.value ?: '#' %}
+    {% if c.rightSectionButtonLinkType.value == 'external' and rightUrl != '#' and not (rightUrl starts with 'http://') and not (rightUrl starts with 'https://') %}
+        {% set rightUrl = 'https://' ~ rightUrl %}
+    {% endif %}
+
+    <section class="cms-element-ict-single-title-button-section" style="{{ background }}min-height:{{ c.minHeight.value ?: '300px' }};">
+        <div class="cms-element-ict-single-title-button-section__inner">
+            <h2 class="cms-element-ict-single-title-button-section__title" style="color:{{ c.titleColor.value ?: '#ffffff' }};">
+                {{ c.title.value }}
+            </h2>
+            <div class="cms-element-ict-single-title-button-section__description" style="color:{{ c.descriptionColor.value ?: '#e9ecef' }};">
+                {{ c.description.value|raw }}
+            </div>
+            <div class="cms-element-ict-single-title-button-section__actions">
+                {% if c.leftSectionButtonText.value %}
+                    <a
+                        href="{{ leftUrl }}"
+                        target="{{ c.leftSectionButtonTarget.value ?: '_self' }}"
+                        class="cms-element-ict-single-title-button-section__button"
+                        style="background-color:{{ c.leftSectionButtonBackgroundColor.value ?: '#0064ff' }};color:{{ c.leftSectionButtonTextColor.value ?: '#ffffff' }};"
+                    >
+                        {{ c.leftSectionButtonText.value }}
+                    </a>
+                {% endif %}
+                {% if c.rightSectionButtonText.value %}
+                    <a
+                        href="{{ rightUrl }}"
+                        target="{{ c.rightSectionButtonTarget.value ?: '_self' }}"
+                        class="cms-element-ict-single-title-button-section__button"
+                        style="background-color:{{ c.rightSectionButtonBackgroundColor.value ?: '#6c757d' }};color:{{ c.rightSectionButtonTextColor.value ?: '#ffffff' }};"
+                    >
+                        {{ c.rightSectionButtonText.value }}
+                    </a>
+                {% endif %}
+            </div>
+        </div>
+    </section>
+{% endblock %}

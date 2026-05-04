@@ -1,0 +1,41 @@
+<div class="sw-cms-el-ict-accordion">
+    <header
+        v-if="title || description"
+        class="sw-cms-el-ict-accordion__intro"
+    >
+        <h3
+            v-if="title"
+            class="sw-cms-el-ict-accordion__headline"
+        >
+            {{ title }}
+        </h3>
+
+        <p
+            v-if="description"
+            class="sw-cms-el-ict-accordion__description"
+        >
+            {{ description }}
+        </p>
+    </header>
+
+    <div class="sw-cms-el-ict-accordion__items">
+        <article
+            v-for="(entry, index) in previewEntries"
+            :key="index"
+            class="sw-cms-el-ict-accordion__item"
+            :class="{ 'is--expanded': entry.expanded }"
+        >
+            <div class="sw-cms-el-ict-accordion__item-header">
+                <span class="sw-cms-el-ict-accordion__item-title">
+                    {{ entry.title }}
+                </span>
+
+                <span class="sw-cms-el-ict-accordion__indicator"></span>
+            </div>
+
+            <p class="sw-cms-el-ict-accordion__item-content">
+                {{ stripTags(entry.content) }}
+            </p>
+        </article>
+    </div>
+</div>

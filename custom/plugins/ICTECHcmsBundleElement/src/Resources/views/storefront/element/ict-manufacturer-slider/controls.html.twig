@@ -1,0 +1,16 @@
+{% block element_ict_manufacturer_slider_controls %}
+    {% if hasSliderControls %}
+        <div class="base-slider-controls ict-manufacturer-slider__controls"
+             data-base-slider-controls="true"
+             role="navigation">
+            <button class="base-slider-controls-prev ict-manufacturer-slider__control is-nav-prev-outside"
+                    aria-label="{{ 'general.previous'|trans|striptags }}">
+                {% sw_icon 'arrow-head-left' %}
+            </button>
+            <button class="base-slider-controls-next ict-manufacturer-slider__control is-nav-next-outside"
+                    aria-label="{{ 'general.next'|trans|striptags }}">
+                {% sw_icon 'arrow-head-right' %}
+            </button>
+        </div>
+    {% endif %}
+{% endblock %}

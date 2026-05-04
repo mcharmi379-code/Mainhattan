@@ -1,0 +1,40 @@
+{% block sw_cms_el_ict_category_image_slider %}
+<div class="sw-cms-el-ict-category-image-slider">
+    <div class="sw-cms-el-ict-category-image-slider__content">
+        <div class="sw-cms-el-ict-category-image-slider__navigation">
+            <sw-icon
+                class="sw-cms-el-ict-category-image-slider__navigation-button"
+                name="regular-chevron-left"
+                size="24"
+                :class="{ 'is--disabled': !showPrev }"
+                @click="prevSlide"
+            />
+        </div>
+
+        <div class="sw-cms-el-ict-category-image-slider__grid">
+            <div
+                v-for="(card, index) in visibleCards"
+                :key="sliderPos + index"
+                class="sw-cms-el-ict-category-image-slider__item"
+            >
+                <div class="sw-cms-el-ict-category-image-slider__image">
+                    <img :src="getCardImage(card)" alt="">
+                </div>
+                <div class="sw-cms-el-ict-category-image-slider__title">
+                    {{ getCardName(card) }}
+                </div>
+            </div>
+        </div>
+
+        <div class="sw-cms-el-ict-category-image-slider__navigation">
+            <sw-icon
+                class="sw-cms-el-ict-category-image-slider__navigation-button"
+                name="regular-chevron-right"
+                size="24"
+                :class="{ 'is--disabled': !showNext }"
+                @click="nextSlide"
+            />
+        </div>
+    </div>
+</div>
+{% endblock %}

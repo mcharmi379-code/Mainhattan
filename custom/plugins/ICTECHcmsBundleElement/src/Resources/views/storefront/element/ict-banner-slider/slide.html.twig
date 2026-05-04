@@ -1,0 +1,53 @@
+{% block element_ict_banner_slider_slide %}
+    <div class="image-slider-item-container">
+        <div class="image-slider-item{% if not loop.first %} is-not-first{% endif %} is-{{ displayMode }}">
+            <div class="ict-banner-slider__image-wrapper">
+                <img src="{{ item.mediaUrl }}"
+                     class="ict-banner-slider__image img-fluid image-slider-image"
+                     alt="{{ item.mainTitle }}"
+                     loading="lazy">
+            </div>
+
+            <div class="ict-banner-slider__content-wrapper">
+                <div class="container">
+                    <div class="ict-banner-slider__content">
+                        {% if item.mainTitle %}
+                            <h1 class="ict-banner-slider__main-title" {% if item.mainTitleColor %}style="color: {{ item.mainTitleColor|e('html_attr') }}"{% endif %}>{{ item.mainTitle }}</h1>
+                        {% endif %}
+
+                        {% if item.subTitle %}
+                            <h2 class="ict-banner-slider__sub-title" {% if item.subTitleColor %}style="color: {{ item.subTitleColor|e('html_attr') }}"{% endif %}>{{ item.subTitle }}</h2>
+                        {% endif %}
+
+                        {% if item.description %}
+                            <p class="ict-banner-slider__description" {% if item.descriptionColor %}style="color: {{ item.descriptionColor|e('html_attr') }}"{% endif %}>{{ item.description }}</p>
+                        {% endif %}
+
+                        <div class="ict-banner-slider__actions">
+                            {% set buttonBackground = item.buttonColor ?? '#f15a24' %}
+                            {% set buttonTextColor = item.buttonTextColor ?? '#ffffff' %}
+
+                            {% if item.callButtonText and item.callButtonNumber %}
+                                <a href="tel:{{ item.callButtonNumber }}"
+                                   class="btn ict-banner-slider__btn ict-banner-slider__btn--call"
+                                   style="background-color: {{ buttonBackground|e('html_attr') }}; border-color: {{ buttonBackground|e('html_attr') }}; color: {{ buttonTextColor|e('html_attr') }}">
+                                    <span class="ict-banner-slider__btn-icon">{% sw_icon 'phone' %}</span>
+                                    {{ item.callButtonText }}
+                                </a>
+                            {% endif %}
+
+                            {% if item.emailButtonText and item.emailButtonAddress %}
+                                <a href="mailto:{{ item.emailButtonAddress }}"
+                                   class="btn ict-banner-slider__btn ict-banner-slider__btn--email"
+                                   style="background-color: {{ buttonBackground|e('html_attr') }}; border-color: {{ buttonBackground|e('html_attr') }}; color: {{ buttonTextColor|e('html_attr') }}">
+                                    <span class="ict-banner-slider__btn-icon">{% sw_icon 'envelope' %}</span>
+                                    {{ item.emailButtonText }}
+                                </a>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,1 @@
+"use strict";(window["webpackJsonpPlugini-c-t-e-c-hcms-bundle-element"]=window["webpackJsonpPlugini-c-t-e-c-hcms-bundle-element"]||[]).push([[2921],{2921:function(n,e,t){t.r(e),t.d(e,{default:function(){return c}});var c={template:'<div class="sw-cms-block-ict-subcategory-navigation">\n    <slot name="content"></slot>\n</div>\n'}}}]);

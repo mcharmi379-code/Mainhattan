@@ -1,0 +1,34 @@
+{% block element_ict_feature_grid %}
+    {% set config   = element.config %}
+    {% set slotData = element.data %}
+    {% set cards    = config.cards.value ?? [] %}
+    {% set columns  = config.numberOfColumns.value ?? 3 %}
+    {% set spacing  = config.cardSpacing.value ?? 20 %}
+
+    <div class="cms-element-ict-feature-grid">
+        <div class="ifg-grid" style="grid-template-columns: repeat({{ columns }}, minmax(0, 1fr)); gap: {{ spacing }}px;">
+            {% for card in cards %}
+                {% set cardIndex      = loop.index0 %}
+                {% set iconMedia      = slotData.iconImages[cardIndex] ?? null %}
+                {% set cardImageMedia = slotData.cardImages[cardIndex] ?? null %}
+                {% set cardVideoMedia = slotData.cardVideos[cardIndex] ?? null %}
+                {% set accentColor    = card.cardAccentColor ?? '#6366f1' %}
+                {% set bgColor        = card.cardBackgroundColor ?? '#ffffff' %}
+
+                {% set mediaHeightRaw = (card.mediaHeight ?? '200') ~ '' %}
+                {% set mediaHeightCss = mediaHeightRaw matches '/^[0-9]+(\\.[0-9]+)?$/' ? mediaHeightRaw ~ 'px' : mediaHeightRaw %}
+                {% set objectFit      = (card.mediaDisplayMode ?? 'crop') == 'crop' ? 'cover' : 'contain' %}
+
+                {% set activeButton = null %}
+                {% if card.buttons is defined and card.buttons is iterable %}
+                    {% for btn in card.buttons %}
+                        {% if activeButton is null and (btn.show is not defined or btn.show) %}
+                            {% set activeButton = btn %}
+                        {% endif %}
+                    {% endfor %}
+                {% endif %}
+                {% sw_include '@ICTECHcmsBundleElement/storefront/element/ict-feature-grid/card.html.twig' %}
+            {% endfor %}
+        </div>
+    </div>
+{% endblock %}

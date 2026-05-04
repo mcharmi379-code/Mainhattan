@@ -1,0 +1,82 @@
+{% block sw_cms_el_config_ict_hero_banner %}
+<div class="ict-hero-banner-config">
+    <div class="ict-hero-banner-config__section">
+        <div class="ict-hero-banner-config__label">
+            <sw-icon name="regular-image" small />
+            {{ $tc('ict-cms-bundle-element.cms.elements.ictHeroBanner.config.logo') }}
+        </div>
+
+        <sw-media-upload-v2
+            :upload-tag="logoUploadTag"
+            :source="logoSource"
+            :allow-multi-select="false"
+            variant="regular"
+            :file-accept="'image/*'"
+            @media-upload-sidebar-open="logoModalOpen = true"
+            @media-upload-remove-image="onLogoRemove"
+        />
+
+        <sw-upload-listener
+            :upload-tag="logoUploadTag"
+            auto-upload
+            @media-upload-finish="onLogoUploadFinish"
+        />
+
+        <sw-media-modal-v2
+            v-if="logoModalOpen"
+            variant="full"
+            :caption="$tc('ict-cms-bundle-element.cms.elements.ictHeroBanner.config.logo')"
+            :allow-multi-select="false"
+            @media-modal-selection-change="onLogoSelect"
+            @modal-close="logoModalOpen = false"
+        />
+    </div>
+
+    <div class="ict-hero-banner-config__section">
+        <div class="ict-hero-banner-config__label">
+            <sw-icon name="regular-image" small />
+            {{ $tc('ict-cms-bundle-element.cms.elements.ictHeroBanner.config.heroImage') }}
+        </div>
+
+        <sw-media-upload-v2
+            :upload-tag="heroUploadTag"
+            :source="heroSource"
+            :allow-multi-select="false"
+            variant="regular"
+            :file-accept="'image/*'"
+            @media-upload-sidebar-open="heroModalOpen = true"
+            @media-upload-remove-image="onHeroRemove"
+        />
+
+        <sw-upload-listener
+            :upload-tag="heroUploadTag"
+            auto-upload
+            @media-upload-finish="onHeroUploadFinish"
+        />
+
+        <sw-media-modal-v2
+            v-if="heroModalOpen"
+            variant="full"
+            :caption="$tc('ict-cms-bundle-element.cms.elements.ictHeroBanner.config.heroImage')"
+            :allow-multi-select="false"
+            @media-modal-selection-change="onHeroSelect"
+            @modal-close="heroModalOpen = false"
+        />
+    </div>
+
+    <div class="ict-hero-banner-config__section">
+        <sw-textarea-field
+            v-model:value="element.config.headline.value"
+            :label="$tc('ict-cms-bundle-element.cms.elements.ictHeroBanner.config.headline')"
+            :placeholder="$tc('ict-cms-bundle-element.cms.elements.ictHeroBanner.config.headlinePlaceholder')"
+            @update:value="onUpdate"
+        />
+
+        <sw-colorpicker
+            v-model:value="element.config.backgroundColor.value"
+            :label="$tc('ict-cms-bundle-element.cms.elements.ictHeroBanner.config.backgroundColor')"
+            @update:value="onUpdate"
+        />
+    </div>
+</div>
+{% endblock %}

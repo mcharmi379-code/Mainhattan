@@ -1,0 +1,99 @@
+{% block sw_cms_el_config_ict_story_card %}
+<div class="ict-story-card-config">
+    <div class="ict-story-card-config__section">
+        <div class="ict-story-card-config__label">
+            <sw-icon name="regular-image" small />
+            {{ $tc('ict-cms-bundle-element.cms.elements.ictStoryCard.config.cardImage') }}
+        </div>
+
+        <sw-media-upload-v2
+            :upload-tag="uploadTag"
+            :source="mediaSource"
+            :allow-multi-select="false"
+            variant="regular"
+            :file-accept="'image/*'"
+            @media-upload-sidebar-open="onOpenMediaModal"
+            @media-upload-remove-image="onRemoveImage"
+        />
+
+        <sw-upload-listener
+            :upload-tag="uploadTag"
+            auto-upload
+            @media-upload-finish="onImageUploadFinish"
+        />
+
+        <sw-media-modal-v2
+            v-if="mediaModalIsOpen"
+            variant="full"
+            :caption="$tc('ict-cms-bundle-element.cms.elements.ictStoryCard.config.cardImage')"
+            :allow-multi-select="false"
+            @media-modal-selection-change="onSelectImage"
+            @modal-close="onCloseMediaModal"
+        />
+    </div>
+
+    <div class="ict-story-card-config__section">
+        <sw-text-field
+            v-model:value="element.config.title.value"
+            :label="$tc('ict-cms-bundle-element.cms.elements.ictStoryCard.config.title')"
+            :placeholder="$tc('ict-cms-bundle-element.cms.elements.ictStoryCard.config.titlePlaceholder')"
+            @update:value="onUpdate"
+        />
+
+        <div class="ict-story-card-config__editor-label">
+            {{ $tc('ict-cms-bundle-element.cms.elements.ictStoryCard.config.subline') }}
+        </div>
+        <sw-text-editor
+            v-model:value="element.config.subline.value"
+            sanitize-input
+            @update:value="onUpdate"
+        />
+
+        <sw-text-field
+            v-model:value="element.config.subtitle.value"
+            :label="$tc('ict-cms-bundle-element.cms.elements.ictStoryCard.config.subtitle')"
+            :placeholder="$tc('ict-cms-bundle-element.cms.elements.ictStoryCard.config.subtitlePlaceholder')"
+            @update:value="onUpdate"
+        />
+    </div>
+
+    <div class="ict-story-card-config__section">
+        <sw-single-select
+            v-model:value="element.config.linkType.value"
+            :label="$tc('ict-cms-bundle-element.cms.elements.ictStoryCard.config.linkType')"
+            :options="linkTypeOptions"
+            @update:value="onUpdate"
+        />
+
+        <sw-dynamic-url-field
+            v-if="element.config.linkType.value === 'internal'"
+            v-model:value="element.config.linkUrl.value"
+        />
+
+        <template v-else>
+            <sw-text-field
+                v-model:value="element.config.linkUrl.value"
+                :label="$tc('ict-cms-bundle-element.cms.elements.ictStoryCard.config.linkUrl')"
+                :placeholder="$tc('ict-cms-bundle-element.cms.elements.ictStoryCard.config.linkUrlPlaceholder')"
+                @update:value="onUpdate"
+            />
+            <div class="ict-story-card-config__link-actions">
+                <sw-button
+                    size="small"
+                    variant="danger"
+                    :disabled="!element.config.linkUrl.value"
+                    @click="onRemoveLink"
+                >
+                    {{ $tc('ict-cms-bundle-element.cms.elements.ictStoryCard.config.removeLink') }}
+                </sw-button>
+            </div>
+        </template>
+
+        <sw-switch-field
+            v-model:value="element.config.openInNewTab.value"
+            :label="$tc('ict-cms-bundle-element.cms.elements.ictStoryCard.config.openInNewTab')"
+            @update:value="onUpdate"
+        />
+    </div>
+</div>
+{% endblock %}

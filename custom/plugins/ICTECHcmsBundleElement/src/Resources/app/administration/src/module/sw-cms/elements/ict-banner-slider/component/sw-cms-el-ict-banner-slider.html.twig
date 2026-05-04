@@ -1,0 +1,99 @@
+<div
+    class="sw-cms-el-ict-banner-slider"
+    :class="{ 'has--outside-arrows': arrowsOutside }"
+>
+    <div class="sw-cms-el-ict-banner-slider__slide">
+        <div
+            class="sw-cms-el-ict-banner-slider__image-box"
+            :class="`is--${displayMode}`"
+        >
+            <img
+                class="sw-cms-el-ict-banner-slider__image"
+                :src="currentSlide.mediaUrl"
+                alt=""
+            >
+        </div>
+
+        <div class="sw-cms-el-ict-banner-slider__overlay">
+            <h1
+                v-if="currentSlide.mainTitle"
+                class="sw-cms-el-ict-banner-slider__main-title"
+                :style="mainTitleStyle"
+            >
+                {{ currentSlide.mainTitle }}
+            </h1>
+
+            <h2
+                v-if="currentSlide.subTitle"
+                class="sw-cms-el-ict-banner-slider__sub-title"
+                :style="subTitleStyle"
+            >
+                {{ currentSlide.subTitle }}
+            </h2>
+
+            <p
+                v-if="currentSlide.description"
+                class="sw-cms-el-ict-banner-slider__description"
+                :style="descriptionStyle"
+            >
+                {{ currentSlide.description }}
+            </p>
+
+            <div
+                v-if="currentSlide.callButtonText || currentSlide.emailButtonText"
+                class="sw-cms-el-ict-banner-slider__actions"
+            >
+                <span
+                    v-if="currentSlide.callButtonText"
+                    class="sw-cms-el-ict-banner-slider__btn"
+                    :style="buttonStyle"
+                >
+                    {{ currentSlide.callButtonText }}
+                </span>
+                <span
+                    v-if="currentSlide.emailButtonText"
+                    class="sw-cms-el-ict-banner-slider__btn"
+                    :style="buttonStyle"
+                >
+                    {{ currentSlide.emailButtonText }}
+                </span>
+            </div>
+        </div>
+
+        <div
+            v-if="showDots"
+            class="sw-cms-el-ict-banner-slider__dots"
+            :class="`is--dot-${navigationDots}`"
+        >
+            <span
+                v-for="(item, index) in sliderItems"
+                :key="index"
+                class="sw-cms-el-ict-banner-slider__dot"
+                :class="{ 'is--active': isActiveSlide(index) }"
+                role="button"
+                :tabindex="0"
+                @click="goToSlide(index)"
+                @keydown.enter="goToSlide(index)"
+            />
+        </div>
+    </div>
+
+    <div
+        v-if="showArrows"
+        class="sw-cms-el-ict-banner-slider__arrows"
+        :class="`is--nav-${navigationArrows}`"
+    >
+        <sw-icon
+            class="sw-cms-el-ict-banner-slider__arrow sw-cms-el-ict-banner-slider__arrow--prev"
+            name="regular-chevron-left"
+            size="24"
+            @click="prevSlide"
+        />
+        <sw-icon
+            class="sw-cms-el-ict-banner-slider__arrow sw-cms-el-ict-banner-slider__arrow--next"
+            name="regular-chevron-right"
+            size="24"
+            @click="nextSlide"
+        />
+    </div>
+</div>

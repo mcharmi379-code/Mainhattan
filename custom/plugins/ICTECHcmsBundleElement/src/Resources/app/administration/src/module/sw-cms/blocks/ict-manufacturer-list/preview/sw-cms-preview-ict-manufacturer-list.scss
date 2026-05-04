@@ -1,0 +1,35 @@
+.sw-cms-preview-ict-manufacturer-list {
+    padding: 12px;
+
+    &__letters {
+        display: flex;
+        gap: 6px;
+        margin-bottom: 12px;
+    }
+
+    &__letter {
+        width: 18px;
+        height: 18px;
+        border: 1px solid #d8dde6;
+        border-radius: 3px;
+        background: #fff;
+        color: #2f3c4d;
+        font-size: 10px;
+        font-weight: 600;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    &__grid {
+        display: grid;
+        grid-template-columns: repeat(5, minmax(0, 1fr));
+        gap: 8px;
+    }
+
+    &__item {
+        min-height: 26px;
+        border-radius: 4px;
+        background: linear-gradient(180deg, #f8fafc 0%, #f1f5f9 100%);
+    }
+}

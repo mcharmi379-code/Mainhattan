@@ -1,0 +1,97 @@
+{% block sw_cms_element_ict_feature_grid %}
+<div class="sw-cms-el-ict-feature-grid">
+    <div
+        class="ifg-grid"
+        :style="{
+            gridTemplateColumns: `repeat(${element.config.numberOfColumns.value}, minmax(0, 1fr))`,
+            gap: `${element.config.cardSpacing.value}px`,
+        }"
+    >
+        <div
+            v-for="(card, index) in element.config.cards.value"
+            :key="index"
+            class="ifg-card"
+            :style="{ '--ifg-accent': card.cardAccentColor || '#6366f1', backgroundColor: card.cardBackgroundColor || '#ffffff' }"
+        >
+            <div class="ifg-card__accent-bar"></div>
+
+            <div class="ifg-card__media" :style="{ height: getMediaHeightCss(card) }">
+                <template v-if="element.data && element.data.cardImages && element.data.cardImages[index]">
+                    <img
+                        class="ifg-card__media-img"
+                        :src="element.data.cardImages[index].url"
+                        :alt="card.headline || 'Media'"
+                        :style="{ objectFit: getMediaObjectFit(card) }"
+                    >
+                </template>
+                <iframe
+                    v-else-if="card.cardBackgroundVideoUploadType === 'url' && card.cardBackgroundVideoUploadUrl"
+                    class="ifg-card__media-iframe"
+                    :src="getYoutubeEmbedUrl(card.cardBackgroundVideoUploadUrl)"
+                    frameborder="0"
+                    allowfullscreen
+                ></iframe>
+                <video
+                    v-else-if="card.cardBackgroundVideoUploadType === 'file' && element.data && element.data.cardVideos && element.data.cardVideos[index]"
+                    class="ifg-card__media-video"
+                    autoplay muted loop
+                    :style="{ objectFit: getMediaObjectFit(card) }"
+                >
+                    <source :src="element.data.cardVideos[index].url" type="video/mp4">
+                </video>
+                <div v-else class="ifg-card__media-placeholder">Media</div>
+            </div>
+
+            <div class="ifg-card__body">
+                <div class="ifg-card__icon-row">
+                    <div class="ifg-card__icon-wrap" :style="{ color: card.iconColor || '#6366f1' }">
+                        <span
+                            v-if="element.data && element.data.iconImages && element.data.iconImages[index] && isSvgUrl(element.data.iconImages[index].url)"
+                            class="ifg-card__icon-mask"
+                            :style="{
+                                backgroundColor: card.iconColor || '#6366f1',
+                                WebkitMaskImage: `url(${element.data.iconImages[index].url})`,
+                                maskImage: `url(${element.data.iconImages[index].url})`
+                            }"
+                        ></span>
+                        <img
+                            v-else-if="element.data && element.data.iconImages && element.data.iconImages[index]"
+                            :src="element.data.iconImages[index].url"
+                            :alt="card.headline || 'Icon'"
+                            class="ifg-card__icon-img"
+                        >
+                        <svg v-else width="80" height="80" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
+                        </svg>
+                    </div>
+                </div>
+
+                <h3 class="ifg-card__headline" :style="{ color: card.headlineColor || '#1e293b' }">
+                    {{ card.headline }}
+                </h3>
+
+                <p v-if="(card.subheadline || '').trim()" class="ifg-card__subheadline" :style="{ color: card.subheadlineColor || '#64748b' }">
+                    {{ card.subheadline }}
+                </p>
+
+                <div class="ifg-card__body-text" :style="{ color: card.bodyTextColor || '#64748b' }" v-html="card.bodyText"></div>
+
+                <div v-if="getActiveButton(card)" class="ifg-card__footer">
+                    <span
+                        class="ifg-card__btn"
+                        :style="{
+                            '--ifg-btn-text': getActiveButton(card).buttonTextColor || '#ffffff',
+                            '--ifg-btn-radius': (getActiveButton(card).buttonBorderRadius || 6) + 'px',
+                        }"
+                    >
+                        {{ getActiveButton(card).buttonText || 'Learn More' }}
+                        <svg class="ifg-card__btn-arrow" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                            <path d="M5 12h14M12 5l7 7-7 7"/>
+                        </svg>
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

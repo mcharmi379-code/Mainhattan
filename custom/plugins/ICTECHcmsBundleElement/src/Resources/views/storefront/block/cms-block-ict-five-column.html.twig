@@ -1,0 +1,19 @@
+{% block block_ict_five_column %}
+    {% set slots = [
+        block.slots.getSlot('left'),
+        block.slots.getSlot('leftCenter'),
+        block.slots.getSlot('center'),
+        block.slots.getSlot('rightCenter'),
+        block.slots.getSlot('right')
+    ] %}
+
+    {% for slot in slots %}
+        {% if slot %}
+            <div class="col-lg col-md-6 col-12 ict-five-column-layout__col" data-cms-element-id="{{ slot.id }}">
+                <div class="ict-five-column-layout__card-slot">
+                    {% sw_include '@Storefront/storefront/element/cms-element-' ~ slot.type ~ '.html.twig' ignore missing with { element: slot } %}
+                </div>
+            </div>
+        {% endif %}
+    {% endfor %}
+{% endblock %}

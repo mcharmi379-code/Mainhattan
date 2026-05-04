@@ -1,0 +1,109 @@
+{% block sw_cms_element_ict_platform_support %}
+<div class="sw-cms-el-ict-platform-support">
+    <div
+        class="platform-support-preview"
+        :style="previewWrapperStyle"
+    >
+        <!-- Image background -->
+        <div
+            v-if="element.config.backgroundType.value === 'image' && element.data && element.data.backgroundImage"
+            class="ps-bg-image"
+            :style="{ backgroundImage: 'url(' + element.data.backgroundImage.url + ')' }"
+        ></div>
+
+        <!-- Video background (file) -->
+        <video
+            v-if="element.config.backgroundType.value === 'video' && element.config.backgroundVideoUploadType.value === 'file' && element.data && element.data.backgroundVideo"
+            class="ps-bg-video"
+            autoplay muted loop playsinline
+        >
+            <source :src="element.data.backgroundVideo.url" type="video/mp4">
+        </video>
+
+        <!-- Video background (URL / YouTube) -->
+        <iframe
+            v-if="element.config.backgroundType.value === 'video' && element.config.backgroundVideoUploadType.value === 'url' && element.config.backgroundVideoUploadUrl.value"
+            class="ps-bg-video"
+            :src="getYoutubeEmbedUrl(element.config.backgroundVideoUploadUrl.value)"
+            frameborder="0"
+            allowfullscreen
+        ></iframe>
+
+        <div class="ps-content">
+            <h3 v-if="element.config.platformBlockTitle.value" :style="{
+                fontSize: element.config.platformTitleSize.value + 'px',
+                lineHeight: element.config.platformTitleLineHeight.value + 'px',
+                fontWeight: '700',
+                color: element.config.platformTitleColor.value,
+                textAlign: element.config.platformTitleAlignment.value,
+                marginBottom: '2rem'
+            }">
+                {{ element.config.platformBlockTitle.value }}
+            </h3>
+            <div class="platform-grid" :style="{
+                display: 'grid',
+                gridTemplateColumns: 'repeat(5, 1fr)',
+                gap: '32px',
+                justifyItems: element.config.platformAlignment.value
+            }">
+                <div v-for="(platform, index) in platformItems" :key="index" class="platform-item" :style="{
+                    display: 'flex',
+                    flexDirection: 'column',
+                    alignItems: 'center',
+                    gap: '10px'
+                }">
+                    <div class="platform-icon-wrapper" :style="{
+                        width: platform.iconSizePx + 'px',
+                        height: platform.iconSizePx + 'px',
+                        backgroundColor: platform.iconBackgroundType === 'solid' ? platform.iconBackgroundColor : 'transparent',
+                        background: platform.iconBackgroundType === 'gradient'
+                            ? 'linear-gradient(' + platform.iconGradientDirection + ', ' + platform.iconGradientColor1 + ', ' + platform.iconGradientColor2 + ')'
+                            : '',
+                        borderRadius: platform.iconBackgroundShape === 'circle' ? '50%' : platform.iconBackgroundShape === 'rounded' ? '12px' : platform.iconBackgroundShape === 'square' ? '0' : '8px',
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'center'
+                    }">
+                        <template v-if="element.data && element.data.platformIcons && element.data.platformIcons[index]">
+                            <span
+                                v-if="element.data.platformIcons[index].url && element.data.platformIcons[index].url.toLowerCase().includes('.svg')"
+                                :style="{
+                                    display: 'block',
+                                    width: '70%',
+                                    height: '70%',
+                                    backgroundColor: platform.iconColor,
+                                    WebkitMaskImage: 'url(' + element.data.platformIcons[index].url + ')',
+                                    maskImage: 'url(' + element.data.platformIcons[index].url + ')',
+                                    WebkitMaskSize: 'contain',
+                                    maskSize: 'contain',
+                                    WebkitMaskRepeat: 'no-repeat',
+                                    maskRepeat: 'no-repeat',
+                                    WebkitMaskPosition: 'center',
+                                    maskPosition: 'center'
+                                }"
+                            ></span>
+                            <img
+                                v-else
+                                :src="element.data.platformIcons[index].url"
+                                :alt="platform.platformLabel"
+                                :style="{ width: '70%', height: '70%', objectFit: 'contain' }"
+                            >
+                        </template>
+                        <svg v-else width="55%" height="55%" viewBox="0 0 24 24" :fill="platform.iconColor">
+                            <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 14.5v-9l6 4.5-6 4.5z"/>
+                        </svg>
+                    </div>
+                    <span v-if="platform.platformLabel" :style="{
+                        fontSize: platform.platformLabelSizePx + 'px',
+                        fontWeight: platform.platformLabelWeight,
+                        color: platform.platformLabelColor,
+                        textAlign: 'center'
+                    }">
+                        {{ platform.platformLabel }}
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

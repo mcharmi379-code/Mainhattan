@@ -1,0 +1,6 @@
+{% block block_ict_single_title_button_section %}
+    {% set element = block.slots.getSlot('content') %}
+    <div class="cms-block-ict-single-title-button-section" data-cms-element-id="{{ element.id }}">
+        {% sw_include "@Storefront/storefront/element/cms-element-" ~ element.type ~ ".html.twig" ignore missing %}
+    </div>
+{% endblock %}

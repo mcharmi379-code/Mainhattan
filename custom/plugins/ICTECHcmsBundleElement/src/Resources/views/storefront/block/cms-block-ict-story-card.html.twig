@@ -1,0 +1,11 @@
+{% block block_ict_story_card %}
+<div class="cms-block-ict-story-card">
+    <div class="cms-block-container">
+        {% block block_ict_story_card_content %}
+            {% set element = block.slots.getSlot('content') %}
+            {% sw_include '@Storefront/storefront/element/cms-element-' ~ element.type ~ '.html.twig' ignore missing %}
+        {% endblock %}
+    </div>
+</div>
+{% endblock %}
+

@@ -1,0 +1,135 @@
+{% block sw_cms_el_config_ict_file_download %}
+<div class="ict-fd-config">
+
+    <sw-tabs
+        position-identifier="sw-cms-el-config-ict-file-download"
+        default-item="media"
+    >
+        <template #default="{ active }">
+            <sw-tabs-item
+                name="media"
+                :title="$tc('ict-cms-bundle-element.cms.elements.ictFileDownload.config.tabs.media')"
+                :active-tab="active"
+            >
+                {{ $tc('ict-cms-bundle-element.cms.elements.ictFileDownload.config.tabs.media') }}
+            </sw-tabs-item>
+            <sw-tabs-item
+                name="layout"
+                :title="$tc('ict-cms-bundle-element.cms.elements.ictFileDownload.config.tabs.layout')"
+                :active-tab="active"
+            >
+                {{ $tc('ict-cms-bundle-element.cms.elements.ictFileDownload.config.tabs.layout') }}
+            </sw-tabs-item>
+        </template>
+
+        <template #content="{ active }">
+
+            <div v-if="active === 'media'" class="ict-fd-config__tab-content">
+
+                <div class="ict-fd-config__media-grid">
+                    <div class="ict-fd-config__media-section">
+                        <div class="ict-fd-config__media-label">
+                            <sw-icon name="regular-file" small />
+                            {{ $tc('ict-cms-bundle-element.cms.elements.ictFileDownload.config.uploadMedia') }}
+                        </div>
+
+                        <sw-media-upload-v2
+                            :upload-tag="uploadTagMedia"
+                            :source="mediaSource"
+                            :allow-multi-select="false"
+                            variant="regular"
+                            :file-accept="'*/*'"
+                            :help-text="$tc('ict-cms-bundle-element.cms.elements.ictFileDownload.config.uploadMediaHelpText')"
+                            @media-upload-sidebar-open="onOpenMediaModal"
+                            @media-upload-remove-image="onRemoveFile"
+                        />
+
+                        <sw-upload-listener
+                            :upload-tag="uploadTagMedia"
+                            auto-upload
+                            @media-upload-finish="onFileUploadFinish"
+                        />
+
+                        <sw-media-modal-v2
+                            v-if="mediaModalIsOpen"
+                            variant="full"
+                            :caption="$tc('ict-cms-bundle-element.cms.elements.ictFileDownload.config.uploadMedia')"
+                            :allow-multi-select="false"
+                            @media-modal-selection-change="onSelectFile"
+                            @modal-close="onCloseMediaModal"
+                        />
+                    </div>
+
+                    <div class="ict-fd-config__media-section">
+                        <div class="ict-fd-config__media-label">
+                            <sw-icon name="regular-image" small />
+                            {{ $tc('ict-cms-bundle-element.cms.elements.ictFileDownload.config.uploadPreview') }}
+                        </div>
+
+                        <sw-media-upload-v2
+                            :upload-tag="uploadTagPreview"
+                            :source="previewSource"
+                            :allow-multi-select="false"
+                            variant="regular"
+                            :file-accept="'image/*'"
+                           
+                            @media-upload-sidebar-open="onOpenPreviewModal"
+                            @media-upload-remove-image="onRemovePreview"
+                        />
+
+                        <sw-upload-listener
+                            :upload-tag="uploadTagPreview"
+                            auto-upload
+                            @media-upload-finish="onPreviewUploadFinish"
+                        />
+
+                        <sw-media-modal-v2
+                            v-if="previewModalIsOpen"
+                            variant="full"
+                            :caption="$tc('ict-cms-bundle-element.cms.elements.ictFileDownload.config.uploadPreview')"
+                            :allow-multi-select="false"
+                            @media-modal-selection-change="onSelectPreview"
+                            @modal-close="onClosePreviewModal"
+                        />
+                    </div>
+                </div>
+
+            </div>
+
+            <div v-if="active === 'layout'" class="ict-fd-config__tab-content">
+
+                <div class="ict-fd-config__row">
+                    <sw-text-field
+                        v-model:value="element.config.title.value"
+                        :label="$tc('ict-cms-bundle-element.cms.elements.ictFileDownload.config.title')"
+                        :placeholder="$tc('ict-cms-bundle-element.cms.elements.ictFileDownload.config.titlePlaceholder')"
+                        @update:value="onUpdate"
+                    />
+                    <sw-text-field
+                        v-model:value="element.config.subtitle.value"
+                        :label="$tc('ict-cms-bundle-element.cms.elements.ictFileDownload.config.subtitle')"
+                        :placeholder="$tc('ict-cms-bundle-element.cms.elements.ictFileDownload.config.subtitlePlaceholder')"
+                        @update:value="onUpdate"
+                    />
+                </div>
+
+                <sw-text-field
+                    v-model:value="element.config.buttonText.value"
+                    :label="$tc('ict-cms-bundle-element.cms.elements.ictFileDownload.config.buttonText')"
+                    :placeholder="$tc('ict-cms-bundle-element.cms.elements.ictFileDownload.config.buttonTextPlaceholder')"
+                    @update:value="onUpdate"
+                />
+
+                <sw-switch-field
+                    v-model:value="element.config.showSpecifications.value"
+                    :label="$tc('ict-cms-bundle-element.cms.elements.ictFileDownload.config.showSpecifications')"
+                    @update:value="onUpdate"
+                />
+
+            </div>
+
+        </template>
+    </sw-tabs>
+
+</div>
+{% endblock %}

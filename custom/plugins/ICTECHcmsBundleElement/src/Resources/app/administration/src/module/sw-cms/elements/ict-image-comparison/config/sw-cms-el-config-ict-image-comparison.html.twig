@@ -1,0 +1,105 @@
+{% block sw_cms_el_config_ict_image_comparison %}
+<div class="ict-image-comparison-config">
+    <sw-tabs
+        v-model:active-tab="activeTab"
+        position-identifier="ict-image-comparison-config"
+    >
+        <template #default="{ active }">
+            <sw-tabs-item
+                name="general"
+                :active-tab="active"
+            >
+                {{ $tc('ict-cms-bundle-element.cms.elements.ictImageComparison.config.tabs.general') }}
+            </sw-tabs-item>
+            <sw-tabs-item
+                name="media"
+                :active-tab="active"
+            >
+                {{ $tc('ict-cms-bundle-element.cms.elements.ictImageComparison.config.tabs.media') }}
+            </sw-tabs-item>
+        </template>
+
+        <template #content="{ active }">
+            <div v-if="active === 'general'" class="ict-image-comparison-config__tab-content">
+                <sw-single-select
+                    v-model:value="element.config.layout.value"
+                    :label="$tc('ict-cms-bundle-element.cms.elements.ictImageComparison.config.layout')"
+                    :options="layoutOptions"
+                    @update:value="onUpdate"
+                />
+            </div>
+
+            <div v-if="active === 'media'" class="ict-image-comparison-config__tab-content">
+                <div class="ict-image-comparison-config__media-section">
+                    <div class="ict-image-comparison-config__media-label">
+                        <sw-icon name="regular-image" small />
+                        {{ $tc('ict-cms-bundle-element.cms.elements.ictImageComparison.config.beforeImage') }}
+                    </div>
+
+                    <sw-media-upload-v2
+                        :upload-tag="beforeUploadTag"
+                        :source="beforeSource"
+                        :allow-multi-select="false"
+                        variant="regular"
+                        :file-accept="'image/*'"
+                        @media-upload-sidebar-open="beforeModalOpen = true"
+                        @media-upload-remove-image="onBeforeRemove"
+                    />
+
+                    <sw-upload-listener
+                        :upload-tag="beforeUploadTag"
+                        auto-upload
+                        @media-upload-finish="onBeforeUploadFinish"
+                    />
+
+                    <sw-media-modal-v2
+                        v-if="beforeModalOpen"
+                        variant="full"
+                        :caption="$tc('ict-cms-bundle-element.cms.elements.ictImageComparison.config.beforeImage')"
+                        :allow-multi-select="false"
+                        @media-modal-selection-change="onBeforeSelect"
+                        @modal-close="beforeModalOpen = false"
+                    />
+                </div>
+
+                <div class="ict-image-comparison-config__media-section">
+                    <div class="ict-image-comparison-config__media-label">
+                        <sw-icon name="regular-image" small />
+                        {{ $tc('ict-cms-bundle-element.cms.elements.ictImageComparison.config.afterImage') }}
+                    </div>
+
+                    <sw-media-upload-v2
+                        :upload-tag="afterUploadTag"
+                        :source="afterSource"
+                        :allow-multi-select="false"
+                        variant="regular"
+                        :file-accept="'image/*'"
+                        @media-upload-sidebar-open="afterModalOpen = true"
+                        @media-upload-remove-image="onAfterRemove"
+                    />
+
+                    <sw-upload-listener
+                        :upload-tag="afterUploadTag"
+                        auto-upload
+                        @media-upload-finish="onAfterUploadFinish"
+                    />
+
+                    <sw-media-modal-v2
+                        v-if="afterModalOpen"
+                        variant="full"
+                        :caption="$tc('ict-cms-bundle-element.cms.elements.ictImageComparison.config.afterImage')"
+                        :allow-multi-select="false"
+                        @media-modal-selection-change="onAfterSelect"
+                        @modal-close="afterModalOpen = false"
+                    />
+                </div>
+
+                <div class="ict-image-comparison-config__hint">
+                    <sw-icon name="regular-info-circle" small />
+                    {{ $tc('ict-cms-bundle-element.cms.elements.ictImageComparison.config.sizeHint') }}
+                </div>
+            </div>
+        </template>
+    </sw-tabs>
+</div>
+{% endblock %}

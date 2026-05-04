@@ -1,0 +1,60 @@
+{% block element_ict_image_comparison %}
+    {% set layout      = element.data.layout ?? element.config.layout.value ?? 'horizontal' %}
+    {% set beforeMedia = element.data.beforeMedia ?? null %}
+    {% set afterMedia  = element.data.afterMedia ?? null %}
+
+    <div
+        class="cms-element-ict-image-comparison ict-img-compare ict-img-compare--{{ layout }}"
+        data-ict-image-comparison="true"
+        data-layout="{{ layout }}"
+        aria-label="{{ 'ict-cms-bundle-element.storefront.imageComparison.ariaLabel'|trans }}"
+    >
+        <div class="ict-img-compare__container">
+            <div class="ict-img-compare__before" aria-label="{{ 'ict-cms-bundle-element.storefront.imageComparison.beforeLabel'|trans }}">
+                {% if beforeMedia and beforeMedia.url %}
+                    <img
+                        src="{{ beforeMedia.url }}"
+                        alt="{{ beforeMedia.alt ?? 'ict-cms-bundle-element.storefront.imageComparison.beforeLabel'|trans }}"
+                        loading="lazy"
+                        decoding="async"
+                        draggable="false"
+                    >
+                {% else %}
+                    <div class="ict-img-compare__placeholder" aria-hidden="true"></div>
+                {% endif %}
+            </div>
+
+            <div class="ict-img-compare__after" aria-label="{{ 'ict-cms-bundle-element.storefront.imageComparison.afterLabel'|trans }}">
+                {% if afterMedia and afterMedia.url %}
+                    <img
+                        src="{{ afterMedia.url }}"
+                        alt="{{ afterMedia.alt ?? 'ict-cms-bundle-element.storefront.imageComparison.afterLabel'|trans }}"
+                        loading="lazy"
+                        decoding="async"
+                        draggable="false"
+                    >
+                {% else %}
+                    <div class="ict-img-compare__placeholder" aria-hidden="true"></div>
+                {% endif %}
+            </div>
+
+            <div
+                class="ict-img-compare__handle"
+                role="slider"
+                aria-valuemin="0"
+                aria-valuemax="100"
+                aria-valuenow="50"
+                aria-label="{{ 'ict-cms-bundle-element.storefront.imageComparison.handleLabel'|trans }}"
+                tabindex="0"
+            >
+                <div class="ict-img-compare__handle-line ict-img-compare__handle-line--before"></div>
+                <div class="ict-img-compare__handle-circle">
+                    <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                        <path d="M8 5L3 12L8 19M16 5L21 12L16 19" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </div>
+                <div class="ict-img-compare__handle-line ict-img-compare__handle-line--after"></div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

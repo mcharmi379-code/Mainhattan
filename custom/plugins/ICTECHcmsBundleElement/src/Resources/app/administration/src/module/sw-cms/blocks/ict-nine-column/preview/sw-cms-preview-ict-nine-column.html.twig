@@ -1,0 +1,17 @@
+<div class="sw-cms-preview-ict-nine-column">
+    <span
+        v-for="slot in 9"
+        :key="slot"
+        class="sw-cms-preview-ict-nine-column__slot"
+    >
+        <sw-icon
+            class="sw-cms-preview-ict-nine-column__icon"
+            name="regular-plus-circle"
+            size="10"
+        />
+
+        <span class="sw-cms-preview-ict-nine-column__label">
+            {{ $tc('sw-cms.detail.title.elementChangeModal') }}
+        </span>
+    </span>
+</div>

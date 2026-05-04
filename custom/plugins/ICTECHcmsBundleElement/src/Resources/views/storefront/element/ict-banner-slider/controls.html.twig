@@ -1,0 +1,20 @@
+{% block element_ict_banner_slider_controls %}
+    {% if navigationArrows != 'none' and hasMultipleSlides %}
+        <div class="image-slider-controls-container">
+            <div class="base-slider-controls" data-base-slider-controls="true">
+                <button
+                    class="base-slider-controls-prev image-slider-controls-prev{% if navigationArrows == 'outside' %} is-nav-prev-outside{% else %} is-nav-prev-inside{% endif %}"
+                    aria-label="Previous slide"
+                >
+                    {% sw_icon 'arrow-head-left' %}
+                </button>
+                <button
+                    class="base-slider-controls-next image-slider-controls-next{% if navigationArrows == 'outside' %} is-nav-next-outside{% else %} is-nav-next-inside{% endif %}"
+                    aria-label="Next slide"
+                >
+                    {% sw_icon 'arrow-head-right' %}
+                </button>
+            </div>
+        </div>
+    {% endif %}
+{% endblock %}

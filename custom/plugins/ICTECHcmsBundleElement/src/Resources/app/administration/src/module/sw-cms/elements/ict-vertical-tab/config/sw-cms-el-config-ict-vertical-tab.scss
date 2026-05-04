@@ -1,0 +1,65 @@
+.ict-vertical-tab-config {
+    &__tab {
+        border: 1px solid #d1dbe8;
+        border-radius: 4px;
+        margin-bottom: 8px;
+        overflow: hidden;
+    }
+
+    &__tab-header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 10px 14px;
+        background: #f9fafb;
+        cursor: pointer;
+        user-select: none;
+
+        &:hover {
+            background: #f0f4f9;
+        }
+    }
+
+    &__tab-title {
+        font-size: 13px;
+        font-weight: 600;
+        color: #1a2b3c;
+    }
+
+    &__tab-actions {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+    }
+
+    &__remove-icon {
+        color: #de294c;
+
+        &:hover {
+            opacity: 0.75;
+        }
+    }
+
+    &__tab-body {
+        padding: 16px;
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+        border-top: 1px solid #d1dbe8;
+    }
+
+    &__editor-label {
+        font-size: 12px;
+        font-weight: 600;
+        color: #52667a;
+        margin-bottom: -8px;
+    }
+
+    &__link-actions {
+        margin-top: -4px;
+    }
+
+    &__add {
+        margin-top: 8px;
+    }
+}

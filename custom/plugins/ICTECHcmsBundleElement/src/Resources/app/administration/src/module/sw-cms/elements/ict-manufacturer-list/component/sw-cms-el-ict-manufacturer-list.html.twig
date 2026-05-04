@@ -1,0 +1,23 @@
+<div class="sw-cms-el-ict-manufacturer-list">
+    <div class="sw-cms-el-ict-manufacturer-list__letters">
+        <button
+            v-for="letter in alphabet"
+            :key="letter"
+            class="sw-cms-el-ict-manufacturer-list__letter"
+            type="button"
+            tabindex="-1"
+        >
+            {{ letter }}
+        </button>
+    </div>
+
+    <div class="sw-cms-el-ict-manufacturer-list__grid">
+        <div
+            v-for="item in previewItems"
+            :key="item.id"
+            class="sw-cms-el-ict-manufacturer-list__item"
+        >
+            <div class="sw-cms-el-ict-manufacturer-list__placeholder"></div>
+        </div>
+    </div>
+</div>

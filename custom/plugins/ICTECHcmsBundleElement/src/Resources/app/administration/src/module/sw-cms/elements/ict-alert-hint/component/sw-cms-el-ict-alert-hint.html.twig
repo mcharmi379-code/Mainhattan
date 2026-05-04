@@ -1,0 +1,18 @@
+{% block sw_cms_el_ict_alert_hint %}
+<div :class="alertClasses">
+    <span v-if="activateIcon" class="ict-alert-hint__icon" aria-hidden="true">
+        <sw-icon v-if="alertType === 'success'" name="regular-check-circle" size="18" />
+        <sw-icon v-else-if="alertType === 'danger'" name="regular-times-circle" size="18" />
+        <sw-icon v-else-if="alertType === 'warning'" name="regular-exclamation-triangle" size="18" />
+        <sw-icon v-else name="regular-info-circle" size="18" />
+    </span>
+    <div class="ict-alert-hint__body">
+        <strong v-if="title" class="ict-alert-hint__title">{{ title }}</strong>
+        <!-- eslint-disable-next-line vue/no-v-html -->
+        <div v-if="content" class="ict-alert-hint__content" v-html="content"></div>
+        <div v-if="!title && !content" class="ict-alert-hint__placeholder">
+            {{ $tc('ict-cms-bundle-element.cms.elements.ictAlertHint.config.placeholder') }}
+        </div>
+    </div>
+</div>
+{% endblock %}

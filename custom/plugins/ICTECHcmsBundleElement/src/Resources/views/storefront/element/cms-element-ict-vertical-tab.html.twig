@@ -1,0 +1,62 @@
+{% block element_ict_vertical_tab %}
+    {% set tabs = element.data.tabs ?? [] %}
+
+    {% if tabs|length > 0 %}
+        <div class="cms-element-ict-vertical-tab ict-vtab" data-ict-vertical-tab="true">
+            <div class="ict-vtab__layout">
+                <div class="ict-vtab__panels">
+                    {% for tab in tabs %}
+                        {% set isFirst = loop.first %}
+                        {% set target = tab.openInNewTab ? '_blank' : '_self' %}
+                        {% set rel = tab.openInNewTab ? 'noopener noreferrer' : '' %}
+
+                        <div
+                            class="ict-vtab__panel{% if isFirst %} ict-vtab__panel--active{% endif %}"
+                            role="tabpanel"
+                            id="ict-vtab-panel-{{ loop.index }}"
+                            aria-labelledby="ict-vtab-nav-{{ loop.index }}"
+                            {% if not isFirst %}hidden{% endif %}
+                        >
+                            {% if tab.header %}
+                                <h3 class="ict-vtab__header">{{ tab.header }}</h3>
+                            {% endif %}
+
+                            {% if tab.content %}
+                                <div class="ict-vtab__content">{{ tab.content|raw }}</div>
+                            {% endif %}
+
+                            {% if tab.buttonText and tab.linkUrl %}
+                                <a
+                                    class="ict-vtab__btn"
+                                    href="{{ tab.linkUrl }}"
+                                    target="{{ target }}"
+                                    {% if rel %}rel="{{ rel }}"{% endif %}
+                                >
+                                    {{ tab.buttonText }}
+                                </a>
+                            {% elseif tab.buttonText %}
+                                <span class="ict-vtab__btn ict-vtab__btn--no-link">{{ tab.buttonText }}</span>
+                            {% endif %}
+                        </div>
+                    {% endfor %}
+                </div>
+
+                <nav class="ict-vtab__nav" role="tablist" aria-label="{{ 'ict-cms-bundle-element.storefront.verticalTab.navLabel'|trans }}">
+                    {% for tab in tabs %}
+                        <button
+                            class="ict-vtab__nav-item{% if loop.first %} ict-vtab__nav-item--active{% endif %}"
+                            role="tab"
+                            id="ict-vtab-nav-{{ loop.index }}"
+                            aria-controls="ict-vtab-panel-{{ loop.index }}"
+                            aria-selected="{{ loop.first ? 'true' : 'false' }}"
+                            data-tab-index="{{ loop.index0 }}"
+                            type="button"
+                        >
+                            {{ tab.title ?: ('Tab ' ~ loop.index) }}
+                        </button>
+                    {% endfor %}
+                </nav>
+            </div>
+        </div>
+    {% endif %}
+{% endblock %}

@@ -1,0 +1,97 @@
+.cms-block-ict-nine-column {
+    .ict-nine-column-layout__card-slot,
+    .ict-nine-column-layout__card-slot > .cms-element-ict-nine-column,
+    .ict-nine-column-layout__col {
+        height: 100%;
+    }
+}
+
+.ict-nine-column-card {
+    display: flex;
+    flex-direction: column;
+    min-height: 100%;
+    overflow: hidden;
+    border: 1px solid rgba(15, 23, 42, 0.08);
+    border-radius: 1.5rem;
+    background: linear-gradient(180deg, #ffffff 0%, #f8fafc 100%);
+    box-shadow: 0 18px 38px rgba(15, 23, 42, 0.08);
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+
+    &:hover,
+    &:focus-within {
+        transform: translateY(-4px);
+        box-shadow: 0 24px 46px rgba(15, 23, 42, 0.12);
+    }
+
+    &__media {
+        aspect-ratio: 4 / 3;
+        background: linear-gradient(135deg, #dbeafe 0%, #ccfbf1 100%);
+
+        img {
+            display: block;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+    }
+
+    &__media-placeholder {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+        height: 100%;
+        padding: 1rem;
+        color: rgba(15, 23, 42, 0.68);
+        font-size: 1rem;
+        font-weight: 600;
+        text-align: center;
+    }
+
+    &__content {
+        display: flex;
+        flex: 1 1 auto;
+        flex-direction: column;
+        gap: 0.75rem;
+        padding: 1.25rem;
+    }
+
+    &__eyebrow {
+        margin: 0;
+        color: #0b5ed7;
+        font-size: 0.75rem;
+        font-weight: 700;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+    }
+
+    &__title {
+        margin: 0;
+        color: #0f172a;
+        font-size: 1.4rem;
+        font-weight: 700;
+        line-height: 1.15;
+    }
+
+    &__text {
+        margin: 0;
+        flex: 1 1 auto;
+        color: #475569;
+        line-height: 1.55;
+    }
+
+    &__link {
+        display: inline-flex;
+        align-items: center;
+        align-self: flex-start;
+        min-height: 2.5rem;
+        margin-top: auto;
+        padding: 0.625rem 1rem;
+        border-radius: 999px;
+        background: #0f172a;
+        color: #ffffff;
+        font-size: 0.875rem;
+        font-weight: 600;
+        text-decoration: none;
+    }
+}

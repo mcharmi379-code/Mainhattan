@@ -1,0 +1,18 @@
+{% block element_ict_platform_support %}
+    {% set config = element.config %}
+    {% set data = element.data %}
+
+    {% sw_include '@ICTECHcmsBundleElement/storefront/element/ict-platform-support/open.html.twig' %}
+    {% sw_include '@ICTECHcmsBundleElement/storefront/element/ict-platform-support/background-video.html.twig' %}
+    {% sw_include '@ICTECHcmsBundleElement/storefront/element/ict-platform-support/title.html.twig' %}
+
+    {% sw_include '@ICTECHcmsBundleElement/storefront/element/ict-platform-support/grid-open.html.twig' %}
+    {% for platform in data.platformItems ?? config.platformItems.value %}
+        {% sw_include '@ICTECHcmsBundleElement/storefront/element/ict-platform-support/grid-item.html.twig' %}
+    {% endfor %}
+    {% sw_include '@ICTECHcmsBundleElement/storefront/element/ict-platform-support/grid-close.html.twig' %}
+
+    </div>
+
+    {% sw_include '@ICTECHcmsBundleElement/storefront/element/ict-platform-support/styles.html.twig' %}
+{% endblock %}

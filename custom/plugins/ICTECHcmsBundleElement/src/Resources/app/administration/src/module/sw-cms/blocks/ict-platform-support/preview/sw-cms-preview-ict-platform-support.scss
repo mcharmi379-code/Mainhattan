@@ -1,0 +1,30 @@
+.sw-cms-preview-ict-platform-support {
+    padding: 10px;
+    background: #f8f9fa;
+
+    .preview-title {
+        font-size: 10px;
+        font-weight: 700;
+        color: #1a1a2e;
+        text-align: center;
+        margin-bottom: 8px;
+    }
+
+    .preview-grid {
+        display: grid;
+        grid-template-columns: repeat(5, 1fr);
+        gap: 6px;
+    }
+
+    .preview-item {
+        display: flex;
+        justify-content: center;
+    }
+
+    .preview-icon {
+        width: 24px;
+        height: 24px;
+        border-radius: 6px;
+        background: #005AE5;
+    }
+}

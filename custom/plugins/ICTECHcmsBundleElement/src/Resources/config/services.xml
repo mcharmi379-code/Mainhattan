@@ -1,0 +1,142 @@
+<?xml version="1.0" ?>
+
+<container xmlns="http://symfony.com/schema/dic/services"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+    <services>
+        <defaults autowire="true"
+                  autoconfigure="true"
+                  public="false"/>
+
+        <!-- Column resolvers (extend ImageCmsElementResolver, no extra deps) -->
+        <service id="ICTECHcmsBundleElement\Core\Content\Cms\IctThreeColumnCmsElementResolver">
+            <argument type="service" id="Shopware\Core\Content\Media\Cms\DefaultMediaResolver"/>
+        </service>
+        <service id="ICTECHcmsBundleElement\Core\Content\Cms\IctTwoColumnCmsElementResolver">
+            <argument type="service" id="Shopware\Core\Content\Media\Cms\DefaultMediaResolver"/>
+        </service>
+        <service id="ICTECHcmsBundleElement\Core\Content\Cms\IctFiveColumnCmsElementResolver">
+            <argument type="service" id="Shopware\Core\Content\Media\Cms\DefaultMediaResolver"/>
+        </service>
+        <service id="ICTECHcmsBundleElement\Core\Content\Cms\IctSixColumnCmsElementResolver">
+            <argument type="service" id="Shopware\Core\Content\Media\Cms\DefaultMediaResolver"/>
+        </service>
+        <service id="ICTECHcmsBundleElement\Core\Content\Cms\IctNineColumnCmsElementResolver">
+            <argument type="service" id="Shopware\Core\Content\Media\Cms\DefaultMediaResolver"/>
+        </service>
+
+        <!-- Gallery micro-classes -->
+        <service id="ICTECHcmsBundleElement\Core\Content\Cms\Helper\Gallery\ExtractGalleryMediaIds"/>
+        <service id="ICTECHcmsBundleElement\Core\Content\Cms\Helper\Gallery\ResolveGalleryMedia"/>
+        <service id="ICTECHcmsBundleElement\Core\Content\Cms\Helper\Gallery\MapGalleryItem">
+            <argument type="service" id="ICTECHcmsBundleElement\Core\Content\Cms\Helper\Gallery\ResolveGalleryMedia"/>
+        </service>
+        <service id="ICTECHcmsBundleElement\Core\Content\Cms\Helper\Gallery\BuildGalleryItem">
+            <argument type="service" id="ICTECHcmsBundleElement\Core\Content\Cms\Helper\Gallery\MapGalleryItem"/>
+        </service>
+
+        <!-- Category micro-classes -->
+        <service id="ICTECHcmsBundleElement\Core\Content\Cms\Helper\Category\ExtractCategoryIds"/>
+        <service id="ICTECHcmsBundleElement\Core\Content\Cms\Helper\Category\ResolveCategoryEntity"/>
+        <service id="ICTECHcmsBundleElement\Core\Content\Cms\Helper\Category\CollectNestedCategoryIds"/>
+        <service id="ICTECHcmsBundleElement\Core\Content\Cms\Helper\Category\MapSubcategoryTree"/>
+        <service id="ICTECHcmsBundleElement\Core\Content\Cms\Helper\Category\MapCategoryCard">
+            <argument type="service" id="ICTECHcmsBundleElement\Core\Content\Cms\Helper\Category\ResolveCategoryEntity"/>
+        </service>
+        <service id="ICTECHcmsBundleElement\Core\Content\Cms\Helper\Category\BuildCategoryCard">
+            <argument type="service" id="ICTECHcmsBundleElement\Core\Content\Cms\Helper\Category\MapCategoryCard"/>
+        </service>
+
+        <!-- Media micro-classes -->
+        <service id="ICTECHcmsBundleElement\Core\Content\Cms\Helper\Media\BuildMediaCriteria"/>
+        <service id="ICTECHcmsBundleElement\Core\Content\Cms\Helper\Media\ResolveMediaEntry"/>
+        <service id="ICTECHcmsBundleElement\Service\PluginConfigService"/>
+
+        <!-- Resolvers -->
+        <service id="ICTECHcmsBundleElement\Core\Content\Cms\IctImageGalleryCmsElementResolver">
+            <argument type="service" id="ICTECHcmsBundleElement\Core\Content\Cms\Helper\Gallery\ExtractGalleryMediaIds"/>
+            <argument type="service" id="ICTECHcmsBundleElement\Core\Content\Cms\Helper\Gallery\BuildGalleryItem"/>
+        </service>
+
+        <service id="ICTECHcmsBundleElement\Core\Content\Cms\IctCategoryImageSliderCmsElementResolver">
+            <argument type="service" id="ICTECHcmsBundleElement\Core\Content\Cms\Helper\Category\ExtractCategoryIds"/>
+            <argument type="service" id="ICTECHcmsBundleElement\Core\Content\Cms\Helper\Category\BuildCategoryCard"/>
+        </service>
+
+        <service id="ICTECHcmsBundleElement\Core\Content\Cms\DataResolver\Element\IctTwoColumnThreeImageElementDataResolver">
+            <argument type="service" id="ICTECHcmsBundleElement\Core\Content\Cms\Helper\Media\BuildMediaCriteria"/>
+            <argument type="service" id="ICTECHcmsBundleElement\Core\Content\Cms\Helper\Media\ResolveMediaEntry"/>
+            <tag name="shopware.cms.data_resolver"/>
+        </service>
+
+        <service id="ICTECHcmsBundleElement\Core\Content\Cms\DataResolver\Element\IctPlatformSupportCmsElementResolver">
+            <tag name="shopware.cms.data_resolver"/>
+        </service>
+
+        <service id="ICTECHcmsBundleElement\Core\Content\Cms\DataResolver\Element\IctOverviewCards6CmsElementResolver">
+            <tag name="shopware.cms.data_resolver"/>
+        </service>
+
+        <service id="ICTECHcmsBundleElement\Core\Content\Cms\DataResolver\Element\IctFeatureGridCmsElementResolver">
+            <tag name="shopware.cms.data_resolver"/>
+        </service>
+
+        <service id="ICTECHcmsBundleElement\Core\Content\Cms\DataResolver\Element\IctContentTabsCmsElementResolver">
+            <tag name="shopware.cms.data_resolver"/>
+        </service>
+
+        <service id="ICTECHcmsBundleElement\Core\Content\Cms\DataResolver\Element\IctProductMatrixCmsElementResolver">
+            <tag name="shopware.cms.data_resolver"/>
+        </service>
+        <service id="ICTECHcmsBundleElement\Core\Content\Cms\DataResolver\Element\IctProductComparisonCmsElementResolver">
+            <argument type="service" id="Shopware\Core\Content\ProductStream\Service\ProductStreamBuilder"/>
+            <tag name="shopware.cms.data_resolver"/>
+        </service>
+        <!-- <service id="ICTECHcmsBundleElement\Core\Content\Cms\IctImageGalleryCmsElementResolver"/> -->
+        <service id="ICTECHcmsBundleElement\Core\Content\Cms\IctManufacturerListCmsElementResolver"/>
+        <service id="ICTECHcmsBundleElement\Core\Content\Cms\IctManufacturerSliderCmsElementResolver"/>
+        <service id="ICTECHcmsBundleElement\Core\Content\Cms\IctShowcaseHeroCmsElementResolver">
+            <argument type="service" id="Shopware\Core\Content\Media\Cms\DefaultMediaResolver"/>
+        </service>
+        <service id="ICTECHcmsBundleElement\Core\Content\Cms\IctTitleActionPanelCmsElementResolver">
+            <argument type="service" id="Shopware\Core\Content\Media\Cms\DefaultMediaResolver"/>
+        </service>
+        <service id="ICTECHcmsBundleElement\Core\Content\Cms\IctHeroSectionElementDataResolver"/>
+        <service id="ICTECHcmsBundleElement\Core\Content\Cms\IctSingleTitleButtonSectionCmsElementResolver"/>
+
+        <service id="ICTECHcmsBundleElement\Core\Content\Cms\DataResolver\Element\IctBreadcrumbNavigationCmsElementResolver">
+            <tag name="shopware.cms.data_resolver"/>
+        </service>
+
+        <service id="ICTECHcmsBundleElement\Core\Content\Cms\DataResolver\Element\IctSubcategoryNavigationCmsElementResolver">
+            <argument type="service" id="product.repository"/>
+            <argument type="service" id="ICTECHcmsBundleElement\Core\Content\Cms\Helper\Category\CollectNestedCategoryIds"/>
+            <argument type="service" id="ICTECHcmsBundleElement\Core\Content\Cms\Helper\Category\MapSubcategoryTree"/>
+            <tag name="shopware.cms.data_resolver"/>
+        </service>
+
+        <service id="ICTECHcmsBundleElement\Core\Content\Cms\DataResolver\Element\IctAlertHintCmsElementResolver">
+            <tag name="shopware.cms.data_resolver"/>
+        </service>
+
+        <service id="ICTECHcmsBundleElement\Core\Content\Cms\DataResolver\Element\IctFileDownloadCmsElementResolver">
+            <tag name="shopware.cms.data_resolver"/>
+        </service>
+
+        <service id="ICTECHcmsBundleElement\Core\Content\Cms\DataResolver\Element\IctStoryCardCmsElementResolver">
+            <tag name="shopware.cms.data_resolver"/>
+        </service>
+
+        <service id="ICTECHcmsBundleElement\Core\Content\Cms\DataResolver\Element\IctVerticalTabCmsElementResolver">
+            <tag name="shopware.cms.data_resolver"/>
+        </service>
+
+        <service id="ICTECHcmsBundleElement\Core\Content\Cms\DataResolver\Element\IctHeroBannerCmsElementResolver">
+            <tag name="shopware.cms.data_resolver"/>
+        </service>
+
+        <service id="ICTECHcmsBundleElement\Core\Content\Cms\DataResolver\Element\IctImageComparisonCmsElementResolver">
+            <tag name="shopware.cms.data_resolver"/>
+        </service>
+    </services>
+</container>

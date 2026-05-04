@@ -1,0 +1,13 @@
+{% block sw_cms_block_ict_single_title_button_section %}
+    <div class="sw-cms-block-ict-single-title-button-section">
+        <slot name="content">
+            <sw-cms-slot
+                v-bind="{ element, block }"
+                :active="active"
+                :config="element.config"
+                :disabled="disabled"
+                name="content">
+            </sw-cms-slot>
+        </slot>
+    </div>
+{% endblock %}

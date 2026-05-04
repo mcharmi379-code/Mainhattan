@@ -1,0 +1,14 @@
+{% block block_ict_category_image_slider %}
+    {% set element = block.slots.getSlot('slider') %}
+
+    {% if element %}
+        <div class="cms-block-ict-category-image-slider">
+            <div class="cms-block-container-row">
+                <div class="cms-block-ict-category-image-slider__col" data-cms-element-id="{{ element.id }}">
+                    {% sw_include '@Storefront/storefront/element/cms-element-' ~ element.type ~ '.html.twig' ignore missing with { element: element } %}
+                </div>
+            </div>
+        </div>
+    {% endif %}
+{% endblock %}
+

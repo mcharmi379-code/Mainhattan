@@ -1,0 +1,228 @@
+.cms-element-ict-banner-slider {
+    .image-slider-item {
+        position: relative;
+        min-height: 500px;
+        display: grid;
+        align-items: center;
+        justify-content: center;
+        max-width: 100%;
+
+        @include media-breakpoint-down(lg) {
+            min-height: 420px;
+        }
+
+        @include media-breakpoint-down(md) {
+            min-height: 360px;
+        }
+
+        @include media-breakpoint-down(sm) {
+            min-height: 280px;
+        }
+
+        &.is-not-first {
+            display: none;
+        }
+
+        &.is-cover .ict-banner-slider__image {
+            object-fit: cover;
+        }
+
+        &.is-contain .ict-banner-slider__image {
+            object-fit: contain;
+        }
+    }
+
+    .js-slider-initialized .image-slider-item.is-not-first {
+        display: block;
+    }
+
+    .ict-banner-slider__image-wrapper {
+        position: absolute;
+        inset: 0;
+        z-index: 1;
+        background-color: #f5f5f5;
+
+        &::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.4);
+            z-index: 2;
+        }
+    }
+
+    .ict-banner-slider__image {
+        width: 100%;
+        height: 100%;
+        display: block;
+    }
+
+    .ict-banner-slider__content-wrapper {
+        position: relative;
+        z-index: 3;
+        width: 100%;
+        padding: 40px 0;
+
+        @include media-breakpoint-down(md) {
+            padding: 28px 0;
+        }
+
+        @include media-breakpoint-down(sm) {
+            padding: 20px 0;
+        }
+    }
+
+    .ict-banner-slider__content {
+        color: #ffffff;
+        text-align: center;
+        max-width: 800px;
+        margin: 0 auto;
+        padding: 0 48px;
+
+        @include media-breakpoint-down(md) {
+            padding: 0 32px;
+        }
+
+        @include media-breakpoint-down(sm) {
+            padding: 0 16px;
+        }
+    }
+
+    .ict-banner-slider__main-title {
+        font-size: 3rem;
+        font-weight: 700;
+        margin-bottom: 0.5rem;
+        text-transform: uppercase;
+        line-height: 1.1;
+        overflow-wrap: anywhere;
+        word-break: break-word;
+
+        @include media-breakpoint-down(lg) {
+            font-size: 2.5rem;
+        }
+
+        @include media-breakpoint-down(md) {
+            font-size: 1.75rem;
+        }
+
+        @include media-breakpoint-down(sm) {
+            font-size: 1.25rem;
+            margin-bottom: 0.35rem;
+        }
+    }
+
+    .ict-banner-slider__sub-title {
+        font-size: 1.75rem;
+        font-weight: 400;
+        margin-bottom: 1rem;
+        text-transform: uppercase;
+        overflow-wrap: anywhere;
+        word-break: break-word;
+
+        @include media-breakpoint-down(lg) {
+            font-size: 1.5rem;
+        }
+
+        @include media-breakpoint-down(md) {
+            font-size: 1.125rem;
+            margin-bottom: 0.75rem;
+        }
+
+        @include media-breakpoint-down(sm) {
+            font-size: 0.9rem;
+            margin-bottom: 0.5rem;
+        }
+    }
+
+    .ict-banner-slider__description {
+        font-size: 1rem;
+        line-height: 1.5;
+        margin-bottom: 1.5rem;
+        max-width: 600px;
+        margin-left: auto;
+        margin-right: auto;
+        overflow-wrap: anywhere;
+        word-break: break-word;
+
+        @include media-breakpoint-down(md) {
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+        }
+
+        @include media-breakpoint-down(sm) {
+            font-size: 0.8rem;
+            margin-bottom: 0.75rem;
+        }
+    }
+
+    .ict-banner-slider__actions {
+        display: flex;
+        gap: 0.75rem;
+        justify-content: center;
+        flex-wrap: wrap;
+
+        @include media-breakpoint-down(sm) {
+            gap: 0.5rem;
+            flex-direction: column;
+            align-items: center;
+        }
+    }
+
+    .ict-banner-slider__btn {
+        // Override Bootstrap .btn defaults
+        min-height: unset !important;
+        padding: 0.5rem 1.25rem !important;
+        font-size: 0.9375rem !important;
+        font-weight: 600;
+        border-radius: 4px;
+        display: inline-flex !important;
+        align-items: center;
+        justify-content: center;
+        gap: 0.4rem;
+        text-decoration: none;
+        background-color: #f15a24;
+        border: 1px solid #f15a24;
+        color: #ffffff;
+        white-space: nowrap;
+        touch-action: manipulation;
+        -webkit-tap-highlight-color: transparent;
+        cursor: pointer;
+        line-height: 1.4;
+
+        @include media-breakpoint-down(md) {
+            padding: 0.4rem 0.875rem !important;
+            font-size: 0.875rem !important;
+        }
+
+        @include media-breakpoint-down(sm) {
+            padding: 0.375rem 0.75rem !important;
+            font-size: 0.8125rem !important;
+            width: auto;
+        }
+
+        &:hover,
+        &:active {
+            background-color: darken(#f15a24, 10%);
+            border-color: darken(#f15a24, 10%);
+            color: #ffffff;
+            text-decoration: none;
+        }
+
+        &-icon {
+            display: flex;
+            align-items: center;
+            flex-shrink: 0;
+
+            svg {
+                width: 16px;
+                height: 16px;
+                display: block;
+
+                @include media-breakpoint-down(sm) {
+                    width: 14px;
+                    height: 14px;
+                }
+            }
+        }
+    }
+}

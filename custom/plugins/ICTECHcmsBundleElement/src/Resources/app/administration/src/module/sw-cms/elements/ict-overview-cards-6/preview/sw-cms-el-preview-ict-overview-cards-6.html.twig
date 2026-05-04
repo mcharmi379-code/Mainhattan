@@ -1,0 +1,19 @@
+{% block sw_cms_element_ict_overview_cards_6_preview %}
+<div class="sw-cms-el-preview-ict-overview-cards-6">
+    <div class="ict-oc6-preview__bar">
+        <span class="ict-oc6-preview__bar-label">Overview Cards</span>
+        <span class="ict-oc6-preview__bar-cols">3 col</span>
+    </div>
+    <div class="ict-oc6-preview__grid">
+        <div class="ict-oc6-preview__card" v-for="i in 3" :key="i">
+            <div class="ict-oc6-preview__media"></div>
+            <div class="ict-oc6-preview__body">
+                <div class="ict-oc6-preview__headline"></div>
+                <div class="ict-oc6-preview__text"></div>
+                <div class="ict-oc6-preview__text ict-oc6-preview__text--short"></div>
+                <div class="ict-oc6-preview__btn"></div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

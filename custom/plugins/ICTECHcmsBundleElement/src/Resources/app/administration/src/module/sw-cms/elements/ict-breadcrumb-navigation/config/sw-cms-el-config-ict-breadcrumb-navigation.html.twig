@@ -1,0 +1,37 @@
+{% block sw_cms_el_config_ict_breadcrumb_navigation %}
+<div class="ict-bc-config">
+
+    <sw-alert variant="info" class="ict-bc-config__info-banner">
+        <strong>{{ $tc('ict-cms-bundle-element.cms.elements.ictBreadcrumbNavigation.config.autoTitle') }}</strong>
+        <p>{{ $tc('ict-cms-bundle-element.cms.elements.ictBreadcrumbNavigation.config.autoDesc') }}</p>
+        <p class="ict-bc-config__hint">
+            <strong>{{ $tc('ict-cms-bundle-element.cms.elements.ictBreadcrumbNavigation.config.hintLabel') }}</strong>
+            {{ $tc('ict-cms-bundle-element.cms.elements.ictBreadcrumbNavigation.config.hintText') }}
+        </p>
+    </sw-alert>
+
+    <div class="ict-bc-config__row">
+        <sw-select-field
+            v-model="element.config.alignment.value"
+            :label="$tc('ict-cms-bundle-element.cms.elements.ictBreadcrumbNavigation.config.alignment')"
+            @change="onUpdate"
+        >
+            <option
+                v-for="opt in alignmentOptions"
+                :key="opt.value"
+                :value="opt.value"
+            >
+                {{ opt.label }}
+            </option>
+        </sw-select-field>
+
+        <sw-colorpicker
+            v-model="element.config.textColor.value"
+            :label="$tc('ict-cms-bundle-element.cms.elements.ictBreadcrumbNavigation.config.textColor')"
+            :colorOutput="'hex'"
+            @input="onUpdate"
+        />
+    </div>
+
+</div>
+{% endblock %}

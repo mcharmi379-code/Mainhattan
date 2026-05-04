@@ -1,0 +1,16 @@
+{% block element_ict_platform_support_title %}
+    {% if config.platformBlockTitle.value %}
+        <h2 class="platform-block-title" style="
+                    font-size: {{ config.platformTitleSize.value }}px;
+                    line-height: {{ config.platformTitleLineHeight.value ?? 28 }}px;
+                    font-weight: 700;
+                    color: {{ config.platformTitleColor.value }};
+                    text-align: {{ config.platformTitleAlignment.value }};
+                    margin-bottom: 2rem;
+                    position: relative;
+                    z-index: 2;
+                ">
+            {{ config.platformBlockTitle.value }}
+        </h2>
+    {% endif %}
+{% endblock %}

@@ -1,0 +1,87 @@
+{% block element_ict_manufacturer_list %}
+    {% set alphabet = element.data.alphabet ?? [] %}
+    {% set groups = element.data.groups ?? [] %}
+
+    {% if groups|length > 0 %}
+        <div class="cms-element-ict-manufacturer-list ict-manufacturer-list">
+            <div class="ict-manufacturer-list__letters">
+                {% for letter in alphabet %}
+                    {% if letter.anchor %}
+                        <a
+                            href="#{{ letter.anchor }}"
+                            class="ict-manufacturer-list__letter"
+                        >
+                            {{ letter.label }}
+                        </a>
+                    {% else %}
+                        <span class="ict-manufacturer-list__letter is-disabled">
+                            {{ letter.label }}
+                        </span>
+                    {% endif %}
+                {% endfor %}
+            </div>
+
+            <div class="ict-manufacturer-list__groups">
+                {% for group in groups %}
+                    <section
+                        id="{{ group.anchor }}"
+                        class="ict-manufacturer-list__group"
+                    >
+                        <h3 class="ict-manufacturer-list__heading">
+                            {{ group.label }}
+                        </h3>
+
+                        <div class="ict-manufacturer-list__grid">
+                            {% for manufacturer in group.items %}
+                                {% set manufacturerName = manufacturer.name ?? '' %}
+                                {% set media = manufacturer.media ?? null %}
+                                {% set initials = manufacturerName|split(' ')|filter(value => value is not empty)|map(value => value|slice(0, 1))|join('')|slice(0, 2)|upper %}
+                                {% set manufacturerHref = manufacturer.link ?: (path('frontend.search.page') ~ '?search=' ~ manufacturerName|url_encode) %}
+
+                                <article class="ict-manufacturer-list__item">
+                                    {% if manufacturerHref %}
+                                        <a
+                                            href="{{ manufacturerHref }}"
+                                            class="ict-manufacturer-list__link"
+                                        >
+                                    {% else %}
+                                        <div class="ict-manufacturer-list__content">
+                                    {% endif %}
+
+                                    <div class="ict-manufacturer-list__media">
+                                        {% if media %}
+                                            {% sw_thumbnails 'ict-manufacturer-list-thumbnails' with {
+                                                media: media,
+                                                attributes: {
+                                                    'class': 'ict-manufacturer-list__image',
+                                                    'alt': media.translated.alt|default(manufacturerName),
+                                                    'title': media.translated.title|default(manufacturerName),
+                                                    'loading': 'lazy',
+                                                    'decoding': 'async'
+                                                }
+                                            } %}
+                                        {% else %}
+                                            <span class="ict-manufacturer-list__fallback">
+                                                {{ initials ?: 'M' }}
+                                            </span>
+                                        {% endif %}
+                                    </div>
+
+                                    <span class="ict-manufacturer-list__name">
+                                        {{ manufacturerName }}
+                                    </span>
+
+                                    {% if manufacturerHref %}
+                                        </a>
+                                    {% else %}
+                                        </div>
+                                    {% endif %}
+                                </article>
+                            {% endfor %}
+                        </div>
+                    </section>
+                {% endfor %}
+            </div>
+        </div>
+    {% endif %}
+{% endblock %}

@@ -1,0 +1,10 @@
+.cms-element-ict-content-tabs {
+    width: 100%;
+
+    .ict-ct__panels {
+        padding: $spacer;
+        border: var(--bs-border-width) solid var(--bs-border-color);
+        border-top: 0;
+        border-radius: 0 0 var(--bs-border-radius) var(--bs-border-radius);
+    }
+}

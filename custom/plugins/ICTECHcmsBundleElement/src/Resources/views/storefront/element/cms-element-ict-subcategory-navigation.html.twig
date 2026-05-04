@@ -1,0 +1,61 @@
+{% block element_ict_subcategory_navigation %}
+    {% set subcategories = element.data.subcategories ?? [] %}
+    {% set showProductCount = element.config.showProductCount.value ?? false %}
+    {% set categoryLevels = element.config.categoryLevels.value ?? 1 %}
+
+    {% macro renderCategory(category, showProductCount) %}
+        {% set categoryName = category.name ?? '' %}
+        {% set media = category.media ?? null %}
+
+        <li class="ict-subcat-nav__item">
+            <a
+                href="{{ seoUrl('frontend.navigation.page', { navigationId: category.id }) }}"
+                class="ict-subcat-nav__card"
+                title="{{ categoryName }}"
+            >
+                <div class="ict-subcat-nav__media">
+                    {% if media %}
+                        {% sw_thumbnails 'ict-subcat-nav-thumbnails' with {
+                            media: media,
+                            attributes: {
+                                'class': 'ict-subcat-nav__image',
+                                'alt': media.translated.alt|default(categoryName),
+                                'loading': 'lazy',
+                                'decoding': 'async'
+                            }
+                        } %}
+                    {% else %}
+                        <span class="ict-subcat-nav__placeholder" aria-hidden="true">
+                            {{ categoryName|slice(0, 1)|upper }}
+                        </span>
+                    {% endif %}
+                </div>
+
+                <div class="ict-subcat-nav__body">
+                    <span class="ict-subcat-nav__name">{{ categoryName }}</span>
+                    {% if showProductCount and category.productCount is not null and category.productCount > 0 %}
+                        <span class="ict-subcat-nav__count">{{ category.productCount }}</span>
+                    {% endif %}
+                </div>
+            </a>
+
+            {% if category.children is defined and category.children|length > 0 %}
+                <ul class="ict-subcat-nav__grid ict-subcat-nav__grid--nested" role="list">
+                    {% for child in category.children %}
+                        {{ _self.renderCategory(child, showProductCount) }}
+                    {% endfor %}
+                </ul>
+            {% endif %}
+        </li>
+    {% endmacro %}
+
+    {% if subcategories|length > 0 %}
+        <div class="cms-element-ict-subcategory-navigation ict-subcat-nav">
+            <ul class="ict-subcat-nav__grid" role="list">
+                {% for category in subcategories %}
+                    {{ _self.renderCategory(category, showProductCount) }}
+                {% endfor %}
+            </ul>
+        </div>
+    {% endif %}
+{% endblock %}

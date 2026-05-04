@@ -1,0 +1,43 @@
+{% block element_ict_manufacturer_slider_slide %}
+    {% set media = manufacturer.media ?? null %}
+    {% set manufacturerName = manufacturer.name ?? '' %}
+    {% set manufacturerInitials = manufacturerName|split(' ')|filter(value => value is not empty)|map(value => value|slice(0, 1))|join('')|slice(0, 2)|upper %}
+    {% set isTextOnlyCard = not media and showManufacturerName and manufacturerName %}
+
+    <div class="ict-manufacturer-slider__slide product-slider-item" aria-label="{{ manufacturerName|default('Manufacturer')|sw_sanitize }}">
+        <div class="ict-manufacturer-slider__card{% if not media %} is-no-media{% endif %}{% if isTextOnlyCard %} is-text-only{% endif %}">
+            {% if manufacturer.link %}
+                <a href="{{ manufacturer.link }}"
+                   class="ict-manufacturer-slider__link"
+                   {% if manufacturerName %}aria-label="{{ manufacturerName|sw_sanitize }}"{% endif %}>
+            {% endif %}
+
+            {% if media or not showManufacturerName %}
+                <span class="ict-manufacturer-slider__media">
+                    {% if media %}
+                        {% sw_thumbnails 'ict-manufacturer-slider-thumbnails' with {
+                            media: media,
+                            attributes: {
+                                'class': 'ict-manufacturer-slider__image',
+                                'alt': media.translated.alt|default(manufacturerName),
+                                'title': media.translated.title|default(manufacturerName),
+                                'loading': 'lazy',
+                                'decoding': 'async'
+                            }
+                        } %}
+                    {% else %}
+                        <span class="ict-manufacturer-slider__fallback">{{ manufacturerInitials ?: 'M' }}</span>
+                    {% endif %}
+                </span>
+            {% endif %}
+
+            {% if showManufacturerName and manufacturerName %}
+                <span class="ict-manufacturer-slider__name" title="{{ manufacturerName }}">{{ manufacturerName }}</span>
+            {% endif %}
+
+            {% if manufacturer.link %}
+                </a>
+            {% endif %}
+        </div>
+    </div>
+{% endblock %}

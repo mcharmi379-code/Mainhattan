@@ -1,0 +1,51 @@
+{
+    "ict-cms-bundle-element": {
+        "storefront": {
+            "productMatrix": {
+                "noProduct": "Kein Produkt konfiguriert.",
+                "noVariants": "Keine Varianten für dieses Produkt gefunden.",
+                "colArticle": "Artikel",
+                "colDelivery": "Lieferung",
+                "colPrice": "Preis",
+                "colBuy": "Kaufen",
+                "freeShipping": "Kostenloser Versand",
+                "addToCart": "In den Warenkorb",
+                "quantity": "Menge",
+                "decrease": "Menge verringern",
+                "increase": "Menge erhöhen"
+            },
+            "productComparison": {
+                "noProducts": "Keine Produkte konfiguriert.",
+                "ratingAria": "Bewertung %rating% von 5",
+                "labels": {
+                    "name": "Name",
+                    "price": "Preis",
+                    "description": "Beschreibung",
+                    "rating": "Bewertung",
+                    "manufacturer": "Hersteller",
+                    "propertyGroups": {
+                        "target_group": "Zielgruppe",
+                        "color": "Farbe",
+                        "ingredients": "Inhaltsstoffe",
+                        "size": "Größe",
+                        "material": "Material"
+                    }
+                }
+            },
+            "fileDownload": {
+                "defaultButtonText": "Jetzt herunterladen",
+                "fileAvailable": "Datei verfügbar",
+                "noFile": "Keine Datei angehängt"
+            },
+            "verticalTab": {
+                "navLabel": "Tab-Navigation"
+            },
+            "imageComparison": {
+                "ariaLabel": "Bildvergleich-Schieberegler",
+                "beforeLabel": "Vorher",
+                "afterLabel": "Nachher",
+                "handleLabel": "Ziehen zum Vergleichen"
+            }
+        }
+    }
+}

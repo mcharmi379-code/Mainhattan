@@ -1,0 +1,173 @@
+.cms-element-ict-vertical-tab {
+    .ict-vtab {
+        &__layout {
+            display: flex;
+            gap: 0;
+            border: 1px solid #e2eaf3;
+            border-radius: 8px;
+            background: #fff;
+        }
+
+        &__panels {
+            flex: 1 1 auto;
+            padding: 2rem 2.5rem;
+            border-right: 1px solid #e2eaf3;
+            min-width: 0;
+        }
+
+        &__panel {
+            display: none;
+
+            &--active {
+                display: block;
+            }
+        }
+
+        &__header {
+            margin: 0 0 .75rem;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #c8a84b;
+            line-height: 1.25;
+        }
+
+        &__content {
+            font-size: 1rem;
+            color: #3d4f60;
+            line-height: 1.6;
+            margin-bottom: 1.25rem;
+
+            p {
+                margin: 0 0 .75rem;
+
+                &:last-child {
+                    margin-bottom: 0;
+                }
+            }
+        }
+
+        &__btn {
+            display: inline-block;
+            padding: .5rem 1.25rem;
+            border: 1px solid #1a2b3c;
+            font-size: .8125rem;
+            font-weight: 600;
+            color: #1a2b3c;
+            text-decoration: none;
+            text-transform: uppercase;
+            letter-spacing: .06em;
+            transition: background-color .2s ease, color .2s ease;
+            touch-action: manipulation;
+            -webkit-tap-highlight-color: transparent;
+
+            &:hover,
+            &:focus-visible {
+                background-color: #1a2b3c;
+                color: #fff;
+                text-decoration: none;
+                outline: 2px solid #1a2b3c;
+                outline-offset: 2px;
+            }
+
+            &--no-link {
+                cursor: default;
+
+                &:hover {
+                    background-color: transparent;
+                    color: #1a2b3c;
+                }
+            }
+        }
+
+        &__nav {
+            flex: 0 0 200px;
+            width: 200px;
+            display: flex;
+            flex-direction: column;
+            padding: 1.5rem 0;
+            border-left: 3px solid #e2eaf3;
+        }
+
+        &__nav-item {
+            display: block;
+            width: 100%;
+            padding: .75rem 1.25rem;
+            background: none;
+            border: none;
+            border-left: 3px solid transparent;
+            margin-left: -3px;
+            font-size: .9375rem;
+            color: #8a9bb0;
+            text-align: left;
+            cursor: pointer;
+            transition: color .15s ease, border-color .15s ease;
+            touch-action: manipulation;
+            -webkit-tap-highlight-color: transparent;
+
+            &:hover {
+                color: #3d4f60;
+            }
+
+            &--active {
+                color: #189eff;
+                border-left-color: #189eff;
+                font-weight: 600;
+            }
+
+            &:focus-visible {
+                outline: 2px solid #189eff;
+                outline-offset: -2px;
+            }
+        }
+    }
+
+    @media (max-width: 767.98px) {
+        .ict-vtab {
+            &__layout {
+                flex-direction: column;
+                border-radius: 8px;
+                overflow: hidden;
+            }
+
+            &__panels {
+                order: 1;
+                border-right: none;
+                border-bottom: 1px solid #e2eaf3;
+                padding: 1.25rem 1rem;
+            }
+
+            &__nav {
+                order: 2;
+                flex: none;
+                width: 100%;
+                flex-direction: row;
+                overflow-x: auto;
+                -webkit-overflow-scrolling: touch;
+                padding: 0;
+                border-left: none;
+                border-top: 3px solid #e2eaf3;
+                scrollbar-width: none;
+
+                &::-webkit-scrollbar {
+                    display: none;
+                }
+            }
+
+            &__nav-item {
+                flex: 0 0 auto;
+                white-space: nowrap;
+                width: auto;
+                border-left: none;
+                border-bottom: 3px solid transparent;
+                margin-left: 0;
+                margin-bottom: 0;
+                padding: .75rem 1rem;
+
+                &--active {
+                    border-left-color: transparent;
+                    border-bottom-color: #189eff;
+                }
+            }
+        }
+    }
+}

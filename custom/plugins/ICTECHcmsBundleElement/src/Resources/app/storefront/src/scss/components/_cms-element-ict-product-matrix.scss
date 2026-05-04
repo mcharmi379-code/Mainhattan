@@ -1,0 +1,237 @@
+.cms-element-ict-product-matrix {
+    width: 100%;
+
+    &__empty {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        padding: 16px 20px;
+        background: #eff6ff;
+        border: 1px solid #bfdbfe;
+        border-radius: 6px;
+        color: #1e3a5f;
+        font-size: 14px;
+    }
+
+    &__empty-icon {
+        font-size: 18px;
+        flex-shrink: 0;
+    }
+}
+
+.ipm-table {
+    width: 100%;
+    border-collapse: collapse;
+    background: #fff;
+
+    &__head {
+        border-bottom: 2px solid #e2e8f0;
+    }
+
+    &__th {
+        padding: 12px 16px;
+        font-size: 14px;
+        font-weight: 700;
+        color: #1e293b;
+        text-align: left;
+        white-space: nowrap;
+
+        &--article { width: 45%; }
+    }
+
+    &__row {
+        border-bottom: 1px solid #f1f5f9;
+        transition: background 0.12s ease;
+
+        &:last-child { border-bottom: none; }
+
+        &:hover { background: #f8fafc; }
+    }
+
+    &__td {
+        padding: 12px 16px;
+        vertical-align: middle;
+        font-size: 14px;
+        color: #334155;
+
+        &--article { min-width: 220px; }
+        &--delivery { white-space: nowrap; }
+        &--price { white-space: nowrap; font-weight: 600; }
+        &--buy { white-space: nowrap; }
+    }
+}
+
+// ── Article cell ──────────────────────────────────────────────────────
+.ipm-article {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+
+    &__img {
+        width: 56px;
+        height: 56px;
+        object-fit: contain;
+        border-radius: 4px;
+        border: 1px solid #e2e8f0;
+        flex-shrink: 0;
+        background: #f8fafc;
+    }
+
+    &__img-placeholder {
+        width: 56px;
+        height: 56px;
+        border-radius: 4px;
+        border: 1px solid #e2e8f0;
+        background: #f1f5f9;
+        flex-shrink: 0;
+    }
+
+    &__info {
+        display: flex;
+        flex-direction: column;
+        gap: 3px;
+        min-width: 0;
+    }
+
+    &__name {
+        font-size: 14px;
+        font-weight: 600;
+        color: #1e3a5f;
+        text-decoration: none;
+        overflow-wrap: anywhere;
+
+        &:hover {
+            text-decoration: underline;
+            color: #1e3a5f;
+        }
+    }
+
+    &__options {
+        font-size: 12px;
+        color: #64748b;
+        overflow-wrap: anywhere;
+    }
+}
+
+// ── Delivery cell ─────────────────────────────────────────────────────
+.ipm-delivery {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 13px;
+    color: #334155;
+
+    &__dot {
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+        background: #22c55e;
+        flex-shrink: 0;
+    }
+
+    &--free { color: #334155; }
+}
+
+// ── Price cell ────────────────────────────────────────────────────────
+.ipm-price {
+    font-size: 15px;
+    font-weight: 700;
+    color: #1e293b;
+
+    &--na { color: #94a3b8; font-weight: 400; }
+}
+
+// ── Buy cell ──────────────────────────────────────────────────────────
+.ipm-buy-form {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+
+    &__qty {
+        display: flex;
+        align-items: center;
+        border: 1px solid #e2e8f0;
+        border-radius: 4px;
+        overflow: hidden;
+    }
+
+    &__qty-btn {
+        width: 30px;
+        height: 34px;
+        background: #f8fafc;
+        border: none;
+        font-size: 16px;
+        font-weight: 600;
+        color: #334155;
+        cursor: pointer;
+        transition: background 0.12s;
+        line-height: 1;
+
+        &:hover { background: #e2e8f0; }
+    }
+
+    &__qty-input {
+        width: 40px;
+        height: 34px;
+        border: none;
+        border-left: 1px solid #e2e8f0;
+        border-right: 1px solid #e2e8f0;
+        text-align: center;
+        font-size: 13px;
+        font-weight: 600;
+        color: #1e293b;
+        background: #fff;
+        outline: none;
+
+        /* hide number spinners */
+        -moz-appearance: textfield;
+        &::-webkit-outer-spin-button,
+        &::-webkit-inner-spin-button { -webkit-appearance: none; margin: 0; }
+    }
+
+    &__submit {
+        padding: 8px 18px;
+        background: #1e3a5f;
+        color: #fff;
+        border: none;
+        border-radius: 4px;
+        font-size: 13px;
+        font-weight: 600;
+        cursor: pointer;
+        white-space: nowrap;
+        transition: background 0.15s ease;
+
+        &:hover { background: #162d4a; }
+    }
+}
+
+// ── Compact display mode ──────────────────────────────────────────────
+.cms-element-ict-product-matrix--compact {
+    .ipm-table__th,
+    .ipm-table__td { padding: 8px 12px; }
+
+    .ipm-article__img,
+    .ipm-article__img-placeholder { width: 40px; height: 40px; }
+
+    .ipm-buy-form__submit { padding: 6px 12px; font-size: 12px; }
+}
+
+// ── Highlighted display mode ──────────────────────────────────────────
+.cms-element-ict-product-matrix--highlighted {
+    .ipm-table__row:nth-child(odd) { background: #f8fafc; }
+}
+
+// ── Responsive ────────────────────────────────────────────────────────
+@media (max-width: 767px) {
+    .ipm-table {
+        display: block;
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+    }
+
+    .ipm-buy-form {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 6px;
+    }
+}

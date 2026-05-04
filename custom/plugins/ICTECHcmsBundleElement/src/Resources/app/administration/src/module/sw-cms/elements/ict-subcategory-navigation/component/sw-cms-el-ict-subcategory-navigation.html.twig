@@ -1,0 +1,14 @@
+{% block sw_cms_el_ict_subcategory_navigation %}
+<div class="sw-cms-el-ict-subcategory-navigation">
+    <div class="ict-subcat-preview">
+        <div
+            v-for="i in previewCards"
+            :key="i"
+            class="ict-subcat-preview__card"
+        >
+            <div class="ict-subcat-preview__img"></div>
+            <div class="ict-subcat-preview__badge">CATEGORY</div>
+        </div>
+    </div>
+</div>
+{% endblock %}

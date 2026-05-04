@@ -1,0 +1,62 @@
+{% block sw_cms_element_ict_product_matrix %}
+<div class="sw-cms-el-ict-product-matrix">
+
+    <template v-if="!hasProduct">
+        <div class="sw-cms-el-ict-product-matrix__empty">
+            <sw-icon name="regular-info-circle" size="18" color="#1e3a5f" />
+            <div class="sw-cms-el-ict-product-matrix__empty-text">
+                <strong>{{ $tc('ict-cms-bundle-element.cms.elements.ictProductMatrix.noProductTitle') }}</strong>
+                <span>{{ $tc('ict-cms-bundle-element.cms.elements.ictProductMatrix.noProductHint') }}</span>
+            </div>
+        </div>
+    </template>
+
+    <template v-else>
+        <table class="sw-cms-el-ict-product-matrix__table">
+            <thead>
+                <tr>
+                    <th class="sw-cms-el-ict-product-matrix__th sw-cms-el-ict-product-matrix__th--article">
+                        {{ $tc('ict-cms-bundle-element.cms.elements.ictProductMatrix.colArticle') }}
+                    </th>
+                    <th class="sw-cms-el-ict-product-matrix__th">
+                        {{ $tc('ict-cms-bundle-element.cms.elements.ictProductMatrix.colDelivery') }}
+                    </th>
+                    <th class="sw-cms-el-ict-product-matrix__th">
+                        {{ $tc('ict-cms-bundle-element.cms.elements.ictProductMatrix.colPrice') }}
+                    </th>
+                    <th class="sw-cms-el-ict-product-matrix__th">
+                        {{ $tc('ict-cms-bundle-element.cms.elements.ictProductMatrix.colBuy') }}
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr
+                    v-for="row in skeletonRows"
+                    :key="row"
+                    class="sw-cms-el-ict-product-matrix__row"
+                >
+                    <td class="sw-cms-el-ict-product-matrix__td sw-cms-el-ict-product-matrix__td--article">
+                        <div class="sw-cms-el-ict-product-matrix__thumb"></div>
+                        <div class="sw-cms-el-ict-product-matrix__meta">
+                            <span class="sw-cms-el-ict-product-matrix__skeleton sw-cms-el-ict-product-matrix__skeleton--name"></span>
+                            <span class="sw-cms-el-ict-product-matrix__skeleton sw-cms-el-ict-product-matrix__skeleton--props"></span>
+                        </div>
+                    </td>
+                    <td class="sw-cms-el-ict-product-matrix__td">
+                        <span class="sw-cms-el-ict-product-matrix__skeleton sw-cms-el-ict-product-matrix__skeleton--mid"></span>
+                    </td>
+                    <td class="sw-cms-el-ict-product-matrix__td">
+                        <span class="sw-cms-el-ict-product-matrix__skeleton sw-cms-el-ict-product-matrix__skeleton--mid"></span>
+                    </td>
+                    <td class="sw-cms-el-ict-product-matrix__td">
+                        <span class="sw-cms-el-ict-product-matrix__btn-skeleton">
+                            {{ $tc('ict-cms-bundle-element.cms.elements.ictProductMatrix.addToCart') }}
+                        </span>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </template>
+
+</div>
+{% endblock %}

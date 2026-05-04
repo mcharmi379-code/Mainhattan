@@ -1,0 +1,225 @@
+{% block element_ict_overview_cards_6 %}
+    {% set config = element.config %}
+    {% set slotData = element.data %}
+    {% set cards = slotData.cards ?? config.cards.value ?? [] %}
+    {% set columns = config.numberOfColumns.value ?? 3 %}
+    {% set cardSpacing = config.cardSpacing.value ?? 25 %}
+    {% set verticalAlignmentRaw = config.verticalAlignment.value ?? 'stretch' %}
+    {% set verticalAlignment = verticalAlignmentRaw == 'start'
+        ? 'flex-start'
+        : (verticalAlignmentRaw == 'end' ? 'flex-end' : verticalAlignmentRaw) %}
+
+    <div class="cms-element-ict-overview-cards-6" style="
+        {% if config.backgroundType.value == 'color' %}
+            background-color: {{ config.backgroundColor.value }};
+        {% elseif config.backgroundType.value == 'gradient' %}
+            background: linear-gradient(to {{ config.backgroundGradientDirection.value }}, {{ config.backgroundGradientColor1.value }}, {{ config.backgroundGradientColor2.value }});
+        {% endif %}
+        position: relative;
+        overflow: hidden;
+    ">
+        {% if config.backgroundType.value == 'image' and slotData.backgroundMedia %}
+            <div class="element-background-image" style="background-image: url('{{ slotData.backgroundMedia.url }}');"></div>
+        {% endif %}
+
+        {% if config.backgroundType.value == 'video' %}
+            {% if config.backgroundVideoUploadType.value == 'url' and config.backgroundVideoUploadUrl.value %}
+                {% set videoId = config.backgroundVideoUploadUrl.value|replace({'https://www.youtube.com/watch?v=': '', 'https://youtu.be/': ''})|split('&')[0] %}
+                <iframe class="element-background-video-iframe" src="https://www.youtube.com/embed/{{ videoId }}?autoplay=1&mute=1&loop=1&playlist={{ videoId }}&controls=0&showinfo=0&rel=0" frameborder="0" allowfullscreen></iframe>
+            {% elseif config.backgroundVideoUploadType.value == 'file' and slotData.backgroundVideoMedia %}
+                <video autoplay muted loop class="element-background-video">
+                    <source src="{{ slotData.backgroundVideoMedia.url }}" type="video/mp4">
+                </video>
+            {% endif %}
+        {% endif %}
+
+        <div class="ict-overview-cards-grid" style="grid-template-columns: repeat({{ columns }}, minmax(0, 1fr)); gap: {{ cardSpacing }}px; align-items: {{ verticalAlignment }}; position: relative; z-index: 1;">
+            {% for card in cards %}
+                {% set cardIndex = loop.index0 %}
+                {% set cardImageMedia = slotData.cardImages[cardIndex] ?? null %}
+                {% set cardVideoMedia = slotData.cardVideos[cardIndex] ?? null %}
+                {% set cardMainImageMedia = slotData.cardMainImages[cardIndex] ?? null %}
+                {% set cardMainVideoMedia = slotData.cardMainVideos[cardIndex] ?? null %}
+                {% set iconImageMedia = slotData.iconImages[cardIndex] ?? null %}
+                {% set detailRows = card.showDetailRows and card.detailRows is defined and card.detailRows is iterable ? card.detailRows : [] %}
+                {% set activeButton = null %}
+                {% set activeButtonIndex = 0 %}
+                {% if card.buttons is defined and card.buttons is iterable %}
+                    {% for configuredButton in card.buttons %}
+                        {% if activeButton is null and (configuredButton.show is not defined or configuredButton.show) %}
+                            {% set activeButton = configuredButton %}
+                            {% set activeButtonIndex = loop.index0 %}
+                        {% endif %}
+                    {% endfor %}
+                {% endif %}
+                {% set mediaDisplayMode = card.mediaDisplayMode ?? 'fill' %}
+                {% set mediaObjectFit = mediaDisplayMode == 'crop' ? 'cover' : (mediaDisplayMode == 'fill' ? 'fill' : 'contain') %}
+                {% set mediaHeightRaw = card.mediaHeight is defined and card.mediaHeight is not null ? (card.mediaHeight ~ '')|trim : '' %}
+                {% set mediaHeightCss = mediaHeightRaw ? (mediaHeightRaw matches '/^[0-9]+(\.[0-9]+)?$/' ? mediaHeightRaw ~ 'px' : mediaHeightRaw) : '345px' %}
+                {% set headlineSizeRaw = card.headlineSize is defined and card.headlineSize is not null ? (card.headlineSize ~ '')|trim : '' %}
+                {% set subheadlineSizeRaw = card.subheadlineSize is defined and card.subheadlineSize is not null ? (card.subheadlineSize ~ '')|trim : '' %}
+                {% set bodyTextSizeRaw = card.bodyTextSize is defined and card.bodyTextSize is not null ? (card.bodyTextSize ~ '')|trim : '' %}
+                {% set detailTitleSizeRaw = card.detailRowsTitleSize is defined and card.detailRowsTitleSize is not null ? (card.detailRowsTitleSize ~ '')|trim : '' %}
+                {% set detailValueSizeRaw = card.detailRowsValueSize is defined and card.detailRowsValueSize is not null ? (card.detailRowsValueSize ~ '')|trim : '' %}
+                {% set infoTextSizeRaw = card.infoTextSize is defined and card.infoTextSize is not null ? (card.infoTextSize ~ '')|trim : '' %}
+                {% set headlineCssSize = headlineSizeRaw ? (headlineSizeRaw matches '/^[0-9]+(\.[0-9]+)?$/' ? headlineSizeRaw ~ 'px' : headlineSizeRaw) : '24px' %}
+                {% set subheadlineCssSize = subheadlineSizeRaw ? (subheadlineSizeRaw matches '/^[0-9]+(\.[0-9]+)?$/' ? subheadlineSizeRaw ~ 'px' : subheadlineSizeRaw) : '20px' %}
+                {% set bodyTextCssSize = bodyTextSizeRaw ? (bodyTextSizeRaw matches '/^[0-9]+(\.[0-9]+)?$/' ? bodyTextSizeRaw ~ 'px' : bodyTextSizeRaw) : '16px' %}
+                {% set detailTitleCssSize = detailTitleSizeRaw ? (detailTitleSizeRaw matches '/^[0-9]+(\.[0-9]+)?$/' ? detailTitleSizeRaw ~ 'px' : detailTitleSizeRaw) : '16px' %}
+                {% set detailValueCssSize = detailValueSizeRaw ? (detailValueSizeRaw matches '/^[0-9]+(\.[0-9]+)?$/' ? detailValueSizeRaw ~ 'px' : detailValueSizeRaw) : '16px' %}
+                {% set infoTextCssSize = infoTextSizeRaw ? (infoTextSizeRaw matches '/^[0-9]+(\.[0-9]+)?$/' ? infoTextSizeRaw ~ 'px' : infoTextSizeRaw) : '16px' %}
+                {% set headlineLineHeightRaw = card.headlineLineHeight is defined and card.headlineLineHeight is not null ? (card.headlineLineHeight ~ '')|trim : '' %}
+                {% set subheadlineLineHeightRaw = card.subheadlineLineHeight is defined and card.subheadlineLineHeight is not null ? (card.subheadlineLineHeight ~ '')|trim : '' %}
+                {% set bodyTextLineHeightRaw = card.bodyTextLineHeight is defined and card.bodyTextLineHeight is not null ? (card.bodyTextLineHeight ~ '')|trim : '' %}
+                {% set detailTitleLineHeightRaw = card.detailRowsTitleLineHeight is defined and card.detailRowsTitleLineHeight is not null ? (card.detailRowsTitleLineHeight ~ '')|trim : '' %}
+                {% set detailValueLineHeightRaw = card.detailRowsValueLineHeight is defined and card.detailRowsValueLineHeight is not null ? (card.detailRowsValueLineHeight ~ '')|trim : '' %}
+                {% set infoTextLineHeightRaw = card.infoTextLineHeight is defined and card.infoTextLineHeight is not null ? (card.infoTextLineHeight ~ '')|trim : '' %}
+                {% set headlineLineHeightCss = headlineLineHeightRaw ? (headlineLineHeightRaw matches '/^[0-9]+(\.[0-9]+)?$/' ? headlineLineHeightRaw ~ 'px' : headlineLineHeightRaw) : '28px' %}
+                {% set subheadlineLineHeightCss = subheadlineLineHeightRaw ? (subheadlineLineHeightRaw matches '/^[0-9]+(\.[0-9]+)?$/' ? subheadlineLineHeightRaw ~ 'px' : subheadlineLineHeightRaw) : '25px' %}
+                {% set bodyTextLineHeightCss = bodyTextLineHeightRaw ? (bodyTextLineHeightRaw matches '/^[0-9]+(\.[0-9]+)?$/' ? bodyTextLineHeightRaw ~ 'px' : bodyTextLineHeightRaw) : '24px' %}
+                {% set detailTitleLineHeightCss = detailTitleLineHeightRaw ? (detailTitleLineHeightRaw matches '/^[0-9]+(\.[0-9]+)?$/' ? detailTitleLineHeightRaw ~ 'px' : detailTitleLineHeightRaw) : '24px' %}
+                {% set detailValueLineHeightCss = detailValueLineHeightRaw ? (detailValueLineHeightRaw matches '/^[0-9]+(\.[0-9]+)?$/' ? detailValueLineHeightRaw ~ 'px' : detailValueLineHeightRaw) : '24px' %}
+                {% set infoTextLineHeightCss = infoTextLineHeightRaw ? (infoTextLineHeightRaw matches '/^[0-9]+(\.[0-9]+)?$/' ? infoTextLineHeightRaw ~ 'px' : infoTextLineHeightRaw) : '24px' %}
+                {% set detailRowBorder = (card.detailRowsOutlineThickness ?? 1) ~ 'px solid ' ~ (card.detailRowsOutlineColor ?? '#E4E4E3') %}
+                <div
+                    class="ict-overview-card"
+                    style="
+                        {% if card.cardMainBackgroundType == 'color' %}
+                            background-color: {{ card.cardMainBackgroundColor ?? '#FFFFFF' }};
+                        {% elseif card.cardMainBackgroundType == 'gradient' %}
+                            background: linear-gradient(to {{ card.cardMainBackgroundGradientDirection ?? 'top' }}, {{ card.cardMainBackgroundGradientColor1 ?? '#005AE5' }}, {{ card.cardMainBackgroundGradientColor2 ?? '#0080FF' }});
+                        {% else %}
+                            background-color: #FFFFFF;
+                        {% endif %}
+                    "
+                >
+                    {% if card.cardMainBackgroundType == 'image' and cardMainImageMedia %}
+                        <div class="card-main-background" style="background-image: url('{{ cardMainImageMedia.url }}');"></div>
+                    {% endif %}
+
+                    {% if card.cardMainBackgroundType == 'video' and card.cardMainBackgroundVideoUploadType == 'url' and card.cardMainBackgroundVideoUploadUrl %}
+                        {% set cardMainVideoId = card.cardMainBackgroundVideoUploadUrl|replace({'https://www.youtube.com/watch?v=': '', 'https://youtu.be/': ''})|split('&')[0] %}
+                        <iframe class="card-main-background-iframe" src="https://www.youtube.com/embed/{{ cardMainVideoId }}?autoplay=1&mute=1&loop=1&playlist={{ cardMainVideoId }}&controls=0&showinfo=0&rel=0" frameborder="0" allowfullscreen></iframe>
+                    {% elseif card.cardMainBackgroundType == 'video' and card.cardMainBackgroundVideoUploadType == 'file' and cardMainVideoMedia %}
+                        <video autoplay muted loop class="card-main-background-video">
+                            <source src="{{ cardMainVideoMedia.url }}" type="video/mp4">
+                        </video>
+                    {% endif %}
+
+                    <div class="card-shell">
+                        <div class="card-media card-media--{{ mediaDisplayMode }}" style="height: {{ mediaHeightCss }};">
+                            {% if card.cardBackgroundType == 'image' and cardImageMedia %}
+                                {% if mediaDisplayMode == 'tile' %}
+                                    <div class="card-media-tile" style="background-image: url('{{ cardImageMedia.url }}');"></div>
+                                {% else %}
+                                    <img class="card-media-image" src="{{ cardImageMedia.url }}" alt="{{ card.headline ?? 'Media' }}" style="object-fit: {{ mediaObjectFit }};">
+                                {% endif %}
+                            {% elseif card.cardBackgroundType == 'video' and card.cardBackgroundVideoUploadType == 'url' and card.cardBackgroundVideoUploadUrl %}
+                                {% set cardVideoId = card.cardBackgroundVideoUploadUrl|replace({'https://www.youtube.com/watch?v=': '', 'https://youtu.be/': ''})|split('&')[0] %}
+                                <iframe class="card-media-iframe" src="https://www.youtube.com/embed/{{ cardVideoId }}?autoplay=1&mute=1&loop=1&playlist={{ cardVideoId }}&controls=0&showinfo=0&rel=0" frameborder="0" allowfullscreen></iframe>
+                            {% elseif card.cardBackgroundType == 'video' and card.cardBackgroundVideoUploadType == 'file' and cardVideoMedia %}
+                                <video autoplay muted loop class="card-media-video" style="object-fit: {{ mediaObjectFit }};">
+                                    <source src="{{ cardVideoMedia.url }}" type="video/mp4">
+                                </video>
+                            {% else %}
+                                <div class="card-media-placeholder">Media</div>
+                            {% endif %}
+                        </div>
+
+                        <div class="card-content">
+                                <div class="card-icon" style="text-align: {{ card.iconAlignment ?? 'left' }};">
+                                    <div class="icon-wrapper" style="
+                                        width: {{ card.iconSize ?? 80 }}px;
+                                        height: {{ card.iconSize ?? 80 }}px;
+                                        background-color: {{ card.iconBackgroundColor ?? 'transparent' }};
+                                        border-radius: {% if card.iconShape == 'round' %}50%{% else %}{{ card.iconBorderRadius ?? 8 }}px{% endif %};
+                                        {% if card.iconOutlinePosition == 'outside' %}
+                                            outline: {{ card.iconOutlineThickness ?? 0 }}px solid {{ card.iconOutlineColor ?? 'transparent' }};
+                                        {% else %}
+                                            border: {{ card.iconOutlineThickness ?? 0 }}px solid {{ card.iconOutlineColor ?? 'transparent' }};
+                                        {% endif %}
+                                        color: {{ card.iconColor ?? '#005AE5' }};
+                                    ">
+                                        {% if iconImageMedia %}
+                                            {% if '.svg' in iconImageMedia.url %}
+                                                <span class="icon-image-mask" style="background-color: {{ card.iconColor ?? '#005AE5' }}; -webkit-mask-image: url('{{ iconImageMedia.url }}'); mask-image: url('{{ iconImageMedia.url }}');"></span>
+                                            {% else %}
+                                                <img src="{{ iconImageMedia.url }}" alt="Icon" class="icon-image">
+                                            {% endif %}
+                                        {% else %}
+                                            <svg width="50%" height="50%" viewBox="0 0 24 24" fill="currentColor">
+                                                <path d="M12,1L3,5V11C3,16.55 6.84,21.74 12,23C17.16,21.74 21,16.55 21,11V5L12,1Z"/>
+                                            </svg>
+                                        {% endif %}
+                                    </div>
+                                </div>
+
+                                <h3 class="card-headline" style="font-size: {{ headlineCssSize }}; line-height: {{ headlineLineHeightCss }}; text-align: {{ card.headlineAlignment ?? 'left' }}; color: {{ card.headlineColor ?? '#262624' }};">
+                                    {{ card.headline }}
+                                </h3>
+
+                                <h4 class="card-subheadline" style="font-size: {{ subheadlineCssSize }}; line-height: {{ subheadlineLineHeightCss }}; text-align: {{ card.subheadlineAlignment ?? 'left' }}; color: {{ card.subheadlineColor ?? '#262624' }};">
+                                    {{ card.subheadline }}
+                                </h4>
+
+                            {% if card.showBodyText %}
+                                <div class="card-body-text" style="font-size: {{ bodyTextCssSize }}; line-height: {{ bodyTextLineHeightCss }}; text-align: {{ card.bodyTextAlignment ?? 'left' }}; color: {{ card.bodyTextColor ?? '#262624' }};">
+                                    {{ card.bodyText|raw }}
+                                </div>
+                            {% endif %}
+
+                            {% if detailRows|length > 0 %}
+                                <div class="card-detail-rows">
+                                    {% for row in detailRows %}
+                                        {% set titleText = row.title is defined and row.title is not null ? (row.title ~ '')|trim : '' %}
+                                        {% set valueText = row.value is defined and row.value is not null ? (row.value ~ '')|trim : '' %}
+                                        {% if titleText or valueText %}
+                                            <div class="card-detail-row" style="border-bottom: {{ detailRowBorder }};">
+                                                <div class="card-detail-row__title" style="text-align: {{ card.detailRowsTitleAlignment ?? 'left' }}; font-size: {{ detailTitleCssSize }}; line-height: {{ detailTitleLineHeightCss }}; color: {{ row.titleColor ?? '#262624' }}; font-weight: {{ card.detailRowsTitleFontWeight ?? '700' }};">
+                                                    {{ titleText }}
+                                                </div>
+                                                <div class="card-detail-row__value" style="text-align: {{ card.detailRowsValueAlignment ?? 'right' }}; font-size: {{ detailValueCssSize }}; line-height: {{ detailValueLineHeightCss }}; color: {{ row.valueColor ?? '#262624' }}; font-weight: {{ card.detailRowsValueFontWeight ?? '400' }};">
+                                                    {{ valueText }}
+                                                </div>
+                                            </div>
+                                        {% endif %}
+                                    {% endfor %}
+                                </div>
+                            {% endif %}
+
+                            {% if card.infoText is defined and (card.infoText ~ '')|trim %}
+                                <div class="card-info-text" style="border-bottom: {{ detailRowBorder }}; text-align: {{ card.infoTextAlignment ?? 'left' }}; font-size: {{ infoTextCssSize }}; line-height: {{ infoTextLineHeightCss }}; color: {{ card.infoTextColor ?? '#262624' }}; font-weight: {{ card.infoTextFontWeight ?? '700' }};">
+                                    {{ card.infoText }}
+                                </div>
+                            {% endif %}
+
+                            {% if activeButton %}
+                                {% set buttonUrl = activeButton.buttonUrl ?? '#' %}
+                                <div class="card-buttons" style="justify-content: flex-start;">
+                                    <div class="card-button-wrapper">
+                                        <a
+                                            href="{{ buttonUrl }}"
+                                            target="{{ activeButton.buttonTarget ?? '_self' }}"
+                                            class="card-button"
+                                            style="
+                                                --button-text: {{ activeButton.buttonTextColor ?? '#FFFFFF' }};
+                                                --button-hover-text: {{ activeButton.buttonHoverTextColor ?? '#000000' }};
+                                                --button-border-width: {{ activeButton.buttonBorderWidth ?? 0 }}px;
+                                                --button-border-style: {{ activeButton.buttonBorderStyle ?? 'solid' }};
+                                                --button-border-color: {{ activeButton.buttonBorderColor ?? 'transparent' }};
+                                                --button-hover-border-color: {{ activeButton.buttonHoverBorderColor ?? 'transparent' }};
+                                                --button-radius: {{ activeButton.buttonBorderRadius ?? 6 }}px;
+                                            "
+                                        >
+                                            <span>{{ activeButton.buttonText ?? 'LEARN MORE' }}</span>
+                                        </a>
+                                    </div>
+                                </div>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,65 @@
+.sw-cms-preview-ict-product-matrix {
+    padding: 6px;
+    background: #fff;
+    border: 1px solid #e2e8f0;
+    border-radius: 4px;
+
+    .ipm-preview__header {
+        display: flex;
+        align-items: center;
+        gap: 4px;
+        padding: 3px 4px;
+        border-bottom: 1px solid #e2e8f0;
+        margin-bottom: 3px;
+    }
+
+    .ipm-preview__col {
+        font-size: 5px;
+        font-weight: 700;
+        color: #334155;
+        flex: 1;
+
+        &--wide { flex: 3; }
+    }
+
+    .ipm-preview__row {
+        display: flex;
+        align-items: center;
+        gap: 4px;
+        padding: 3px 0;
+        border-bottom: 1px solid #f1f5f9;
+    }
+
+    .ipm-preview__thumb {
+        width: 18px;
+        height: 14px;
+        border-radius: 2px;
+        background: #e2e8f0;
+        flex-shrink: 0;
+    }
+
+    .ipm-preview__lines {
+        flex: 2;
+        display: flex;
+        flex-direction: column;
+        gap: 2px;
+    }
+
+    .ipm-preview__line {
+        height: 3px;
+        border-radius: 2px;
+        background: #cbd5e1;
+        width: 90%;
+
+        &--short { width: 55%; }
+        &--mid { flex: 1; height: 3px; border-radius: 2px; background: #cbd5e1; }
+    }
+
+    .ipm-preview__btn {
+        width: 22px;
+        height: 8px;
+        border-radius: 2px;
+        background: #1e3a5f;
+        flex-shrink: 0;
+    }
+}

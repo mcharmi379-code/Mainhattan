@@ -1,0 +1,34 @@
+.sw-cms-el-preview-ict-three-column {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    height: 100%;
+    padding: 12px;
+    border-radius: 10px;
+    background: #ffffff;
+    box-shadow: 0 4px 12px rgba(15, 23, 42, 0.08);
+
+    &__media {
+        display: block;
+        width: 100%;
+        aspect-ratio: 16 / 9;
+        border-radius: 8px;
+        background: linear-gradient(135deg, #dbeafe 0%, #ccfbf1 100%);
+    }
+
+    &__line {
+        display: block;
+        height: 6px;
+        width: 100%;
+        border-radius: 999px;
+        background: rgba(15, 23, 42, 0.12);
+    }
+
+    &__line--short {
+        width: 56%;
+    }
+
+    &__line--small {
+        width: 42%;
+    }
+}

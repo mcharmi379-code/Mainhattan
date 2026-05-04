@@ -1,0 +1,10 @@
+{% block element_ict_platform_support_grid_open %}
+    <div class="platform-grid" style="
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 32px;
+            justify-items: {{ config.platformAlignment.value }};
+            position: relative;
+            z-index: 2;
+        ">
+{% endblock %}

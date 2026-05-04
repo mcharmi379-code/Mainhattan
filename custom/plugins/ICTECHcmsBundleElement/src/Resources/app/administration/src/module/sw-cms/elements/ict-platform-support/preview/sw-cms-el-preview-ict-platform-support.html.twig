@@ -1,0 +1,20 @@
+{% block sw_cms_element_ict_platform_support_preview %}
+<div class="sw-cms-el-preview-ict-platform-support">
+    <div class="ict-ps-preview__header">
+        <span class="ict-ps-preview__dot"></span>
+        <span class="ict-ps-preview__dot"></span>
+        <span class="ict-ps-preview__dot"></span>
+        <span class="ict-ps-preview__label">Platform Support</span>
+    </div>
+    <div class="ict-ps-preview__grid">
+        <div class="ict-ps-preview__item" v-for="i in 5" :key="i">
+            <div class="ict-ps-preview__icon">
+                <svg viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 14H9V8h2v8zm4 0h-2V8h2v8z"/>
+                </svg>
+            </div>
+            <span class="ict-ps-preview__name">Item {{ i }}</span>
+        </div>
+    </div>
+</div>
+{% endblock %}

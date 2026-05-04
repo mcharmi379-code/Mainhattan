@@ -1,0 +1,11 @@
+{% block block_ict_product_comparison %}
+    {% set element = block.slots.getSlot('comparison') %}
+
+    {% if element %}
+        <div class="cms-block-ict-product-comparison">
+            <div data-cms-element-id="{{ element.id }}">
+                {% sw_include '@Storefront/storefront/element/cms-element-' ~ element.type ~ '.html.twig' ignore missing with { element: element } %}
+            </div>
+        </div>
+    {% endif %}
+{% endblock %}

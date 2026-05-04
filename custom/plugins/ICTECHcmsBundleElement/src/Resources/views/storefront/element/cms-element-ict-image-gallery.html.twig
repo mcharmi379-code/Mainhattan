@@ -1,0 +1,17 @@
+{% block element_ict_image_gallery %}
+    {% set galleryTitle = element.data.galleryTitle ?? element.config.galleryTitle.value ?? '' %}
+    {% set columns = element.data.columns ?? element.config.columns.value ?? 4 %}
+    {% set galleryItems = element.data.galleryItems ?? [] %}
+
+    {% if galleryItems|length > 0 %}
+        <div class="cms-element-ict-image-gallery ict-image-gallery ict-image-gallery--columns-{{ columns }}" data-ict-gallery>
+            {% if galleryTitle %}
+                <h2 class="ict-image-gallery__title">
+                    {{ galleryTitle }}
+                </h2>
+            {% endif %}
+            {% sw_include '@ICTECHcmsBundleElement/storefront/element/ict-image-gallery/grid.html.twig' %}
+            {% sw_include '@ICTECHcmsBundleElement/storefront/element/ict-image-gallery/lightbox.html.twig' %}
+        </div>
+    {% endif %}
+{% endblock %}

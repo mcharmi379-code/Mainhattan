@@ -1,0 +1,33 @@
+{% block sw_cms_el_preview_ict_product_comparison %}
+<div class="sw-cms-el-preview-ict-product-comparison">
+
+    <!-- Header row: label col + 3 product cols -->
+    <div class="pcp-preview__header-row">
+        <div class="pcp-preview__label-col"></div>
+        <div class="pcp-preview__product-col pcp-preview__product-col--highlight">
+            <div class="pcp-preview__product-thumb"></div>
+            <div class="pcp-preview__product-name"></div>
+            <div class="pcp-preview__product-price pcp-preview__product-price--highlight"></div>
+        </div>
+        <div class="pcp-preview__product-col">
+            <div class="pcp-preview__product-thumb"></div>
+            <div class="pcp-preview__product-name"></div>
+            <div class="pcp-preview__product-price"></div>
+        </div>
+        <div class="pcp-preview__product-col">
+            <div class="pcp-preview__product-thumb"></div>
+            <div class="pcp-preview__product-name"></div>
+            <div class="pcp-preview__product-price"></div>
+        </div>
+    </div>
+
+    <!-- Property rows -->
+    <div class="pcp-preview__row" v-for="i in 4" :key="i">
+        <div class="pcp-preview__row-label"></div>
+        <div class="pcp-preview__row-cell"></div>
+        <div class="pcp-preview__row-cell"></div>
+        <div class="pcp-preview__row-cell"></div>
+    </div>
+
+</div>
+{% endblock %}

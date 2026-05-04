@@ -1,0 +1,530 @@
+{% block sw_cms_el_config_ict_product_box %}
+    <sw-tabs class="sw-cms-el-config-ict-three-column-image-box" default-item="leftImage">
+
+        <template #default="{ active }">
+            <sw-tabs-item name="leftImage" :active-tab="active">
+                {{ $tc('sw-cms.elements.ictTwoColumnThreeImage.config.tab.leftImage') }}
+            </sw-tabs-item>
+            <sw-tabs-item name="rightTopImage" :active-tab="active">
+                {{ $tc('sw-cms.elements.ictTwoColumnThreeImage.config.tab.rightTopImage') }}
+            </sw-tabs-item>
+            <sw-tabs-item name="rightBottomImage" :active-tab="active">
+                {{ $tc('sw-cms.elements.ictTwoColumnThreeImage.config.tab.rightBottomImage') }}
+            </sw-tabs-item>
+        </template>
+        <template #content="{ active }">
+            <!-- Left Image -->
+            <sw-container v-if="active === 'leftImage' && element.config" class="sw-cms-el-config-ict-three-column-left-image-section__main"
+                          :label="$tc('sw-cms.elements.ictTwoColumnThreeImage.config.tab.leftImage')">
+                <!-- Left Image Configuration -->
+                <sw-upload-listener
+                        :upload-tag="leftImageUploadTag"
+                        @media-upload-finish="onLeftImageUpload"
+                        auto-upload>
+                </sw-upload-listener>
+
+                <sw-media-upload-v2
+                        variant="regular"
+                        :upload-tag="leftImageUploadTag"
+                        :source="leftImageMediaItem"
+                        :allow-multi-select="false"
+                        :label="$tc('sw-cms.elements.ictTwoColumnThreeImage.config.label.leftImage')"
+                        :default-folder="'cms_page'"
+                        :file-accept="fileAccept"
+                        @selection-change="onLeftImageSelectionChanges"
+                        @media-upload-remove-image="onLeftImageRemove"
+                        @media-upload-sidebar-open="onOpenLeftImageModal">
+                </sw-media-upload-v2>
+
+                <sw-media-modal-v2
+                        v-if="leftImageMediaModalIsOpen"
+                        :initial-folder-id="null"
+                        :entity-context="'cms_page'"
+                        @media-modal-selection-change="onLeftImageSelectionChanges"
+                        @modal-close="onCloseLeftImageModal">
+                </sw-media-modal-v2>
+
+                <div class="sw-cms-el-config-ict-three-column-image-box_config_mode">
+                    <mt-select
+                            v-model="element.config.leftImageObjectFit.value"
+                            :label="$tc('sw-cms.elements.ictTwoColumnThreeImage.config.label.leftImageObjectFit')"
+                            :options="objectFitOptions"
+                            @update:model-value="onLeftImageObjectFit">
+                    </mt-select>
+
+                     <mt-text-field
+                               v-if="element.config.leftImageObjectFit.value === 'cover' "
+                                v-model="element.config.leftImageHeight.value"
+                                :label="$tc('sw-cms.elements.ictTwoColumnThreeImage.config.label.leftImageHeight')"
+                                @update:model-value="onLeftImageHeight">
+                     </mt-text-field>
+
+                </div>
+
+                <div class="sw-cms-el-config-ict-three-column-image-box_text_config">
+                    <sw-text-editor
+                            :value="element.config.leftImageDescription.value"
+                            :label="$tc('sw-cms.elements.ictTwoColumnThreeImage.config.label.leftImageDescription')"
+                            sanitize-input
+                            @update:value="onLeftImageDescriptionInput">
+                    </sw-text-editor>
+                </div>
+
+                <div class="sw-cms-el-config-ict-three-column-image-box_button">
+                    <div class="sw-cms-el-config-ict-three-column-image-box_button_icon">
+                        <sw-upload-listener
+                                :upload-tag="leftButtonIconUploadTag"
+                                @media-upload-finish="onLeftButtonIconUpload"
+                                auto-upload>
+                        </sw-upload-listener>
+
+                        <sw-media-upload-v2
+                                variant="regular"
+                                :upload-tag="leftButtonIconUploadTag"
+                                :source="leftButtonIconMediaItem"
+                                :allow-multi-select="false"
+                                :label="$tc('sw-cms.elements.ictTwoColumnThreeImage.config.label.leftButtonIcon')"
+                                :default-folder="'cms_page'"
+                                :file-accept="buttonImageAccept"
+                                        @selection-change="onLeftButtonIconSelectionChanges"
+                                @media-upload-remove-image="onLeftButtonIconRemove"
+                                @media-upload-sidebar-open="onOpenLeftButtonIconModal">
+                        </sw-media-upload-v2>
+
+                        <sw-media-modal-v2
+                                v-if="leftButtonIconMediaModalIsOpen"
+                                :initial-folder-id="null"
+                                :entity-context="'cms_page'"
+                                @media-modal-selection-change="onLeftButtonIconSelectionChanges"
+                                @modal-close="onCloseLeftButtonIconModal">
+                        </sw-media-modal-v2>
+                    </div>
+
+                    <div class="sw-cms-el-config-ict-three-column-image-box_button_config">
+                        <mt-select
+                                v-model="element.config.leftButtonIconSize.value"
+                                :label="$tc('sw-cms.elements.ictTwoColumnThreeImage.config.label.leftButtonIconSize')"
+                                :options="buttonIconSizeOptions"
+                                @update:model-value="onLeftButtonIconSizeChange">
+                        </mt-select>
+                        <mt-switch
+                                v-model="element.config.leftButtonIconHoverActive.value"
+                                :label="$tc('sw-cms.elements.ictTwoColumnThreeImage.config.label.leftButtonIconHoverActive')"
+                                @update:model-value="onLeftButtonIconHoverActiveChange">
+                        </mt-switch>
+                        <mt-colorpicker
+                                v-if="element.config.leftButtonIconHoverActive.value"
+                                v-model="element.config.leftButtonIconHoverColor.value"
+                                :label="$tc('sw-cms.elements.ictTwoColumnThreeImage.config.label.leftButtonIconHoverColor')"
+                                @update:model-value="onLeftButtonIconHoverColorChange">
+                        </mt-colorpicker>
+                        <mt-text-field
+                                v-model="element.config.leftButtonTitle.value"
+                                :label="$tc('sw-cms.elements.ictTwoColumnThreeImage.config.label.leftButtonText')"
+                                @update:model-value="onLeftButtonTitleInput">
+                        </mt-text-field>
+
+                        <mt-select
+                                v-model="element.config.leftButtonLinkType.value"
+                                :label="$tc('sw-cms.elements.ictTwoColumnThreeImage.config.label.buttonLinkType')"
+                                :options="linkTypeOptions"
+                                @update:model-value="onLeftButtonLinkType">
+                        </mt-select>
+                    </div>
+                    <div class="sw-cms-el-config-ict-three-column-image-box-url-field">
+                        <sw-dynamic-url-field
+                                v-if="element.config.leftButtonLinkType && element.config.leftButtonLinkType.value === 'internal'"
+                                v-model:value="element.config.leftButtonLink.value"></sw-dynamic-url-field>
+                    </div>
+                    <div>
+                        <mt-text-field
+                                v-if="element.config.leftButtonLinkType.value === 'external'"
+                                v-model="element.config.leftButtonLink.value"
+                                :label="$tc('sw-cms.elements.ictTwoColumnThreeImage.config.label.buttonLink')"
+                                @update:model-value="onLeftButtonLink">
+                        </mt-text-field>
+                    </div>
+
+                    <div class="sw-cms-el-config-ict-three-column-image-box_button_styling">
+                        <div class="button-color-config">
+                            <mt-colorpicker
+                                    v-model="element.config.leftButtonBackgroundColor.value"
+                                    :label="$tc('sw-cms.elements.ictTwoColumnThreeImage.config.label.buttonBackgroundColor')"
+                                    @update:model-value="onLeftButtonBackgroundColorChange">
+                            </mt-colorpicker>
+
+                            <mt-colorpicker
+                                    v-model="element.config.leftButtonHoverBackgroundColor.value"
+                                    :label="$tc('sw-cms.elements.ictTwoColumnThreeImage.config.label.buttonHoverBackgroundColor')"
+                                    @update:model-value="onLeftButtonHoverBackgroundColorChange">
+                            </mt-colorpicker>
+
+                            <mt-colorpicker
+                                    v-model="element.config.leftButtonTextColor.value"
+                                    :label="$tc('sw-cms.elements.ictTwoColumnThreeImage.config.label.buttonTextColor')"
+                                    @update:model-value="onLeftButtonTextColorChange">
+                            </mt-colorpicker>
+
+                            <mt-colorpicker
+                                    v-model="element.config.leftButtonHoverTextColor.value"
+                                    :label="$tc('sw-cms.elements.ictTwoColumnThreeImage.config.label.buttonHoverTextColor')"
+                                    @update:model-value="onLeftButtonHoverTextColorChange">
+                            </mt-colorpicker>
+                        </div>
+
+                        <div class="button-border-config">
+                            <mt-colorpicker
+                                    v-model="element.config.leftButtonBorderColor.value"
+                                    :label="$tc('sw-cms.elements.ictTwoColumnThreeImage.config.label.buttonBorderColor')"
+                                    @update:model-value="onLeftButtonBorderColorChange">
+                            </mt-colorpicker>
+                        </div>
+                    </div>
+                </div>
+            </sw-container>
+            
+            <!-- Right Image -->
+            <sw-container v-if="active === 'rightTopImage' && element.config"
+                          class="sw-cms-el-config-ict-two-column-right-top-image-section__main"
+                          :label="$tc('sw-cms.elements.ictTwoColumnThreeImage.config.tab.rightTopImage')">
+                <!-- Right Top Image Configuration -->
+                <sw-upload-listener
+                        :upload-tag="rightTopImageUploadTag"
+                        @media-upload-finish="onRightTopImageUpload"
+                        auto-upload>
+                </sw-upload-listener>
+
+                <sw-media-upload-v2
+                        variant="regular"
+                        :upload-tag="rightTopImageUploadTag"
+                        :source="rightTopImageMediaItem"
+                        :allow-multi-select="false"
+                        :label="$tc('sw-cms.elements.ictTwoColumnThreeImage.config.label.rightTopImage')"
+                        :default-folder="'cms_page'"
+                        :file-accept="fileAccept"
+                        @selection-change="onRightTopImageSelectionChanges"
+                        @media-upload-remove-image="onRightTopImageRemove"
+                        @media-upload-sidebar-open="onOpenRightTopImageModal">
+                </sw-media-upload-v2>
+
+                <sw-media-modal-v2
+                        v-if="rightTopImageMediaModalIsOpen"
+                        :initial-folder-id="null"
+                        :entity-context="'cms_page'"
+                        @media-modal-selection-change="onRightTopImageSelectionChanges"
+                        @modal-close="onCloseRightTopImageModal">
+                </sw-media-modal-v2>
+
+                <div class="sw-cms-el-config-ict-three-column-image-box_config_mode">
+                    <mt-select
+                            v-model="element.config.rightTopImageObjectFit.value"
+                            :label="$tc('sw-cms.elements.ictTwoColumnThreeImage.config.label.rightImageObjectFit')"
+                            :options="objectFitOptions"
+                            @update:model-value="onRightTopImageObjectFit">
+                    </mt-select>
+
+                
+                     <mt-text-field
+                         v-if="element.config.rightTopImageObjectFit.value === 'cover' "
+                         v-model="element.config.rightTopImageHeight.value"
+                         :label="$tc('sw-cms.elements.ictTwoColumnThreeImage.config.label.rightImageHeight')"
+                         @update:model-value="onRightTopImageHeight">
+                     </mt-text-field>
+                </div>
+
+                <div class="sw-cms-el-config-ict-three-column-image-box_text_config">
+                    <sw-text-editor
+                            :value="element.config.rightTopImageDescription.value"
+                            :label="$tc('sw-cms.elements.ictTwoColumnThreeImage.config.label.rightImageDescription')"
+                            sanitize-input
+                            @update:value="onRightTopImageDescriptionInput">
+                    </sw-text-editor>
+                </div>
+
+                <div class="sw-cms-el-config-ict-three-column-image-box_button">
+                    <div class="sw-cms-el-config-ict-three-column-image-box_button_icon">
+                        <sw-upload-listener
+                                :upload-tag="rightTopButtonIconUploadTag"
+                                @media-upload-finish="onRightTopButtonIconUpload"
+                                auto-upload>
+                        </sw-upload-listener>
+
+
+                        <sw-media-upload-v2
+                                variant="regular"
+                                :upload-tag="rightTopButtonIconUploadTag"
+                                :source="rightTopButtonIconMediaItem"
+                                :allow-multi-select="false"
+                                :label="$tc('sw-cms.elements.ictTwoColumnThreeImage.config.label.rightButtonIcon')"
+                                :default-folder="'cms_page'"
+                                :file-accept="buttonImageAccept"
+                                @selection-change="onRightTopButtonIconSelectionChanges"
+                                @media-upload-remove-image="onRightTopButtonIconRemove"
+                                @media-upload-sidebar-open="onOpenRightTopButtonIconModal">
+                        </sw-media-upload-v2>
+
+                        <sw-media-modal-v2
+                                v-if="rightTopButtonIconMediaModalIsOpen"
+                                :initial-folder-id="null"
+                                :entity-context="'cms_page'"
+                                @media-modal-selection-change="onRightTopButtonIconSelectionChanges"
+                                @modal-close="onCloseRightTopButtonIconModal">
+                        </sw-media-modal-v2>
+                    </div>
+
+                    <div class="sw-cms-el-config-ict-three-column-image-box_button_config">
+                        <mt-select
+                                v-model="element.config.rightTopButtonIconSize.value"
+                                :label="$tc('sw-cms.elements.ictTwoColumnThreeImage.config.label.rightTopButtonIconSize')"
+                                :options="buttonIconSizeOptions"
+                                @update:model-value="onRightTopButtonIconSizeChange">
+                        </mt-select>
+                        <mt-switch
+                                v-model="element.config.rightTopButtonIconHoverActive.value"
+                                :label="$tc('sw-cms.elements.ictTwoColumnThreeImage.config.label.rightTopButtonIconHoverActive')"
+                                @update:model-value="onRightTopButtonIconHoverActiveChange">
+                        </mt-switch>
+                        <mt-colorpicker
+                                v-if="element.config.rightTopButtonIconHoverActive.value"
+                                v-model="element.config.rightTopButtonIconHoverColor.value"
+                                :label="$tc('sw-cms.elements.ictTwoColumnThreeImage.config.label.rightTopButtonIconHoverColor')"
+                                @update:model-value="onRightTopButtonIconHoverColorChange">
+                        </mt-colorpicker>
+                        <mt-text-field
+                                v-model="element.config.rightTopButtonTitle.value"
+                                :label="$tc('sw-cms.elements.ictTwoColumnThreeImage.config.label.rightButtonText')"
+                                @update:model-value="onRightTopButtonTitleInput">
+                        </mt-text-field>
+
+                        <mt-select
+                                v-model="element.config.rightTopButtonLinkType.value"
+                                :label="$tc('sw-cms.elements.ictTwoColumnThreeImage.config.label.buttonLinkType')"
+                                :options="linkTypeOptions"
+                                        @update:model-value="onRightTopButtonLinkType">
+                        </mt-select>
+                    </div>
+                    <div class="sw-cms-el-config-ict-three-column-image-box-url-field">
+                        <sw-dynamic-url-field
+                                v-if="element.config.rightTopButtonLinkType && element.config.rightTopButtonLinkType.value === 'internal'"
+                                v-model:value="element.config.rightTopButtonLink.value"></sw-dynamic-url-field>
+                    </div>
+                    <div>
+                        <mt-text-field
+                                v-if="element.config.rightTopButtonLinkType.value === 'external'"
+                                v-model="element.config.rightTopButtonLink.value"
+                                :label="$tc('sw-cms.elements.ictTwoColumnThreeImage.config.label.buttonLink')"
+                                @update:model-value="onRightTopButtonLink">
+                        </mt-text-field>
+                    </div>
+
+                    <div class="sw-cms-el-config-ict-three-column-image-box_button_styling">
+                        <div class="button-color-config">
+                            <mt-colorpicker
+                                    v-model="element.config.rightTopButtonBackgroundColor.value"
+                                    :label="$tc('sw-cms.elements.ictTwoColumnThreeImage.config.label.buttonBackgroundColor')"
+                                    @update:model-value="onRightTopButtonBackgroundColorChange">
+                            </mt-colorpicker>
+
+                            <mt-colorpicker
+                                    v-model="element.config.rightTopButtonHoverBackgroundColor.value"
+                                    :label="$tc('sw-cms.elements.ictTwoColumnThreeImage.config.label.buttonHoverBackgroundColor')"
+                                    @update:model-value="onRightTopButtonHoverBackgroundColorChange">
+                            </mt-colorpicker>
+
+                            <mt-colorpicker
+                                    v-model="element.config.rightTopButtonTextColor.value"
+                                    :label="$tc('sw-cms.elements.ictTwoColumnThreeImage.config.label.buttonTextColor')"
+                                    @update:model-value="onRightTopButtonTextColorChange">
+                            </mt-colorpicker>
+
+                            <mt-colorpicker
+                                    v-model="element.config.rightTopButtonHoverTextColor.value"
+                                    :label="$tc('sw-cms.elements.ictTwoColumnThreeImage.config.label.buttonHoverTextColor')"
+                                    @update:model-value="onRightTopButtonHoverTextColorChange">
+                            </mt-colorpicker>
+                        </div>
+
+                        <div class="button-border-config">
+                            <mt-colorpicker
+                                    v-model="element.config.rightTopButtonBorderColor.value"
+                                    :label="$tc('sw-cms.elements.ictTwoColumnThreeImage.config.label.buttonBorderColor')"
+                                    @update:model-value="onRightTopButtonBorderColorChange">
+                            </mt-colorpicker>
+                        </div>
+                    </div>
+                </div>
+            </sw-container>
+
+            <!-- Right Bottom Image -->
+            <sw-container v-if="active === 'rightBottomImage' && element.config"
+                          class="sw-cms-el-config-ict-two-column-right-bottom-image-section__main"
+                          :label="$tc('sw-cms.elements.ictTwoColumnThreeImage.config.tab.rightBottomImage')">
+                <!-- Right Bottom Image Configuration -->
+                <sw-upload-listener
+                        :upload-tag="rightBottomImageUploadTag"
+                        @media-upload-finish="onRightBottomImageUpload"
+                        auto-upload>
+                </sw-upload-listener>
+
+                <sw-media-upload-v2
+                        variant="regular"
+                        :upload-tag="rightBottomImageUploadTag"
+                        :source="rightBottomImageMediaItem"
+                        :allow-multi-select="false"
+                        :label="$tc('sw-cms.elements.ictTwoColumnThreeImage.config.label.rightBottomImage')"
+                        :default-folder="'cms_page'"
+                        :file-accept="fileAccept"
+                        @selection-change="onRightBottomImageSelectionChanges"
+                        @media-upload-remove-image="onRightBottomImageRemove"
+                        @media-upload-sidebar-open="onOpenRightBottomImageModal">
+                </sw-media-upload-v2>
+
+                <sw-media-modal-v2
+                        v-if="rightBottomImageMediaModalIsOpen"
+                        :initial-folder-id="null"
+                        :entity-context="'cms_page'"
+                        @media-modal-selection-change="onRightBottomImageSelectionChanges"
+                        @modal-close="onCloseRightBottomImageModal">
+                </sw-media-modal-v2>
+
+                <div class="sw-cms-el-config-ict-three-column-image-box_config_mode">
+                    <mt-select
+                            v-model="element.config.rightBottomImageObjectFit.value"
+                            :label="$tc('sw-cms.elements.ictTwoColumnThreeImage.config.label.rightImageObjectFit')"
+                            :options="objectFitOptions"
+                            @update:model-value="onRightBottomObjectFit">
+                    </mt-select>
+
+                   <mt-text-field
+                          v-if="element.config.rightBottomImageObjectFit.value === 'cover' "
+                            v-model="element.config.rightBottomImageHeight.value"
+                            :label="$tc('sw-cms.elements.ictTwoColumnThreeImage.config.label.rightImageHeight')"
+                         @update:model-value="onRightBottomHeight">
+                     </mt-text-field>
+                </div>
+
+                <div class="sw-cms-el-config-ict-three-column-image-box_text_config">
+                    <sw-text-editor
+                            :value="element.config.rightBottomImageDescription.value"
+                            :label="$tc('sw-cms.elements.ictTwoColumnThreeImage.config.label.rightImageDescription')"
+                            sanitize-input
+                            @update:value="onRightBottomImageDescriptionInput">
+                    </sw-text-editor>
+                </div>
+
+                <div class="sw-cms-el-config-ict-three-column-image-box_button">
+                    <div class="sw-cms-el-config-ict-three-column-image-box_button_icon">
+                        <sw-upload-listener
+                                :upload-tag="rightBottomButtonIconUploadTag"
+                                @media-upload-finish="onRightBottomButtonIconUpload"
+                                auto-upload>
+                        </sw-upload-listener>
+
+                        <sw-media-upload-v2
+                                variant="regular"
+                                :upload-tag="rightBottomButtonIconUploadTag"
+                                :source="rightBottomButtonIconMediaItem"
+                                :allow-multi-select="false"
+                                :label="$tc('sw-cms.elements.ictTwoColumnThreeImage.config.label.rightButtonIcon')"
+                                :default-folder="'cms_page'"
+                                :file-accept="buttonImageAccept"
+                                @selection-change="onRightBottomButtonIconSelectionChanges"
+                                @media-upload-remove-image="onRightBottomButtonIconRemove"
+                                @media-upload-sidebar-open="onOpenRightBottomButtonIconModal">
+                        </sw-media-upload-v2>
+
+                        <sw-media-modal-v2
+                                v-if="rightBottomButtonIconMediaModalIsOpen"
+                                :initial-folder-id="null"
+                                :entity-context="'cms_page'"
+                                @media-modal-selection-change="onRightBottomButtonIconSelectionChanges"
+                                @modal-close="onCloseRightBottomButtonIconModal">
+                        </sw-media-modal-v2>
+                    </div>
+
+                    <div class="sw-cms-el-config-ict-three-column-image-box_button_config">
+                        <mt-select
+                                v-model="element.config.rightBottomButtonIconSize.value"
+                                :label="$tc('sw-cms.elements.ictTwoColumnThreeImage.config.label.rightBottomButtonIconSize')"
+                                :options="buttonIconSizeOptions"
+                                @update:model-value="onRightBottomButtonIconSizeChange">
+                        </mt-select>
+                        <mt-switch
+                                v-model="element.config.rightBottomButtonIconHoverActive.value"
+                                :label="$tc('sw-cms.elements.ictTwoColumnThreeImage.config.label.rightBottomButtonIconHoverActive')"
+                                @update:model-value="onRightBottomButtonIconHoverActiveChange">
+                        </mt-switch>
+                        <mt-colorpicker
+                                v-if="element.config.rightBottomButtonIconHoverActive.value"
+                                v-model="element.config.rightBottomButtonIconHoverColor.value"
+                                :label="$tc('sw-cms.elements.ictTwoColumnThreeImage.config.label.rightBottomButtonIconHoverColor')"
+                                @update:model-value="onRightBottomButtonIconHoverColorChange">
+                        </mt-colorpicker>
+                        <mt-text-field
+                                v-model="element.config.rightBottomButtonTitle.value"
+                                :label="$tc('sw-cms.elements.ictTwoColumnThreeImage.config.label.rightButtonText')"
+                                @update:model-value="onRightBottomButtonTitleInput">
+                        </mt-text-field>
+
+                        <mt-select
+                                v-model="element.config.rightBottomButtonLinkType.value"
+                                :label="$tc('sw-cms.elements.ictTwoColumnThreeImage.config.label.buttonLinkType')"
+                                :options="linkTypeOptions"
+                                        @update:model-value="onRightBottomButtonLinkType">
+                        </mt-select>
+                    </div>
+                    <div class="sw-cms-el-config-ict-three-column-image-box-url-field">
+                        <sw-dynamic-url-field
+                                v-if="element.config.rightBottomButtonLinkType && element.config.rightBottomButtonLinkType.value === 'internal'"
+                                v-model:value="element.config.rightBottomButtonLink.value"></sw-dynamic-url-field>
+                    </div>
+                    <div>
+                        <mt-text-field
+                                v-if="element.config.rightBottomButtonLinkType.value === 'external'"
+                                v-model="element.config.rightBottomButtonLink.value"
+                                :label="$tc('sw-cms.elements.ictTwoColumnThreeImage.config.label.buttonLink')"
+                                @update:model-value="onRightBottomButtonLink">
+                        </mt-text-field>
+                    </div>
+
+                    <div class="sw-cms-el-config-ict-three-column-image-box_button_styling">
+                        <div class="button-color-config">
+                            <mt-colorpicker
+                                    v-model="element.config.rightBottomButtonBackgroundColor.value"
+                                    :label="$tc('sw-cms.elements.ictTwoColumnThreeImage.config.label.buttonBackgroundColor')"
+                                    @update:model-value="onRightBottomButtonBackgroundColorChange">
+                            </mt-colorpicker>
+
+                            <mt-colorpicker
+                                    v-model="element.config.rightBottomButtonHoverBackgroundColor.value"
+                                    :label="$tc('sw-cms.elements.ictTwoColumnThreeImage.config.label.buttonHoverBackgroundColor')"
+                                    @update:model-value="onRightBottomButtonHoverBackgroundColorChange">
+                            </mt-colorpicker>
+
+                            <mt-colorpicker
+                                    v-model="element.config.rightBottomButtonTextColor.value"
+                                    :label="$tc('sw-cms.elements.ictTwoColumnThreeImage.config.label.buttonTextColor')"
+                                    @update:model-value="onRightBottomButtonTextColorChange">
+                            </mt-colorpicker>
+
+                            <mt-colorpicker
+                                    v-model="element.config.rightBottomButtonHoverTextColor.value"
+                                    :label="$tc('sw-cms.elements.ictTwoColumnThreeImage.config.label.buttonHoverTextColor')"
+                                    @update:model-value="onRightBottomButtonHoverTextColorChange">
+                            </mt-colorpicker>
+                        </div>
+
+                        <div class="button-border-config">
+                            <mt-colorpicker
+                                    v-model="element.config.rightBottomButtonBorderColor.value"
+                                    :label="$tc('sw-cms.elements.ictTwoColumnThreeImage.config.label.buttonBorderColor')"
+                                    @update:model-value="onRightBottomButtonBorderColorChange">
+                            </mt-colorpicker>
+                        </div>
+                    </div>
+                </div>
+            </sw-container>
+
+        </template>
+    </sw-tabs>
+{% endblock %}

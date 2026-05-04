@@ -1,0 +1,117 @@
+.sw-cms-el-config-ict-content-tabs {
+    --ict-ct-accent: #1e293b;
+    --ict-ct-border: #e2e8f0;
+    --ict-ct-surface: #f8fafc;
+    --ict-ct-muted: #64748b;
+
+    .ict-ct-config__tabs-nav {
+        display: flex;
+        border-bottom: 2px solid var(--ict-ct-border);
+        margin-bottom: 16px;
+    }
+
+    .ict-ct-config__tab-btn {
+        padding: 8px 16px;
+        font-size: 13px;
+        font-weight: 600;
+        color: var(--ict-ct-muted);
+        background: none;
+        border: none;
+        border-bottom: 2px solid transparent;
+        margin-bottom: -2px;
+        cursor: pointer;
+        transition: color 0.15s, border-color 0.15s;
+        outline: none;
+
+        &:hover {
+            color: var(--ict-ct-accent);
+        }
+
+        &--active {
+            color: var(--ict-ct-accent);
+            border-bottom-color: var(--ict-ct-accent);
+        }
+    }
+
+    .ict-ct-config__panel {
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+    }
+
+    // ── Tab item row ──────────────────────────────────────────────────
+    .ict-ct-config__item {
+        border: 1px solid var(--ict-ct-border);
+        border-radius: 8px;
+        overflow: hidden;
+        background: #fff;
+    }
+
+    .ict-ct-config__item-header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 10px 14px;
+        background: var(--ict-ct-surface);
+        gap: 8px;
+    }
+
+    .ict-ct-config__item-label {
+        font-size: 13px;
+        font-weight: 600;
+        color: var(--ict-ct-accent);
+        flex: 1;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+
+    .ict-ct-config__item-actions {
+        display: flex;
+        align-items: center;
+        gap: 4px;
+        flex-shrink: 0;
+    }
+
+    .ict-ct-config__item-body {
+        padding: 14px;
+        border-top: 1px solid var(--ict-ct-border);
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+    }
+
+    .ict-ct-config__editor-label {
+        font-size: 12px;
+        font-weight: 600;
+        color: var(--ict-ct-muted);
+        margin-bottom: -6px;
+    }
+
+    // ── Add button ────────────────────────────────────────────────────
+    .ict-ct-config__add-btn {
+        width: 100%;
+        justify-content: center;
+        border: 1px dashed var(--ict-ct-border);
+        border-radius: 6px;
+        color: var(--ict-ct-muted);
+        margin-top: 4px;
+
+        &:hover {
+            border-color: var(--ict-ct-accent);
+            color: var(--ict-ct-accent);
+        }
+    }
+
+    // ── Settings grid ─────────────────────────────────────────────────
+    .ict-ct-config__settings-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 12px;
+    }
+
+    .ict-ct-config__field-wrap {
+        display: flex;
+        flex-direction: column;
+    }
+}

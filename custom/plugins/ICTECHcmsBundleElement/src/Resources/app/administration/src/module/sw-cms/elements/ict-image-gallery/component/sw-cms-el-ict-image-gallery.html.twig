@@ -1,0 +1,82 @@
+<div
+    class="sw-cms-el-ict-image-gallery"
+    :class="{
+        'sw-cms-el-ict-image-gallery--placeholder': isPlaceholder,
+        'sw-cms-el-ict-image-gallery--columns-1': columns === 1,
+        'sw-cms-el-ict-image-gallery--columns-2': columns === 2,
+        'sw-cms-el-ict-image-gallery--columns-3': columns === 3,
+        'sw-cms-el-ict-image-gallery--columns-4': columns === 4,
+        'sw-cms-el-ict-image-gallery--columns-5': columns === 5,
+        'sw-cms-el-ict-image-gallery--columns-6': columns === 6
+    }"
+>
+    <div
+        v-if="isPlaceholder"
+        class="sw-cms-el-ict-image-gallery__placeholder"
+        role="button"
+        :tabindex="disabled ? -1 : 0"
+        @click="onPlaceholderActivate"
+        @keydown.enter.prevent="onPlaceholderActivate"
+        @keydown.space.prevent="onPlaceholderActivate"
+    >
+        <sw-icon
+            class="sw-cms-el-ict-image-gallery__placeholder-icon"
+            name="regular-plus-circle"
+            size="18"
+        />
+
+        <span class="sw-cms-el-ict-image-gallery__placeholder-label">
+            {{ $tc('sw-cms.detail.title.elementChangeModal') }}
+        </span>
+    </div>
+
+    <template v-else>
+        <p
+            v-if="galleryTitle"
+            class="sw-cms-el-ict-image-gallery__title"
+        >
+            {{ galleryTitle }}
+        </p>
+
+        <div class="sw-cms-el-ict-image-gallery__grid">
+            <template v-for="(item, index) in galleryItems">
+                <div
+                    v-if="item"
+                    :key="index"
+                    class="sw-cms-el-ict-image-gallery__item"
+                >
+                    <div class="sw-cms-el-ict-image-gallery__media">
+                        <img
+                            v-if="item.media?.url"
+                            :src="item.media.url"
+                            :alt="item.media?.translated?.alt || item.title || galleryTitle"
+                        >
+                        <img
+                            v-else-if="item.mediaUrl && item.isPreview"
+                            :src="assetFilter(item.mediaUrl)"
+                            :alt="item.title || galleryTitle"
+                        >
+                        <img
+                            v-else-if="item.mediaUrl"
+                            :src="item.mediaUrl"
+                            :alt="item.title || galleryTitle"
+                        >
+                        <div
+                            v-else
+                            class="sw-cms-el-ict-image-gallery__media-placeholder"
+                        >
+                            {{ item.title || galleryTitle }}
+                        </div>
+                    </div>
+
+                    <p
+                        v-if="item.title"
+                        class="sw-cms-el-ict-image-gallery__caption"
+                    >
+                        {{ item.title }}
+                    </p>
+                </div>
+            </template>
+        </div>
+    </template>
+</div>

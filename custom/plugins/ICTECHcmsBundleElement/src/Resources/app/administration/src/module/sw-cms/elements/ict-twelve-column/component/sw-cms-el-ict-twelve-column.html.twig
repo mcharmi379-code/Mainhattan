@@ -1,0 +1,20 @@
+<div class="sw-cms-el-ict-twelve-column sw-cms-el-ict-twelve-column--placeholder">
+    <div
+        class="sw-cms-el-ict-twelve-column__placeholder"
+        role="button"
+        :tabindex="disabled ? -1 : 0"
+        @click="onPlaceholderActivate"
+        @keydown.enter.prevent="onPlaceholderActivate"
+        @keydown.space.prevent="onPlaceholderActivate"
+    >
+        <sw-icon
+            class="sw-cms-el-ict-twelve-column__placeholder-icon"
+            name="regular-plus-circle"
+            size="18"
+        />
+
+        <span class="sw-cms-el-ict-twelve-column__placeholder-label">
+            {{ $tc('sw-cms.detail.title.elementChangeModal') }}
+        </span>
+    </div>
+</div>

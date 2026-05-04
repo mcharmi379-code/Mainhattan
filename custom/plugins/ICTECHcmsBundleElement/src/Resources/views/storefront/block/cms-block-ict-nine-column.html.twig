@@ -1,0 +1,23 @@
+{% block block_ict_nine_column %}
+    {% set slots = [
+        block.slots.getSlot('col1'),
+        block.slots.getSlot('col2'),
+        block.slots.getSlot('col3'),
+        block.slots.getSlot('col4'),
+        block.slots.getSlot('col5'),
+        block.slots.getSlot('col6'),
+        block.slots.getSlot('col7'),
+        block.slots.getSlot('col8'),
+        block.slots.getSlot('col9')
+    ] %}
+
+    {% for slot in slots %}
+        {% if slot %}
+            <div class="col-lg col-md-4 col-6 ict-nine-column-layout__col" data-cms-element-id="{{ slot.id }}">
+                <div class="ict-nine-column-layout__card-slot">
+                    {% sw_include '@Storefront/storefront/element/cms-element-' ~ slot.type ~ '.html.twig' ignore missing with { element: slot } %}
+                </div>
+            </div>
+        {% endif %}
+    {% endfor %}
+{% endblock %}

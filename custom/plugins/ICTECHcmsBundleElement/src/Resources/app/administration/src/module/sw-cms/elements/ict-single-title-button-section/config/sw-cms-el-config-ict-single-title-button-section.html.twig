@@ -1,0 +1,179 @@
+{% block sw_cms_el_config_ict_single_title_button_section %}
+    <sw-tabs default-item="content">
+        <template #default="{ active }">
+            <sw-tabs-item name="content" :active-tab="active">Content</sw-tabs-item>
+            <sw-tabs-item name="leftButton" :active-tab="active">Left button</sw-tabs-item>
+            <sw-tabs-item name="rightButton" :active-tab="active">Right button</sw-tabs-item>
+        </template>
+
+        <template #content="{ active }">
+            <sw-container v-if="active === 'content'">
+                <mt-select
+                    v-model="element.config.backgroundType.value"
+                    label="Background type"
+                    :options="[
+                        { value: 'color', label: 'Color' },
+                        { value: 'gbColor', label: 'Gradient' }
+                    ]"
+                    @update:model-value="onInput"
+                />
+
+                <sw-colorpicker
+                    v-if="element.config.backgroundType.value === 'color'"
+                    v-model:value="element.config.backgroundColor.value"
+                    label="Background color"
+                    color-output="hex"
+                    @update:value="onInput"
+                />
+
+                <sw-container v-if="element.config.backgroundType.value === 'gbColor'" columns="1fr 1fr" gap="16px">
+                    <sw-colorpicker
+                        v-model:value="element.config.backgroundGradientColor1.value"
+                        label="Gradient color 1"
+                        color-output="hex"
+                        @update:value="onInput"
+                    />
+                    <sw-colorpicker
+                        v-model:value="element.config.backgroundGradientColor2.value"
+                        label="Gradient color 2"
+                        color-output="hex"
+                        @update:value="onInput"
+                    />
+                </sw-container>
+
+                <mt-text-field
+                    v-model="element.config.minHeight.value"
+                    label="Minimum height"
+                    @update:model-value="onInput"
+                />
+
+                <mt-text-field v-model="element.config.title.value" label="Title" @update:model-value="onInput" />
+
+                <sw-text-editor v-model:value="element.config.description.value" sanitize-input @update:value="onInput" />
+
+                <sw-container columns="1fr 1fr" gap="16px">
+                    <sw-colorpicker
+                        v-model:value="element.config.titleColor.value"
+                        label="Title color"
+                        color-output="hex"
+                        @update:value="onInput"
+                    />
+                    <sw-colorpicker
+                        v-model:value="element.config.descriptionColor.value"
+                        label="Description color"
+                        color-output="hex"
+                        @update:value="onInput"
+                    />
+                </sw-container>
+            </sw-container>
+
+            <sw-container v-if="active === 'leftButton'">
+                <mt-text-field
+                    v-model="element.config.leftSectionButtonText.value"
+                    label="Button text"
+                    @update:model-value="onInput"
+                />
+
+                <mt-select
+                    v-model="element.config.leftSectionButtonLinkType.value"
+                    label="Link type"
+                    :options="[
+                        { value: 'internal', label: 'Internal' },
+                        { value: 'external', label: 'External' }
+                    ]"
+                    @update:model-value="onInput"
+                />
+
+                <sw-dynamic-url-field
+                    v-if="element.config.leftSectionButtonLinkType.value === 'internal'"
+                    v-model:value="element.config.leftSectionButtonLink.value"
+                />
+                <mt-text-field
+                    v-else
+                    v-model="element.config.leftSectionButtonLink.value"
+                    label="Link"
+                    @update:model-value="onInput"
+                />
+
+                <mt-select
+                    v-model="element.config.leftSectionButtonTarget.value"
+                    label="Target"
+                    :options="[
+                        { value: '_self', label: 'Same tab' },
+                        { value: '_blank', label: 'New tab' }
+                    ]"
+                    @update:model-value="onInput"
+                />
+
+                <sw-container columns="1fr 1fr" gap="16px">
+                    <sw-colorpicker
+                        v-model:value="element.config.leftSectionButtonBackgroundColor.value"
+                        label="Background color"
+                        color-output="hex"
+                        @update:value="onInput"
+                    />
+                    <sw-colorpicker
+                        v-model:value="element.config.leftSectionButtonTextColor.value"
+                        label="Text color"
+                        color-output="hex"
+                        @update:value="onInput"
+                    />
+                </sw-container>
+            </sw-container>
+
+            <sw-container v-if="active === 'rightButton'">
+                <mt-text-field
+                    v-model="element.config.rightSectionButtonText.value"
+                    label="Button text"
+                    @update:model-value="onInput"
+                />
+
+                <mt-select
+                    v-model="element.config.rightSectionButtonLinkType.value"
+                    label="Link type"
+                    :options="[
+                        { value: 'internal', label: 'Internal' },
+                        { value: 'external', label: 'External' }
+                    ]"
+                    @update:model-value="onInput"
+                />
+
+                <sw-dynamic-url-field
+                    v-if="element.config.rightSectionButtonLinkType.value === 'internal'"
+                    v-model:value="element.config.rightSectionButtonLink.value"
+                />
+                <mt-text-field
+                    v-else
+                    v-model="element.config.rightSectionButtonLink.value"
+                    label="Link"
+                    @update:model-value="onInput"
+                />
+
+                <mt-select
+                    v-model="element.config.rightSectionButtonTarget.value"
+                    label="Target"
+                    :options="[
+                        { value: '_self', label: 'Same tab' },
+                        { value: '_blank', label: 'New tab' }
+                    ]"
+                    @update:model-value="onInput"
+                />
+
+                <sw-container columns="1fr 1fr" gap="16px">
+                    <sw-colorpicker
+                        v-model:value="element.config.rightSectionButtonBackgroundColor.value"
+                        label="Background color"
+                        color-output="hex"
+                        @update:value="onInput"
+                    />
+                    <sw-colorpicker
+                        v-model:value="element.config.rightSectionButtonTextColor.value"
+                        label="Text color"
+                        color-output="hex"
+                        @update:value="onInput"
+                    />
+                </sw-container>
+            </sw-container>
+        </template>
+    </sw-tabs>
+{% endblock %}

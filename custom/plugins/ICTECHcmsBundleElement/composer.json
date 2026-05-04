@@ -1,0 +1,47 @@
+{
+    "name": "ictech/ictech-cms-bundle-element",
+    "description": "Custom CMS layouts and responsive image gallery elements for Shopware 6.6 and 6.7.",
+    "type": "shopware-platform-plugin",
+    "version": "1.0.0",
+    "license": "MIT",
+    "require": {
+        "shopware/core": "^6.6"
+    },
+    "extra": {
+        "shopware-plugin-class": "ICTECHcmsBundleElement\\ICTECHcmsBundleElement",
+        "label": {
+            "de-DE": "ICTECH CMS Bundle Element",
+            "en-GB": "ICTECH CMS Bundle Element"
+        },
+        "description": {
+            "de-DE": "ICTECH CMS Bundle Element ist ein umfassendes Shopware 6 Plugin, das alle häufig verwendeten CMS-Elemente in einem leistungsstarken Paket vereint. Anstatt nach mehreren einzelnen Plugins zu suchen und diese zu installieren, erhalten Sie alles, was Sie für die professionelle Content-Erstellung benötigen, in einer einzigen Lösung.",
+            "en-GB": "ICTECH CMS Bundle Element is a comprehensive Shopware 6 plugin that brings together all commonly used CMS elements in one powerful package. Instead of searching for and installing multiple individual plugins, you get everything you need for professional content creation in a single solution."
+        },
+        "plugin-icon": "src/Resources/config/bundle.png",
+        "copyright": "(c) iCreateive Technologies. All Rights Reserved.",
+        "manufacturerLink": {
+            "de-DE": "https://www.icreativetechnologies.com/",
+            "en-GB": "https://www.icreativetechnologies.com/"
+        },
+        "supportLink": {
+            "de-DE": "https://support.icreativetechnologies.com/",
+            "en-GB": "https://support.icreativetechnologies.com/"
+        }
+    },
+    "autoload": {
+        "psr-4": {
+            "ICTECHcmsBundleElement\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "ICTECHcmsBundleElement\\Tests\\": "tests/"
+        }
+    },
+    "config": {
+        "allow-plugins": {
+            "symfony/runtime": true,
+            "dealerdirect/phpcodesniffer-composer-installer": true
+        }
+    }
+}

@@ -1,0 +1,19 @@
+<div class="sw-cms-preview-ict-manufacturer-list">
+    <div class="sw-cms-preview-ict-manufacturer-list__letters">
+        <span
+            v-for="letter in ['#', 'A', 'B', 'C', 'D', 'E', 'F']"
+            :key="letter"
+            class="sw-cms-preview-ict-manufacturer-list__letter"
+        >
+            {{ letter }}
+        </span>
+    </div>
+
+    <div class="sw-cms-preview-ict-manufacturer-list__grid">
+        <div
+            v-for="item in 10"
+            :key="item"
+            class="sw-cms-preview-ict-manufacturer-list__item"
+        ></div>
+    </div>
+</div>

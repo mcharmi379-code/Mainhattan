@@ -1,0 +1,33 @@
+{% block sw_cms_element_ict_content_tabs %}
+<div class="sw-cms-el-ict-content-tabs" :class="['sw-cms-el-ict-content-tabs--' + tabStyle, 'sw-cms-el-ict-content-tabs--' + displayMode]">
+
+    <div v-if="!hasContent" class="sw-cms-el-ict-content-tabs__placeholder">
+        <sw-icon name="regular-plus-circle" size="18" />
+        <span>{{ $tc('ict-cms-bundle-element.cms.elements.ictContentTabs.addTabHint') }}</span>
+    </div>
+
+    <template v-else>
+        <div class="sw-cms-el-ict-content-tabs__nav">
+            <button
+                v-for="(tab, index) in tabs"
+                :key="index"
+                class="sw-cms-el-ict-content-tabs__nav-item"
+                :class="{ 'sw-cms-el-ict-content-tabs__nav-item--active': activeTabIndex === index }"
+                type="button"
+                @click="setActiveTab(index)"
+            >
+                {{ tab.label || ('Tab ' + (index + 1)) }}
+            </button>
+        </div>
+
+        <div class="sw-cms-el-ict-content-tabs__panel">
+            <div
+                v-if="activeTab"
+                class="sw-cms-el-ict-content-tabs__content"
+                v-html="activeTab.content || ''"
+            ></div>
+        </div>
+    </template>
+
+</div>
+{% endblock %}

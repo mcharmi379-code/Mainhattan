@@ -1,0 +1,369 @@
+.sw-cms-el-config-ict-overview-cards-6 {
+    --ict-oc-accent: #1a1a2e;
+    --ict-oc-accent-2: #005ae5;
+    --ict-oc-border: #e2e6ed;
+    --ict-oc-surface: #f7f8fa;
+    --ict-oc-muted: #6b7280;
+
+    // ── Global section blocks ─────────────────────────────────────────
+    .config-section {
+        margin-bottom: 20px;
+        padding: 14px 16px;
+        background: #fff;
+        border: 1px solid var(--ict-oc-border);
+        border-radius: 10px;
+
+        .config-section-title {
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: 0.07em;
+            text-transform: uppercase;
+            color: var(--ict-oc-accent);
+            margin: 0 0 14px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid var(--ict-oc-accent-2);
+            display: inline-block;
+        }
+    }
+
+    .card-management {
+        padding: 0;
+        background: transparent;
+        border: none;
+    }
+
+    // ── Cards section header ──────────────────────────────────────────
+    .section-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 12px;
+
+        .config-section-title {
+            border-bottom: none;
+            padding-bottom: 0;
+            margin-bottom: 0;
+        }
+    }
+
+    // ── Card accordion ────────────────────────────────────────────────
+    .card-config {
+        margin-bottom: 8px;
+    }
+
+    .ict-accordion {
+        border: 1px solid var(--ict-oc-border);
+        border-radius: 10px;
+        overflow: hidden;
+        background: #fff;
+        transition: box-shadow 0.15s ease;
+
+        &:focus-within {
+            box-shadow: 0 0 0 2px rgba(0, 90, 229, 0.18);
+        }
+    }
+
+    .ict-accordion-header {
+        padding: 11px 16px;
+        background: var(--ict-oc-surface);
+        cursor: pointer;
+        transition: background 0.15s ease;
+
+        &:hover {
+            background: #eef0f5;
+        }
+    }
+
+    .ict-card-accordion {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        width: 100%;
+
+        h4 {
+            margin: 0;
+            font-size: 12px;
+            font-weight: 700;
+            color: var(--ict-oc-accent);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+    }
+
+    .ict-card-accordion-arrow {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 22px;
+        height: 22px;
+        border-radius: 6px;
+        background: var(--ict-oc-border);
+        color: var(--ict-oc-muted);
+        transition: transform 0.2s ease, background 0.15s ease, color 0.15s ease;
+        flex-shrink: 0;
+
+        &.open {
+            transform: rotate(90deg);
+            background: var(--ict-oc-accent-2);
+            color: #fff;
+        }
+    }
+
+    .ict-accordion-content {
+        display: none;
+        padding: 16px;
+        border-top: 1px solid var(--ict-oc-border);
+
+        &.open {
+            display: block;
+        }
+    }
+
+    // ── Card item content ─────────────────────────────────────────────
+    .card-item-content {
+        display: flex;
+        flex-direction: column;
+        gap: 0;
+    }
+
+    // ── Field groups ──────────────────────────────────────────────────
+    .field-group {
+        margin-bottom: 16px;
+        padding-bottom: 16px;
+        border-bottom: 1px solid var(--ict-oc-border);
+
+        &:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+            padding-bottom: 0;
+        }
+
+        .field-group-title {
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: 0.06em;
+            text-transform: uppercase;
+            color: var(--ict-oc-accent);
+            margin: 0 0 10px;
+        }
+    }
+
+    .field-group--button-settings {
+        .field-group-title {
+            margin-bottom: 0;
+        }
+    }
+
+    .field-subgroup {
+        padding-left: 10px;
+        border-left: 2px solid var(--ict-oc-border);
+        margin-top: 10px;
+    }
+
+    // ── Sub-accordion (buttons) ───────────────────────────────────────
+    .ict-sub-accordion {
+        border: 1px solid var(--ict-oc-border);
+        border-radius: 8px;
+        overflow: hidden;
+        background: #fff;
+    }
+
+    .ict-sub-accordion-header {
+        background: var(--ict-oc-surface);
+        padding: 10px 14px;
+        cursor: pointer;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        transition: background 0.15s ease;
+
+        &:hover {
+            background: #eef0f5;
+        }
+    }
+
+    .ict-sub-accordion-content {
+        display: none;
+        padding: 0 16px;
+        border-top: 1px solid var(--ict-oc-border);
+
+        &.open {
+            display: block;
+            padding: 16px;
+            max-height: 70vh;
+            overflow-y: auto;
+        }
+    }
+
+    // ── Button items ──────────────────────────────────────────────────
+    .button-settings-toolbar {
+        display: flex;
+        justify-content: flex-end;
+        margin-bottom: 12px;
+    }
+
+    .button-settings-list {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .button-item {
+        border: 1px solid var(--ict-oc-border);
+        border-radius: 8px;
+        overflow: hidden;
+        background: #fff;
+    }
+
+    .button-item-header {
+        background: var(--ict-oc-surface);
+        padding: 10px 14px;
+        cursor: pointer;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 10px;
+        transition: background 0.15s ease;
+
+        &:hover {
+            background: #eef0f5;
+        }
+    }
+
+    .button-item-header-content {
+        display: flex;
+        flex-direction: column;
+        gap: 2px;
+        min-width: 0;
+    }
+
+    .button-item-index {
+        font-size: 9px;
+        font-weight: 700;
+        color: var(--ict-oc-muted);
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+    }
+
+    .button-item-title {
+        font-size: 12px;
+        font-weight: 600;
+        color: var(--ict-oc-accent);
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        max-width: 280px;
+    }
+
+    .button-item-header-actions {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        flex-shrink: 0;
+    }
+
+    .button-item-content {
+        display: none;
+        padding: 0 16px;
+        border-top: 1px solid var(--ict-oc-border);
+
+        &.open {
+            display: block;
+            padding: 16px;
+        }
+    }
+
+    .button-settings-empty {
+        color: var(--ict-oc-muted);
+        font-size: 12px;
+        padding: 8px 0;
+    }
+
+    // ── Inline / grid helpers ─────────────────────────────────────────
+    .inline-fields {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+        gap: 12px;
+        margin-top: 12px;
+    }
+
+    .shadow-fields-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 12px;
+        margin-top: 12px;
+    }
+
+    .color-row {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 12px;
+        margin-top: 12px;
+    }
+
+    .gradient-fields {
+        margin-top: 12px;
+    }
+
+    .gradient-background-config {
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr;
+        gap: 12px;
+        margin-top: 12px;
+    }
+
+    // ── Feature / detail rows ─────────────────────────────────────────
+    .feature-item {
+        border: 1px solid var(--ict-oc-border);
+        padding: 12px;
+        margin-top: 10px;
+        border-radius: 6px;
+        background: var(--ict-oc-surface);
+
+        .feature-item-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+            font-size: 12px;
+            font-weight: 600;
+            color: var(--ict-oc-muted);
+        }
+    }
+
+    // ── Remove card ───────────────────────────────────────────────────
+    .remove-card-section {
+        margin-top: 14px;
+        padding-top: 12px;
+        border-top: 1px dashed var(--ict-oc-border);
+        display: flex;
+        justify-content: flex-end;
+    }
+
+    .ict-icon-shape-field,
+    .ict-feature-text-field {
+        margin-top: 10px;
+    }
+
+    .field-subgroup--button-settings {
+        margin-top: 12px;
+    }
+}
+
+// ── Card number badge ─────────────────────────────────────────────────
+.ict-oc6-card-badge {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 20px;
+    height: 20px;
+    padding: 0 5px;
+    border-radius: 5px;
+    background: var(--ict-oc-accent-2);
+    color: #fff;
+    font-size: 10px;
+    font-weight: 700;
+    line-height: 1;
+    flex-shrink: 0;
+}

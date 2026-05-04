@@ -1,0 +1,11 @@
+{% block block_ict_overview_cards_6 %}
+    {% set element = block.slots.getSlot('overviewCards') %}
+
+    {% if element %}
+        <div class="cms-block-ict-overview-cards-6">
+            <div data-cms-element-id="{{ element.id }}">
+                {% sw_include '@Storefront/storefront/element/cms-element-' ~ element.type ~ '.html.twig' ignore missing with { element: element } %}
+            </div>
+        </div>
+    {% endif %}
+{% endblock %}

@@ -1,0 +1,13 @@
+{% block sw_cms_block_ict_two_column_three_image %}
+    <div class="sw-cms-block-ict-two-column-three-image">
+        <slot name="ictTwoColumnThreeImage">
+            {% block sw_cms_block_ict_two_column_three_image_slot %}
+                <div class="ict-two-column-three-image-preview">
+                    <div class="col">Left Image</div>
+                    <div class="col">Right Image 1</div>
+                    <div class="col">Right Image 2</div>
+                </div>
+            {% endblock %}
+        </slot>
+    </div>
+{% endblock %}

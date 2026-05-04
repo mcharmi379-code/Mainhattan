@@ -1,0 +1,134 @@
+{% block sw_cms_el_config_ict_platform_support %}
+<sw-tabs v-if="element.config" class="sw-cms-el-config-ict-platform-support" default-item="general">
+    <template #default="{ active }">
+        <sw-tabs-item name="general" :active-tab="active">General</sw-tabs-item>
+        <sw-tabs-item name="platforms" :active-tab="active">
+            Items
+            <span v-if="element.config.platformItems.value.length" class="ict-ps-tab-badge">
+                {{ element.config.platformItems.value.length }}
+            </span>
+        </sw-tabs-item>
+    </template>
+
+    <template #content="{ active }">
+        <!-- General Tab -->
+        <sw-container v-if="active === 'general'" class="sw-cms-el-config-ict-platform-support__general">
+
+            <mt-text-field v-model="element.config.platformBlockTitle.value" label="Block Title"></mt-text-field>
+
+            <div class="title-settings-grid">
+                <mt-text-field v-model="element.config.platformTitleSize.value" label="Title Size (px)" placeholder="e.g. 28"></mt-text-field>
+                <mt-text-field v-model="element.config.platformTitleLineHeight.value" label="Line Height (px)" placeholder="e.g. 34"></mt-text-field>
+                <mt-colorpicker v-model="element.config.platformTitleColor.value" label="Title Color"></mt-colorpicker>
+                <mt-select v-model="element.config.platformTitleAlignment.value" label="Title Alignment" :options="alignmentOptions"></mt-select>
+            </div>
+
+            <h5>Background</h5>
+            <mt-select v-model="element.config.backgroundType.value" label="Background Type" :options="backgroundTypeOptions"></mt-select>
+            <mt-number-field v-model="element.config.platformBlockBorderRadius.value" label="Border Radius (px)" number-type="int" :min="0"></mt-number-field>
+
+            <mt-colorpicker v-if="element.config.backgroundType.value === 'color'" v-model="element.config.platformBlockBackground.value" label="Background Color"></mt-colorpicker>
+
+            <div v-if="element.config.backgroundType.value === 'image'">
+                <sw-upload-listener :upload-tag="getBackgroundImageUploadTag()" @media-upload-finish="onBackgroundImageUpload" auto-upload></sw-upload-listener>
+                <sw-media-upload-v2 variant="regular" :upload-tag="getBackgroundImageUploadTag()" :source="getBackgroundImageMediaItem()" :allow-multi-select="false" label="Background Image" :default-folder="'cms_page'" file-accept="image/*" @selection-change="onBackgroundImageSelectionChanges" @media-upload-remove-image="onBackgroundImageRemove" @media-upload-sidebar-open="onOpenBackgroundImageModal"></sw-media-upload-v2>
+                <sw-media-modal-v2 v-if="backgroundImageModal" :initial-folder-id="null" :entity-context="'cms_page'" @media-modal-selection-change="onBackgroundImageSelectionChanges" @modal-close="onCloseBackgroundImageModal"></sw-media-modal-v2>
+                <mt-text-field v-model="element.config.backgroundImageMinHeight.value" label="Min Height" placeholder="e.g. 400px"></mt-text-field>
+            </div>
+
+            <div v-if="element.config.backgroundType.value === 'video'">
+                <mt-select v-model="element.config.backgroundVideoUploadType.value" label="Video Type" :options="videoUploadOptions"></mt-select>
+                <mt-text-field v-if="element.config.backgroundVideoUploadType.value === 'url'" v-model="element.config.backgroundVideoUploadUrl.value" label="Video URL"></mt-text-field>
+                <div v-if="element.config.backgroundVideoUploadType.value === 'file'">
+                    <sw-upload-listener :upload-tag="getBackgroundVideoUploadTag()" @media-upload-finish="onBackgroundVideoUpload" auto-upload></sw-upload-listener>
+                    <sw-media-upload-v2 variant="regular" :upload-tag="getBackgroundVideoUploadTag()" :source="getBackgroundVideoMediaItem()" :allow-multi-select="false" label="Background Video" :default-folder="'cms_page'" file-accept="video/*" @selection-change="onBackgroundVideoSelectionChanges" @media-upload-remove-image="onBackgroundVideoRemove" @media-upload-sidebar-open="onOpenBackgroundVideoModal"></sw-media-upload-v2>
+                    <sw-media-modal-v2 v-if="backgroundVideoModal" :initial-folder-id="null" :entity-context="'cms_page'" @media-modal-selection-change="onBackgroundVideoSelectionChanges" @modal-close="onCloseBackgroundVideoModal"></sw-media-modal-v2>
+                </div>
+            </div>
+
+            <div v-if="element.config.backgroundType.value === 'gradient'" class="gradient-settings">
+                <mt-colorpicker v-model="element.config.gradientColor1.value" label="Gradient Color 1"></mt-colorpicker>
+                <mt-colorpicker v-model="element.config.gradientColor2.value" label="Gradient Color 2"></mt-colorpicker>
+                <mt-select v-model="element.config.gradientDirection.value" label="Direction" :options="gradientDirectionOptions"></mt-select>
+            </div>
+
+            <h5>Layout</h5>
+            <mt-select v-model="element.config.platformAlignment.value" label="Items Alignment" :options="alignmentOptions"></mt-select>
+
+        </sw-container>
+
+        <!-- Items Tab -->
+        <sw-container v-if="active === 'platforms'" class="sw-cms-el-config-ict-platform-support__platforms">
+
+            <div class="platforms-header">
+                <h3>Platform Items</h3>
+                <sw-button @click="addPlatform" size="small" variant="primary">+ Add Item</sw-button>
+            </div>
+
+            <div v-for="(platform, index) in element.config.platformItems.value" :key="index" class="platform-config">
+                <div class="ict-accordion">
+                    <div class="ict-accordion-header" @click="toggleAccordion(index)">
+                        <div class="ict-card-accordion">
+                            <h4>
+                                <span class="ict-ps-item-index">#{{ index + 1 }}</span>
+                                {{ platform.platformLabel || 'Untitled Item' }}
+                            </h4>
+                            <span class="ict-card-accordion-arrow" :class="{ open: openIndex === index }">
+                                <mt-icon size="0.75rem" name="regular-chevron-right-xxs"></mt-icon>
+                            </span>
+                        </div>
+                    </div>
+
+                    <div class="ict-accordion-content" :class="{ open: openIndex === index }">
+
+                        <h5>Icon Image</h5>
+                        <sw-upload-listener :upload-tag="getPlatformIconUploadTag(index)" @media-upload-finish="onPlatformIconUpload(index, $event)" auto-upload></sw-upload-listener>
+                        <sw-media-upload-v2 variant="regular" :upload-tag="getPlatformIconUploadTag(index)" :source="getPlatformIconMediaItem(index)" :allow-multi-select="false" label="Icon Image" :default-folder="'cms_page'" file-accept="image/*" @selection-change="onPlatformIconSelectionChanges(index, $event)" @media-upload-remove-image="onPlatformIconRemove(index)" @media-upload-sidebar-open="onOpenPlatformIconModal(index)"></sw-media-upload-v2>
+                        <sw-media-modal-v2 v-if="platformIconModals[index]" :initial-folder-id="null" :entity-context="'cms_page'" @media-modal-selection-change="onPlatformIconSelectionChanges(index, $event)" @modal-close="onClosePlatformIconModal(index)"></sw-media-modal-v2>
+
+                        <div class="icon-settings-grid">
+                            <mt-text-field v-model="platform.iconSizePx" label="Icon Size (px)" placeholder="e.g. 48"></mt-text-field>
+                            <mt-colorpicker v-model="platform.iconColor" label="Icon Color"></mt-colorpicker>
+                            <mt-select v-model="platform.iconBackgroundShape" label="Shape" :options="iconShapeOptions"></mt-select>
+                        </div>
+
+                        <h6>Icon Background</h6>
+                        <mt-select v-model="platform.iconBackgroundType" label="Background Type" :options="iconBackgroundTypeOptions"></mt-select>
+                        <mt-colorpicker v-if="platform.iconBackgroundType === 'solid'" v-model="platform.iconBackgroundColor" label="Background Color"></mt-colorpicker>
+                        <div v-if="platform.iconBackgroundType === 'gradient'">
+                            <mt-colorpicker v-model="platform.iconGradientColor1" label="Gradient Color 1"></mt-colorpicker>
+                            <mt-colorpicker v-model="platform.iconGradientColor2" label="Gradient Color 2"></mt-colorpicker>
+                            <mt-select v-model="platform.iconGradientDirection" label="Direction" :options="gradientDirectionOptions"></mt-select>
+                        </div>
+
+                        <h5>Label</h5>
+                        <mt-text-field v-model="platform.platformLabel" label="Label Text"></mt-text-field>
+                        <div class="label-settings-grid">
+                            <mt-text-field v-model="platform.platformLabelSizePx" label="Size (px)" placeholder="e.g. 14"></mt-text-field>
+                            <mt-select v-model="platform.platformLabelWeight" label="Weight" :options="fontWeightOptions"></mt-select>
+                            <mt-colorpicker v-model="platform.platformLabelColor" label="Color"></mt-colorpicker>
+                        </div>
+
+                        <h5>Link</h5>
+                        <div class="link-settings-grid">
+                            <mt-select v-model="platform.linkType" label="Link Type" :options="linkTypeOptions"></mt-select>
+                            <mt-select v-model="platform.platformLinkTarget" label="Target" :options="targetOptions"></mt-select>
+                        </div>
+                        <sw-dynamic-url-field v-if="platform.linkType === 'internal'" v-model:value="platform.platformLinkUrl"></sw-dynamic-url-field>
+                        <mt-text-field v-if="platform.linkType === 'external'" v-model="platform.platformLinkUrl" label="URL"></mt-text-field>
+
+                        <div v-if="element.config.platformItems.value.length > 1" class="remove-platform-section">
+                            <sw-button @click="removePlatform(index)" size="small" variant="danger">
+                                <mt-icon name="regular-trash" size="14px"></mt-icon>
+                                &nbsp;Remove
+                            </sw-button>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+        </sw-container>
+    </template>
+</sw-tabs>
+{% endblock %}

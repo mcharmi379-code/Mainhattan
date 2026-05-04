@@ -1,0 +1,35 @@
+{% block sw_cms_el_ict_image_comparison %}
+<div
+    class="sw-cms-el-ict-image-comparison"
+    :class="{ 'sw-cms-el-ict-image-comparison--vertical': isVertical }"
+>
+    <div class="sw-cms-el-ict-image-comparison__before">
+        <template v-if="beforeMedia && beforeMedia.url">
+            <img :src="beforeMedia.url" alt="" />
+        </template>
+        <template v-else>
+            <div class="sw-cms-el-ict-image-comparison__placeholder">
+                <sw-icon name="regular-image" />
+                <span>{{ $tc('ict-cms-bundle-element.cms.elements.ictImageComparison.placeholder.before') }}</span>
+            </div>
+        </template>
+    </div>
+
+    <div class="sw-cms-el-ict-image-comparison__handle">
+        <sw-icon name="regular-chevron-left-xs" />
+        <sw-icon name="regular-chevron-right-xs" />
+    </div>
+
+    <div class="sw-cms-el-ict-image-comparison__after">
+        <template v-if="afterMedia && afterMedia.url">
+            <img :src="afterMedia.url" alt="" />
+        </template>
+        <template v-else>
+            <div class="sw-cms-el-ict-image-comparison__placeholder">
+                <sw-icon name="regular-image" />
+                <span>{{ $tc('ict-cms-bundle-element.cms.elements.ictImageComparison.placeholder.after') }}</span>
+            </div>
+        </template>
+    </div>
+</div>
+{% endblock %}

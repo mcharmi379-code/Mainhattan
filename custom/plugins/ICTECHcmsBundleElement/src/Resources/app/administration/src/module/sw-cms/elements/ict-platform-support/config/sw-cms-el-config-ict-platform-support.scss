@@ -1,0 +1,198 @@
+.sw-cms-el-config-ict-platform-support {
+    --ict-ps-accent: #005ae5;
+    --ict-ps-accent-light: #e8f0fe;
+    --ict-ps-border: #dde3ec;
+    --ict-ps-surface: #f7f9fc;
+    --ict-ps-text: #1a1a2e;
+    --ict-ps-muted: #52667a;
+
+    .title-settings-grid,
+    .label-settings-grid,
+    .link-settings-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 12px;
+        margin-bottom: 12px;
+    }
+
+    .icon-settings-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr;
+        gap: 12px;
+        margin-bottom: 12px;
+    }
+
+    // ── Section headings ──────────────────────────────────────────────
+    h5 {
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        font-size: 11px;
+        font-weight: 700;
+        letter-spacing: 0.07em;
+        text-transform: uppercase;
+        color: var(--ict-ps-accent);
+        margin: 18px 0 8px;
+
+        &::before {
+            content: '';
+            display: inline-block;
+            width: 3px;
+            height: 12px;
+            border-radius: 2px;
+            background: var(--ict-ps-accent);
+            flex-shrink: 0;
+        }
+    }
+
+    h6 {
+        font-size: 11px;
+        font-weight: 600;
+        color: var(--ict-ps-muted);
+        margin: 12px 0 6px;
+        padding-left: 9px;
+        border-left: 2px solid var(--ict-ps-border);
+    }
+
+    // ── Items header ──────────────────────────────────────────────────
+    .platforms-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 14px;
+        padding: 10px 14px;
+        background: var(--ict-ps-accent-light);
+        border-radius: 8px;
+        border: 1px solid rgba(0, 90, 229, 0.15);
+
+        h3 {
+            margin: 0;
+            font-size: 13px;
+            font-weight: 700;
+            color: var(--ict-ps-accent);
+        }
+    }
+
+    // ── Platform item accordion ───────────────────────────────────────
+    .platform-config {
+        margin-bottom: 6px;
+    }
+
+    .ict-accordion {
+        border: 1px solid var(--ict-ps-border);
+        border-radius: 8px;
+        overflow: hidden;
+        transition: box-shadow 0.15s ease;
+
+        &:focus-within {
+            box-shadow: 0 0 0 2px rgba(0, 90, 229, 0.2);
+        }
+    }
+
+    .ict-accordion-header {
+        padding: 10px 14px;
+        background: var(--ict-ps-surface);
+        cursor: pointer;
+        border-bottom: 1px solid transparent;
+        transition: background 0.15s ease;
+
+        &:hover {
+            background: #edf1f8;
+        }
+    }
+
+    .ict-card-accordion {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+
+        h4 {
+            margin: 0;
+            font-size: 12px;
+            font-weight: 600;
+            color: var(--ict-ps-text);
+        }
+    }
+
+    .ict-card-accordion-arrow {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 20px;
+        height: 20px;
+        border-radius: 50%;
+        background: rgba(0, 90, 229, 0.08);
+        color: var(--ict-ps-accent);
+        transition: transform 0.2s ease, background 0.15s ease;
+        flex-shrink: 0;
+
+        &.open {
+            transform: rotate(90deg);
+            background: var(--ict-ps-accent);
+            color: #fff;
+        }
+    }
+
+    .ict-accordion-content {
+        display: none;
+        padding: 16px;
+        background: #fff;
+        border-top: 1px solid var(--ict-ps-border);
+
+        &.open {
+            display: block;
+        }
+    }
+
+    // ── Remove section ────────────────────────────────────────────────
+    .remove-platform-section {
+        margin-top: 16px;
+        padding-top: 12px;
+        border-top: 1px dashed var(--ict-ps-border);
+        display: flex;
+        justify-content: flex-end;
+    }
+
+    // ── Gradient section ──────────────────────────────────────────────
+    .gradient-settings {
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr;
+        gap: 12px;
+        margin-top: 8px;
+    }
+}
+
+// ── Item index badge ──────────────────────────────────────────────────
+.ict-ps-item-index {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 20px;
+    height: 18px;
+    padding: 0 5px;
+    border-radius: 4px;
+    background: var(--ict-ps-accent);
+    color: #fff;
+    font-size: 9px;
+    font-weight: 700;
+    line-height: 1;
+    flex-shrink: 0;
+}
+
+// ── Tab item count badge ──────────────────────────────────────────────
+.ict-ps-tab-badge {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 16px;
+    height: 16px;
+    padding: 0 4px;
+    border-radius: 8px;
+    background: var(--ict-ps-accent);
+    color: #fff;
+    font-size: 9px;
+    font-weight: 700;
+    line-height: 1;
+    margin-left: 4px;
+    vertical-align: middle;
+}

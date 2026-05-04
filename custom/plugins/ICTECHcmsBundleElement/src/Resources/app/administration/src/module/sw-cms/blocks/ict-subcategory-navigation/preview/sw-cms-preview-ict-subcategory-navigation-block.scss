@@ -1,0 +1,31 @@
+.ict-subcat-block-preview {
+    padding: 12px;
+    background: #f9fafb;
+    border: 1px solid #e5e7eb;
+    border-radius: 4px;
+
+    &__grid {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 6px;
+    }
+
+    &__card {
+        border: 1px solid #e5e7eb;
+        border-radius: 4px;
+        overflow: hidden;
+        background: #fff;
+    }
+
+    &__img {
+        height: 28px;
+        background: #e5e7eb;
+    }
+
+    &__label {
+        height: 8px;
+        margin: 6px;
+        border-radius: 3px;
+        background: #d1d5db;
+    }
+}

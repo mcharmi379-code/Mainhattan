@@ -1,0 +1,51 @@
+{
+    "ict-cms-bundle-element": {
+        "storefront": {
+            "productMatrix": {
+                "noProduct": "No product configured.",
+                "noVariants": "No variants found for this product.",
+                "colArticle": "Article",
+                "colDelivery": "Delivery",
+                "colPrice": "Price",
+                "colBuy": "Buy",
+                "freeShipping": "Free shipping",
+                "addToCart": "Add to shopping cart",
+                "quantity": "Quantity",
+                "decrease": "Decrease quantity",
+                "increase": "Increase quantity"
+            },
+            "productComparison": {
+                "noProducts": "No products configured.",
+                "ratingAria": "Rating %rating% out of 5",
+                "labels": {
+                    "name": "Name",
+                    "price": "Price",
+                    "description": "Description",
+                    "rating": "Rating",
+                    "manufacturer": "Manufacturer",
+                    "propertyGroups": {
+                        "target_group": "Target Group",
+                        "color": "Color",
+                        "ingredients": "Ingredients",
+                        "size": "Size",
+                        "material": "Material"
+                    }
+                }
+            },
+            "fileDownload": {
+                "defaultButtonText": "Download now",
+                "fileAvailable": "File available",
+                "noFile": "No file attached"
+            },
+            "verticalTab": {
+                "navLabel": "Tab navigation"
+            },
+            "imageComparison": {
+                "ariaLabel": "Image comparison slider",
+                "beforeLabel": "Before",
+                "afterLabel": "After",
+                "handleLabel": "Drag to compare"
+            }
+        }
+    }
+}

@@ -1,0 +1,53 @@
+{% block block_ict_four_column %}
+    {% block block_ict_four_column_left %}
+        {% set element = block.slots.getSlot('left') %}
+        {% if element %}
+            <div class="ict-four-column-layout__col" data-cms-element-id="{{ element.id }}">
+                {% block block_ict_four_column_left_inner %}
+                    <div class="ict-four-column-layout__card-slot">
+                        {% sw_include '@Storefront/storefront/element/cms-element-' ~ element.type ~ '.html.twig' ignore missing with { element: element } %}
+                    </div>
+                {% endblock %}
+            </div>
+        {% endif %}
+    {% endblock %}
+
+    {% block block_ict_four_column_center_left %}
+        {% set element = block.slots.getSlot('centerLeft') %}
+        {% if element %}
+            <div class="ict-four-column-layout__col" data-cms-element-id="{{ element.id }}">
+                {% block block_ict_four_column_center_left_inner %}
+                    <div class="ict-four-column-layout__card-slot">
+                        {% sw_include '@Storefront/storefront/element/cms-element-' ~ element.type ~ '.html.twig' ignore missing with { element: element } %}
+                    </div>
+                {% endblock %}
+            </div>
+        {% endif %}
+    {% endblock %}
+
+    {% block block_ict_four_column_center_right %}
+        {% set element = block.slots.getSlot('centerRight') %}
+        {% if element %}
+            <div class="ict-four-column-layout__col" data-cms-element-id="{{ element.id }}">
+                {% block block_ict_four_column_center_right_inner %}
+                    <div class="ict-four-column-layout__card-slot">
+                        {% sw_include '@Storefront/storefront/element/cms-element-' ~ element.type ~ '.html.twig' ignore missing with { element: element } %}
+                    </div>
+                {% endblock %}
+            </div>
+        {% endif %}
+    {% endblock %}
+
+    {% block block_ict_four_column_right %}
+        {% set element = block.slots.getSlot('right') %}
+        {% if element %}
+            <div class="ict-four-column-layout__col" data-cms-element-id="{{ element.id }}">
+                {% block block_ict_four_column_right_inner %}
+                    <div class="ict-four-column-layout__card-slot">
+                        {% sw_include '@Storefront/storefront/element/cms-element-' ~ element.type ~ '.html.twig' ignore missing with { element: element } %}
+                    </div>
+                {% endblock %}
+            </div>
+        {% endif %}
+    {% endblock %}
+{% endblock %}

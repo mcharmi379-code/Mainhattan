@@ -1,0 +1,49 @@
+{% block sw_cms_el_ict_product_comparison %}
+<div class="sw-cms-el-ict-product-comparison">
+
+    {% block sw_cms_el_ict_product_comparison_empty %}
+    <div v-if="!hasProducts" class="ict-pc__empty">
+        <sw-icon name="regular-products" size="32px" color="#94a3b8" />
+        <span class="ict-pc__empty-text">
+            {{ $tc('ict-cms-bundle-element.cms.elements.ictProductComparison.component.selectProducts') }}
+        </span>
+    </div>
+    {% endblock %}
+
+    {% block sw_cms_el_ict_product_comparison_table %}
+    <div v-if="hasProducts" class="ict-pc__table">
+
+        <!-- Product header row -->
+        <div class="ict-pc__header">
+            <div class="ict-pc__label-cell"></div>
+            <div
+                v-for="(col, idx) in previewColumns"
+                :key="idx"
+                class="ict-pc__product-cell"
+                :class="{ 'ict-pc__product-cell--highlight': idx === 0 && highlightFirst }"
+            >
+                <div class="ict-pc__product-thumb">
+                    <sw-icon name="regular-products" size="20px" color="#94a3b8" />
+                </div>
+                <div class="ict-pc__product-name">{{ col.name }}</div>
+                <div class="ict-pc__product-price" :class="{ 'ict-pc__product-price--highlight': idx === 0 && highlightFirst }">
+                    {{ col.price }}
+                </div>
+            </div>
+        </div>
+
+        <!-- Property rows -->
+        <div v-for="(row, rIdx) in previewRows" :key="rIdx" class="ict-pc__row">
+            <div class="ict-pc__label-cell">{{ row }}</div>
+            <div
+                v-for="(col, cIdx) in previewColumns"
+                :key="cIdx"
+                class="ict-pc__value-cell"
+            >—</div>
+        </div>
+
+    </div>
+    {% endblock %}
+
+</div>
+{% endblock %}

@@ -1,0 +1,64 @@
+{% block element_ict_manufacturer_slider %}
+    {% set manufacturers = element.data.manufacturers ?? [] %}
+    {% set showManufacturerName = element.data.showManufacturerName ?? element.config.showManufacturerName.value ?? true %}
+    {% set maxWidth = element.data.maxWidth ?? element.config.maxWidth.value ?? 180 %}
+    {% set maxHeight = element.data.maxHeight ?? element.config.maxHeight.value ?? 100 %}
+    {% set desktopItems = element.data.desktopItems ?? element.config.desktopItems.value ?? 4 %}
+    {% set tabletItems = element.data.tabletItems ?? element.config.tabletItems.value ?? 2 %}
+    {% set mobileItems = element.data.mobileItems ?? element.config.mobileItems.value ?? 1 %}
+    {% set hasSliderControls = manufacturers|length > 1 %}
+    {% set sliderOptions = {
+        slider: {
+            controls: hasSliderControls,
+            nav: false,
+            mouseDrag: manufacturers|length > mobileItems,
+            autoplay: false,
+            autoplayButtonOutput: false,
+            gutter: 16,
+            items: mobileItems,
+            loop: manufacturers|length > desktopItems,
+            rewind: manufacturers|length <= desktopItems,
+            speed: 400,
+            responsive: {
+                xs: {
+                    items: mobileItems
+                },
+                sm: {
+                    items: tabletItems
+                },
+                md: {
+                    items: tabletItems
+                },
+                lg: {
+                    items: desktopItems
+                },
+                xl: {
+                    items: desktopItems
+                }
+            }
+        }
+    } %}
+
+    {% if manufacturers|length > 0 %}
+        <div
+            class="cms-element-ict-manufacturer-slider"
+            style="--ict-manufacturer-slider-max-width: {{ maxWidth }}px; --ict-manufacturer-slider-max-height: {{ maxHeight }}px;"
+        >
+            <div
+                class="base-slider ict-manufacturer-slider{% if hasSliderControls %} has-nav-outside{% endif %}"
+                data-base-slider="true"
+                data-base-slider-options='{{ sliderOptions|json_encode }}'
+                role="region"
+                aria-label="{{ 'ict-cms-bundle-element.cms.elements.ictManufacturerSlider.label'|trans|striptags }}"
+                tabindex="0"
+            >
+                <div class="ict-manufacturer-slider__container" data-base-slider-container="true">
+                    {% for manufacturer in manufacturers %}
+                        {% sw_include '@ICTECHcmsBundleElement/storefront/element/ict-manufacturer-slider/slide.html.twig' %}
+                    {% endfor %}
+                </div>
+                {% sw_include '@ICTECHcmsBundleElement/storefront/element/ict-manufacturer-slider/controls.html.twig' %}
+            </div>
+        </div>
+    {% endif %}
+{% endblock %}
