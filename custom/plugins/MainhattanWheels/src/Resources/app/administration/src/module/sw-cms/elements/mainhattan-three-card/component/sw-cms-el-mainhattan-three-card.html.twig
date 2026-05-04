@@ -1,5 +1,8 @@
 <div class="sw-cms-el-mainhattan-three-card">
-    <div class="sw-cms-el-mainhattan-three-card__heading">
+    <div
+        v-if="element.config.heading.value"
+        class="sw-cms-el-mainhattan-three-card__heading"
+    >
         {{ element.config.heading.value }}
     </div>
 
@@ -9,22 +12,25 @@
             :key="index"
             class="sw-cms-el-mainhattan-three-card__card"
         >
-            <div class="sw-cms-el-mainhattan-three-card__media">
+            <div class="sw-cms-el-mainhattan-three-card__glow"></div>
+
+            <div class="sw-cms-el-mainhattan-three-card__media-frame">
                 <img
                     v-if="card.media && card.media.url"
+                    class="sw-cms-el-mainhattan-three-card__media"
                     :src="card.media.url"
                     :alt="card.media.alt || card.title"
                 >
                 <div
                     v-else
-                    class="sw-cms-el-mainhattan-three-card__media-placeholder"
+                    class="sw-cms-el-mainhattan-three-card__media sw-cms-el-mainhattan-three-card__media-placeholder"
                 >
                     {{ index + 1 }}
                 </div>
             </div>
 
             <div class="sw-cms-el-mainhattan-three-card__content">
-                <h3>{{ card.title }}</h3>
+                <h3 class="sw-cms-el-mainhattan-three-card__title">{{ card.title }}</h3>
                 <div
                     class="sw-cms-el-mainhattan-three-card__description"
                     v-html="$sanitize(card.description)"

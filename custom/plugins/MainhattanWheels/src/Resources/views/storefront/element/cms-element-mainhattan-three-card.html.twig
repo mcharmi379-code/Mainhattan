@@ -1,22 +1,31 @@
 {% block element_mainhattan_three_card %}
     {% set config = element.translated.config %}
+    {% set slotData = element.data ?? {} %}
+    {% set defaultImages = [
+        asset('bundles/mainhattanwheels/storefront/default-cms-icons/layer-1.svg'),
+        asset('bundles/mainhattanwheels/storefront/default-cms-icons/frame.svg'),
+        asset('bundles/mainhattanwheels/storefront/default-cms-icons/group.svg')
+    ] %}
     {% set cards = [
         {
-            media: element.data.cardOneImage ?? null,
+            media: slotData.cardOneImage ?? null,
+            fallbackImage: defaultImages[0],
             title: config.cardOneTitle.value,
             description: config.cardOneDescription.value,
             buttonText: config.cardOneButtonText.value,
             buttonLink: config.cardOneButtonLink.value
         },
         {
-            media: element.data.cardTwoImage ?? null,
+            media: slotData.cardTwoImage ?? null,
+            fallbackImage: defaultImages[1],
             title: config.cardTwoTitle.value,
             description: config.cardTwoDescription.value,
             buttonText: config.cardTwoButtonText.value,
             buttonLink: config.cardTwoButtonLink.value
         },
         {
-            media: element.data.cardThreeImage ?? null,
+            media: slotData.cardThreeImage ?? null,
+            fallbackImage: defaultImages[2],
             title: config.cardThreeTitle.value,
             description: config.cardThreeDescription.value,
             buttonText: config.cardThreeButtonText.value,
@@ -35,22 +44,33 @@
             {% for card in cards %}
                 <article class="cms-element-mainhattan-three-card__card">
                     <div class="cms-element-mainhattan-three-card__card-inner">
-                        {% if card.media %}
-                            <div class="cms-element-mainhattan-three-card__media">
+                        <div class="cms-element-mainhattan-three-card__glow"></div>
+
+                        <div class="cms-element-mainhattan-three-card__media">
+                            {% set media = card.media is defined and card.media.id is defined ? card.media : null %}
+
+                            {% if media %}
                                 {% sw_thumbnails 'cms-element-mainhattan-three-card-thumbnails' with {
-                                    media: card.media,
+                                    media: media,
                                     sizes: {
-                                        default: '96px'
+                                        default: '44px'
                                     },
                                     attributes: {
                                         class: 'cms-element-mainhattan-three-card__image',
-                                        alt: card.media.translated.alt ?: card.title ?: '',
-                                        title: card.media.translated.title ?: card.title ?: '',
+                                        alt: media.translated.alt ?: card.title ?: '',
+                                        title: media.translated.title ?: card.title ?: '',
                                         loading: 'lazy'
                                     }
                                 } %}
-                            </div>
-                        {% endif %}
+                            {% else %}
+                                <img
+                                    class="cms-element-mainhattan-three-card__image"
+                                    src="{{ card.fallbackImage }}"
+                                    alt="{{ card.title ?: '' }}"
+                                    loading="lazy"
+                                >
+                            {% endif %}
+                        </div>
 
                         {% if card.title %}
                             <h3 class="cms-element-mainhattan-three-card__title">{{ card.title }}</h3>

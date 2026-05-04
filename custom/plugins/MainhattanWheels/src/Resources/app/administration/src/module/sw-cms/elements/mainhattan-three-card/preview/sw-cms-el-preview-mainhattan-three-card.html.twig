@@ -5,11 +5,16 @@
 
     <div class="sw-cms-el-preview-mainhattan-three-card__grid">
         <div
-            v-for="cardIndex in 3"
-            :key="cardIndex"
+            v-for="(card, index) in cards"
+            :key="index"
             class="sw-cms-el-preview-mainhattan-three-card__card"
         >
-            <div class="sw-cms-el-preview-mainhattan-three-card__icon"></div>
+            <div class="sw-cms-el-preview-mainhattan-three-card__glow"></div>
+            <img
+                class="sw-cms-el-preview-mainhattan-three-card__icon"
+                :src="card.imageUrl"
+                alt=""
+            >
             <div class="sw-cms-el-preview-mainhattan-three-card__title"></div>
             <div class="sw-cms-el-preview-mainhattan-three-card__line"></div>
             <div class="sw-cms-el-preview-mainhattan-three-card__line sw-cms-el-preview-mainhattan-three-card__line--short"></div>

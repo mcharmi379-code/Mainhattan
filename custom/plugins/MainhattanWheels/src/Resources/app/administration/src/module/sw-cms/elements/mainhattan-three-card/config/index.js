@@ -1,6 +1,7 @@
 import template from './sw-cms-el-config-mainhattan-three-card.html.twig';
 import './sw-cms-el-config-mainhattan-three-card.scss';
 import './component/mainhattan-dynamic-url-field';
+import { defaultCards } from '../shared/default-cards';
 
 const { Mixin } = Shopware;
 
@@ -54,6 +55,8 @@ export default {
 
     methods: {
         createCardDefinition(suffix, index) {
+            const defaultCard = defaultCards[index - 1];
+
             return {
                 index,
                 mediaKey: `card${suffix}Image`,
@@ -61,6 +64,7 @@ export default {
                 descriptionKey: `card${suffix}Description`,
                 buttonTextKey: `card${suffix}ButtonText`,
                 buttonLinkKey: `card${suffix}ButtonLink`,
+                defaultImageUrl: defaultCard.imageUrl,
             };
         },
 
@@ -96,7 +100,6 @@ export default {
 
         onImageRemove(mediaKey) {
             this.element.config[mediaKey].value = null;
-
             this.updateElementData(mediaKey, null);
             this.emitUpdate();
         },

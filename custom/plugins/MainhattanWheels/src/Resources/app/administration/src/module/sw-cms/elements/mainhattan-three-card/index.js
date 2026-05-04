@@ -1,5 +1,3 @@
-const { Snippet } = Shopware;
-
 Shopware.Component.register('sw-cms-el-mainhattan-three-card', () => import('./component'));
 Shopware.Component.register('sw-cms-el-config-mainhattan-three-card', () => import('./config'));
 Shopware.Component.register('sw-cms-el-preview-mainhattan-three-card', () => import('./preview'));
@@ -13,7 +11,7 @@ Shopware.Service('cmsService').registerCmsElement({
     defaultConfig: {
         heading: {
             source: 'static',
-            value: Snippet.tc('sw-cms.elements.mainhattanThreeCard.defaults.heading'),
+            value: 'Mainhattan Wheels',
         },
         cardOneImage: {
             source: 'static',
@@ -24,15 +22,15 @@ Shopware.Service('cmsService').registerCmsElement({
         },
         cardOneTitle: {
             source: 'static',
-            value: Snippet.tc('sw-cms.elements.mainhattanThreeCard.defaults.cardOneTitle'),
+            value: 'Alufelgen reparieren & -veredeln',
         },
         cardOneDescription: {
             source: 'static',
-            value: Snippet.tc('sw-cms.elements.mainhattanThreeCard.defaults.cardOneDescription'),
+            value: 'Professionelle Felgenreparatur. Technische und Optische Instandsetzung von Felgen. Felgenveredelung in hoechster Qualitaet.',
         },
         cardOneButtonText: {
             source: 'static',
-            value: Snippet.tc('sw-cms.elements.mainhattanThreeCard.defaults.buttonText'),
+            value: 'Zum Felgendoktor - alle Bereiche',
         },
         cardOneButtonLink: {
             source: 'static',
@@ -47,15 +45,15 @@ Shopware.Service('cmsService').registerCmsElement({
         },
         cardTwoTitle: {
             source: 'static',
-            value: Snippet.tc('sw-cms.elements.mainhattanThreeCard.defaults.cardTwoTitle'),
+            value: 'Anlagen fuer die Felgen- & Radbearbeitung',
         },
         cardTwoDescription: {
             source: 'static',
-            value: Snippet.tc('sw-cms.elements.mainhattanThreeCard.defaults.cardTwoDescription'),
+            value: 'CNC-Maschinen fuer die Instandsetzung glanzgedrehter Felgen, Pulverbeschichtungsanlagen, Richtmaschinen u.v.m. Inkl. Schulung und Support!',
         },
         cardTwoButtonText: {
             source: 'static',
-            value: Snippet.tc('sw-cms.elements.mainhattanThreeCard.defaults.buttonText'),
+            value: 'Maschinen fuer die Felgenbearbeitung',
         },
         cardTwoButtonLink: {
             source: 'static',
@@ -70,15 +68,15 @@ Shopware.Service('cmsService').registerCmsElement({
         },
         cardThreeTitle: {
             source: 'static',
-            value: Snippet.tc('sw-cms.elements.mainhattanThreeCard.defaults.cardThreeTitle'),
+            value: 'Felgenproduktion',
         },
         cardThreeDescription: {
             source: 'static',
-            value: Snippet.tc('sw-cms.elements.mainhattanThreeCard.defaults.cardThreeDescription'),
+            value: 'Mainhattan-Wheels Leichtmetallraeder. Deluxe-Wheels Felgendesigns, eigene Radentwicklung und Realisierung von Kundenprojekten.',
         },
         cardThreeButtonText: {
             source: 'static',
-            value: Snippet.tc('sw-cms.elements.mainhattanThreeCard.defaults.buttonText'),
+            value: 'Zum Felgenvertrieb',
         },
         cardThreeButtonLink: {
             source: 'static',

@@ -83,7 +83,7 @@ final class MainhattanThreeCardCmsElementResolver extends AbstractCmsElementReso
             $data[$fieldName] = $media instanceof MediaEntity ? $media : null;
         }
 
-        $slot->setData(new ArrayStruct($data, 'mainhattan_three_card'));
+        $slot->setData(new ArrayStruct($data));
     }
 
     private function buildCriteriaKey(CmsSlotEntity $slot, string $fieldName): string

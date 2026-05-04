@@ -63,7 +63,7 @@
                             :upload-tag="uploadTag(card.mediaKey)"
                             :source="previewSource(card.mediaKey)"
                             :allow-multi-select="false"
-                            :default-folder="cmsPageState.pageEntityName"
+                            :default-folder-id="cmsPageState.defaultMediaFolderId"
                             :caption="$tc('sw-cms.elements.mainhattanThreeCard.imageLabel')"
                             @media-upload-sidebar-open="onOpenMediaModal(card.mediaKey)"
                             @media-upload-remove-image="onImageRemove(card.mediaKey)"
