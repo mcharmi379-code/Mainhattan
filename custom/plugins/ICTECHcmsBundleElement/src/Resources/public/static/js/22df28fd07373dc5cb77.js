@@ -1,0 +1,1 @@
+"use strict";(window["webpackJsonpPlugini-c-t-e-c-hcms-bundle-element"]=window["webpackJsonpPlugini-c-t-e-c-hcms-bundle-element"]||[]).push([[2288],{2288:function(n,c,e){e.r(c),e.d(c,{default:function(){return t}});var t={template:'{% block sw_cms_block_ict_vertical_tab %}\n<div class="sw-cms-block-ict-vertical-tab">\n    <slot name="content" />\n</div>\n{% endblock %}\n'}}}]);
